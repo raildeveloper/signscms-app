@@ -1,0 +1,173 @@
+// verify that the tomCatHome directory exists
+def tomCatHome = System.getenv()['CATLINA_HOME']
+if(!tomCatHome){
+	throw new GradleException("Unable to locate tomCatHome : ${tomCatHome}")
+}
+
+// Maven Repo - Local File System
+gtfsDepsDir = 'file:////PI-477-DEV-SVR/Maven-repository/repository'
+
+subprojects {
+    apply plugin: 'checkstyle'
+    apply plugin: 'eclipse'
+    apply plugin: 'eclipse-wtp'
+    apply plugin: 'java'
+    apply plugin: 'jdepend'
+
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.7 // Target JDK 7 only
+
+    configurations {
+        // This configuration is used for JAR dependencies that are going to be
+        // provided by the application container, and should not be made part
+        // the standard distribution.
+        provided
+    }
+
+    // Setup Checkstyle property to match the root of the project. The reason
+    // for this name for the property is that it matches that used by the
+    // Checkstyle Eclipse plugin.
+    checkstyle.configProperties.project_loc = projectDir
+    // Set the location of the rules file to be the global one
+    checkstyle.configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    // Setup Checkstyle classpath to find all provided stuff
+    checkstyleMain.classpath += configurations.provided
+    checkstyleTest.classpath += configurations.provided
+
+    repositories {
+        // For now look in a fixed place Maven Repository - File Share
+       mavenRepo url: gtfsDepsDir
+    }
+
+    dependencies {
+        // Any changes here will require updates to the jars specified in        
+	compile group:'commons-codec', name:'commons-codec', version :'1.6'
+	compile group:'com.google.guava', name:'guava', version :'r09'
+	compile group:'org.slf4j', name:'slf4j-api', version :'1.6.6'
+    
+	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
+	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'
+	testCompile group:'junit', name:'junit', version :'4.10'
+	testCompile group:'org.mockito', name:'mockito-all', version :'1.8.5'
+	testCompile group:'ognl', name:'ognl', version :'3.0.6'
+	testCompile group:'org.unitils', name:'unitils-core', version :'3.3'
+	testCompile group:'org.unitils', name:'unitils-io', version :'3.3'
+	testCompile group:'org.unitils', name:'unitils-mock', version :'3.3'
+	testCompile group:'ch.qos.logback', name:'logback-classic', version :'1.0.7'
+	testCompile group:'ch.qos.logback', name:'logback-core', version :'1.0.6'    
+
+
+
+		
+    ////////////////////////////////////////////////////////////////////////
+    // Add Server Provided dependencies
+    ////////////////////////////////////////////////////////////////////////
+	
+	provided fileTree("${tomCatHome}/lib") {
+		include 'servlet-api.jar'
+	}
+
+    ////////////////////////////////////////////////////////////////////////
+    // Plugin dependencies
+    ////////////////////////////////////////////////////////////////////////
+		
+		checkstyle group:'checkstyle', name:'checkstyle', version :'5.5-all'
+		jdepend group:'jdepend', name:'jdepend', version :'2.9.1'
+		jdepend group:'ant', name:'ant-jdepend', version :'1.8.4'
+    }
+
+    // This trick adds the provided JAR files to to the classpath
+    sourceSets {
+        main { compileClasspath += configurations.provided }
+        test { compileClasspath += configurations.provided }
+    }
+
+    test {     
+        classpath += configurations.provided
+    }
+
+    // After all checks are performed and passed, so extra checks.
+    // Specifically:
+    //   - The JDepend has not detected any circular dependencies. This is
+    //     non-negotiable.
+    check.doLast {
+        ['main', 'test'].each { f ->
+            File cycles = file("${project.reporting.baseDir}/jdepend/${f}.xml")
+            if (cycles.file) {
+                def records = new XmlSlurper().parse(cycles)
+                def num = records.Cycles.Package.size()
+                if (0 < num) {
+                    throw new GradleException("Found ${num} circular dependencies. See ${cycles} for details.")
+                }
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Tinkering with the Eclipse configuration files
+    ////////////////////////////////////////////////////////////////////////////
+
+    
+    // Ignore the /build directory which is created by Gradle
+    eclipse.project.file.withXml {
+        def node = it.asNode()
+
+        // Add node to ignore Gradle build directory
+        def filter = node.appendNode('filteredResources').appendNode('filter')
+        filter.appendNode('id', '1347509495609')
+        filter.appendNode('name')
+        filter.appendNode('type', '30')
+        def matcher = filter.appendNode('matcher')
+        matcher.appendNode('id', 'org.eclipse.ui.ide.multiFilter')
+        matcher.appendNode('arguments', '1.0-name-matches-false-false-build')
+
+        // Add build command for Checkstyle
+        def buildCommand = node.buildSpec[0].appendNode('buildCommand')
+        buildCommand.appendNode('name', 'net.sf.eclipsecs.core.CheckstyleBuilder')
+        buildCommand.appendNode('arguments')
+
+        // Add nature for Checkstyle
+        node.natures[0].appendNode('nature', 'net.sf.eclipsecs.core.CheckstyleNature')
+    }
+}
+
+//project(':gtfs-ejb') {
+//}
+
+project(':gtfs-web') {
+    apply plugin: 'war'
+
+    dependencies {
+        //compile project(':gtfs-ejb')
+    }
+
+    // Bump the WebModule version
+    eclipse.wtp.facet.file.withXml { provider ->
+        def prov = provider.asNode()
+        prov.installed.find { it.@facet == 'jst.web' }.@version = '3.0'
+        //prov.appendNode('installed', [facet:'jst.jsf', version:'2.0'])
+    }
+}
+
+project(':gtfs-ear') {
+    apply plugin: 'ear'
+
+    dependencies {
+        compile project(':gtfs-web')
+
+        deploy project(path: ':gtfs-web', configuration: 'archives')
+        //earlib group: 'log4j', name: 'log4j', version: '1.2.15', ext: 'jar'
+    }
+
+    ear {
+		appDirName 'src/main'
+        deploymentDescriptor {
+            initializeInOrder = true
+            description = "RailCorp GTFS"
+        }
+    }
+}
+
+task clean << {
+    delete buildDir
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+"-//Puppy Crawl//DTD Suppressions 1.1//EN"
+"http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+  <!--
+      .  _   _    _    _   _____ _
+      . | | | |  / \  | | |_   _| |
+      . | |_| | / _ \ | |   | | | |
+      . |  _  |/ ___ \| |___| | |_|
+      . |_| |_/_/   \_\_____|_| (_)
+      .
+      . Stop! You must edit this file following these rules:
+      .
+      . 1) Do not use tabs, or leave trailing white space characters.
+      .
+      . 2) Put the suppression in the correct place, not just anywhere.
+      .
+      . 3) Not allowed to suppress CyclomaticComplexity.
+      .    Use warningCyclomaticComplexity instead.
+      .
+      . 4) Not allowed to suppress GenericIllegalRegexp.
+      .    Use consoleOutput instead.
+  -->
+
+  <?ignore
+    Examples:
+
+  <suppress checks="MagicNumber"
+            files="[/\\]DirsDateUtils.java"
+            />
+
+  <suppress id="warningCyclomaticComplexity"
+            files="[/\\]ExecuteSqlTasklet.java"
+            />
+
+  <suppress checks="." files="[/\\]dirs[/\\]generated[/\\]"/>
+  ?>
+
+  <!-- Suppressions for test code -->
+  <suppress checks="ImportControl" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="JavadocMethod" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="MagicNumber" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="JavadocVariable" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="JavadocType" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="IllegalThrows" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="IllegalInstantiation" files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="LineLength" files="[/\\]test[/\\]java[/\\]"/>    
+  <!-- End of test code suppressions -->
+ 
+</suppressions>
