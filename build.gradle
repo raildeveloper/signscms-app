@@ -17,7 +17,7 @@ subprojects {
     apply plugin: 'jdepend'
 
     version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = 1.7 // Target JDK 7 only
+    sourceCompatibility = 1.6 // Target JDK 7 only
 
     configurations {
         // This configuration is used for JAR dependencies that are going to be
@@ -52,6 +52,8 @@ subprojects {
 	compile group:'commons-codec', name:'commons-codec', version :'1.6'
 	compile group:'com.google.guava', name:'guava', version :'r09'
 	compile group:'org.slf4j', name:'slf4j-api', version :'1.6.6'
+	compile group:'net.sf.opencsv', name:'opencsv', version :'2.0'
+	compile group:'net.sf.supercsv', name:'super-csv', version :'2.0.0'
     
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'
