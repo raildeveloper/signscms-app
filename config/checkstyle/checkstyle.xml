@@ -230,8 +230,7 @@
 
     <module name="CovariantEquals"/>
     <module name="DeclarationOrder"/>
-    <module name="DefaultComesLast"/>
-    <module name="DoubleCheckedLocking"/>
+    <module name="DefaultComesLast"/>    
     <module name="EqualsHashCode"/>
     <module name="ExplicitInitialization"/>
     <module name="FallThrough"/>
