@@ -182,7 +182,7 @@
     <!-- Checks for Size Violations.                    -->
     <!-- See http://checkstyle.sf.net/config_sizes.html -->
     <module name="LineLength">
-      <property name="max" value="80"/>
+      <property name="max" value="140"/>
       <property name="ignorePattern" value="^import (static )?[^ ]+;$"/>
     </module>
     <module name="MethodLength"/>
