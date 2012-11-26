@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	
+	<bean id="ServiceAlertCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.ServiceAlertCsvConverter"/>
+	
+	<bean id="VehiclePositionCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter"/>
+	
+	<bean id="ServiceAlertCSVListener" class="au.gov.nsw.railcorp.gtfs.servlet.CsvListenerServlet">
+		<property name="converter" ref="ServiceAlertCSVConverter" />
+	</bean>
+	
+	<bean id="VehiclePositionCSVListener" class="au.gov.nsw.railcorp.gtfs.servlet.CsvListenerServlet">
+		<property name="converter" ref="VehiclePositionCSVConverter"/>
+	</bean>
+
+	<bean id="VehiclePositionGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
+		<property name="converter" ref="VehiclePositionCSVConverter"/>
+	</bean>
+	
+	<bean id="ServiceAlertGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
+		<property name="converter" ref="ServiceAlertCSVConverter"/>
+	</bean>
+		
+</beans>
