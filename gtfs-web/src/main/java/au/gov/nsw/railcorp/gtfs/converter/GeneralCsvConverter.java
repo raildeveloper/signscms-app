@@ -2,8 +2,6 @@
 
 package au.gov.nsw.railcorp.gtfs.converter;
 
-import au.gov.nsw.railcorp.gtfs.exception.BusinessException;
-
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader;
