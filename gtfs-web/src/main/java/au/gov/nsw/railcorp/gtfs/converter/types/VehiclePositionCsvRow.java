@@ -340,11 +340,9 @@ public class VehiclePositionCsvRow extends TripBasedCsvRow {
      * @return true if contents exist for VehiclePosition data
      */
     public boolean positionContentsExist() {
-        return     bearing != null
-                || latitude != null
-                || longitude != null
-                || odometer != null
-                || speed != null;
+        // as lat & long are required, only need to check for existence of these 2 items
+        // and can ignore the other items in the Position object
+        return latitude != null && longitude != null;
     }
 
     /**

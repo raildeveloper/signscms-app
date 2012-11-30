@@ -17,8 +17,6 @@ import com.google.transit.realtime.GtfsRealtime.VehiclePosition.VehicleStopStatu
 
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBigDecimal;
-import org.supercsv.cellprocessor.ParseInt;
-import org.supercsv.cellprocessor.ParseLong;
 import org.supercsv.cellprocessor.constraint.Unique;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
@@ -58,7 +56,7 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         /* routeId */new Optional(),
         /* startTime */new Optional(),
         /* startDate */new Optional(),
-        /* scheduleRelationship */new Optional(new ParseInt()),
+        /* scheduleRelationship */new Optional(new ParseBigDecimal()),
         /* vehicleId */new Optional(),
         /* vehicleLabel */new Optional(),
         /* licensePlate */new Optional(),
@@ -67,11 +65,11 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         /* bearing */new Optional(new ParseBigDecimal()),
         /* odometer */new Optional(new ParseBigDecimal()),
         /* speed */new Optional(new ParseBigDecimal()),
-        /* currentStopSequence */new Optional(new ParseInt()),
+        /* currentStopSequence */new Optional(new ParseBigDecimal()),
         /* stopId */new Optional(),
-        /* currentStatus */new Optional(new ParseInt()),
-        /* timestamp */new Optional(new ParseLong()),
-        /* congestionLevel" */new Optional(new ParseInt())
+        /* currentStatus */new Optional(new ParseBigDecimal()),
+        /* timestamp */new Optional(new ParseBigDecimal()),
+        /* congestionLevel" */new Optional(new ParseBigDecimal())
         };
 
         return processors;
@@ -286,14 +284,13 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         if (row.positionContentsExist()) {
             final Position.Builder pos = Position.newBuilder();
 
+            // lat & long are required
+            assert row.getLatitude() != null;
+            assert row.getLongitude() != null;
+            pos.setLatitude(row.getLatitude().floatValue());
+            pos.setLongitude(row.getLongitude().floatValue());
             if (row.getBearing() != null) {
                 pos.setBearing(row.getBearing().floatValue());
-            }
-            if (row.getLatitude() != null) {
-                pos.setLatitude(row.getLatitude().floatValue());
-            }
-            if (row.getLongitude() != null) {
-                pos.setLongitude(row.getLongitude().floatValue());
             }
             if (row.getOdometer() != null) {
                 pos.setOdometer(row.getOdometer().doubleValue());

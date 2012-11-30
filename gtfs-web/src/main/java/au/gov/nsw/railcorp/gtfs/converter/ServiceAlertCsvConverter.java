@@ -15,8 +15,7 @@ import com.google.transit.realtime.GtfsRealtime.TranslatedString.Translation;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
 
 import org.supercsv.cellprocessor.Optional;
-import org.supercsv.cellprocessor.ParseInt;
-import org.supercsv.cellprocessor.ParseLong;
+import org.supercsv.cellprocessor.ParseBigDecimal;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
 
@@ -52,15 +51,15 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     protected CellProcessor[] getProcessors() {
 
         final CellProcessor[] processors = new CellProcessor[] {
-        /* activeStart */   new Optional(new ParseLong()),
-        /* activeEnd */     new Optional(new ParseLong()),
+        /* activeStart */   new Optional(new ParseBigDecimal()),
+        /* activeEnd */     new Optional(new ParseBigDecimal()),
         /* agencyId */      new Optional(),
         /* routeId */       new Optional(),
-        /* routeType */     new Optional(new ParseInt()),
+        /* routeType */     new Optional(new ParseBigDecimal()),
         /* tripId */        new Optional(),
         /* stopId */        new Optional(),
-        /* cause */         new Optional(new ParseInt()),
-        /* effect */        new Optional(new ParseInt()),
+        /* cause */         new Optional(new ParseBigDecimal()),
+        /* effect */        new Optional(new ParseBigDecimal()),
         /* url */           new Optional(),
         /* headerText */    new Optional(),
         /* description */   new Optional()

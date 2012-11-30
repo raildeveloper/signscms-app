@@ -2,6 +2,8 @@
 
 package au.gov.nsw.railcorp.gtfs.converter;
 
+import au.gov.nsw.railcorp.gtfs.exception.BusinessException;
+
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader;
@@ -57,6 +59,7 @@ public abstract class GeneralCsvConverter implements CsvConverter {
     @Override
     public final boolean convertAndStoreCsv(Reader csvContents) {
 
+        boolean res = true;
         // setup FeedMessage & Feed Header GTFS objects?
         final FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
         gtfsHeader.setGtfsRealtimeVersion(GTFS_VERSION);
@@ -81,25 +84,29 @@ public abstract class GeneralCsvConverter implements CsvConverter {
                 processCsvRowAndBuildGtfsrEntity(row, entity);
                 gtfsMessage.addEntity(entity);
             }
+            log.info("Read CSV file of {} Lines", beanReader.getRowNumber());
 
             // Create Protocol buffer from FeedHeader & replace stored Protocol Buffer
             final FeedMessage newFeed = gtfsMessage.build();
-            // TODO - check if synchronisation required???
-             final byte[] newProtoBuf = newFeed.toByteArray();
+
+            final byte[] newProtoBuf = newFeed.toByteArray();
+            // Assigning the shared member protobuf is atomic, so no further sync required, as
+            // reading only performed via getCurrentProtoBuf(), which also performs an atomic read
              protobuf = newProtoBuf;
 
         } catch (IOException e) {
-            log.error(e.toString());
+            log.error(e.getMessage());
+            res = false;
         } finally {
             if (beanReader != null) {
                 try {
                     beanReader.close();
                 } catch (IOException e) {
-                    log.warn(e.toString());
+                    log.warn(e.getMessage());
                 }
             }
         }
-        return true;
+        return res;
     }
 
     /**

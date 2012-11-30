@@ -1,6 +1,6 @@
 // RailCorp 2012
 
-package au.gov.nsw.gtfs.servlet;
+package au.gov.nsw.railcorp.gtfs.servlet;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -37,6 +37,7 @@ public class GtfsrServletTest extends TestCase {
      gtfsServlet = new GtfsrServlet();
  }
  
+ @Override
  public void tearDown() {
      gtfsServlet = null;
  }
