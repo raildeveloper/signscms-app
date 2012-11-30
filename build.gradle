@@ -58,6 +58,7 @@ subprojects {
 	compile group:'org.springframework', name:'spring-beans', version :'3.1.2.RELEASE'
 	compile group:'org.springframework', name:'spring-context', version :'3.1.2.RELEASE'
 	compile group:'org.springframework', name:'spring-core', version :'3.1.2.RELEASE'
+	compile group:'com.google.protobuf', name:'protobuf-java', version :'2.4.1'
     
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'

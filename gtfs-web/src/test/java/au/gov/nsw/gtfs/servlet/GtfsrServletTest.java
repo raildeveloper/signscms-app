@@ -32,8 +32,17 @@ public class GtfsrServletTest extends TestCase {
  @InjectMocks
  private GtfsrServlet gtfsServlet;
 
+ @Override
+ public void setUp() {
+     gtfsServlet = new GtfsrServlet();
+ }
+ 
+ public void tearDown() {
+     gtfsServlet = null;
+ }
+ 
  @Test
- public void handleRequestTest() throws IOException, ServletException
+ public void testhandleRequest() throws IOException, ServletException
  {
 
   log.info("GtfsrServletTest - handleRequest");

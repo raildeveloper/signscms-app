@@ -2,6 +2,8 @@
 
 package au.gov.nsw.railcorp.gtfs.converter;
 
+import java.io.Reader;
+
 /**
  * Interface for all CSV Converters.
  * @author John
@@ -14,7 +16,7 @@ public interface CsvConverter {
      *            The data contents in CSV format
      * @return returns true if the CSV was successfully parsed and converted
      */
-    boolean convertAndStoreCsv(String csvContents);
+    boolean convertAndStoreCsv(Reader csvContents);
 
     /**
      * Obtains the most recent successfully converted ProtoBuf in binary format.

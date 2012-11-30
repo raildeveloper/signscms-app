@@ -40,14 +40,9 @@
   ?>
 
   <!-- Suppressions for test code -->
-  <suppress checks="ImportControl" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="JavadocMethod" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="MagicNumber" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="JavadocVariable" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="JavadocType" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="IllegalThrows" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="IllegalInstantiation" files="[/\\]test[/\\]java[/\\]"/>
-  <suppress checks="LineLength" files="[/\\]test[/\\]java[/\\]"/>    
+  <suppress checks="." files="[/\\]test[/\\]java[/\\]"/>
   <!-- End of test code suppressions -->
+ 
+  <suppress checks="." files="[/\\]google[/\\]"/>
  
 </suppressions>

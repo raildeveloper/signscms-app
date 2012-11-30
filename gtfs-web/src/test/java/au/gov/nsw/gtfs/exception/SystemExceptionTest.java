@@ -8,10 +8,10 @@ import org.junit.Test;
 
 public class SystemExceptionTest {
 
- @Test
- public void test()
- {
+    @Test
+    public void test()
+    {
 
-  assertTrue(true);
- }
+        assertTrue(true);
+    }
 }
