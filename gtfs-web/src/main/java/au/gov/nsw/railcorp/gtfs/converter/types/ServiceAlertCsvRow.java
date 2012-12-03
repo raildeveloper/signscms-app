@@ -233,4 +233,17 @@ public class ServiceAlertCsvRow extends TripBasedCsvRow {
             || getRouteId() != null;
     }
 
+    /**
+     * Determines if any data content exist for this row.
+     * @return true if some data exists to create a Alert GTFS-R object with some content
+     */
+    public boolean rowContentsExist() {
+        return timeRangeContentExists()
+             || informedEntityContentExists()
+             || cause != null
+             || effect != null
+             || url != null
+             || headerText != null
+             || description != null;
+    }
 }

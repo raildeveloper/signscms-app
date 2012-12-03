@@ -335,7 +335,7 @@ public class VehiclePositionCsvRow extends TripBasedCsvRow {
     }
 
     /**
-     * Determines if data contents exist sufficiently to create a GTFS-R VehiclePosition
+     * Determines if data contents exist sufficiently to create a GTFS-R Position
      * object with any data.
      * @return true if contents exist for VehiclePosition data
      */
@@ -367,6 +367,20 @@ public class VehiclePositionCsvRow extends TripBasedCsvRow {
             || startTime != null
             || getTripId() != null
             || (scheduleRelationship != null && ScheduleRelationship.valueOf(scheduleRelationship.intValue()) != null);
+    }
+
+    /**
+     * Determines if any data content exist for this row.
+     * @return true if some data exists to create a VehiclePosition GTFS-R object with some content
+     */
+    public boolean rowContentsExist() {
+        return positionContentsExist()
+            || vehicleDescriptorContentsExist()
+            || tripDescriptorContentsExist()
+            || currentStopSequence != null
+            || currentStatus != null
+            || timestamp != null
+            || congestionLevel != null;
     }
 
 }

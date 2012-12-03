@@ -14,6 +14,8 @@ import java.io.Reader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.supercsv.cellprocessor.ift.CellProcessor;
+import org.supercsv.exception.SuperCsvCellProcessorException;
+import org.supercsv.exception.SuperCsvConstraintViolationException;
 import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
@@ -79,8 +81,9 @@ public abstract class GeneralCsvConverter implements CsvConverter {
             while ((row = beanReader.read(getCsvRowClass(), header, processors)) != null) {
                 final FeedEntity.Builder entity = FeedEntity.newBuilder();
                 entity.setId(String.valueOf(beanReader.getRowNumber()));
-                processCsvRowAndBuildGtfsrEntity(row, entity);
-                gtfsMessage.addEntity(entity);
+                if (processCsvRowAndBuildGtfsrEntity(row, entity)) {
+                    gtfsMessage.addEntity(entity);
+                }
             }
             log.info("Read CSV file of {} Lines", beanReader.getRowNumber());
 
@@ -93,7 +96,19 @@ public abstract class GeneralCsvConverter implements CsvConverter {
              protobuf = newProtoBuf;
 
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("Failed to Process CSV - " + e.getMessage());
+            res = false;
+        } catch (SuperCsvConstraintViolationException e) {
+            log.error("Failed to Process CSV - " + e.getMessage());
+            if (e.getCsvContext() != null) {
+                log.error(e.getCsvContext().toString());
+            }
+            res = false;
+        } catch (SuperCsvCellProcessorException e) {
+            log.error("Failed to Process CSV - " + e.getMessage());
+            if (e.getCsvContext() != null) {
+                log.error(e.getCsvContext().toString());
+            }
             res = false;
         } finally {
             if (beanReader != null) {
@@ -129,14 +144,17 @@ public abstract class GeneralCsvConverter implements CsvConverter {
     public final String getCurrentProtoBufDebug() {
 
         final byte[] buf = getCurrentProtoBuf();
-        FeedMessage mesg;
-        try {
-            mesg = FeedMessage.parseFrom(buf);
-        } catch (InvalidProtocolBufferException e) {
-            log.error(e.toString());
-            return null;
+        if (buf != null) {
+            FeedMessage mesg;
+            try {
+                mesg = FeedMessage.parseFrom(buf);
+                log.info(mesg.toString());
+                return mesg.toString();
+            } catch (InvalidProtocolBufferException e) {
+                log.error(e.toString());
+            }
         }
-        return mesg.toString();
+        return "";
     }
 
     /**
@@ -176,7 +194,8 @@ public abstract class GeneralCsvConverter implements CsvConverter {
      *            The object representing the row
      * @param gtfsEntity
      *          A GTFS builder object that will be modified to add the data for this row
+     * @return true if an entity was successfully populated
      */
-    protected abstract void processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity);
+    protected abstract boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity);
 
 }

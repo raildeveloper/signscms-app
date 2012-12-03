@@ -98,27 +98,30 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
      * (java.lang.Object, com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder)
      */
     @Override
-    protected void processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
+    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
 
         assert row.getClass() == ServiceAlertCsvRow.class;
 
         if (row.getClass() == ServiceAlertCsvRow.class) {
             final ServiceAlertCsvRow currRow = (ServiceAlertCsvRow) row;
 
-            // Build the GTFS-R Alert object
-            final Alert.Builder alert = Alert.newBuilder();
+            if (currRow.rowContentsExist()) {
+                // Build the GTFS-R Alert object
+                final Alert.Builder alert = Alert.newBuilder();
 
-            writeActivePeriod(currRow, alert);
-            writeCause(currRow, alert);
-            writeDescription(currRow, alert);
-            writeEffect(currRow, alert);
-            writeHeaderText(currRow, alert);
-            writeUrl(currRow, alert);
-            writeEntitySelector(currRow, alert);
+                writeActivePeriod(currRow, alert);
+                writeCause(currRow, alert);
+                writeDescription(currRow, alert);
+                writeEffect(currRow, alert);
+                writeHeaderText(currRow, alert);
+                writeUrl(currRow, alert);
+                writeEntitySelector(currRow, alert);
 
-            gtfsEntity.setAlert(alert);
+                gtfsEntity.setAlert(alert);
+                return true;
+            }
         }
-
+        return false;
     }
 
     /**

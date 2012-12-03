@@ -112,27 +112,31 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
      *      com.google.transit.realtime.GtfsRealtime.FeedEntity.Builder)
      */
     @Override
-    protected void processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
+    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
 
         assert row.getClass() == VehiclePositionCsvRow.class;
 
         if (row.getClass() == VehiclePositionCsvRow.class) {
             final VehiclePositionCsvRow currRow = (VehiclePositionCsvRow) row;
 
-            // Build the Vehicle Position GTFS-R object
-            final VehiclePosition.Builder vehiclePosition = VehiclePosition.newBuilder();
+            if (currRow.rowContentsExist()) {
+                // Build the Vehicle Position GTFS-R object
+                final VehiclePosition.Builder vehiclePosition = VehiclePosition.newBuilder();
 
-            writeCongestionLevel(currRow, vehiclePosition);
-            writeVehicleStopStatus(currRow, vehiclePosition);
-            writeCurrentStopSequence(currRow, vehiclePosition);
-            writeStopId(currRow, vehiclePosition);
-            writeTimestamp(currRow, vehiclePosition);
-            writePosition(currRow, vehiclePosition);
-            writeVehicleDescriptor(currRow, vehiclePosition);
-            writeTripDescriptor(currRow, vehiclePosition);
+                writeCongestionLevel(currRow, vehiclePosition);
+                writeVehicleStopStatus(currRow, vehiclePosition);
+                writeCurrentStopSequence(currRow, vehiclePosition);
+                writeStopId(currRow, vehiclePosition);
+                writeTimestamp(currRow, vehiclePosition);
+                writePosition(currRow, vehiclePosition);
+                writeVehicleDescriptor(currRow, vehiclePosition);
+                writeTripDescriptor(currRow, vehiclePosition);
 
-            gtfsEntity.setVehicle(vehiclePosition);
+                gtfsEntity.setVehicle(vehiclePosition);
+                return true;
+            }
         }
+        return false;
     }
 
     /**
