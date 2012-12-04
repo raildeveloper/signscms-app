@@ -4,6 +4,7 @@ package au.gov.nsw.railcorp.gtfs.servlet;
 
 import au.gov.nsw.railcorp.gtfs.converter.CsvConverter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -11,6 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestHandler;
 
 
@@ -24,6 +27,7 @@ public class CsvListenerServlet implements HttpRequestHandler {
     private static final long serialVersionUID = 1L;
 
     private CsvConverter converter;
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Constructor.
@@ -64,6 +68,7 @@ public class CsvListenerServlet implements HttpRequestHandler {
 
     /**
      * Handles all requests for the CSV Listener servlet from the PI Database.
+     * Expects the CSV content as the request contents
      * {@inheritDoc}
      * @see HttpRequestHandler#handleRequest(HttpServletRequest request, HttpServletResponse response)
      */
@@ -72,11 +77,16 @@ public class CsvListenerServlet implements HttpRequestHandler {
     HttpServletResponse response)
     throws ServletException, IOException
     {
-
-        // TODO Auto-generated method stub
         final PrintWriter writer = response.getWriter();
-        writer
-        .append("<html><head><title>Test</title></head><body>Hello</body></html>");
+        final BufferedReader reader = request.getReader();
+        log.info("CSV Process {} request received of {} bytes",
+                request.getServletContext().getServletContextName(),
+                request.getContentLength());
+        if (converter.convertAndStoreCsv(reader)) {
+            writer.append("Successful Update");
+        } else {
+            writer.append("Failed to CSV processing");
+        }
     }
 
 }

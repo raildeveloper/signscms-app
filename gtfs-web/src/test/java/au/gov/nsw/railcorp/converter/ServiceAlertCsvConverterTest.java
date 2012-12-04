@@ -14,6 +14,7 @@ import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader.Incrementality;
 import com.google.transit.realtime.GtfsRealtime.TimeRange;
 
+import java.io.InputStreamReader;
 import java.io.StringReader;
 
 import org.junit.After;
@@ -398,6 +399,19 @@ public class ServiceAlertCsvConverterTest extends TestCase {
             }
         }
         assertEquals(expectedDebug, actualDebug);
+    }
+    
+    @Test
+    public void testLargeDataSet() {        
+        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("servicealerts-largetestdata.csv"));
+        assertTrue(converter.convertAndStoreCsv(file));
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(1046, mesg.getEntityCount());
     }
     
 }

@@ -11350,7 +11350,8 @@ public final class GtfsRealtime {
         return result;
       }
       
-      public com.google.transit.realtime.GtfsRealtime.TranslatedString buildPartial() {
+      @SuppressWarnings("unused")
+    public com.google.transit.realtime.GtfsRealtime.TranslatedString buildPartial() {
         com.google.transit.realtime.GtfsRealtime.TranslatedString result = new com.google.transit.realtime.GtfsRealtime.TranslatedString(this);
         int from_bitField0_ = bitField0_;
         if (translationBuilder_ == null) {

@@ -8,9 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestHandler;
 
 /**
@@ -22,6 +25,7 @@ public class GtfsrServlet implements HttpRequestHandler {
     private static final long serialVersionUID = 1L;
 
     private CsvConverter converter;
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Constructor.
@@ -62,6 +66,8 @@ public class GtfsrServlet implements HttpRequestHandler {
 
     /**
      * Handles all requests from App Developers for the GTFS-R feed.
+     * A single parameter 'debug' can be passed to return the debug text representing the protocol buffer rather
+     * than the binary protocol buffer
      * {@inheritDoc}
      * @see org.springframework.web.HttpRequestHandler#handleRequest(javax.servlet.http.HttpServletRequest,
      *      javax.servlet.http.HttpServletResponse)
@@ -70,11 +76,19 @@ public class GtfsrServlet implements HttpRequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
-
-        // TODO Auto-generated method stub
-        final PrintWriter writer = response.getWriter();
-        writer.append("<html><head><title>Test</title></head><body>Hello</body></html>");
-
+        assert converter != null;
+        if (request.getParameter("debug") != null) {
+            log.info("GTFS-R {} debug request received", request.getServletContext().getServletContextName());
+            final PrintWriter writer = response.getWriter();
+            writer.append(converter.getCurrentProtoBufDebug());
+        } else {
+            log.info("GTFS-R {} binary request received", request.getServletContext().getServletContextName());
+            final ServletOutputStream output = response.getOutputStream();
+            final byte[] buf = converter.getCurrentProtoBuf();
+            if (buf != null) {
+                output.write(buf);
+            }
+        }
     }
 
 }
