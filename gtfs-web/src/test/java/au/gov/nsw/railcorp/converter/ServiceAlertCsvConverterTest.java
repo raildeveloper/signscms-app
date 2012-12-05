@@ -403,7 +403,7 @@ public class ServiceAlertCsvConverterTest extends TestCase {
     
     @Test
     public void testLargeDataSet() {        
-        InputStreamReader file = new InputStreamReader(this.getClass().getResourceAsStream("servicealerts-largetestdata.csv"));
+        InputStreamReader file = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("servicealerts-largetestdata.csv"));
         assertTrue(converter.convertAndStoreCsv(file));
         FeedMessage mesg = null;
         try {
