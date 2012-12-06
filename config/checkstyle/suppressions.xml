@@ -40,7 +40,7 @@
   ?>
 
   <!-- Suppressions for test code -->
-  <suppress checks="." files="[/\\]test[/\\]java[/\\]"/>
+  <suppress checks="." files="[/\\]test[/\\]"/>
   <!-- End of test code suppressions -->
  
   <suppress checks="." files="[/\\]google[/\\]"/>
