@@ -10,7 +10,16 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>	
 	</listener>
-
+	
+    <filter>
+        <filter-name>GtfsWebFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GtfsWebFilter</filter-name>
+        <url-pattern>/*</url-pattern>        
+    </filter-mapping>
+    
 	<servlet>
 		<description>Listens for CSV updates to the Service Alert data</description>
 		<display-name>ServiceAlertCSVListener</display-name>

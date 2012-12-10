@@ -24,5 +24,7 @@
 	<bean id="ServiceAlertGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
 		<property name="converter" ref="ServiceAlertCSVConverter"/>
 	</bean>
+	
+	<bean id="GtfsWebFilter" class="au.gov.nsw.railcorp.gtfs.servlet.filter.GtfsWebFilter"/>
 		
 </beans>
