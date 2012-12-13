@@ -44,5 +44,6 @@
   <!-- End of test code suppressions -->
  
   <suppress checks="." files="[/\\]google[/\\]"/>
+  <suppress checks="." files="[/\\]resources[/\\]"/>
  
 </suppressions>

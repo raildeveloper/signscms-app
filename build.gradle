@@ -59,6 +59,8 @@ subprojects {
 	compile group:'org.springframework', name:'spring-context', version :'3.1.2.RELEASE'
 	compile group:'org.springframework', name:'spring-core', version :'3.1.2.RELEASE'
 	compile group:'com.google.protobuf', name:'protobuf-java', version :'2.4.1'
+	compile group:'ch.qos.logback', name:'logback-classic', version :'1.0.7'
+	compile group:'ch.qos.logback', name:'logback-core', version :'1.0.6' 
     
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'
@@ -68,10 +70,6 @@ subprojects {
 	testCompile group:'org.unitils', name:'unitils-core', version :'3.3'
 	testCompile group:'org.unitils', name:'unitils-io', version :'3.3'
 	testCompile group:'org.unitils', name:'unitils-mock', version :'3.3'
-	testCompile group:'ch.qos.logback', name:'logback-classic', version :'1.0.7'
-	testCompile group:'ch.qos.logback', name:'logback-core', version :'1.0.6'    
-
-
 
 		
     ////////////////////////////////////////////////////////////////////////
@@ -164,6 +162,9 @@ project(':gtfs-web') {
         //compile project(':gtfs-ejb')
     }
 
+	war{
+		archiveName 'SydneyTrainsGTFS.war'
+	}
     // Bump the WebModule version
     eclipse.wtp.facet.file.withXml { provider ->
         def prov = provider.asNode()

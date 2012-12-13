@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-    <display-name>gtfs-web</display-name>
+    <display-name>SydneyTrainsGTFS</display-name>
   
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -28,7 +28,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ServiceAlertCSVListener</servlet-name>
-		<url-pattern>/ServiceAlertCSVListener</url-pattern>
+		<url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
 	</servlet-mapping>
 	
 
@@ -40,7 +40,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>VehiclePositionCSVListener</servlet-name>
-		<url-pattern>/VehiclePositionCSVListener</url-pattern>
+		<url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -51,7 +51,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>VehiclePositionGTFSR</servlet-name>
-		<url-pattern>/VehiclePositionGTFSR</url-pattern>
+		<url-pattern>/GTFSRVehiclePosition</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -62,7 +62,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ServiceAlertGTFSR</servlet-name>
-		<url-pattern>/ServiceAlertGTFSR</url-pattern>
+		<url-pattern>/GTFSRServiceAlerts</url-pattern>
 	</servlet-mapping>
 
   
