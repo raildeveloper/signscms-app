@@ -73,6 +73,7 @@ public class GtfsWebFilterTest extends TestCase {
             writer.flush();
             writer.close();
             assertTrue(FileUtils.readFileToString(file, "UTF-8").contains("Invalid Request"));
+            IOUnitils.deleteTempFileOrDir(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
