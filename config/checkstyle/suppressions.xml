@@ -45,5 +45,7 @@
  
   <suppress checks="." files="[/\\]google[/\\]"/>
   <suppress checks="." files="[/\\]resources[/\\]"/>
+  <suppress checks="." files="[/\\]resources[/\\]"/>
+  <suppress checks="IllegalCatch" files="[/\\]StaticFeedHandlerServlet.java"/>
  
 </suppressions>

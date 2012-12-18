@@ -26,5 +26,9 @@
 	</bean>
 	
 	<bean id="GtfsWebFilter" class="au.gov.nsw.railcorp.gtfs.servlet.filter.GtfsWebFilter"/>
-		
+	
+	<bean id="StaticFeedHandler" class="au.gov.nsw.railcorp.gtfs.servlet.StaticFeedHandlerServlet" />
+
+	<bean id="TransitBundleListener" class="au.gov.nsw.railcorp.gtfs.servlet.TransitBundleListener" />		
 </beans>
+

@@ -1,69 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-    <display-name>SydneyTrainsGTFS</display-name>
-  
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/GTFS-Spring.xml</param-value>
-	</context-param>
-	
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>	
-	</listener>
-	
-    <filter>
-        <filter-name>GtfsWebFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>GtfsWebFilter</filter-name>
-        <url-pattern>/*</url-pattern>        
-    </filter-mapping>
-    
-	<servlet>
-		<description>Listens for CSV updates to the Service Alert data</description>
-		<display-name>ServiceAlertCSVListener</display-name>
-		<servlet-name>ServiceAlertCSVListener</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServiceAlertCSVListener</servlet-name>
-		<url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
-	</servlet-mapping>
-	
-
-	<servlet>
-		<description>Listens for CSV updates to the Vehicle Position data</description>
-		<display-name>VehiclePositionCSVListener</display-name>
-		<servlet-name>VehiclePositionCSVListener</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>VehiclePositionCSVListener</servlet-name>
-		<url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<description>Serves the GTFS-R Vehicle Position data</description>
-		<display-name>VehiclePositionGTFSR</display-name>
-		<servlet-name>VehiclePositionGTFSR</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>VehiclePositionGTFSR</servlet-name>
-		<url-pattern>/GTFSRVehiclePosition</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<description>Serves the GTFS-R Service Alert data</description>
-		<display-name>ServiceAlertGTFSR</display-name>
-		<servlet-name>ServiceAlertGTFSR</servlet-name>
-		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServiceAlertGTFSR</servlet-name>
-		<url-pattern>/GTFSRServiceAlerts</url-pattern>
-	</servlet-mapping>
-
-  
+  <display-name>SydneyTrainsGTFS</display-name>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/GTFS-Spring.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>GtfsWebFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GtfsWebFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description>Servlet to receive static GTFS Feed</description>
+    <display-name>StaticFeedHandler</display-name>
+    <servlet-name>StaticFeedHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StaticFeedHandler</servlet-name>
+    <url-pattern>/GTFS_LoadStatic</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Servlet to listen static GTFS Feed Requests</description>
+    <display-name>TransitBundleListener</display-name>
+    <servlet-name>TransitBundleListener</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransitBundleListener</servlet-name>
+    <url-pattern>/GTFSTransitBundle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Listens for CSV updates to the Service Alert data</description>
+    <display-name>ServiceAlertCSVListener</display-name>
+    <servlet-name>ServiceAlertCSVListener</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceAlertCSVListener</servlet-name>
+    <url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Listens for CSV updates to the Vehicle Position data</description>
+    <display-name>VehiclePositionCSVListener</display-name>
+    <servlet-name>VehiclePositionCSVListener</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VehiclePositionCSVListener</servlet-name>
+    <url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Serves the GTFS-R Vehicle Position data</description>
+    <display-name>VehiclePositionGTFSR</display-name>
+    <servlet-name>VehiclePositionGTFSR</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VehiclePositionGTFSR</servlet-name>
+    <url-pattern>/GTFSRVehiclePosition</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Serves the GTFS-R Service Alert data</description>
+    <display-name>ServiceAlertGTFSR</display-name>
+    <servlet-name>ServiceAlertGTFSR</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceAlertGTFSR</servlet-name>
+    <url-pattern>/GTFSRServiceAlerts</url-pattern>
+  </servlet-mapping>
 </web-app>

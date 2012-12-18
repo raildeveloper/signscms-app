@@ -51,8 +51,7 @@ subprojects {
         // Any changes here will require updates to the jars specified in        
 	compile group:'commons-codec', name:'commons-codec', version :'1.6'
 	compile group:'com.google.guava', name:'guava', version :'r09'
-	compile group:'org.slf4j', name:'slf4j-api', version :'1.6.6'
-	compile group:'net.sf.opencsv', name:'opencsv', version :'2.0'
+	compile group:'org.slf4j', name:'slf4j-api', version :'1.6.6'	
 	compile group:'net.sf.supercsv', name:'super-csv', version :'2.0.0'
 	compile group:'org.springframework', name:'spring-web', version :'3.1.2.RELEASE'
 	compile group:'org.springframework', name:'spring-beans', version :'3.1.2.RELEASE'
@@ -60,7 +59,9 @@ subprojects {
 	compile group:'org.springframework', name:'spring-core', version :'3.1.2.RELEASE'
 	compile group:'com.google.protobuf', name:'protobuf-java', version :'2.4.1'
 	compile group:'ch.qos.logback', name:'logback-classic', version :'1.0.7'
-	compile group:'ch.qos.logback', name:'logback-core', version :'1.0.6' 
+	compile group:'ch.qos.logback', name:'logback-core', version :'1.0.6'
+	compile group:'commons-fileupload', name:'commons-fileupload', version :'1.2.2'
+	compile group:'commons-io', name:'commons-io', version:'1.4'	
     
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'
