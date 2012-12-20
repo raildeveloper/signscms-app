@@ -10,9 +10,9 @@ public class TransitBundle {
 
     private static TransitBundle sINSTANCE;
 
-    private String latestBundleFileName;
+    private String latestBundleFileName = "";
 
-    private String latestBundleLocation;
+    private String latestBundleLocation = "";
 
     /**
      * Return instance of Transit Bundle.

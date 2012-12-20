@@ -105,6 +105,9 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
 
             // Bundle Created - Delete the temp files
             FileUtils.deleteDirectory(tempDir);
+
+            final int responseCode = 200;
+            response.setStatus(responseCode);
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -124,7 +127,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             }
             // timeStamp - Appended to File Name - example - 20121219_135813
             final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-            final String fileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp;
+            final String fileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp + ".zip";
 
             // Need to correct the upload path
             final String fileN = publishPath + File.separator + fileName;
