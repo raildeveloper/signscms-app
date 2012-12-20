@@ -62,7 +62,8 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
                 log.info("HTTP Request received is not multipart/form-data");
                 return;
             }
-
+            log.info("Started reading files received via HTTP Post {}",
+            new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             // Save the files received to java.io.tmpdir
             final DiskFileItemFactory factory = new DiskFileItemFactory();
 
@@ -97,7 +98,8 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
                     sFile.getName(), sFile.length());
                 }
             }
-
+            log.info("Finished reading files received via HTTP Post {}",
+            new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             // Files Uploaded - Create the Zip bundle
             createGtfsBundle(publishPath, uploadedFiles);
 
@@ -115,6 +117,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
     private void createGtfsBundle(String publishPath, List<String> uploadedFiles) {
 
         try {
+            log.info("Bundle Creation started {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             final File publishDir = new File(publishPath);
             if (!publishDir.exists()) {
                 publishDir.mkdir();
@@ -152,6 +155,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             outputStream.close();
             transitBundle.setLatestBundleFileName(fileName);
             transitBundle.setLatestBundleLocation(fileN);
+            log.info("Bundle Creation finished {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             log.info("Successfully created transit bundle at " + fileN);
 
         } catch (FileNotFoundException e) {
