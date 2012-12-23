@@ -60,6 +60,7 @@ public abstract class GeneralCsvConverter implements CsvConverter {
     public final boolean convertAndStoreCsv(Reader csvContents) {
 
         boolean res = true;
+
         // setup FeedMessage & Feed Header GTFS objects?
         final FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
         gtfsHeader.setGtfsRealtimeVersion(GTFS_VERSION);
@@ -77,8 +78,10 @@ public abstract class GeneralCsvConverter implements CsvConverter {
             final String[] header = getCsvHeaders();
             final CellProcessor[] processors = getProcessors();
 
+            log.info("CSV File contents for {}:", this.getClass().toString());
             Object row;
             while ((row = beanReader.read(getCsvRowClass(), header, processors)) != null) {
+                log.info(beanReader.getUntokenizedRow());
                 final FeedEntity.Builder entity = FeedEntity.newBuilder();
                 entity.setId(String.valueOf(beanReader.getRowNumber()));
                 if (processCsvRowAndBuildGtfsrEntity(row, entity)) {
