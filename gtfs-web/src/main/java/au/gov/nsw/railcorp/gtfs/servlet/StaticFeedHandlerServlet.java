@@ -54,6 +54,11 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // construct directory path to store upload file
+        final String tempUploadPath = request.getServletContext().getRealPath("") + File.separator + TEMP_DIRECTORY;
+        final String publishPath = request.getServletContext().getRealPath("") + File.separator + PUBLISHED_DIRECTORY;
+        // create the directory if it doesn't exists
+        final File tempDir = new File(tempUploadPath);
         final List<String> uploadedFiles = new ArrayList<String>();
         try {
             log.info("Static Feed Upload request received : StaticFeedHandlerServlet : handleRequest()");
@@ -71,11 +76,6 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
 
             final ServletFileUpload upload = new ServletFileUpload(factory);
 
-            // construct directory path to store upload file
-            final String tempUploadPath = request.getServletContext().getRealPath("") + File.separator + TEMP_DIRECTORY;
-            final String publishPath = request.getServletContext().getRealPath("") + File.separator + PUBLISHED_DIRECTORY;
-            // create the directory if it doesn't exists
-            final File tempDir = new File(tempUploadPath);
             if (!tempDir.exists()) {
                 tempDir.mkdir();
             }
@@ -103,13 +103,13 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             // Files Uploaded - Create the Zip bundle
             createGtfsBundle(publishPath, uploadedFiles);
 
-            // Bundle Created - Delete the temp files
-            FileUtils.deleteDirectory(tempDir);
-
             final int responseCode = 200;
             response.setStatus(responseCode);
         } catch (Exception e) {
             log.error(e.getMessage());
+        } finally {
+            // Bundle Created - Delete the temp files
+            FileUtils.deleteDirectory(tempDir);
         }
     }
 
