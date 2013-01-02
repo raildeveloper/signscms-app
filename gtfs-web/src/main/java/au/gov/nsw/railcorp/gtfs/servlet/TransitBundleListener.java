@@ -76,6 +76,11 @@ public class TransitBundleListener implements HttpRequestHandler {
                             transitBundle.setLatestBundleLocation(publishPath + bundle.getName());
                             transitBundle.setLatestBundleFileName(bundle.getName());
                         }
+                    } else {
+                        // Something really weird - publish directory exists but nothing published
+                        final int responseCode = 404;
+                        response.setStatus(responseCode);
+                        return;
                     }
 
                 }
