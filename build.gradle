@@ -18,7 +18,7 @@ subprojects {
 
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = 1.6 // Target JDK 7 only
-
+	sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
     configurations {
         // This configuration is used for JAR dependencies that are going to be
         // provided by the application container, and should not be made part
@@ -66,6 +66,9 @@ subprojects {
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'
 	testCompile group:'junit', name:'junit', version :'4.10'
+	testCompile group:'info.cukes', name:'cucumber-core', version:'1.1.1'
+    testCompile group:'info.cukes', name:'cucumber-java', version:'1.1.1'
+    testCompile group:'info.cukes', name:'cucumber-junit', version:'1.1.1'
 	testCompile group:'org.mockito', name:'mockito-all', version :'1.8.5'
 	testCompile group:'ognl', name:'ognl', version :'3.0.6'
 	testCompile group:'org.unitils', name:'unitils-core', version :'3.3'
