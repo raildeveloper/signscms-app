@@ -41,6 +41,12 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
 
     private static final String PUBLISHED_DIRECTORY = "published";
 
+    /* Response to be given if request successfully processed */
+    private static final int REQUEST_SUCCESS_CODE = 200;
+
+    /* Response to be given if the request processing encountered any errors - Bad Request */
+    private static final int BAD_REQUEST_CODE = 400;
+
     private static final Logger log = LoggerFactory.getLogger(StaticFeedHandlerServlet.class);
 
     /* Spring Injected Transit Bundle Bean */
@@ -55,8 +61,12 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // construct directory path to store upload file
+        // Temp Path for all uploaded files - This shall be deleted once request is complete.
         final String tempUploadPath = request.getServletContext().getRealPath("") + File.separator + TEMP_DIRECTORY;
+
+        // Publish path to store all the Published GTFS bundles
         final String publishPath = request.getServletContext().getRealPath("") + File.separator + PUBLISHED_DIRECTORY;
+
         // create the directory if it doesn't exists
         final File tempDir = new File(tempUploadPath);
         final List<String> uploadedFiles = new ArrayList<String>();
@@ -65,6 +75,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             if (!ServletFileUpload.isMultipartContent(request)) {
                 // if not, we stop here
                 log.info("HTTP Request received is not multipart/form-data");
+                response.setStatus(BAD_REQUEST_CODE);
                 return;
             }
             log.info("Started reading files received via HTTP Post {}",
@@ -103,9 +114,9 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             // Files Uploaded - Create the Zip bundle
             createGtfsBundle(publishPath, uploadedFiles);
 
-            final int responseCode = 200;
-            response.setStatus(responseCode);
+            response.setStatus(REQUEST_SUCCESS_CODE);
         } catch (Exception e) {
+            response.setStatus(BAD_REQUEST_CODE);
             log.error(e.getMessage());
         } finally {
             // Bundle Created - Delete the temp files
@@ -116,8 +127,9 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
     /**
      * This method create the GTFS Bundle.
      * @param uploadedFiles
+     * @throws IOException
      */
-    private void createGtfsBundle(String publishPath, List<String> uploadedFiles) {
+    private void createGtfsBundle(String publishPath, List<String> uploadedFiles) throws IOException {
 
         try {
             log.info("Bundle Creation started {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
@@ -127,11 +139,11 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             }
             // timeStamp - Appended to File Name - example - 20121219_135813
             final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-            final String fileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp + ".zip";
+            final String gtfsBundlePublishFileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp + ".zip";
 
             // Need to correct the upload path
-            final String fileN = publishPath + File.separator + fileName;
-            final File transitGtfsBundle = new File(fileN);
+            final String gtfsBundlePublishFileLocation = publishPath + File.separator + gtfsBundlePublishFileName;
+            final File transitGtfsBundle = new File(gtfsBundlePublishFileLocation);
             FileOutputStream outputStream;
             outputStream = new FileOutputStream(transitGtfsBundle);
             final ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
@@ -140,13 +152,16 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             final int bytesToRead = 1024;
             final byte[] buffer = new byte[bytesToRead];
             for (String file : uploadedFiles) {
-                final File f = new File(file);
-                if (!f.exists()) {
-                    log.info("Couldn't find file " + file);
+                final File uploadedFile = new File(file);
+                if (!uploadedFile.exists()) {
+                    log
+                    .info(
+                    "GTFS Bundle Creation Error - File there in uploaded list but couldn't find file at Temp Location {} - "
+                    + "Continue with the rest of files", file);
                     continue;
                 }
-                final BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(f));
-                final ZipEntry entry = new ZipEntry(f.getName());
+                final BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(uploadedFile));
+                final ZipEntry entry = new ZipEntry(uploadedFile.getName());
                 entry.setMethod(ZipEntry.DEFLATED);
                 zipOutputStream.putNextEntry(entry);
                 while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -156,15 +171,21 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             }
             zipOutputStream.close();
             outputStream.close();
-            transitBundle.setLatestBundleFileName(fileName);
-            transitBundle.setLatestBundleLocation(fileN);
+            transitBundle.setLatestBundleFileName(gtfsBundlePublishFileName);
+            transitBundle.setLatestBundleLocation(gtfsBundlePublishFileLocation);
             log.info("Bundle Creation finished {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
-            log.info("Successfully created transit bundle at " + fileN);
+            log.info("Successfully created transit bundle at " + gtfsBundlePublishFileLocation);
 
         } catch (FileNotFoundException e) {
+            log
+            .error("Bundle Creation Failure at {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             log.error(e.getMessage());
+            throw new IOException(e);
         } catch (IOException e) {
+            log
+            .error("Bundle Creation Failure at {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             log.error(e.getMessage());
+            throw new IOException(e);
         }
 
     }
