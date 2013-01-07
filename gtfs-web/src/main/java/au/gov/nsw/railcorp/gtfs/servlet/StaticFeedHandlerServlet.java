@@ -112,7 +112,13 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             log.info("Finished reading files received via HTTP Post {}",
             new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             // Files Uploaded - Create the Zip bundle
-            createGtfsBundle(publishPath, uploadedFiles);
+            if (uploadedFiles != null && uploadedFiles.size() > 0) {
+                createGtfsBundle(publishPath, uploadedFiles);
+            } else {
+                // Error Condition
+                response.setStatus(BAD_REQUEST_CODE);
+                log.error("Files not read, some error ");
+            }
 
             response.setStatus(REQUEST_SUCCESS_CODE);
         } catch (Exception e) {
