@@ -81,9 +81,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/GTFS_LoadStatic</url-pattern>
-            <url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
-            <url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
+            <url-pattern>/GTFS_LoadStatic</url-pattern>           
         </web-resource-collection>
         <auth-constraint>
             <role-name>GTFS_LOAD_ROLE</role-name>
@@ -100,9 +98,7 @@
     
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/GTFSRVehiclePosition</url-pattern>
-            <url-pattern>/GTFSRServiceAlerts</url-pattern>
+            <web-resource-name>Protected Resource</web-resource-name>            
             <url-pattern>/GTFSTransitBundle</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
