@@ -76,37 +76,49 @@
     <servlet-name>ServiceAlertGTFSR</servlet-name>
     <url-pattern>/GTFSRServiceAlerts</url-pattern>
   </servlet-mapping>
-  
+   <login-config>
+        <auth-method>BASIC</auth-method>    
+    </login-config>
   <!--  Define Security Constraints - This is for defining roles for accessing GTFS & GTFSR data -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/SydneyTrainsGTFS/GTFS_LoadStatic</url-pattern>            
+            <url-pattern>/GTFS_LoadStatic/*</url-pattern>
+            <url-pattern>/GTFS_LoadServiceAlerts/*</url-pattern>
+            <url-pattern>/GTFS_LoadVehiclePosition/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>            
         </web-resource-collection>
         <auth-constraint>
-            <role-name>GTFS_LOAD_ROLE</role-name>
+            <role-name>gtfs-loadrole</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
-
-    <login-config>
-        <auth-method>BASIC</auth-method>    
-    </login-config>
-
     <security-role>
-        <role-name>GTFS_LOAD_ROLE</role-name>
-    </security-role>
-    
+        <role-name>gtfs-loadrole</role-name>
+    </security-role>    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/SydneyTrainsGTFS/GTFSRVehiclePosition</url-pattern>                        
+            <url-pattern>/GTFSRServiceAlerts/*</url-pattern>
+            <url-pattern>/GTFSTransitBundle/*</url-pattern>
+            <url-pattern>/GTFSRVehiclePosition/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>                        
         </web-resource-collection>
         <auth-constraint>
-            <role-name>GTFS_READ_ROLE</role-name>
+            <role-name>gtfs-readrole</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-role>
-        <role-name>GTFS_READ_ROLE</role-name>
+        <role-name>gtfs-readrole</role-name>
     </security-role>
     <!--  End of Security Constraint Definition -->
 </web-app>
