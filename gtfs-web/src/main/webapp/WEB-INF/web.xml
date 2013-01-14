@@ -81,9 +81,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/SydneyTrainsGTFS/GTFS_LoadStatic</url-pattern>
-            <url-pattern>/SydneyTrainsGTFS/GTFS_LoadVehiclePosition</url-pattern>
-            <url-pattern>/SydneyTrainsGTFS/GTFS_LoadServiceAlerts</url-pattern>
+            <url-pattern>/SydneyTrainsGTFS/GTFS_LoadStatic</url-pattern>            
         </web-resource-collection>
         <auth-constraint>
             <role-name>GTFS_LOAD_ROLE</role-name>
@@ -101,9 +99,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/SydneyTrainsGTFS/GTFSRVehiclePosition</url-pattern>
-            <url-pattern>/SydneyTrainsGTFS/GTFSRServiceAlerts</url-pattern>
-            <url-pattern>/SydneyTrainsGTFS/GTFSTransitBundle</url-pattern>            
+            <url-pattern>/SydneyTrainsGTFS/GTFSRVehiclePosition</url-pattern>                        
         </web-resource-collection>
         <auth-constraint>
             <role-name>GTFS_READ_ROLE</role-name>
