@@ -17,7 +17,6 @@ import com.google.transit.realtime.GtfsRealtime.VehiclePosition.VehicleStopStatu
 
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBigDecimal;
-import org.supercsv.cellprocessor.constraint.Unique;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 
 /**
@@ -52,7 +51,7 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
     protected CellProcessor[] getProcessors() {
 
         final CellProcessor[] processors = new CellProcessor[] {
-        /* trip_id */new Optional(new Unique()),
+        /* trip_id */new Optional(),
         /* routeId */new Optional(),
         /* startTime */new Optional(),
         /* startDate */new Optional(),

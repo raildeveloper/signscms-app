@@ -263,6 +263,9 @@ public class VehiclePositionCsvConverterTest extends TestCase {
 
     /**
      * should be impossible to have duplicate trip ID's in a single vehicle position feed - can't be in 2 places at once.
+     * However, there are a few cases where trips can be renamed and different instances can exist (eg. if a service breaks down etc)
+     * or for non timetabled trips (eg. U001) across network - there could be a few instances, so this test has been changed to allow
+     * duplicate trip ids when the source systems report them rather than invalidate the entire feed.
      */
     @Test
     public void testDuplicateTripIds() {
@@ -270,8 +273,8 @@ public class VehiclePositionCsvConverterTest extends TestCase {
                 "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n" +
         		"123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
-        assertFalse(converter.convertAndStoreCsv(reader));
-        assertEquals(null, converter.getCurrentProtoBuf());
+        assertTrue(converter.convertAndStoreCsv(reader));
+        assertNotNull(null, converter.getCurrentProtoBuf());
     }
     
     @Test
