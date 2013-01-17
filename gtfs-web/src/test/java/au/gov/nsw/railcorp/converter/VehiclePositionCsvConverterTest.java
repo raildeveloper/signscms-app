@@ -69,7 +69,7 @@ public class VehiclePositionCsvConverterTest extends TestCase {
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
-        converter.convertAndStoreCsv(reader);
+        assertTrue(converter.convertAndStoreCsv(reader));
         
         FeedMessage mesg = null;
         try {
@@ -521,6 +521,20 @@ public class VehiclePositionCsvConverterTest extends TestCase {
         assertFalse(converter.convertAndStoreCsv(reader));
     }
     
+    @Test
+    public void testQuotesAroundDecimals() {
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,\"30.76864309\",-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.convertAndStoreCsv(reader);
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals((float)30.76864309, mesg.getEntity(0).getVehicle().getPosition().getLatitude());
+    }
     
     @Test
     public void testLargeCSVData() {

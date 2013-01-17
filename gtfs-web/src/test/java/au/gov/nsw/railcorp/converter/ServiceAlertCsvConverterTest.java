@@ -414,4 +414,68 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         assertEquals(1046, mesg.getEntityCount());
     }
     
+    @Test
+    public void testCommaInText() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals("Train derailed, at Revesby", mesg.getEntity(0).getAlert().getDescriptionText().getTranslation(0).getText());
+
+    }
+
+    /**
+     * Check for escaped quotes inside a quoted text field. Supported escaping is "" for a single double quote
+     */
+    @Test
+    public void testCommaQuotesInText() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed\"\", \"\"at Revesby\"\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals("Train derailed\", \"at Revesby", mesg.getEntity(0).getAlert().getDescriptionText().getTranslation(0).getText());
+
+    }
+    
+    public void testCommaSingleQuotesInText() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed', 'at Revesby\"\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals("Train derailed', 'at Revesby", mesg.getEntity(0).getAlert().getDescriptionText().getTranslation(0).getText());
+
+    }
+
+    public void testQuotesOnEnum() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls,2,101A,stop1,1,\"4\",www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(Effect.DETOUR, mesg.getEntity(0).getAlert().getEffect());
+
+    }
 }
