@@ -87,7 +87,7 @@ public class TransitBundleListener implements HttpRequestHandler {
 
             }
             response.setContentType("application/zip");
-            response.setHeader("Content-Disposition", "attachment; filename=\"SydneyTrainsGTFS_TransitBundle.ZIP\"");
+            response.setHeader("Content-Disposition", "attachment; filename=\"SydneyTrainsGTFS_TransitBundle.zip\"");
 
             final FileInputStream fis = new FileInputStream(bundle);
             final BufferedInputStream inputStream = new BufferedInputStream(fis);
