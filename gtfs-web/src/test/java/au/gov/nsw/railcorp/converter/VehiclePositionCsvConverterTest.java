@@ -271,12 +271,24 @@ public class VehiclePositionCsvConverterTest extends TestCase {
     public void testDuplicateTripIds() {
         String csvData =
                 "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n" +
-        		"123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        		"123.23.trip,testRoute,11:30:00,20121210,1,A28,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
         assertTrue(converter.convertAndStoreCsv(reader));
         assertNotNull(null, converter.getCurrentProtoBuf());
     }
-    
+
+    /**
+     * Can never however have duplicate vehicle id's in a single feed. The actual physical train can't be in 2 places at once
+     */
+    @Test
+    public void testDuplicateVehicleIds() {
+        String csvData =
+                "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n" +
+                "123.24.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        assertFalse(converter.convertAndStoreCsv(reader));
+        assertEquals(null, converter.getCurrentProtoBuf());
+    }    
     @Test
     public void testUninitialisedConverterBuffer() {
         assertEquals(null, converter.getCurrentProtoBuf());
@@ -368,8 +380,8 @@ public class VehiclePositionCsvConverterTest extends TestCase {
         converter.convertAndStoreCsv(reader);
         
         csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,31.986422,-152.9845953,90.412,12450.421,20.23,4,stop3,1,167293092032,1\n" +
-                "223.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,31.986422,-152.9845953,90.412,12450.421,20.23,4,stop3,1,167293092032,1\n" +
-                "323.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,31.986422,-152.9845953,90.412,12450.421,20.23,4,stop3,1,167293092032,1\n";
+                "223.23.trip,testRoute,11:30:00,20121210,1,A28,Some trip,None,31.986422,-152.9845953,90.412,12450.421,20.23,4,stop3,1,167293092032,1\n" +
+                "323.23.trip,testRoute,11:30:00,20121210,1,A29,Some trip,None,31.986422,-152.9845953,90.412,12450.421,20.23,4,stop3,1,167293092032,1\n";
         reader = new StringReader(csvData);
         converter.convertAndStoreCsv(reader);
         
@@ -403,7 +415,7 @@ public class VehiclePositionCsvConverterTest extends TestCase {
     public void testEmptyCSVRow() {
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n" +
         		",,,,,,,,,,,,,,,,,\n" +
-        		"223.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        		"223.23.trip,testRoute,11:30:00,20121210,1,A28,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
         assertTrue(converter.convertAndStoreCsv(reader));
         
