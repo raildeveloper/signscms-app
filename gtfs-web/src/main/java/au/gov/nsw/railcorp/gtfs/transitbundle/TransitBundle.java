@@ -2,6 +2,7 @@
 
 package au.gov.nsw.railcorp.gtfs.transitbundle;
 
+
 /**
  * Bean to handle the latest Sydney Trains GTFS transit bundle.
  * @author RailCorp
@@ -13,6 +14,8 @@ public class TransitBundle {
     private String latestBundleFileName = "";
 
     private String latestBundleLocation = "";
+
+    private String bundleGenerationTime = "";
 
     /**
      * Return instance of Transit Bundle.
@@ -62,6 +65,25 @@ public class TransitBundle {
     public void setLatestBundleLocation(String fileLocation) {
 
         this.latestBundleLocation = fileLocation;
+    }
+
+    /**
+     * Get the Latest Transit Data Bundle Generation Time.
+     * @return the bundleGenerationTime
+     */
+    public String getBundleGenerationTime() {
+
+        return bundleGenerationTime;
+    }
+
+    /**
+     * Set the Latest Transit Data Bundle Generation Time.
+     * @param generationTime
+     *            the bundleGenerationTime to set
+     */
+    public void setBundleGenerationTime(String generationTime) {
+
+        this.bundleGenerationTime = generationTime;
     }
 
 }

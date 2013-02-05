@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -71,11 +72,59 @@ public class TransitBundleListenerTest extends TestCase {
         when(request.getServletContext()).thenReturn(sContext);
         when(response.getOutputStream()).thenReturn(servletOutputStream);
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
+        Date lastModified = new Date(testDataBundle.lastModified());
+        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
+        when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
+        when(request.getHeader("If-Modified-Since")).thenReturn(null);
         transitBundleListener.handleRequest(request, response);
         verify(response).setContentType("application/zip");
         IOUnitils.deleteTempFileOrDir(testDataBundle);
     }
 
+    @Test
+    public void testGTFSBundleIfModifiedSince() throws ServletException, IOException{
+        
+        log.info("testGTFSBundleDownload");
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        final HttpServletResponse response = mock(HttpServletResponse.class);
+        final ServletContext sContext = mock(ServletContext.class);
+        final ServletOutputStream servletOutputStream = mock(ServletOutputStream.class);
+        when(sContext.getContextPath()).thenReturn("SydneyTrainsGTFS");
+        when(request.getServletContext()).thenReturn(sContext);
+        when(response.getOutputStream()).thenReturn(servletOutputStream);
+        when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
+        Date lastModified = new Date(testDataBundle.lastModified());
+        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
+        when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
+        when(request.getHeader("If-Modified-Since")).thenReturn(generationTime);
+        transitBundleListener.handleRequest(request, response);
+        verify(response).setStatus(304);
+        IOUnitils.deleteTempFileOrDir(testDataBundle);
+        
+    }
+    
+    @Test
+    public void testGTFSBundleLastModifiedHeader() throws ServletException, IOException{
+        
+        log.info("testGTFSBundleDownload");
+        final HttpServletRequest request = mock(HttpServletRequest.class);
+        final HttpServletResponse response = mock(HttpServletResponse.class);
+        final ServletContext sContext = mock(ServletContext.class);
+        final ServletOutputStream servletOutputStream = mock(ServletOutputStream.class);
+        when(sContext.getContextPath()).thenReturn("SydneyTrainsGTFS");
+        when(request.getServletContext()).thenReturn(sContext);
+        when(response.getOutputStream()).thenReturn(servletOutputStream);
+        when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
+        Date lastModified = new Date(testDataBundle.lastModified());
+        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
+        final String lastModifiedHeader = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss").format(lastModified);
+        when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
+        when(request.getHeader("If-Modified-Since")).thenReturn(null);
+        transitBundleListener.handleRequest(request, response);
+        verify(response).setHeader("Last-Modified",lastModifiedHeader);
+        IOUnitils.deleteTempFileOrDir(testDataBundle);
+        
+    }
     /**
      * {@inheritDoc}
      * @see junit.framework.TestCase#tearDown()

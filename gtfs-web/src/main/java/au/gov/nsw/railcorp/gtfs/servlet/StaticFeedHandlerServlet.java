@@ -71,6 +71,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
         final File tempDir = new File(tempUploadPath);
         final List<String> uploadedFiles = new ArrayList<String>();
         try {
+
             log.info("Static Feed Upload request received : StaticFeedHandlerServlet : handleRequest()");
             if (!ServletFileUpload.isMultipartContent(request)) {
                 // if not, we stop here
@@ -78,6 +79,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
                 response.setStatus(BAD_REQUEST_CODE);
                 return;
             }
+
             log.info("Started reading files received via HTTP Post {}",
             new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             // Save the files received to java.io.tmpdir
@@ -179,6 +181,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             outputStream.close();
             transitBundle.setLatestBundleFileName(gtfsBundlePublishFileName);
             transitBundle.setLatestBundleLocation(gtfsBundlePublishFileLocation);
+            transitBundle.setBundleGenerationTime(timeStamp);
             log.info("Bundle Creation finished {}", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
             log.info("Successfully created transit bundle at " + gtfsBundlePublishFileLocation);
 
