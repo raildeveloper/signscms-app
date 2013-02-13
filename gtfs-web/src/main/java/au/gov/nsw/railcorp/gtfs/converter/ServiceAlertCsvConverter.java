@@ -212,15 +212,12 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
             if (row.getStopId() != null) {
                 sel.setStopId(row.getStopId());
             }
-            if (row.getTripId() != null || row.getRouteId() != null) {
+            if (row.getRouteId() != null) {
+                sel.setRouteId(row.getRouteId());
+            }
+            if (row.getTripId() != null) {
                 final TripDescriptor.Builder trip = TripDescriptor.newBuilder();
-                if (row.getTripId() != null) {
-                    trip.setTripId(row.getTripId());
-                }
-                if (row.getRouteId() != null) {
-                    sel.setRouteId(row.getRouteId());
-                    trip.setRouteId(row.getRouteId());
-                }
+                trip.setTripId(row.getTripId());
                 sel.setTrip(trip);
             }
             alert.addInformedEntity(sel);

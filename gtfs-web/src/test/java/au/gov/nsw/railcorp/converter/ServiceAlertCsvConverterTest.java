@@ -362,7 +362,6 @@ public class ServiceAlertCsvConverterTest extends TestCase {
                     "      route_type: 2\n" +
                     "      trip {\n" +
                     "        trip_id: \"101A\"\n" +
-                    "        route_id: \"Ehls\"\n" +
                     "      }\n" +
                     "      stop_id: \"stop1\"\n" +
                     "    }\n" +
