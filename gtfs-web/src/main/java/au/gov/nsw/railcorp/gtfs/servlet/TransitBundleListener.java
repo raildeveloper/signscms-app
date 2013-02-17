@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -43,7 +44,7 @@ public class TransitBundleListener implements HttpRequestHandler {
 
     private static final String FILE_DATE_FORMAT = "yyyyMMdd_HHmmss";
 
-    private static final String HEADER_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss";
+    private static final String HEADER_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
     private static final String RESPONSE_CONTENT_TYPE = "application/zip";
 
@@ -67,6 +68,8 @@ public class TransitBundleListener implements HttpRequestHandler {
             log.info("Transit Bundle version : {} served from location {} ", transitBundle.getLatestBundleFileName(),
             transitBundle.getLatestBundleLocation());
             File bundle = new File(transitBundle.getLatestBundleLocation());
+            final SimpleDateFormat fileDateFormat = new SimpleDateFormat(FILE_DATE_FORMAT);
+            fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             if (!bundle.exists()) {
                 // Server restart scenario or nothing has been published.
                 // See if any previously published bundle exists
@@ -92,7 +95,8 @@ public class TransitBundleListener implements HttpRequestHandler {
                             transitBundle.setLatestBundleLocation(publishPath + bundle.getName());
                             transitBundle.setLatestBundleFileName(bundle.getName());
                             final Date lastModified = new Date(bundle.lastModified());
-                            final String generationTime = new SimpleDateFormat(FILE_DATE_FORMAT).format(lastModified);
+
+                            final String generationTime = fileDateFormat.format(lastModified);
                             transitBundle.setBundleGenerationTime(generationTime);
                         }
                     } else {
@@ -107,12 +111,13 @@ public class TransitBundleListener implements HttpRequestHandler {
             }
 
             // Verify in Request Header for Header Name - If-Modified-Since - App developers may not want to download everytime.
-            final Date bundleGenerationDate = new SimpleDateFormat(FILE_DATE_FORMAT).parse(transitBundle.getBundleGenerationTime());
+            final Date bundleGenerationDate = fileDateFormat.parse(transitBundle.getBundleGenerationTime());
 
             final String ifModifiedSince = request.getHeader(IF_MODIFIED_SINCE);
             if (ifModifiedSince != null && !ifModifiedSince.isEmpty()) {
                 try {
-                    final Date ifModifiedSinceDate = new SimpleDateFormat(FILE_DATE_FORMAT).parse(ifModifiedSince);
+
+                    final Date ifModifiedSinceDate = fileDateFormat.parse(ifModifiedSince);
 
                     if (bundleGenerationDate.before(ifModifiedSinceDate) || bundleGenerationDate.equals(ifModifiedSinceDate)) {
                         response.setStatus(NOT_MODIFIED_STATUS_CODE);
@@ -125,8 +130,9 @@ public class TransitBundleListener implements HttpRequestHandler {
 
             response.setContentType(RESPONSE_CONTENT_TYPE);
             response.setHeader("Content-Disposition", "attachment; filename=\"SydneyTrainsGTFS_TransitBundle.zip\"");
-
-            final String lastModifiedHeader = new SimpleDateFormat(HEADER_DATE_FORMAT).format(bundleGenerationDate);
+            final SimpleDateFormat headerDateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT);
+            headerDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            final String lastModifiedHeader = headerDateFormat.format(bundleGenerationDate);
             response.setHeader("Last-Modified", lastModifiedHeader);
             final FileInputStream fis = new FileInputStream(bundle);
             final BufferedInputStream inputStream = new BufferedInputStream(fis);

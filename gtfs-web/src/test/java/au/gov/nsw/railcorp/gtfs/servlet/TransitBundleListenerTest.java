@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -73,7 +74,9 @@ public class TransitBundleListenerTest extends TestCase {
         when(response.getOutputStream()).thenReturn(servletOutputStream);
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
-        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
+        SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String generationTime = fileDateFormat.format(lastModified);
         when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
         when(request.getHeader("If-Modified-Since")).thenReturn(null);
         transitBundleListener.handleRequest(request, response);
@@ -82,8 +85,8 @@ public class TransitBundleListenerTest extends TestCase {
     }
 
     @Test
-    public void testGTFSBundleIfModifiedSince() throws ServletException, IOException{
-        
+    public void testGTFSBundleIfModifiedSince() throws ServletException, IOException {
+
         log.info("testGTFSBundleDownload");
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
@@ -94,18 +97,20 @@ public class TransitBundleListenerTest extends TestCase {
         when(response.getOutputStream()).thenReturn(servletOutputStream);
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
-        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
+        SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String generationTime = fileDateFormat.format(lastModified);
         when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
         when(request.getHeader("If-Modified-Since")).thenReturn(generationTime);
         transitBundleListener.handleRequest(request, response);
         verify(response).setStatus(304);
         IOUnitils.deleteTempFileOrDir(testDataBundle);
-        
+
     }
-    
+
     @Test
-    public void testGTFSBundleLastModifiedHeader() throws ServletException, IOException{
-        
+    public void testGTFSBundleLastModifiedHeader() throws ServletException, IOException {
+
         log.info("testGTFSBundleDownload");
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
@@ -116,15 +121,20 @@ public class TransitBundleListenerTest extends TestCase {
         when(response.getOutputStream()).thenReturn(servletOutputStream);
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
-        final String generationTime = new SimpleDateFormat("yyyyMMdd_HHmmss").format(lastModified);
-        final String lastModifiedHeader = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss").format(lastModified);
+        SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String generationTime = fileDateFormat.format(lastModified);
+        SimpleDateFormat headerDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
+        headerDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        final String lastModifiedHeader = headerDateFormat.format(lastModified);
         when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
         when(request.getHeader("If-Modified-Since")).thenReturn(null);
         transitBundleListener.handleRequest(request, response);
-        verify(response).setHeader("Last-Modified",lastModifiedHeader);
+        verify(response).setHeader("Last-Modified", lastModifiedHeader);
         IOUnitils.deleteTempFileOrDir(testDataBundle);
-        
+
     }
+
     /**
      * {@inheritDoc}
      * @see junit.framework.TestCase#tearDown()

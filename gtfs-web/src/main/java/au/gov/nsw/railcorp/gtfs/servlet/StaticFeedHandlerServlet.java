@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -146,7 +147,9 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
                 publishDir.mkdir();
             }
             // timeStamp - Appended to File Name - example - 20121219_135813
-            final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            final SimpleDateFormat formatUTC = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            formatUTC.setTimeZone(TimeZone.getTimeZone("UTC"));
+            final String timeStamp = formatUTC.format(Calendar.getInstance().getTime());
             final String gtfsBundlePublishFileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp + ".zip";
 
             // Need to correct the upload path
