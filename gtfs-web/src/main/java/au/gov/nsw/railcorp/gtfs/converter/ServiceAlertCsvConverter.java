@@ -5,10 +5,12 @@ package au.gov.nsw.railcorp.gtfs.converter;
 import au.gov.nsw.railcorp.gtfs.converter.types.ServiceAlertCsvRow;
 
 import com.google.transit.realtime.GtfsRealtime.Alert;
+import com.google.transit.realtime.GtfsRealtime.Alert.Builder;
 import com.google.transit.realtime.GtfsRealtime.Alert.Cause;
 import com.google.transit.realtime.GtfsRealtime.Alert.Effect;
 import com.google.transit.realtime.GtfsRealtime.EntitySelector;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
+import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 import com.google.transit.realtime.GtfsRealtime.TimeRange;
 import com.google.transit.realtime.GtfsRealtime.TranslatedString;
 import com.google.transit.realtime.GtfsRealtime.TranslatedString.Translation;
@@ -95,10 +97,11 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     /**
      * {@inheritDoc}
      * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processCsvRowAndBuildGtfsrEntity
-     * (java.lang.Object, com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder)
+     * (java.lang.Object, com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder,
+     *  com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder)
      */
     @Override
-    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
+    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, FeedMessage.Builder gtfsMessage) {
 
         assert row.getClass() == ServiceAlertCsvRow.class;
 
@@ -106,18 +109,68 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
             final ServiceAlertCsvRow currRow = (ServiceAlertCsvRow) row;
 
             if (currRow.rowContentsExist()) {
-                // Build the GTFS-R Alert object
-                final Alert.Builder alert = Alert.newBuilder();
+                final Alert.Builder existingAlert = findDuplicateAlert(currRow, gtfsMessage);
+                if (null == existingAlert) {
+                    // Build the GTFS-R Alert object
+                    final Alert.Builder alert = Alert.newBuilder();
 
-                writeActivePeriod(currRow, alert);
-                writeCause(currRow, alert);
-                writeDescription(currRow, alert);
-                writeEffect(currRow, alert);
-                writeHeaderText(currRow, alert);
-                writeUrl(currRow, alert);
-                writeEntitySelector(currRow, alert);
+                    writeActivePeriod(currRow, alert);
+                    writeCause(currRow, alert);
+                    writeDescription(currRow, alert);
+                    writeEffect(currRow, alert);
+                    writeHeaderText(currRow, alert);
+                    writeUrl(currRow, alert);
+                    writeEntitySelector(currRow, alert);
 
-                gtfsEntity.setAlert(alert);
+                    gtfsEntity.setAlert(alert);
+                    return true;
+                } else {
+                    // This should return false so that the entity is not added, but just the altered alert entity exists.
+                    writeEntitySelector(currRow, existingAlert);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Finds any duplicate Alerts that may already exist in the Service Alert feed.
+     * This could happen as the CSV input does not account for the 1 to many relationship
+     * with the entity selector in the Alert.
+     * @param currRow   The current CSV row
+     * @param gtfsEntity The main entity for alerts
+     * @return A Builder object for an alert with the same data if one exists, null otherwise.
+     */
+    private Builder findDuplicateAlert(ServiceAlertCsvRow currRow, FeedMessage.Builder gtfsMessage) {
+
+        int i = 0;
+        for (FeedEntity e : gtfsMessage.getEntityList()) {
+            if (e.hasAlert()) {
+                final Alert a = e.getAlert();
+                if (a.getEffect() == Effect.valueOf(currRow.getEffect().intValue())
+                    && a.getCause() == Cause.valueOf(currRow.getCause().intValue())
+                    && isEqualToTranslatedString(currRow.getUrl(), a.getUrl())
+                    && isEqualToTranslatedString(currRow.getHeaderText(), a.getHeaderText())
+                    && isEqualToTranslatedString(currRow.getDescription(), a.getDescriptionText()))
+                {
+                    return gtfsMessage.getEntityBuilder(i).getAlertBuilder();
+                }
+            }
+            ++i;
+        }
+        return null;
+    }
+
+
+    /**
+     * Determines whether a string is in the default translation of the GTFS Translated String.
+     * @param s     The java string to compare
+     * @param ts    The translated string to compare
+     * @return true if string s is default translation for the GTFS translated string
+     */
+    private boolean isEqualToTranslatedString(String s, TranslatedString ts) {
+        if ((s != null) == (ts != null)) {
+            if (s == null || s.equals(ts.getTranslation(0).getText())) {
                 return true;
             }
         }

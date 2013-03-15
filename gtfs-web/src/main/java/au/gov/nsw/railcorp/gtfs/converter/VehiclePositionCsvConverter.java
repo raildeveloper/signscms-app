@@ -6,6 +6,7 @@ import au.gov.nsw.railcorp.gtfs.converter.types.TripBasedCsvRow;
 import au.gov.nsw.railcorp.gtfs.converter.types.VehiclePositionCsvRow;
 
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
+import com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder;
 import com.google.transit.realtime.GtfsRealtime.Position;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor.ScheduleRelationship;
@@ -109,10 +110,10 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
     /**
      * {@inheritDoc}
      * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processCsvRowAndBuildGtfsrEntity (java.lang.Object,
-     *      com.google.transit.realtime.GtfsRealtime.FeedEntity.Builder)
+     *      com.google.transit.realtime.GtfsRealtime.FeedEntity.Builder, Builder)
      */
     @Override
-    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity) {
+    protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, Builder gtfsMessage) {
 
         assert row.getClass() == VehiclePositionCsvRow.class;
 

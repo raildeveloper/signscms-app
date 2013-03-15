@@ -273,9 +273,9 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.convertAndStoreCsv(reader);
         
-        csvData = "1029783000,1029784000,Rail1,Ehls,2,,BeverlyHills,1,4,www.131500.com.au,Lift Outage,Lift Broken at Beverly Hills\n" +
-                "1029783000,1029784000,Rail1,Ehls,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift Broken at Revesby\n" +
-                "1029783000,1029784000,Rail1,Ehls,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift Broken at Revesby\n";
+        csvData = "1029783000,1029784000,Rail1,Ehls,2,,BeverlyHills,1,4,www.131500.com.au,Lift Outage,Lift1 Broken at Beverly Hills\n" +
+                "1029783000,1029784000,Rail1,Ehls,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift2 Broken at Revesby\n" +
+                "1029783000,1029784000,Rail1,Ehls,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift3 Broken at Revesby\n";
         reader = new StringReader(csvData);
         converter.convertAndStoreCsv(reader);
         
@@ -477,4 +477,125 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         assertEquals(Effect.DETOUR, mesg.getEntity(0).getAlert().getEffect());
 
     }
+    
+    public void testDuplicateAlertMessageAggregation() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls3,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(1,mesg.getEntityCount());
+        assertEquals(3, mesg.getEntity(0).getAlert().getInformedEntityCount());
+        Alert a = mesg.getEntity(0).getAlert();
+        assertEquals("Ehls1", a.getInformedEntity(0).getRouteId());
+        assertEquals("Ehls2", a.getInformedEntity(1).getRouteId());
+        assertEquals("Ehls3", a.getInformedEntity(2).getRouteId());
+    }
+    
+    public void testDuplicateAlertMessageAggregation2() {
+        String csvData = "1029783000,1029784000,Rail1,Ehls1,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift Broken at Revesby\n" +
+                         "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls3,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783000,1029784000,Rail1,Ehls2,2,,Revesby,1,4,www.131500.com.au,Lift Outage,Lift Broken at Revesby\n" +
+                         "1029783000,1029784000,Rail1,Ehls3,2,,Revesby,1,4,www.131500.com.au,Trip Update,Trip XYZ is late 5 mins\n";
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(3,mesg.getEntityCount());
+    }
+    
+    public void testAggregationAlertComparisonCause() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,2,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(2,mesg.getEntityCount());
+    }
+
+    public void testAggregationAlertComparisonEffect() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,3,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(2,mesg.getEntityCount());
+    }
+    
+    public void testAggregationAlertComparisonUrl() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com,Major Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(2,mesg.getEntityCount());
+    }
+    
+    public void testAggregationAlertComparisonHeading() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com.au,Minor Delays,\"Train derailed, at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(2,mesg.getEntityCount());
+    }
+
+    public void testAggregationAlertComparisonTextMessage() {
+        String csvData = "1029783620,1029784000,Rail1,Ehls1,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed at Revesby\"\n" +
+                         "1029783620,1029784000,Rail1,Ehls2,2,101A,stop1,1,4,www.131500.com.au,Major Delays,\"Train derailed, at Revesby\"\n";
+        
+        StringReader reader = new StringReader(csvData);
+        assertTrue(converter.convertAndStoreCsv(reader));
+        
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertEquals(2,mesg.getEntityCount());
+    }
+    
 }

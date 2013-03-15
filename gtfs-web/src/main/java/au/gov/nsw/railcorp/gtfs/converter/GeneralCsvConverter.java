@@ -7,6 +7,7 @@ import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader.Incrementality;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
+import com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -84,7 +85,7 @@ public abstract class GeneralCsvConverter implements CsvConverter {
                 log.info(beanReader.getUntokenizedRow());
                 final FeedEntity.Builder entity = FeedEntity.newBuilder();
                 entity.setId(String.valueOf(beanReader.getRowNumber()));
-                if (processCsvRowAndBuildGtfsrEntity(row, entity)) {
+                if (processCsvRowAndBuildGtfsrEntity(row, entity, gtfsMessage)) {
                     gtfsMessage.addEntity(entity);
                 }
             }
@@ -197,8 +198,11 @@ public abstract class GeneralCsvConverter implements CsvConverter {
      *            The object representing the row
      * @param gtfsEntity
      *          A GTFS builder object that will be modified to add the data for this row
+     * @param gtfsMessage
+     *          A GTFS builder object that is used to possibly add to existing content rather than
+     *          create a new Entity if some form of aggregation is appropriate.
      * @return true if an entity was successfully populated
      */
-    protected abstract boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity);
+    protected abstract boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, Builder gtfsMessage);
 
 }
