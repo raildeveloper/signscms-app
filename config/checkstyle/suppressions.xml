@@ -49,5 +49,6 @@
   <suppress checks="IllegalCatch" files="[/\\]StaticFeedHandlerServlet.java"/>
   <suppress checks="ReturnCount" files="[/\\]TransitBundleListener.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]TransitBundleListener.java"/>
+  <suppress id="warningCyclomaticComplexity" files="[/\\]ServiceAlertCsvConverter.java"/>
  
 </suppressions>
