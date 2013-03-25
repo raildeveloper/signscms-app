@@ -413,19 +413,6 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         assertEquals(1046, mesg.getEntityCount());
     }
 
-    @Test
-    public void testProductionFailingLogs() {        
-        InputStreamReader file = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("servicealertstest-fails-production.csv"));
-        assertTrue(converter.convertAndStoreCsv(file));
-        FeedMessage mesg = null;
-        try {
-            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
-        } catch (InvalidProtocolBufferException e) {
-            fail("Invalid Protocol Buffer");
-        }
-        assertTrue(mesg != null);
-    }
-    
     
     @Test
     public void testCommaInText() {
@@ -611,5 +598,18 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         }
         assertEquals(2,mesg.getEntityCount());
     }
-    
+
+    @Test
+    public void testAggregationAlertNoCauseOrEffectInInput() {        
+        InputStreamReader file = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("servicealertstest-fails-production.csv"));
+        assertTrue(converter.convertAndStoreCsv(file));
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg != null);
+    }
+
 }
