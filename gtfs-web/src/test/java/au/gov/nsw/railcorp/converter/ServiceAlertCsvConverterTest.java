@@ -612,4 +612,18 @@ public class ServiceAlertCsvConverterTest extends TestCase {
         assertTrue(mesg != null);
     }
 
+    @Test
+    public void testAggregationAlertNoCauseOrEffectInInput2() {        
+        InputStreamReader file = new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream("service_alert_aggregation_complex.csv"));
+        assertTrue(converter.convertAndStoreCsv(file));
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg != null);
+    }
+
+    
 }

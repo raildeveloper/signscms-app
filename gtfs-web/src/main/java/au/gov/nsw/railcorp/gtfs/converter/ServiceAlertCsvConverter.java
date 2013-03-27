@@ -147,8 +147,18 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         for (FeedEntity e : gtfsMessage.getEntityList()) {
             if (e.hasAlert()) {
                 final Alert a = e.getAlert();
-                if (((currRow.getEffect() == null && !a.hasEffect()) || a.getEffect() == Effect.valueOf(currRow.getEffect().intValue()))
-                    && ((currRow.getCause() == null && !a.hasCause()) || a.getCause() == Cause.valueOf(currRow.getCause().intValue()))
+                if (
+                    (
+                        (currRow.getEffect() == null && !a.hasEffect())
+                        ||
+                        (currRow.getEffect() != null && a.getEffect() == Effect.valueOf(currRow.getEffect().intValue()))
+                    )
+                    &&
+                    (
+                        (currRow.getCause() == null && !a.hasCause())
+                        ||
+                        (currRow.getCause() != null && a.getCause() == Cause.valueOf(currRow.getCause().intValue()))
+                    )
                     && isEqualToTranslatedString(currRow.getUrl(), a.getUrl())
                     && isEqualToTranslatedString(currRow.getHeaderText(), a.getHeaderText())
                     && isEqualToTranslatedString(currRow.getDescription(), a.getDescriptionText()))
