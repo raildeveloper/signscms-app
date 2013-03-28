@@ -2,7 +2,6 @@
 
 package au.gov.nsw.railcorp.gtfs.converter;
 
-import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader;
 import com.google.transit.realtime.GtfsRealtime.FeedHeader.Incrementality;
@@ -30,21 +29,12 @@ import org.supercsv.prefs.CsvPreference;
  * protocol buffer from different threads.
  * @author John
  */
-public abstract class GeneralCsvConverter implements CsvConverter {
+public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRetriever implements CsvConverter {
 
     private static final String GTFS_VERSION = "1.0";
     private static final long MILLISECOND_IN_SECOND = 1000L;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
-
-    /**
-     * The stored Protocol Buffer. This object reference requires synchronised access between reading
-     * and writing.
-     * Currently this is handled by never changing the value of the contents, but only assigning/reading
-     * the reference. declared as volatile so propagation between threads is timely, but without
-     * overhead of full synchronise.
-     */
-    private volatile byte[] protobuf;
 
     /**
      * Constructor.
@@ -95,9 +85,7 @@ public abstract class GeneralCsvConverter implements CsvConverter {
             final FeedMessage newFeed = gtfsMessage.build();
 
             final byte[] newProtoBuf = newFeed.toByteArray();
-            // Assigning the shared member protobuf is atomic, so no further sync required, as
-            // reading only performed via getCurrentProtoBuf(), which also performs an atomic read
-             protobuf = newProtoBuf;
+            setCurrentProtoBuf(newProtoBuf);
 
         } catch (IOException e) {
             log.error("Failed to Process CSV - " + e.getMessage());
@@ -124,41 +112,6 @@ public abstract class GeneralCsvConverter implements CsvConverter {
             }
         }
         return res;
-    }
-
-    /**
-     * {@inheritDoc}
-     * This function exists within a thread-safe container class, with updates to
-     * the protocol buffer potentially being made from other threads. As such,
-     * each call to this function should be considered to potentially return a different
-     * value.
-     * @see au.gov.nsw.railcorp.gtfs.converter.CsvConverter#getCurrentProtoBuf()
-     */
-    @Override
-    public final byte[] getCurrentProtoBuf() {
-
-        return protobuf;
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see au.gov.nsw.railcorp.gtfs.converter.CsvConverter#getCurrentProtoBufDebug()
-     */
-    @Override
-    public final String getCurrentProtoBufDebug() {
-
-        final byte[] buf = getCurrentProtoBuf();
-        if (buf != null) {
-            FeedMessage mesg;
-            try {
-                mesg = FeedMessage.parseFrom(buf);
-                log.info(mesg.toString());
-                return mesg.toString();
-            } catch (InvalidProtocolBufferException e) {
-                log.error(e.toString());
-            }
-        }
-        return "";
     }
 
     /**

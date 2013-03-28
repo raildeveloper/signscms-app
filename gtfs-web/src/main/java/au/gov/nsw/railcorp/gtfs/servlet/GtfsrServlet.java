@@ -2,7 +2,7 @@
 
 package au.gov.nsw.railcorp.gtfs.servlet;
 
-import au.gov.nsw.railcorp.gtfs.converter.CsvConverter;
+import au.gov.nsw.railcorp.gtfs.converter.StoredProtocolBufferRetriever;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ public class GtfsrServlet implements HttpRequestHandler {
 
     private static final long serialVersionUID = 1L;
 
-    private CsvConverter converter;
+    private StoredProtocolBufferRetriever protoStorage;
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -48,9 +48,9 @@ public class GtfsrServlet implements HttpRequestHandler {
      * Gets the converter.
      * @return the converter
      */
-    public CsvConverter getConverter() {
+    public StoredProtocolBufferRetriever getProtoStorage() {
 
-        return converter;
+        return protoStorage;
     }
 
     /**
@@ -58,9 +58,9 @@ public class GtfsrServlet implements HttpRequestHandler {
      * @param val
      *            the converter to set
      */
-    public void setConverter(CsvConverter val) {
+    public void setProtoStorage(StoredProtocolBufferRetriever val) {
 
-        this.converter = val;
+        this.protoStorage = val;
     }
 
 
@@ -76,15 +76,15 @@ public class GtfsrServlet implements HttpRequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
-        assert converter != null;
+        assert protoStorage != null;
         if (request.getParameter("debug") != null) {
             log.info("GTFS-R {} debug request received", request.getServletContext().getServletContextName());
             final PrintWriter writer = response.getWriter();
-            writer.append(converter.getCurrentProtoBufDebug());
+            writer.append(protoStorage.getCurrentProtoBufDebug());
         } else {
             log.info("GTFS-R {} binary request received", request.getServletContext().getServletContextName());
             final ServletOutputStream output = response.getOutputStream();
-            final byte[] buf = converter.getCurrentProtoBuf();
+            final byte[] buf = protoStorage.getCurrentProtoBuf();
             if (buf != null) {
                 output.write(buf);
             }

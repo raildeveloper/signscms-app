@@ -9,6 +9,8 @@
 	
 	<bean id="VehiclePositionCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter"/>
 	
+	<bean id="TripUpdateConverter" class="au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter"/>
+	
 	<bean id="TransitBundle" class="au.gov.nsw.railcorp.gtfs.transitbundle.TransitBundle" />
 		
 	<bean id="ServiceAlertCSVListener" class="au.gov.nsw.railcorp.gtfs.servlet.CsvListenerServlet">
@@ -19,14 +21,22 @@
 		<property name="converter" ref="VehiclePositionCSVConverter"/>
 	</bean>
 
+	<bean id="TripUpdateListener" class="au.gov.nsw.railcorp.gtfs.servlet.ProtoListenerServlet">
+		<property name="converter" ref="TripUpdateConverter"/>
+	</bean>
+
 	<bean id="VehiclePositionGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
-		<property name="converter" ref="VehiclePositionCSVConverter"/>
+		<property name="protoStorage" ref="VehiclePositionCSVConverter"/>
 	</bean>
 	
 	<bean id="ServiceAlertGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
-		<property name="converter" ref="ServiceAlertCSVConverter"/>
+		<property name="protoStorage" ref="ServiceAlertCSVConverter"/>
 	</bean>
 	
+	<bean id="TripUpdateGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
+		<property name="protoStorage" ref="TripUpdateConverter"/>
+	</bean>
+
 	<bean id="GtfsWebFilter" class="au.gov.nsw.railcorp.gtfs.servlet.filter.GtfsWebFilter"/>
 	
 	<bean id="StaticFeedHandler" class="au.gov.nsw.railcorp.gtfs.servlet.StaticFeedHandlerServlet">

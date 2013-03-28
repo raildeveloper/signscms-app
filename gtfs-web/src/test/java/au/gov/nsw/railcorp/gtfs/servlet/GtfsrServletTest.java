@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import au.gov.nsw.railcorp.gtfs.converter.CsvConverter;
+import au.gov.nsw.railcorp.gtfs.converter.StoredProtocolBufferRetriever;
 import au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet;
 
 public class GtfsrServletTest extends TestCase {
@@ -36,8 +36,8 @@ public class GtfsrServletTest extends TestCase {
  @Override
  public void setUp() {
      gtfsServlet = new GtfsrServlet();
-     CsvConverter con = mock(CsvConverter.class);
-     gtfsServlet.setConverter(con);
+     StoredProtocolBufferRetriever con = mock(StoredProtocolBufferRetriever.class);
+     gtfsServlet.setProtoStorage(con);
  }
  
  @Override
@@ -63,11 +63,11 @@ public class GtfsrServletTest extends TestCase {
      when(request.getServletContext()).thenReturn(sContext);
      when(sContext.getServletContextName()).thenReturn("TestGTFS-RServlet");
      when(response.getOutputStream()).thenReturn(out);
-     when(gtfsServlet.getConverter().getCurrentProtoBuf()).thenReturn(buf);
+     when(gtfsServlet.getProtoStorage().getCurrentProtoBuf()).thenReturn(buf);
      
      gtfsServlet.handleRequest(request, response);
      
-     verify(gtfsServlet.getConverter()).getCurrentProtoBuf();
+     verify(gtfsServlet.getProtoStorage()).getCurrentProtoBuf();
      verify(out).write(buf);
  }
 
@@ -84,11 +84,11 @@ public class GtfsrServletTest extends TestCase {
      when(request.getParameter("debug")).thenReturn("");
      when(sContext.getServletContextName()).thenReturn("TestGTFS-RServlet");
      when(response.getWriter()).thenReturn(print);
-     when(gtfsServlet.getConverter().getCurrentProtoBufDebug()).thenReturn("Debug GTFS-R Output");
+     when(gtfsServlet.getProtoStorage().getCurrentProtoBufDebug()).thenReturn("Debug GTFS-R Output");
      
      gtfsServlet.handleRequest(request, response);
      
-     verify(gtfsServlet.getConverter()).getCurrentProtoBufDebug();
+     verify(gtfsServlet.getProtoStorage()).getCurrentProtoBufDebug();
      verify(print).append("Debug GTFS-R Output");
 }
  
@@ -103,11 +103,11 @@ public class GtfsrServletTest extends TestCase {
      when(request.getServletContext()).thenReturn(sContext);
      when(sContext.getServletContextName()).thenReturn("TestGTFS-RServlet");
      when(response.getOutputStream()).thenReturn(out);
-     when(gtfsServlet.getConverter().getCurrentProtoBuf()).thenReturn(null);
+     when(gtfsServlet.getProtoStorage().getCurrentProtoBuf()).thenReturn(null);
      
      gtfsServlet.handleRequest(request, response);
      
-     verify(gtfsServlet.getConverter()).getCurrentProtoBuf();
+     verify(gtfsServlet.getProtoStorage()).getCurrentProtoBuf();
      verify(out, never()).write(null);
      
  }
