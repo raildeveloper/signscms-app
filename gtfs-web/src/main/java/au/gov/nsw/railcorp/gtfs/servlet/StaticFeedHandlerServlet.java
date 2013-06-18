@@ -148,7 +148,7 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             }
             // timeStamp - Appended to File Name - example - 20121219_135813
             final SimpleDateFormat formatUTC = new SimpleDateFormat("yyyyMMdd_HHmmss");
-            formatUTC.setTimeZone(TimeZone.getTimeZone("UTC"));
+            formatUTC.setTimeZone(TimeZone.getTimeZone("GMT"));
             final String timeStamp = formatUTC.format(Calendar.getInstance().getTime());
             final String gtfsBundlePublishFileName = "SydneyTrainsGTFS_TransitBundle_" + timeStamp + ".zip";
 

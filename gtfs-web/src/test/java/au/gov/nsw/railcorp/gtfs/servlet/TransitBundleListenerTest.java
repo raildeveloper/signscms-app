@@ -75,7 +75,7 @@ public class TransitBundleListenerTest extends TestCase {
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
         SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         final String generationTime = fileDateFormat.format(lastModified);
         when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
         when(request.getHeader("If-Modified-Since")).thenReturn(null);
@@ -98,7 +98,7 @@ public class TransitBundleListenerTest extends TestCase {
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
         SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         final String generationTime = fileDateFormat.format(lastModified);
         when(transitBundleListener.getTransitBundle().getBundleGenerationTime()).thenReturn(generationTime);
         when(request.getHeader("If-Modified-Since")).thenReturn(generationTime);
@@ -122,7 +122,7 @@ public class TransitBundleListenerTest extends TestCase {
         when(transitBundleListener.getTransitBundle().getLatestBundleLocation()).thenReturn(testDataBundle.getPath());
         Date lastModified = new Date(testDataBundle.lastModified());
         SimpleDateFormat fileDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-        fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        fileDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         final String generationTime = fileDateFormat.format(lastModified);
         SimpleDateFormat headerDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
         headerDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));

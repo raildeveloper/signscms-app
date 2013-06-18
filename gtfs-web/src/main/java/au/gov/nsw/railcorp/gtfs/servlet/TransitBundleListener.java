@@ -69,7 +69,7 @@ public class TransitBundleListener implements HttpRequestHandler {
             transitBundle.getLatestBundleLocation());
             File bundle = new File(transitBundle.getLatestBundleLocation());
             final SimpleDateFormat fileDateFormat = new SimpleDateFormat(FILE_DATE_FORMAT);
-            fileDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            fileDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             if (!bundle.exists()) {
                 // Server restart scenario or nothing has been published.
                 // See if any previously published bundle exists
@@ -131,7 +131,7 @@ public class TransitBundleListener implements HttpRequestHandler {
             response.setContentType(RESPONSE_CONTENT_TYPE);
             response.setHeader("Content-Disposition", "attachment; filename=\"SydneyTrainsGTFS_TransitBundle.zip\"");
             final SimpleDateFormat headerDateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT);
-            headerDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            headerDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             final String lastModifiedHeader = headerDateFormat.format(bundleGenerationDate);
             response.setHeader("Last-Modified", lastModifiedHeader);
             final FileInputStream fis = new FileInputStream(bundle);
