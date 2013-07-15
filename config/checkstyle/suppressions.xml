@@ -50,5 +50,9 @@
   <suppress checks="ReturnCount" files="[/\\]TransitBundleListener.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]TransitBundleListener.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]ServiceAlertCsvConverter.java"/>
- 
+  <suppress id="warningCyclomaticComplexity" files="[/\\]VehiclePositionCsvConverter.java"/>
+  <suppress checks="." files="[/\\]Trip.java"/>
+  <suppress checks="ReturnCount" files="[/\\]TripDao.java"/>
+  <suppress checks="." files="[/\\]TripUpdateGenerator.java"/> 
+  <suppress checks="." files="[/\\]TransitBundleListener.java"/> 
 </suppressions>

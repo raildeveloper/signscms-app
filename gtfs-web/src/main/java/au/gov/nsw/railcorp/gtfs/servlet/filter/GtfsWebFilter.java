@@ -28,7 +28,8 @@ public class GtfsWebFilter implements Filter {
 
     /** Valid URL Mappings. */
     private static enum VALID_URLS {
-        GTFS_LoadServiceAlerts, GTFS_LoadVehiclePosition, GTFSRVehiclePosition, GTFSRServiceAlerts, GTFSTransitBundle, GTFS_LoadStatic
+        GTFSRTripUpdates, TripUpdate, InitDb, console, GTFS_LoadServiceAlerts,
+        GTFS_LoadVehiclePosition, GTFSRVehiclePosition, GTFSRServiceAlerts, GTFSTransitBundle, GTFS_LoadStatic
     };
 
     /*

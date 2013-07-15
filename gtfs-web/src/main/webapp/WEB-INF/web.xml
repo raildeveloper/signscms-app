@@ -1,147 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>SydneyTrainsGTFS</display-name>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/GTFS-Spring.xml</param-value>
-  </context-param>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <filter>
-    <filter-name>GtfsWebFilter</filter-name>
-    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>GtfsWebFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <servlet>
-    <description>Servlet to receive static GTFS Feed</description>
-    <display-name>StaticFeedHandler</display-name>
-    <servlet-name>StaticFeedHandler</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>StaticFeedHandler</servlet-name>
-    <url-pattern>/GTFS_LoadStatic</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Servlet to listen static GTFS Feed Requests</description>
-    <display-name>TransitBundleListener</display-name>
-    <servlet-name>TransitBundleListener</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TransitBundleListener</servlet-name>
-    <url-pattern>/GTFSTransitBundle</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Listens for CSV updates to the Service Alert data</description>
-    <display-name>ServiceAlertCSVListener</display-name>
-    <servlet-name>ServiceAlertCSVListener</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ServiceAlertCSVListener</servlet-name>
-    <url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Listens for CSV updates to the Vehicle Position data</description>
-    <display-name>VehiclePositionCSVListener</display-name>
-    <servlet-name>VehiclePositionCSVListener</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>VehiclePositionCSVListener</servlet-name>
-    <url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Listens for protocol buffer updates to the Trip Update data</description>
-    <display-name>TripUpdateListener</display-name>
-    <servlet-name>TripUpdateListener</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TripUpdateListener</servlet-name>
-    <url-pattern>/GTFS_LoadTripUpdate</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <description>Serves the GTFS-R Vehicle Position data</description>
-    <display-name>VehiclePositionGTFSR</display-name>
-    <servlet-name>VehiclePositionGTFSR</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>VehiclePositionGTFSR</servlet-name>
-    <url-pattern>/GTFSRVehiclePosition</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Serves the GTFS-R Service Alert data</description>
-    <display-name>ServiceAlertGTFSR</display-name>
-    <servlet-name>ServiceAlertGTFSR</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ServiceAlertGTFSR</servlet-name>
-    <url-pattern>/GTFSRServiceAlerts</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Serves the GTFS-R Trip Update data</description>
-    <display-name>TripUpdateGTFSR</display-name>
-    <servlet-name>TripUpdateGTFSR</servlet-name>
-    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TripUpdateGTFSR</servlet-name>
-    <url-pattern>/GTFSRTripUpdates</url-pattern>
-  </servlet-mapping>
-   <login-config>
-        <auth-method>BASIC</auth-method>    
-    </login-config>
-  <!--  Define Security Constraints - This is for defining roles for accessing GTFS & GTFSR data -->
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/GTFS_LoadStatic/*</url-pattern>
-            <url-pattern>/GTFS_LoadServiceAlerts/*</url-pattern>
-            <url-pattern>/GTFS_LoadVehiclePosition/*</url-pattern>
-            <url-pattern>/GTFS_LoadTripUpdate/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>            
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>gtfs-loadrole</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    <security-role>
-        <role-name>gtfs-loadrole</role-name>
-    </security-role>    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Protected Resource</web-resource-name>
-            <url-pattern>/GTFSRServiceAlerts/*</url-pattern>
-            <url-pattern>/GTFSTransitBundle/*</url-pattern>
-            <url-pattern>/GTFSRVehiclePosition/*</url-pattern>
-            <url-pattern>/GTFSRTripUpdates/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>                        
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>gtfs-readrole</role-name>
-        </auth-constraint>
-        <user-data-constraint>
-            <!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
-    </security-constraint>
-    <security-role>
-        <role-name>gtfs-readrole</role-name>
-    </security-role>
-    <!--  End of Security Constraint Definition -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>SydneyTrainsGTFS</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/GTFS-Spring.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<filter>
+		<filter-name>GtfsWebFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>GtfsWebFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<description>Servlet to receive static GTFS Feed</description>
+		<display-name>StaticFeedHandler</display-name>
+		<servlet-name>StaticFeedHandler</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StaticFeedHandler</servlet-name>
+		<url-pattern>/GTFS_LoadStatic</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Servlet to listen static GTFS Feed Requests</description>
+		<display-name>TransitBundleListener</display-name>
+		<servlet-name>TransitBundleListener</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TransitBundleListener</servlet-name>
+		<url-pattern>/GTFSTransitBundle</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Listens for CSV updates to the Service Alert data</description>
+		<display-name>ServiceAlertCSVListener</display-name>
+		<servlet-name>ServiceAlertCSVListener</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceAlertCSVListener</servlet-name>
+		<url-pattern>/GTFS_LoadServiceAlerts</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Listens for CSV updates to the Vehicle Position data</description>
+		<display-name>VehiclePositionCSVListener</display-name>
+		<servlet-name>VehiclePositionCSVListener</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VehiclePositionCSVListener</servlet-name>
+		<url-pattern>/GTFS_LoadVehiclePosition</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Listens for protocol buffer updates to the Trip Update data</description>
+		<display-name>TripUpdateListener</display-name>
+		<servlet-name>TripUpdateListener</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TripUpdateListener</servlet-name>
+		<url-pattern>/GTFS_LoadTripUpdate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description>Serves the GTFS-R Vehicle Position data</description>
+		<display-name>VehiclePositionGTFSR</display-name>
+		<servlet-name>VehiclePositionGTFSR</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VehiclePositionGTFSR</servlet-name>
+		<url-pattern>/GTFSRVehiclePosition</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Serves the GTFS-R Service Alert data</description>
+		<display-name>ServiceAlertGTFSR</display-name>
+		<servlet-name>ServiceAlertGTFSR</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceAlertGTFSR</servlet-name>
+		<url-pattern>/GTFSRServiceAlerts</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Serves the GTFS-R Trip Update data</description>
+		<display-name>TripUpdateGTFSR</display-name>
+		<servlet-name>TripUpdateGTFSR</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TripUpdateGTFSR</servlet-name>
+		<url-pattern>/GTFSRTripUpdates</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>H2Console</servlet-name>
+		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
+		<init-param>
+			<param-name>webAllowOthers</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>H2Console</servlet-name>
+		<url-pattern>/console/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Servlet to receive GTFS Bundle and get that in H2Database</description>
+		<display-name>InitDb</display-name>
+		<servlet-name>InitDb</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InitDb</servlet-name>
+		<url-pattern>/InitDb</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Servlet to generate trip update time prediction</description>
+		<display-name>TripUpdateGenerator</display-name>
+		<servlet-name>TripUpdateGenerator</servlet-name>
+		<servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TripUpdateGenerator</servlet-name>
+		<url-pattern>/TripUpdate</url-pattern>
+	</servlet-mapping>
+	<login-config>
+	<auth-method>BASIC</auth-method>
+	</login-config>
+	<!-- Define Security Constraints - This is for defining roles for accessing 
+		GTFS & GTFSR data -->
+	<security-constraint>
+	<web-resource-collection>
+	<web-resource-name>Protected Resource</web-resource-name>
+	<url-pattern>/GTFS_LoadStatic/*</url-pattern>
+	<url-pattern>/GTFS_LoadServiceAlerts/*</url-pattern>
+	<url-pattern>/GTFS_LoadVehiclePosition/*</url-pattern>
+	<url-pattern>/GTFS_LoadTripUpdate/*</url-pattern>
+	<http-method>GET</http-method>
+	<http-method>POST</http-method>
+	</web-resource-collection>
+	<auth-constraint>
+	<role-name>gtfs-loadrole</role-name>
+	</auth-constraint>
+	<user-data-constraint>
+	<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+	<transport-guarantee>NONE</transport-guarantee>
+	</user-data-constraint>
+	</security-constraint>
+	<security-role>
+	<role-name>gtfs-loadrole</role-name>
+	</security-role>
+	<security-constraint>
+	<web-resource-collection>
+	<web-resource-name>Protected Resource</web-resource-name>
+	<url-pattern>/GTFSRServiceAlerts/*</url-pattern>
+	<url-pattern>/GTFSTransitBundle/*</url-pattern>
+	<url-pattern>/GTFSRVehiclePosition/*</url-pattern>
+	<url-pattern>/GTFSRTripUpdates/*</url-pattern>
+	<http-method>GET</http-method>
+	<http-method>POST</http-method>
+	</web-resource-collection>
+	<auth-constraint>
+	<role-name>gtfs-readrole</role-name>
+	</auth-constraint>
+	<user-data-constraint>
+	<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+	<transport-guarantee>NONE</transport-guarantee>
+	</user-data-constraint>
+	</security-constraint>
+	<security-role>
+	<role-name>gtfs-readrole</role-name>
+	</security-role>
+	<!-- End of Security Constraint Definition -->
 </web-app>

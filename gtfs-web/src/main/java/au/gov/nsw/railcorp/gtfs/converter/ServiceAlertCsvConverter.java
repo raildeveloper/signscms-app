@@ -326,4 +326,14 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         }
     }
 
+    /* (non-Javadoc)
+     * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processTripUpdates(com.google.transit.realtime.GtfsRealtime.FeedMessage)
+     */
+    @Override
+    protected boolean processTripUpdates(FeedMessage feedMessage) {
+
+        // TODO Auto-generated method stub
+        return true;
+    }
+
 }

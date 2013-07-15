@@ -20,7 +20,6 @@ import org.supercsv.io.CsvBeanReader;
 import org.supercsv.io.ICsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
 
-
 /**
  * Implements a general abstract CSV Converter to perform all the common parts
  * of reading the input CSV, parsing it and loading the results into the GTFSR
@@ -32,6 +31,7 @@ import org.supercsv.prefs.CsvPreference;
 public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRetriever implements CsvConverter {
 
     private static final String GTFS_VERSION = "1.0";
+
     private static final long MILLISECOND_IN_SECOND = 1000L;
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -87,6 +87,8 @@ public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRet
             final byte[] newProtoBuf = newFeed.toByteArray();
             setCurrentProtoBuf(newProtoBuf);
 
+            processTripUpdates(newFeed);
+
         } catch (IOException e) {
             log.error("Failed to Process CSV - " + e.getMessage());
             res = false;
@@ -119,6 +121,7 @@ public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRet
      * @return the log
      */
     protected final Logger getLog() {
+
         return log;
     }
 
@@ -150,12 +153,20 @@ public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRet
      * @param row
      *            The object representing the row
      * @param gtfsEntity
-     *          A GTFS builder object that will be modified to add the data for this row
+     *            A GTFS builder object that will be modified to add the data for this row
      * @param gtfsMessage
-     *          A GTFS builder object that is used to possibly add to existing content rather than
-     *          create a new Entity if some form of aggregation is appropriate.
+     *            A GTFS builder object that is used to possibly add to existing content rather than
+     *            create a new Entity if some form of aggregation is appropriate.
      * @return true if an entity was successfully populated
      */
     protected abstract boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, Builder gtfsMessage);
+
+    /**
+     * Does processing required for generating tripUpdates.
+     * @param feedMessage
+     *            feed
+     * @return success
+     */
+    protected abstract boolean processTripUpdates(FeedMessage feedMessage);
 
 }

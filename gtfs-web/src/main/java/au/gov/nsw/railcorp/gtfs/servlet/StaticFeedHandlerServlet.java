@@ -2,6 +2,7 @@
 
 package au.gov.nsw.railcorp.gtfs.servlet;
 
+import au.gov.nsw.railcorp.gtfs.helper.PublishBundle;
 import au.gov.nsw.railcorp.gtfs.transitbundle.TransitBundle;
 
 import java.io.BufferedInputStream;
@@ -117,6 +118,10 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             // Files Uploaded - Create the Zip bundle
             if (uploadedFiles != null && uploadedFiles.size() > 0) {
                 createGtfsBundle(publishPath, uploadedFiles);
+                // push these files into H2 database
+                final PublishBundle publishBundle = new PublishBundle();
+                final File publishedTransitBundle = new File(transitBundle.getLatestBundleLocation());
+                publishBundle.publishBundleH2db(publishedTransitBundle);
             } else {
                 // Error Condition
                 response.setStatus(BAD_REQUEST_CODE);
