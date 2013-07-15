@@ -54,7 +54,7 @@
 	<bean id="TransitBundleListener" class="au.gov.nsw.railcorp.gtfs.servlet.TransitBundleListener" >
 	     <property name="transitBundle" ref="TransitBundle"/>
     </bean>
-    <bean id="InitDb" class="au.gov.nsw.railcorp.gtfs.servlet.DBBundleGenerator" >
+    <bean id="InitDb" class="au.gov.nsw.railcorp.gtfs.servlet.DbBundleGenerator" >
 	     <property name="transitBundle" ref="TransitBundle"/>
     </bean>		
     <bean id="TripUpdateGenerator" class="au.gov.nsw.railcorp.gtfs.servlet.TripUpdateGenerator" >
