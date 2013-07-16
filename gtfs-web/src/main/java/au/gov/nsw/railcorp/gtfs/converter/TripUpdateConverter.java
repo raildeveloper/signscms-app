@@ -14,14 +14,12 @@ import com.google.transit.realtime.GtfsRealtime.TripUpdate;
 import com.google.transit.realtime.GtfsRealtime.TripUpdate.StopTimeEvent;
 import com.google.transit.realtime.GtfsRealtime.TripUpdate.StopTimeUpdate;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Generates Trip Updates.
- * @author Paritosh.
+ * TripUpdateConverter.
+ * @author paritosh
  */
 public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
@@ -42,12 +40,12 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
     }
 
     /**
-     * Generates Trip Updates for all Active Trips.
-     * @return boolean result.
+     * generateTripUpdates.
+     * @return success.
      */
     public final boolean generateTripUpdates() {
 
-        final boolean result = true;
+        boolean result = true;
 
         // setup FeedMessage & Feed Header GTFS objects?
         final FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
@@ -62,36 +60,69 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         gtfsMessage.setHeader(gtfsHeader);
 
         // iterate over each active trip being tracked, construct the babushka doll that is a GTFSR payload
-        final Map<String, Trip> tripMap = activeTrips.getActiveTripMap();
-        if (tripMap != null) {
-            for (Trip trip : activeTrips.getActiveTripMap().values()) {
+        if (activeTrips.getActiveTrips() != null) {
+            for (Trip trip : activeTrips.getActiveTrips()) {
 
                 // if the delay is >= 1 hour out or trip has completed, then invalidate the result
                 if (!trip.hasValidDelayPrediction()) {
                     continue;
                 }
-                // construct StopTimeEvent payload
-                final StopTimeEvent.Builder stopTimeEvent = StopTimeEvent.newBuilder();
-                stopTimeEvent.setDelay((int) trip.getCurrentDelay());
 
-                // construct StopTimeUpdate payload
-                final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
-                stopTimeUpdate.setArrival(stopTimeEvent);
-                stopTimeUpdate.setDeparture(stopTimeEvent);
-                stopTimeUpdate.setScheduleRelationship(StopTimeUpdate.ScheduleRelationship.SCHEDULED);
-
-                // if service is at a stop, mark that as the delay forecast point; otherwise next stop
+                // find the stop we should start publishing delay information from
                 TripStop nextStop = trip.getCurrentStop() != null ? trip.getCurrentStop() : trip.getNextStop();
                 if (nextStop == null && trip.getTripStops() != null) {
                     nextStop = trip.getTripStops().get(0);
                 }
-                stopTimeUpdate.setStopId(nextStop.getStopId());
 
                 // construct TripUpdate payload
                 final TripUpdate.Builder tripUpdate = TripUpdate.newBuilder();
                 tripUpdate.setTrip(trip.getTripDescriptor());
                 tripUpdate.setTimestamp(trip.getRecordedTimeStamp());
-                tripUpdate.addStopTimeUpdate(stopTimeUpdate);
+
+                // iterate over stops, publish stops where delay delta changes
+                long lastArrivalDelta = Long.MAX_VALUE;
+                long lastDepartureDelta = Long.MAX_VALUE;
+                for (TripStop stop : trip.getTripStops()) {
+
+                    // don't publish delays for stops already passed
+                    if (stop.getStopSequence() < nextStop.getStopSequence()) {
+                        continue;
+                    }
+
+                    // calculate delay deltas
+                    long arrivalDelay = stop.getArrivalDelay();
+                    long departureDelay = stop.getDepartureDelay();
+
+                    // if service is within 30 seconds of on-time running, round delay value to 0 seconds
+                    // to keep the feed compact
+                    arrivalDelay = (arrivalDelay > -30 && arrivalDelay < 30) ? 0 : arrivalDelay;
+                    departureDelay = (departureDelay > -30 && departureDelay < 30) ? 0 : departureDelay;
+
+                    // if service has arrived at stop early, publish a useful delay value
+                    // rather than the arrival time
+                    if (arrivalDelay < 0)
+                        arrivalDelay = Math.max(arrivalDelay, departureDelay);
+
+                    // check if delay delta has changed
+                    if (lastArrivalDelta == arrivalDelay && lastDepartureDelta == departureDelay)
+                        continue;
+                    lastArrivalDelta = arrivalDelay;
+                    lastDepartureDelta = departureDelay;
+
+                    // construct StopTimeEvent payloads
+                    final StopTimeEvent.Builder arrivalEvent = StopTimeEvent.newBuilder();
+                    final StopTimeEvent.Builder departureEvent = StopTimeEvent.newBuilder();
+                    arrivalEvent.setDelay((int) arrivalDelay);
+                    departureEvent.setDelay((int) departureDelay);
+
+                    // construct StopTimeUpdate payload, add to TripUpdate payload
+                    final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
+                    stopTimeUpdate.setStopId(stop.getStopId());
+                    stopTimeUpdate.setScheduleRelationship(stop.getScheduleRelationship());
+                    stopTimeUpdate.setArrival(arrivalEvent);
+                    stopTimeUpdate.setDeparture(departureEvent);
+                    tripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                }
 
                 // construct FeedEntity wrapped around TripUpdate
                 final FeedEntity.Builder feedEntity = FeedEntity.newBuilder();
@@ -102,6 +133,8 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                 gtfsMessage.addEntity(feedEntity);
             }
         }
+
+        // System.out.println("TripUpdateConverter.generateTripUpdates invoked" );
 
         // Create Protocol buffer from FeedHeader & replace stored Protocol Buffer
         final FeedMessage newFeed = gtfsMessage.build();
@@ -117,9 +150,9 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         return activeTrips;
     }
 
-    public void setActiveTrips(ActiveTrips activeTrip) {
+    public void setActiveTrips(ActiveTrips activeTrips) {
 
-        this.activeTrips = activeTrip;
+        this.activeTrips = activeTrips;
     }
 
 }

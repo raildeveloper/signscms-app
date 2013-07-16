@@ -16,14 +16,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * TripDAO.
- * @author Paritosh
+ * TripDao.
+ * @author paritosh
  */
 public class TripDao {
 
-    private Connection dbConnection;
-
     private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    private Connection dbConnection;
 
     public Connection getDbConnection() {
 
@@ -36,9 +36,10 @@ public class TripDao {
     }
 
     /**
-     * Finds Trip.
-     * @param tripId id
-     * @return Trip.
+     * findTrip.
+     * @param tripId
+     *            tripid
+     * @return trip
      * @throws SQLException
      *             s
      */
@@ -74,7 +75,8 @@ public class TripDao {
 
         // Retrieve stops for trip
         final String stopQuery = "SELECT S.ARRIVAL_TIME, S.DEPARTURE_TIME, S.STOP_SEQUENCE, S.STOP_ID, "
-        + "  ST.STOP_LAT, ST.STOP_LON FROM STOP_TIMES S, STOPS ST "
+        + "  ST.STOP_LAT, ST.STOP_LON, ST.STOP_NAME "
+        + "FROM STOP_TIMES S, STOPS ST "
         + "WHERE TRIP_ID = ? AND S.STOP_ID = ST.STOP_ID "
         + "ORDER BY STOP_SEQUENCE ";
         final PreparedStatement stopStmt = dbConnection.prepareStatement(stopQuery);
@@ -88,15 +90,17 @@ public class TripDao {
                 stops.setArrivalTime(rs.getString("STOP_TIMES.ARRIVAL_TIME"));
                 stops.setDepartureTime(rs.getString("STOP_TIMES.DEPARTURE_TIME"));
                 stops.setStopId(rs.getString("STOP_TIMES.STOP_ID"));
-                stops.setStopSequence(rs.getString("STOP_TIMES.STOP_SEQUENCE"));
+                stops.setStopSequence(rs.getInt("STOP_TIMES.STOP_SEQUENCE"));
                 stops.setStopLatitude(rs.getString("STOPS.STOP_LAT"));
                 stops.setStopLongt(rs.getString("STOPS.STOP_LON"));
+                stops.setStopName(rs.getString("STOPS.STOP_NAME"));
                 tripStops.add(stops);
             }
 
             if (tripStops.size() > 0) {
                 trip.setTripStops(tripStops);
             }
+
         } catch (SQLException e) {
             log.error(e.getMessage());
         } finally {
@@ -109,10 +113,10 @@ public class TripDao {
     }
 
     /**
-     * Find Trip with Following Trip.
+     * findTripWithFollowingTrip.
      * @param tripId
-     *            tripId
-     * @return Trip
+     *            tripid
+     * @return trip
      * @throws SQLException
      *             s
      */
@@ -131,23 +135,23 @@ public class TripDao {
     }
 
     /**
-     * Next TripId for Block.
+     * nextTripIdForBlock.
      * @param blockId
-     *            blockId
+     *            blockid
      * @param afterTripId
-     *            afterTripId
-     * @return String trip
+     *            aftertripid
+     * @return string
      * @throws SQLException
      *             s
      */
     // Given a block_id and trip_id, return the trip_id that follows, or null if none
     public String nextTripIdForBlock(String blockId, String afterTripId) throws SQLException {
 
-        String nextTripId = null;
         // If trip is not blocked, return null
         if (blockId == null || blockId.length() == 0) {
-            return nextTripId;
+            return null;
         }
+
         // Query database for all trips in this block sorted by ascending starting time
         final String blockQuery = "select t.trip_id, min(st.departure_time) "
         + "from trips t inner join stop_times st on t.trip_id = st.trip_id "
@@ -163,8 +167,7 @@ public class TripDao {
             final String tripId = rs.getString("trip_id");
             if (foundId) {
                 stmt.close();
-                nextTripId = tripId;
-                return nextTripId;
+                return tripId;
             } else if (tripId.equals(afterTripId)) {
                 foundId = true;
             }
@@ -172,7 +175,7 @@ public class TripDao {
 
         // If we made it here, then we didn't find any following trip in the block
         stmt.close();
-        return nextTripId;
+        return null;
     }
 
 }

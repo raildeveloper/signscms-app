@@ -119,9 +119,11 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             if (uploadedFiles != null && uploadedFiles.size() > 0) {
                 createGtfsBundle(publishPath, uploadedFiles);
                 // push these files into H2 database
+                log.info("Finished creating zip for transit bundle - publishing them to h2 db now");
                 final PublishBundle publishBundle = new PublishBundle();
                 final File publishedTransitBundle = new File(transitBundle.getLatestBundleLocation());
                 publishBundle.publishBundleH2db(publishedTransitBundle);
+                log.info("Finished publishing to h2 db");
             } else {
                 // Error Condition
                 response.setStatus(BAD_REQUEST_CODE);

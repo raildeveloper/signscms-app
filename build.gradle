@@ -63,6 +63,7 @@ subprojects {
 	compile group:'commons-fileupload', name:'commons-fileupload', version :'1.2.2'
 	compile group:'commons-io', name:'commons-io', version:'1.4'	
     compile group:'com.h2database', name:'h2', version :'1.3.172' 
+	compile group:'commons-lang', name:'commons-lang', version :'2.6' 
 	
 	testCompile group:'commons-collections', name:'commons-collections', version :'3.1'
 	testCompile group:'commons-lang', name:'commons-lang', version :'2.5'

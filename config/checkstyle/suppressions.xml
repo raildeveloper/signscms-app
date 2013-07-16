@@ -54,5 +54,8 @@
   <suppress checks="." files="[/\\]Trip.java"/>
   <suppress checks="ReturnCount" files="[/\\]TripDao.java"/>
   <suppress checks="." files="[/\\]TripUpdateGenerator.java"/> 
-  <suppress checks="." files="[/\\]TransitBundleListener.java"/> 
+  <suppress checks="." files="[/\\]TripUpdateGenerator.java"/> 
+  <suppress checks="." files="[/\\]TripStop.java"/> 
+    <suppress checks="." files="[/\\]Trip.java"/> 
+	<suppress checks="." files="[/\\]TripInfoServlet.java"/>
 </suppressions>

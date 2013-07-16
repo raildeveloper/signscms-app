@@ -341,12 +341,12 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
 
     private void predictTime(FeedMessage message) throws SQLException {
 
+        // How many updates should a vehicle be absent from the vehicle position feed
+        // for before it's invalidated?
+        final int invalidateCacheItemSampleThreshold = 10;
         final List<FeedEntity> entity = message.getEntityList();
         getLog().info("TripUpdateGenerator.predictTime: got " + entity.size() + " vehicles");
         final Iterator<FeedEntity> entityIterator = entity.iterator();
-        if (generator == null || generator.getActiveTripMap() == null) {
-            return;
-        }
         Map<String, Trip> tripMap = generator.getActiveTripMap();
         final List<Trip> trips = new ArrayList<Trip>();
 
@@ -354,8 +354,10 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         if (tripMap == null) {
             tripMap = new HashMap<String, Trip>();
         }
+
         try {
             final TripDao tripDAO = H2DatabaseAccess.getTripDao();
+
             while (entityIterator.hasNext()) {
                 final FeedEntity feedEntity = entityIterator.next();
                 if (feedEntity.hasVehicle()) {
@@ -384,15 +386,20 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
                             tripMap.put(trip.getTripId(), trip);
 
                             // update delay for service
-                            trip.calculateDelayForVehicle(vp);
+                            trip.setVehiclePosition(vp);
+                            trip.calculateDelay();
+                            if (vp != null) {
+                                trip.setMissedVehicleUpdates(0);
+                            }
 
                             // copy delay value to next trip
                             final Trip nextTrip = trip.getNextTrip();
                             if (trip.hasValidDelayPrediction() && nextTrip != null) {
                                 nextTrip.cascadeDelayFromPreviousTrip(trip);
                                 trips.add(nextTrip);
-                                getLog().info("TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => "
-                                + nextTrip.getCurrentDelay() + " to next trip " + nextTrip.getTripId());
+                                getLog().info(
+                                "TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => " + nextTrip.getCurrentDelay()
+                                + " to next trip " + nextTrip.getTripId());
                                 tripMap.put(nextTrip.getTripId(), nextTrip);
                             }
                         }
@@ -403,9 +410,14 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
             // Remove trips from lookup map that are no longer in the active feed
             final Map<String, Trip> tripMapCopy = new HashMap<String, Trip>(tripMap);
             for (Trip trip : tripMapCopy.values()) {
-                if (!trips.contains(trip)) {
+                if (trips.contains(trip)) {
+                    continue;
+                }
+                if (trip.getMissedVehicleUpdates() > invalidateCacheItemSampleThreshold) {
                     getLog().info("TripUpdateGenerator: invalidated trip " + trip.getTripId());
                     tripMap.remove(trip.getTripId());
+                } else {
+                    trip.setMissedVehicleUpdates(trip.getMissedVehicleUpdates() + 1);
                 }
             }
 

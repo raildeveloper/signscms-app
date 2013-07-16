@@ -2,6 +2,8 @@
 
 package au.gov.nsw.railcorp.gtfs.model;
 
+import com.google.transit.realtime.GtfsRealtime.TripUpdate.StopTimeUpdate.ScheduleRelationship;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,13 +11,14 @@ import java.util.GregorianCalendar;
 /**
  * TripStop.
  * @author paritosh
- *
  */
 public class TripStop {
 
     private String stopId;
 
-    private String stopSequence;
+    private int stopSequence;
+
+    private String stopName;
 
     private String arrivalTime;
 
@@ -33,7 +36,15 @@ public class TripStop {
 
     private Date actualArrivalTime;
 
+    private Date actualTimeAtStop;
+
     private Date actualDepartureTime;
+
+    private Date predictedArrivalTime;
+
+    private Date predictedDepartureTime;
+
+    private ScheduleRelationship scheduleRelationship = ScheduleRelationship.SCHEDULED;
 
     public String getStopId() {
 
@@ -45,12 +56,22 @@ public class TripStop {
         this.stopId = stopid;
     }
 
-    public String getStopSequence() {
+    public String getStopName() {
+
+        return stopName;
+    }
+
+    public void setStopName(String stopname) {
+
+        this.stopName = stopname;
+    }
+
+    public int getStopSequence() {
 
         return stopSequence;
     }
 
-    public void setStopSequence(String stopsequence) {
+    public void setStopSequence(int stopsequence) {
 
         this.stopSequence = stopsequence;
     }
@@ -62,7 +83,8 @@ public class TripStop {
 
     /**
      * setArrivalTime.
-     * @param arrivaltime time
+     * @param arrivaltime
+     *            at
      */
     public void setArrivalTime(String arrivaltime) {
 
@@ -77,7 +99,8 @@ public class TripStop {
 
     /**
      * setDepartureTime.
-     * @param departuretime time
+     * @param departuretime
+     *            dt.
      */
     public void setDepartureTime(String departuretime) {
 
@@ -87,17 +110,18 @@ public class TripStop {
 
     /**
      * gtfsTimeToDate.
-     * @param time time
+     * @param time
+     *            time
      * @return date
      */
     public Date gtfsTimeToDate(String time) {
 
-        final int timepartnumber = 3;
+        final int split = 3;
         final int hour23 = 23;
         final int hour24 = 24;
         // split time of format HH:mm:ss into array
         final String[] timeParts = time.split(":");
-        if (timeParts.length != timepartnumber) {
+        if (timeParts.length != split) {
             return null;
         }
 
@@ -146,14 +170,14 @@ public class TripStop {
         return distanceFromCurrent;
     }
 
-    public void setDistanceFromCurrent(double distancefromcurrent) {
+    public void setDistanceFromCurrent(double distancefromCurrent) {
 
-        this.distanceFromCurrent = distancefromcurrent;
+        this.distanceFromCurrent = distancefromCurrent;
     }
 
     /**
      * toString.
-     * @return tripStop.
+     * @return string
      */
     public String toString() {
 
@@ -186,6 +210,16 @@ public class TripStop {
         this.actualArrivalTime = actualarrivalTime;
     }
 
+    public Date getActualTimeAtStop() {
+
+        return actualTimeAtStop;
+    }
+
+    public void setActualTimeAtStop(Date actualtimeAtStop) {
+
+        this.actualTimeAtStop = actualtimeAtStop;
+    }
+
     public Date getActualDepartureTime() {
 
         return actualDepartureTime;
@@ -194,5 +228,78 @@ public class TripStop {
     public void setActualDepartureTime(Date actualdepartureTime) {
 
         this.actualDepartureTime = actualdepartureTime;
+    }
+
+    public Date getPredictedDepartureTime() {
+
+        return predictedDepartureTime;
+    }
+
+    public void setPredictedDepartureTime(Date predicteddepartureTime) {
+
+        this.predictedDepartureTime = predicteddepartureTime;
+    }
+
+    public Date getPredictedArrivalTime() {
+
+        return predictedArrivalTime;
+    }
+
+    public void setPredictedArrivalTime(Date predictedarrivalTime) {
+
+        this.predictedArrivalTime = predictedarrivalTime;
+    }
+
+    /**
+     * getAnticipatedDwellTime.
+     * @return long
+     */
+    // Determine the dwell time at this stop (in seconds)
+    public long getAnticipatedDwellTime() {
+        final int timecal = 1000;
+        final long plannedArrival = (scheduledArrivalTime != null) ? scheduledArrivalTime.getTime() / timecal : 0;
+        final long plannedDeparture = (scheduledDepartureTime != null) ? scheduledDepartureTime.getTime() / timecal : 0;
+        return plannedDeparture - plannedArrival;
+    }
+
+    /**
+     * getArrivalDelay.
+     * @return long
+     */
+    // Return the seconds of delay that occurred or is predicted to occur at this stop
+    public long getArrivalDelay() {
+        final int timecal = 1000;
+        if (actualArrivalTime != null && scheduledArrivalTime != null) {
+            return (actualArrivalTime.getTime() - scheduledArrivalTime.getTime()) / timecal;
+        }
+        if (predictedArrivalTime != null && scheduledArrivalTime != null) {
+            return (predictedArrivalTime.getTime() - scheduledArrivalTime.getTime()) / timecal;
+        }
+        return 0;
+    }
+
+    /**
+     * getDepartureDelay.
+     * @return long
+     */
+    public long getDepartureDelay() {
+        final int timecal = 1000;
+        if (actualDepartureTime != null && scheduledDepartureTime != null) {
+            return (actualDepartureTime.getTime() - scheduledDepartureTime.getTime()) / timecal;
+        }
+        if (predictedDepartureTime != null && scheduledDepartureTime != null) {
+            return (predictedDepartureTime.getTime() - scheduledDepartureTime.getTime()) / timecal;
+        }
+        return 0;
+    }
+
+    public ScheduleRelationship getScheduleRelationship() {
+
+        return scheduleRelationship;
+    }
+
+    public void setScheduleRelationship(ScheduleRelationship schedulerelationship) {
+
+        this.scheduleRelationship = schedulerelationship;
     }
 }

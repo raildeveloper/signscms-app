@@ -81,7 +81,6 @@ public class TripUpdateGenerator implements HttpRequestHandler {
 
         final FeedMessage message = FeedMessage.parseFrom(inputStream);
 
-
         try {
             predictTime(message);
             protoStorage.generateTripUpdates();
@@ -92,82 +91,94 @@ public class TripUpdateGenerator implements HttpRequestHandler {
 
     }
 
+    /**predictTime.
+     * @param message
+     * @throws SQLException
+     */
     private void predictTime(FeedMessage message) throws SQLException {
-
+     // How many updates should a vehicle be absent from the vehicle position feed
+        // for before it's invalidated?
+        final int invalidateCacheItemSampleThreshold = 10;
         List<FeedEntity> entity = message.getEntityList();
         System.out.println("TripUpdateGenerator.predictTime: got " + entity.size() + " vehicles");
         Iterator<FeedEntity> entityIterator = entity.iterator();
-        Map<String, Trip> tripMap = generator.getActiveTripMap();
+        Map<String,Trip> tripMap = generator.getActiveTripMap();
         List<Trip> trips = new ArrayList<Trip>();
-
-        // Instantiate new hash map for trip ID -> trip associations if none exists
+        
+        // Instantiate new hash map for trip ID -> trip associations if none exists 
         if (tripMap == null)
-            tripMap = new HashMap<String, Trip>();
-
+            tripMap = new HashMap<String,Trip>();
+        
         try {
             TripDao tripDAO = H2DatabaseAccess.getTripDao();
 
             while (entityIterator.hasNext()) {
                 FeedEntity feedEntity = entityIterator.next();
                 if (feedEntity.hasVehicle()) {
-
+                    
                     // Read position/descriptor from GTFSRVehiclePosition feed
                     VehiclePosition vp = feedEntity.getVehicle();
                     TripDescriptor tripDescriptor = vp.getTrip();
                     Long recordedTime = vp.getTimestamp();
-
+                    
                     // System.out.println("Trip : " + tripDescriptor.getTripId()
                     // + " Route : " + tripDescriptor.getRouteId());
 
                     if (tripDescriptor.getRouteId() != null) {
-                        // long startTime = System.currentTimeMillis();
+                        //long startTime = System.currentTimeMillis();
                         // System.out.println("Time start " + startTime);
-
-                        // Attempt to recycle the Trip instance based on tripId,
+                        
+                        // Attempt to recycle the Trip instance based on tripId, 
                         // if unavailable then load from DB
                         Trip trip = tripMap.get(tripDescriptor.getTripId());
                         if (trip == null)
                             trip = tripDAO.findTripWithFollowingTrip(tripDescriptor.getTripId());
-
-                        // long endTime = System.currentTimeMillis();
+                        
+                        //long endTime = System.currentTimeMillis();
                         // System.out.println("Time End " + endTime);
                         // System.out.println("Time Taken " + (endTime - startTime));
-
+                        
                         // store timestamp and descriptor for use in GTFSRTripUpdate feed
                         trip.setRecordedTimeStamp(recordedTime);
                         trip.setTripDescriptor(tripDescriptor);
-
+                        
                         // store Trip instance in tracking sets if stops are defined
                         if (trip.hasTripStops()) {
                             trips.add(trip);
                             tripMap.put(trip.getTripId(), trip);
-
+                            
                             // update delay for service
-                            trip.calculateDelayForVehicle(vp);
-
+                            trip.setVehiclePosition(vp);
+                            trip.calculateDelay();
+                            if (vp != null)
+                                trip.setMissedVehicleUpdates(0);
+                            
                             // copy delay value to next trip
                             Trip nextTrip = trip.getNextTrip();
                             if (trip.hasValidDelayPrediction() && nextTrip != null) {
                                 nextTrip.cascadeDelayFromPreviousTrip(trip);
                                 trips.add(nextTrip);
-                                System.out.println("TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => "
-                                + nextTrip.getCurrentDelay() + " to next trip " + nextTrip.getTripId());
+                                //System.out.println("TripUpdateGenerator: cascaded delay "+trip.getCurrentDelay()+" => "+nextTrip.getCurrentDelay()+" to next trip "+nextTrip.getTripId());
                                 tripMap.put(nextTrip.getTripId(), nextTrip);
                             }
                         }
                     }
                 }
             }
-
+            
             // Remove trips from lookup map that are no longer in the active feed
-            Map<String, Trip> tripMapCopy = new HashMap<String, Trip>(tripMap);
+            Map<String,Trip> tripMapCopy = new HashMap<String,Trip>(tripMap);
             for (Trip trip : tripMapCopy.values()) {
-                if (!trips.contains(trip)) {
-                    System.out.println("TripUpdateGenerator: invalidated trip " + trip.getTripId());
+                if (trips.contains(trip))
+                    continue;
+                if (trip.getMissedVehicleUpdates() > invalidateCacheItemSampleThreshold) {
+                    System.out.println("TripUpdateGenerator: invalidated trip "+trip.getTripId());
                     tripMap.remove(trip.getTripId());
                 }
+                else
+                    trip.setMissedVehicleUpdates(trip.getMissedVehicleUpdates() + 1);
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -236,7 +247,7 @@ public class TripUpdateGenerator implements HttpRequestHandler {
                 stops.setArrivalTime(rs.getString("STOP_TIMES.ARRIVAL_TIME"));
                 stops.setDepartureTime(rs.getString("STOP_TIMES.DEPARTURE_TIME"));
                 stops.setStopId(rs.getString("STOP_TIMES.STOP_ID"));
-                stops.setStopSequence(rs.getString("STOP_TIMES.STOP_SEQUENCE"));
+                stops.setStopSequence(rs.getInt("STOP_TIMES.STOP_SEQUENCE"));
                 stops.setStopLatitude(rs.getString("STOPS.STOP_LAT"));
                 stops.setStopLongt(rs.getString("STOPS.STOP_LON"));
                 // long st = System.currentTimeMillis();

@@ -36,27 +36,34 @@ public class PublishBundle {
 
         boolean sucess = true;
         try {
+            log.info("Recived request to publish bundle in H2 Db" + bundle);
             final ZipFile zipFile = new ZipFile(bundle);
             File fileShapes = null;
             File fileRoutes = null;
             File fileStops = null;
             File fileTrips = null;
             File fileStopTimes = null;
-
+            final String absoultePath = bundle.getAbsolutePath();
+            String filePath = absoultePath.substring(0, absoultePath.lastIndexOf(File.separator));
+            filePath += File.separator;
+            log.info("TransitBundle served from " + absoultePath);
+            log.info("Exported bundle to " + filePath);
             fileRoutes = createDbFile("routes.txt", zipFile,
-            bundle.getAbsolutePath());
+            filePath);
             fileShapes = createDbFile("shapes.txt", zipFile,
-            bundle.getAbsolutePath());
+            filePath);
             fileStops = createDbFile("stops.txt", zipFile,
-            bundle.getAbsolutePath());
+            filePath);
             fileStopTimes = createDbFile("stop_times.txt", zipFile,
-            bundle.getAbsolutePath());
+            filePath);
             fileTrips = createDbFile("trips.txt", zipFile,
-            bundle.getAbsolutePath());
+            filePath);
 
+            log.info("Delete all H2 Objects");
             // Delete all objects before inserting new records
             deleteAllH2DbObjects();
 
+            log.info("Create H2 Tables for Transit Bundle");
             addDbFile(
             "ROUTES",
             "(ROUTE_ID VARCHAR(15), AGENCY_ID VARCHAR(50), ROUTE_SHORT_NAME VARCHAR(10), ROUTE_LONG_NAME VARCHAR(255), "
@@ -84,8 +91,10 @@ public class PublishBundle {
             fileTrips);
             // Create Required Index
             // statement.execute("CREATE INDEX stopIndex ON STOP_TIMES (TRIP_ID, STOP_SEQUENCE)");
-            createIndex();
 
+            log.info("Create Index on STOP_TIMES - TRIP_ID & STOP_SEQUENCE");
+            createIndex();
+            log.info("Index created on STOP_TIMES - TRIP_ID & STOP_SEQUENCE");
         } catch (ZipException e) {
 
             sucess = false;
@@ -111,7 +120,7 @@ public class PublishBundle {
         try {
             con = H2DatabaseAccess.getDbConnection();
             stmt = con.createStatement();
-            stmt.execute("CREATE INDEX SI ON STOP_TIMES (TRIP_ID)");
+            stmt.execute("CREATE INDEX SI ON STOP_TIMES (TRIP_ID, STOP_SEQUENCE)");
         } catch (SQLException e) {
             log.error(e.getMessage());
         } finally {
