@@ -133,6 +133,16 @@
 		<servlet-name>TripUpdateGenerator</servlet-name>
 		<url-pattern>/TripUpdate</url-pattern>
 	</servlet-mapping>
+	<servlet>
+        <description>Provides simple reporting on the state of the trip data</description>
+        <display-name>TripInfoServlet</display-name>
+        <servlet-name>TripInfoServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TripInfoServlet</servlet-name>
+        <url-pattern>/TripInfo</url-pattern>
+    </servlet-mapping>
 	<login-config>
 	<auth-method>BASIC</auth-method>
 	</login-config>

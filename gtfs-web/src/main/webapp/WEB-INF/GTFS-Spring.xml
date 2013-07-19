@@ -5,7 +5,10 @@
 						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	
-	<bean id="ServiceAlertCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.ServiceAlertCsvConverter"/>
+	<bean id="ServiceAlertCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.ServiceAlertCsvConverter"> 
+	  <property name="protoStorage" ref="TripUpdateConverter"/>
+        <property name="generator" ref="TripUpdates"/>    
+	</bean>
 	
 	<bean id="VehiclePositionCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter">
         <property name="protoStorage" ref="TripUpdateConverter"/>
@@ -60,6 +63,9 @@
     <bean id="TripUpdateGenerator" class="au.gov.nsw.railcorp.gtfs.servlet.TripUpdateGenerator" >
     	<property name="protoStorage" ref="TripUpdateConverter"/>
 	    <property name="generator" ref="TripUpdates"/>
+    </bean>
+    <bean id="TripInfoServlet" class="au.gov.nsw.railcorp.gtfs.servlet.TripInfoServlet" >
+        <property name="generator" ref="TripUpdates"/>
     </bean>	
 </beans>
 

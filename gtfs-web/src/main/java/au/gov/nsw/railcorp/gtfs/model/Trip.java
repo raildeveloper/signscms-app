@@ -2,6 +2,7 @@
 
 package au.gov.nsw.railcorp.gtfs.model;
 
+import com.google.transit.realtime.GtfsRealtime;
 import com.google.transit.realtime.GtfsRealtime.Position;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
 import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
@@ -300,6 +301,16 @@ public class Trip {
         // Determine if vehicle is currently at the stop
         boolean currentlyAtStop = (nearestStop != null && nearestStop.getDistanceFromCurrent() <= maxProximity);
 
+        // if service is at Central Station and has not just passed the previous
+        // waypoint, then this is the CQ/Central trip changeover issue, and the last known
+        // delay should remain propagated
+        if (nearestStop.getStopName().contains("Central Station")) {
+            boolean isFirstStop = (nearestStop == tripStops.get(0));
+            boolean hasPassedPrevious = (nearestStop != lastStop) && (lastStop != null) && (lastStop.getActualDepartureTime() != null);
+            if (!isFirstStop && !hasPassedPrevious)
+                return;
+        }
+
         if (!currentlyAtStop && currentStop != null) {
             // Vehicle has moved away from the current stop
             lastStop = currentStop;
@@ -339,16 +350,26 @@ public class Trip {
     // Update the delay for the vehicle based on it passing a stop
     private void setDelayBasedOnStop(TripStop fromStop, boolean vehicleIsAtStop)
     {
-
         // cast planned and actual arrival/departure timestamps to doubles in seconds
         long plannedArrival = (fromStop.getScheduledArrivalTime() != null) ? fromStop.getScheduledArrivalTime().getTime() / 1000 : 0;
         long plannedDeparture = (fromStop.getScheduledDepartureTime() != null) ? fromStop.getScheduledDepartureTime().getTime() / 1000 : 0;
         long actualArrival = (fromStop.getActualArrivalTime() != null) ? fromStop.getActualArrivalTime().getTime() / 1000 : 0;
         long actualDeparture = (fromStop.getActualDepartureTime() != null) ? fromStop.getActualDepartureTime().getTime() / 1000 : 0;
-        long arrivalDelay = actualArrival - plannedArrival;
-        long departureDelay = actualDeparture - plannedDeparture;
+        
+        
+        // if service has not yet departed the stop, use the current at stop time
+        // rather than waypoint passed time
+        if (vehicleIsAtStop && fromStop.getActualTimeAtStop() != null)
+            actualDeparture = fromStop.getActualTimeAtStop().getTime() / 1000;
+
+        
+        long arrivalDelay = (actualArrival > 0) ? actualArrival - plannedArrival : 0;
+        long departureDelay = (actualDeparture > 0) ? actualDeparture - plannedDeparture : 0;
+
         // double plannedDwellTime = plannedDeparture - plannedArrival;
 
+       
+       
         // if service is currently at a stop and is not yet scheduled to have departed,
         // assume service will depart on time
         if (vehicleIsAtStop && actualDeparture < plannedDeparture) {
@@ -422,6 +443,13 @@ public class Trip {
             this.cascadeCurrentDelayToStops();
         }
 
+    }
+
+    // Mark this service as cancelled by setting schedule relationship to skipped
+    public void markAsCancelled() {
+        for (TripStop stop : tripStops) {
+            stop.setScheduleRelationship(GtfsRealtime.TripUpdate.StopTimeUpdate.ScheduleRelationship.SKIPPED);
+        }
     }
 
     // Return the delta of seconds between the end of the specified trip and the start of this trip

@@ -3,6 +3,8 @@
 package au.gov.nsw.railcorp.gtfs.converter;
 
 import au.gov.nsw.railcorp.gtfs.converter.types.ServiceAlertCsvRow;
+import au.gov.nsw.railcorp.gtfs.helper.ActiveTrips;
+import au.gov.nsw.railcorp.gtfs.model.Trip;
 
 import com.google.transit.realtime.GtfsRealtime.Alert;
 import com.google.transit.realtime.GtfsRealtime.Alert.Builder;
@@ -16,10 +18,13 @@ import com.google.transit.realtime.GtfsRealtime.TranslatedString;
 import com.google.transit.realtime.GtfsRealtime.TranslatedString.Translation;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBigDecimal;
 import org.supercsv.cellprocessor.ift.CellProcessor;
-
 
 /**
  * Converter for the CSV format defined for Service Alerts data.
@@ -29,10 +34,19 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     private static final String ENGLISH_LANGUAGE = "en";
 
+    // Set true to scan service alert feed for cancellations and propagate to trip updates
+    private static final boolean enableTripUpdateCancellations = true;
+
+    /* Spring Injected Transit Bundle Bean */
+    private ActiveTrips generator;
+
+    private TripUpdateConverter protoStorage;
+
     /**
      * Constructor.
      */
     public ServiceAlertCsvConverter() {
+
         super();
     }
 
@@ -42,6 +56,7 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
      */
     @Override
     protected Class<?> getCsvRowClass() {
+
         return ServiceAlertCsvRow.class;
     }
 
@@ -53,18 +68,18 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     protected CellProcessor[] getProcessors() {
 
         final CellProcessor[] processors = new CellProcessor[] {
-        /* activeStart */   new Optional(new ParseBigDecimal()),
-        /* activeEnd */     new Optional(new ParseBigDecimal()),
-        /* agencyId */      new Optional(),
-        /* routeId */       new Optional(),
-        /* routeType */     new Optional(new ParseBigDecimal()),
-        /* tripId */        new Optional(),
-        /* stopId */        new Optional(),
-        /* cause */         new Optional(new ParseBigDecimal()),
-        /* effect */        new Optional(new ParseBigDecimal()),
-        /* url */           new Optional(),
-        /* headerText */    new Optional(),
-        /* description */   new Optional()
+        /* activeStart */new Optional(new ParseBigDecimal()),
+        /* activeEnd */new Optional(new ParseBigDecimal()),
+        /* agencyId */new Optional(),
+        /* routeId */new Optional(),
+        /* routeType */new Optional(new ParseBigDecimal()),
+        /* tripId */new Optional(),
+        /* stopId */new Optional(),
+        /* cause */new Optional(new ParseBigDecimal()),
+        /* effect */new Optional(new ParseBigDecimal()),
+        /* url */new Optional(),
+        /* headerText */new Optional(),
+        /* description */new Optional()
         };
 
         return processors;
@@ -78,27 +93,26 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     protected String[] getCsvHeaders() {
 
         final String[] headers = new String[] {
-            "activeStart",
-            "activeEnd",
-            "agencyId",
-            "routeId",
-            "routeType",
-            "tripId",
-            "stopId",
-            "cause",
-            "effect",
-            "url",
-            "headerText",
-            "description"
+        "activeStart",
+        "activeEnd",
+        "agencyId",
+        "routeId",
+        "routeType",
+        "tripId",
+        "stopId",
+        "cause",
+        "effect",
+        "url",
+        "headerText",
+        "description"
         };
         return headers;
     }
 
     /**
      * {@inheritDoc}
-     * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processCsvRowAndBuildGtfsrEntity
-     * (java.lang.Object, com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder,
-     *  com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder)
+     * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processCsvRowAndBuildGtfsrEntity (java.lang.Object,
+     *      com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder, com.google.transit.realtime.GtfsRealtime.FeedMessage.Builder)
      */
     @Override
     protected boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, FeedMessage.Builder gtfsMessage) {
@@ -137,8 +151,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
      * Finds any duplicate Alerts that may already exist in the Service Alert feed.
      * This could happen as the CSV input does not account for the 1 to many relationship
      * with the entity selector in the Alert.
-     * @param currRow   The current CSV row
-     * @param gtfsEntity The main entity for alerts
+     * @param currRow
+     *            The current CSV row
+     * @param gtfsEntity
+     *            The main entity for alerts
      * @return A Builder object for an alert with the same data if one exists, null otherwise.
      */
     private Builder findDuplicateAlert(ServiceAlertCsvRow currRow, FeedMessage.Builder gtfsMessage) {
@@ -147,21 +163,20 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         for (FeedEntity e : gtfsMessage.getEntityList()) {
             if (e.hasAlert()) {
                 final Alert a = e.getAlert();
-                if (
-                    (
-                        (currRow.getEffect() == null && !a.hasEffect())
-                        ||
-                        (currRow.getEffect() != null && a.getEffect() == Effect.valueOf(currRow.getEffect().intValue()))
-                    )
-                    &&
-                    (
-                        (currRow.getCause() == null && !a.hasCause())
-                        ||
-                        (currRow.getCause() != null && a.getCause() == Cause.valueOf(currRow.getCause().intValue()))
-                    )
-                    && isEqualToTranslatedString(currRow.getUrl(), a.getUrl())
-                    && isEqualToTranslatedString(currRow.getHeaderText(), a.getHeaderText())
-                    && isEqualToTranslatedString(currRow.getDescription(), a.getDescriptionText()))
+                if ((
+                (currRow.getEffect() == null && !a.hasEffect())
+                ||
+                (currRow.getEffect() != null && a.getEffect() == Effect.valueOf(currRow.getEffect().intValue()))
+                )
+                &&
+                (
+                (currRow.getCause() == null && !a.hasCause())
+                ||
+                (currRow.getCause() != null && a.getCause() == Cause.valueOf(currRow.getCause().intValue()))
+                )
+                && isEqualToTranslatedString(currRow.getUrl(), a.getUrl())
+                && isEqualToTranslatedString(currRow.getHeaderText(), a.getHeaderText())
+                && isEqualToTranslatedString(currRow.getDescription(), a.getDescriptionText()))
                 {
                     return gtfsMessage.getEntityBuilder(i).getAlertBuilder();
                 }
@@ -171,14 +186,16 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         return null;
     }
 
-
     /**
      * Determines whether a string is in the default translation of the GTFS Translated String.
-     * @param s     The java string to compare
-     * @param ts    The translated string to compare
+     * @param s
+     *            The java string to compare
+     * @param ts
+     *            The translated string to compare
      * @return true if string s is default translation for the GTFS translated string
      */
     private boolean isEqualToTranslatedString(String s, TranslatedString ts) {
+
         if ((s != null) == (ts != null)) {
             if (s == null || s.equals(ts.getTranslation(0).getText())) {
                 return true;
@@ -189,8 +206,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Writes out the url for this CSV row data.
-     * @param row The current data to use
-     * @param alert A builder object that the result will be written into
+     * @param row
+     *            The current data to use
+     * @param alert
+     *            A builder object that the result will be written into
      */
     private void writeUrl(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -201,8 +220,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Writes out the header text for this CSV row data.
-     * @param row The current data to use
-     * @param alert A builder object that the result will be written into
+     * @param row
+     *            The current data to use
+     * @param alert
+     *            A builder object that the result will be written into
      */
     private void writeHeaderText(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -213,8 +234,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Writes out the description for this CSV row data.
-     * @param row The current data to use
-     * @param alert A builder object that the result will be written into
+     * @param row
+     *            The current data to use
+     * @param alert
+     *            A builder object that the result will be written into
      */
     private void writeDescription(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -225,8 +248,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Writes out the effect for this CSV row data.
-     * @param row The current data to use
-     * @param alert A builder object that the result will be written into
+     * @param row
+     *            The current data to use
+     * @param alert
+     *            A builder object that the result will be written into
      */
     private void writeEffect(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -242,8 +267,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Writes out the cause for this CSV row data.
-     * @param row The current data to use
-     * @param alert A builder object that the result will be written into
+     * @param row
+     *            The current data to use
+     * @param alert
+     *            A builder object that the result will be written into
      */
     private void writeCause(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -259,7 +286,8 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Converts the CSV contents to a GTFS-R EntitySelector object.
-     * @param currRow An object representing the CSV row data to convert
+     * @param currRow
+     *            An object representing the CSV row data to convert
      * @return The created GTFS-R Entity Selector object
      */
     private void writeEntitySelector(final ServiceAlertCsvRow row, final Alert.Builder alert) {
@@ -290,7 +318,8 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     /**
      * Returns a GTFS-R TranslatedString object for the provided string as an English
      * translation.
-     * @param description The string to convert
+     * @param description
+     *            The string to convert
      * @return a GTFS-R TranslatedString object
      */
     private TranslatedString convertTranslatedString(String description) {
@@ -309,8 +338,10 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
 
     /**
      * Converts the CSV Active Period contents to a GTFS-R TimeRange object.
-     * @param currRow An object representing the CSV row data to convert
-     * @param alert The Alert builder object to populate
+     * @param currRow
+     *            An object representing the CSV row data to convert
+     * @param alert
+     *            The Alert builder object to populate
      */
     private void writeActivePeriod(final ServiceAlertCsvRow row, final Alert.Builder alert) {
 
@@ -326,14 +357,92 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processTripUpdates(com.google.transit.realtime.GtfsRealtime.FeedMessage)
      */
     @Override
     protected boolean processTripUpdates(FeedMessage feedMessage) {
 
-        // TODO Auto-generated method stub
+        // Loop over service alerts looking for cancelled message
+        if (enableTripUpdateCancellations) { // set to true to enable cancelled service matching
+            final List<FeedEntity> entity = feedMessage.getEntityList();
+            final Iterator<FeedEntity> entityIterator = entity.iterator();
+            while (entityIterator.hasNext()) {
+                final FeedEntity feedEntity = entityIterator.next();
+                if (feedEntity.hasAlert()) {
+                    final Alert alert = feedEntity.getAlert();
+                    String headerText = alert.getHeaderText().getTranslation(0).getText();
+                    if (headerText.equals("Cancelled") && alert.getInformedEntityCount() > 0) {
+                        applyCancellationToEntities(alert.getInformedEntityList());
+                    }
+                }
+            }
+        }
+
+        if (protoStorage == null) {
+            return false;
+        }
+        protoStorage.generateTripUpdates();
         return true;
+    }
+
+    // Got a cancellation service alert, apply that to the trips concerned
+    protected void applyCancellationToEntities(List<EntitySelector> informedEntities) {
+
+        Map<String, Trip> tripMap = generator.getActiveTripMap();
+        if (tripMap == null)
+            return;
+
+        for (EntitySelector entitySelector : informedEntities) {
+            if (entitySelector.getTrip() != null) {
+
+                // Try to match a trip in the activeTripMap against this descriptor (defer
+                // responsibility for Trip data loading from H2 to VehiclePositionCsvConverter)
+                Trip trip = tripMap.get(entitySelector.getTrip().getTripId());
+                if (trip != null)
+                    trip.markAsCancelled();
+
+            }
+        }
+    }
+
+    /**
+     * getGenerator.
+     * @return the generator
+     */
+    public ActiveTrips getGenerator() {
+
+        return generator;
+    }
+
+    /**
+     * setGenerator.
+     * @param genrator
+     *            the generator to set
+     */
+    public void setGenerator(ActiveTrips genrator) {
+
+        this.generator = genrator;
+    }
+
+    /**
+     * getProtoStorage.
+     * @return the protoStorage
+     */
+    public TripUpdateConverter getProtoStorage() {
+
+        return protoStorage;
+    }
+
+    /**
+     * setProtoStorage.
+     * @param protStorage
+     *            the protoStorage to set
+     */
+    public void setProtoStorage(TripUpdateConverter protStorage) {
+
+        this.protoStorage = protStorage;
     }
 
 }

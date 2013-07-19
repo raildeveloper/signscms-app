@@ -190,6 +190,7 @@ public class PublishBundle {
             con = H2DatabaseAccess.getDbConnection();
             statement = con.createStatement();
             statement.execute("DROP ALL OBJECTS");
+            statement.execute("SHUTDOWN COMPACT");
 
         } catch (SQLException e) {
             log.error(e.getMessage());
