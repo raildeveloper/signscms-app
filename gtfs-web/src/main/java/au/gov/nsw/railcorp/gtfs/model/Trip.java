@@ -2,6 +2,7 @@
 
 package au.gov.nsw.railcorp.gtfs.model;
 
+
 import com.google.transit.realtime.GtfsRealtime;
 import com.google.transit.realtime.GtfsRealtime.Position;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;

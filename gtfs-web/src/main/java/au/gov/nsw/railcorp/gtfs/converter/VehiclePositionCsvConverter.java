@@ -347,6 +347,11 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         final List<FeedEntity> entity = message.getEntityList();
         getLog().info("TripUpdateGenerator.predictTime: got " + entity.size() + " vehicles");
         final Iterator<FeedEntity> entityIterator = entity.iterator();
+
+        if (generator == null || generator.getActiveTripMap() == null) {
+            return;
+        }
+
         Map<String, Trip> tripMap = generator.getActiveTripMap();
         final List<Trip> trips = new ArrayList<Trip>();
 
@@ -436,7 +441,9 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
     protected boolean processTripUpdates(FeedMessage feedMessage) {
 
         try {
-            predictTime(feedMessage);
+            if (feedMessage != null) {
+                predictTime(feedMessage);
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             getLog().error(e.getMessage());

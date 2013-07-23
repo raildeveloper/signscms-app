@@ -45,7 +45,9 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
      */
     public final boolean generateTripUpdates() {
 
-        boolean result = true;
+        final boolean result = true;
+        final int positive30 = 30;
+        final int negative30 = -30;
 
         // setup FeedMessage & Feed Header GTFS objects?
         final FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
@@ -95,17 +97,19 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
                     // if service is within 30 seconds of on-time running, round delay value to 0 seconds
                     // to keep the feed compact
-                    arrivalDelay = (arrivalDelay > -30 && arrivalDelay < 30) ? 0 : arrivalDelay;
-                    departureDelay = (departureDelay > -30 && departureDelay < 30) ? 0 : departureDelay;
+                    arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0 : arrivalDelay;
+                    departureDelay = (departureDelay > negative30 && departureDelay < positive30) ? 0 : departureDelay;
 
                     // if service has arrived at stop early, publish a useful delay value
                     // rather than the arrival time
-                    if (arrivalDelay < 0)
+                    if (arrivalDelay < 0) {
                         arrivalDelay = Math.max(arrivalDelay, departureDelay);
+                    }
 
                     // check if delay delta has changed
-                    if (lastArrivalDelta == arrivalDelay && lastDepartureDelta == departureDelay)
+                    if (lastArrivalDelta == arrivalDelay && lastDepartureDelta == departureDelay) {
                         continue;
+                    }
                     lastArrivalDelta = arrivalDelay;
                     lastDepartureDelta = departureDelay;
 
@@ -133,9 +137,6 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                 gtfsMessage.addEntity(feedEntity);
             }
         }
-
-        // System.out.println("TripUpdateConverter.generateTripUpdates invoked" );
-
         // Create Protocol buffer from FeedHeader & replace stored Protocol Buffer
         final FeedMessage newFeed = gtfsMessage.build();
 
@@ -150,9 +151,9 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         return activeTrips;
     }
 
-    public void setActiveTrips(ActiveTrips activeTrips) {
+    public void setActiveTrips(ActiveTrips activetrips) {
 
-        this.activeTrips = activeTrips;
+        this.activeTrips = activetrips;
     }
 
 }

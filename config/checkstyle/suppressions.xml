@@ -49,13 +49,14 @@
   <suppress checks="IllegalCatch" files="[/\\]StaticFeedHandlerServlet.java"/>
   <suppress checks="ReturnCount" files="[/\\]TransitBundleListener.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]TransitBundleListener.java"/>
+  <suppress checks="StrictDuplicateCode" files="[/\\]TransitBundleListener.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]ServiceAlertCsvConverter.java"/>
   <suppress id="warningCyclomaticComplexity" files="[/\\]VehiclePositionCsvConverter.java"/>
-  <suppress checks="." files="[/\\]Trip.java"/>
+  <suppress checks="StrictDuplicateCode" files="[/\\]VehiclePositionCsvConverter.java"/>
   <suppress checks="ReturnCount" files="[/\\]TripDao.java"/>
   <suppress checks="." files="[/\\]TripUpdateGenerator.java"/> 
-  <suppress checks="." files="[/\\]TripUpdateGenerator.java"/> 
+  <suppress id="warningCyclomaticComplexity" files="[/\\]TripUpdateConverter.java"/> 
   <suppress checks="." files="[/\\]TripStop.java"/> 
-    <suppress checks="." files="[/\\]Trip.java"/> 
-	<suppress checks="." files="[/\\]TripInfoServlet.java"/>
+  <suppress checks="." files="[/\\]Trip.java"/> 
+  <suppress checks="." files="[/\\]TripInfoServlet.java"/>
 </suppressions>

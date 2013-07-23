@@ -35,7 +35,7 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     private static final String ENGLISH_LANGUAGE = "en";
 
     // Set true to scan service alert feed for cancellations and propagate to trip updates
-    private static final boolean enableTripUpdateCancellations = true;
+    private static final boolean ENABLE_TRIP_UPDATE_CANCELLATIONS = true;
 
     /* Spring Injected Transit Bundle Bean */
     private ActiveTrips generator;
@@ -365,16 +365,19 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     protected boolean processTripUpdates(FeedMessage feedMessage) {
 
         // Loop over service alerts looking for cancelled message
-        if (enableTripUpdateCancellations) { // set to true to enable cancelled service matching
+        // set to true to enable cancelled service matching
+        if (ENABLE_TRIP_UPDATE_CANCELLATIONS) {
             final List<FeedEntity> entity = feedMessage.getEntityList();
             final Iterator<FeedEntity> entityIterator = entity.iterator();
             while (entityIterator.hasNext()) {
                 final FeedEntity feedEntity = entityIterator.next();
                 if (feedEntity.hasAlert()) {
                     final Alert alert = feedEntity.getAlert();
-                    String headerText = alert.getHeaderText().getTranslation(0).getText();
-                    if (headerText.equals("Cancelled") && alert.getInformedEntityCount() > 0) {
-                        applyCancellationToEntities(alert.getInformedEntityList());
+                    if (alert != null && alert.getHeaderText() != null && alert.getHeaderText().getTranslationList().size() > 0) {
+                        final String headerText = alert.getHeaderText().getTranslationList().get(0).getText();
+                        if ("Cancelled".equalsIgnoreCase(headerText) && alert.getInformedEntityCount() > 0) {
+                            applyCancellationToEntities(alert.getInformedEntityList());
+                        }
                     }
                 }
             }
@@ -387,21 +390,29 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
         return true;
     }
 
+    /**
+     * Cancelation method.
+     * @param informedEntities
+     *            entities
+     */
     // Got a cancellation service alert, apply that to the trips concerned
     protected void applyCancellationToEntities(List<EntitySelector> informedEntities) {
 
-        Map<String, Trip> tripMap = generator.getActiveTripMap();
-        if (tripMap == null)
+        final Map<String, Trip> tripMap = generator.getActiveTripMap();
+        if (tripMap == null) {
             return;
+        }
 
         for (EntitySelector entitySelector : informedEntities) {
             if (entitySelector.getTrip() != null) {
 
                 // Try to match a trip in the activeTripMap against this descriptor (defer
                 // responsibility for Trip data loading from H2 to VehiclePositionCsvConverter)
-                Trip trip = tripMap.get(entitySelector.getTrip().getTripId());
-                if (trip != null)
+                final Trip trip = tripMap.get(entitySelector.getTrip().getTripId());
+                if (trip != null) {
+                    getLog().info("MARK TRIP AS CANCELLED " + trip.getTripId());
                     trip.markAsCancelled();
+                }
 
             }
         }

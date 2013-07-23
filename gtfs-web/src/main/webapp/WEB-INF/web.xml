@@ -155,6 +155,9 @@
 	<url-pattern>/GTFS_LoadServiceAlerts/*</url-pattern>
 	<url-pattern>/GTFS_LoadVehiclePosition/*</url-pattern>
 	<url-pattern>/GTFS_LoadTripUpdate/*</url-pattern>
+	<url-pattern>/InitDb/*</url-pattern>
+	<url-pattern>/TripUpdate/*</url-pattern>	
+	<url-pattern>/console/*</url-pattern>
 	<http-method>GET</http-method>
 	<http-method>POST</http-method>
 	</web-resource-collection>
@@ -176,6 +179,7 @@
 	<url-pattern>/GTFSTransitBundle/*</url-pattern>
 	<url-pattern>/GTFSRVehiclePosition/*</url-pattern>
 	<url-pattern>/GTFSRTripUpdates/*</url-pattern>
+	<url-pattern>/TripInfo/*</url-pattern>
 	<http-method>GET</http-method>
 	<http-method>POST</http-method>
 	</web-resource-collection>
