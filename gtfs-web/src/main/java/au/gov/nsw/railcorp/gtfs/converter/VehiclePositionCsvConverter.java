@@ -347,12 +347,10 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         final List<FeedEntity> entity = message.getEntityList();
         getLog().info("TripUpdateGenerator.predictTime: got " + entity.size() + " vehicles");
         final Iterator<FeedEntity> entityIterator = entity.iterator();
-
-        if (generator == null || generator.getActiveTripMap() == null) {
-            return;
+        Map<String, Trip> tripMap = null;
+        if (generator != null && generator.getActiveTripMap() != null) {
+            tripMap = generator.getActiveTripMap();
         }
-
-        Map<String, Trip> tripMap = generator.getActiveTripMap();
         final List<Trip> trips = new ArrayList<Trip>();
 
         // Instantiate new hash map for trip ID -> trip associations if none exists
@@ -429,6 +427,7 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
         } catch (SQLException e) {
             getLog().error(e.getMessage());
         }
+
         generator.setActiveTrips(trips);
         generator.setActiveTripMap(tripMap);
     }
