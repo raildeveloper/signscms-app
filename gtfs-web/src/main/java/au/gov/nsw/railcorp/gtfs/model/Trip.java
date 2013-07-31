@@ -2,7 +2,6 @@
 
 package au.gov.nsw.railcorp.gtfs.model;
 
-
 import com.google.transit.realtime.GtfsRealtime;
 import com.google.transit.realtime.GtfsRealtime.Position;
 import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
@@ -351,26 +350,23 @@ public class Trip {
     // Update the delay for the vehicle based on it passing a stop
     private void setDelayBasedOnStop(TripStop fromStop, boolean vehicleIsAtStop)
     {
+
         // cast planned and actual arrival/departure timestamps to doubles in seconds
         long plannedArrival = (fromStop.getScheduledArrivalTime() != null) ? fromStop.getScheduledArrivalTime().getTime() / 1000 : 0;
         long plannedDeparture = (fromStop.getScheduledDepartureTime() != null) ? fromStop.getScheduledDepartureTime().getTime() / 1000 : 0;
         long actualArrival = (fromStop.getActualArrivalTime() != null) ? fromStop.getActualArrivalTime().getTime() / 1000 : 0;
         long actualDeparture = (fromStop.getActualDepartureTime() != null) ? fromStop.getActualDepartureTime().getTime() / 1000 : 0;
-        
-        
+
         // if service has not yet departed the stop, use the current at stop time
         // rather than waypoint passed time
         if (vehicleIsAtStop && fromStop.getActualTimeAtStop() != null)
             actualDeparture = fromStop.getActualTimeAtStop().getTime() / 1000;
 
-        
         long arrivalDelay = (actualArrival > 0) ? actualArrival - plannedArrival : 0;
         long departureDelay = (actualDeparture > 0) ? actualDeparture - plannedDeparture : 0;
 
         // double plannedDwellTime = plannedDeparture - plannedArrival;
 
-       
-       
         // if service is currently at a stop and is not yet scheduled to have departed,
         // assume service will depart on time
         if (vehicleIsAtStop && actualDeparture < plannedDeparture) {
@@ -448,6 +444,13 @@ public class Trip {
 
     // Mark this service as cancelled by setting schedule relationship to skipped
     public void markAsCancelled() {
+
+        final TripDescriptor.Builder trip = TripDescriptor.newBuilder();
+        trip.setTripId(tripId);
+        trip.setRouteId(routeId);
+        trip.setScheduleRelationship(TripDescriptor.ScheduleRelationship.CANCELED);
+        tripDescriptor = trip.build();
+
         for (TripStop stop : tripStops) {
             stop.setScheduleRelationship(GtfsRealtime.TripUpdate.StopTimeUpdate.ScheduleRelationship.SKIPPED);
         }
