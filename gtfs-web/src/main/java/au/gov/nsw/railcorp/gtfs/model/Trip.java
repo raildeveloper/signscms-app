@@ -34,6 +34,10 @@ public class Trip {
 
     private static final long MILLISECOND_IN_SECOND = 1000L;
 
+    public static enum TRIP_TYPES {
+        TRIP_CANCELLED, TRIP_INSERTED, TRIP_CHANGED, NONE
+    };
+
     // The all important key for this service
     private String tripId;
 
@@ -82,6 +86,9 @@ public class Trip {
 
     // The current delay time in seconds
     private long currentDelay = Long.MAX_VALUE;
+
+    // Type of Trip
+    private TRIP_TYPES tripType;
 
     public String getTripId() {
 
@@ -603,5 +610,15 @@ public class Trip {
     public void setMissedVehicleUpdates(int missedVehicleUpdates) {
 
         this.missedVehicleUpdates = missedVehicleUpdates;
+    }
+
+    public TRIP_TYPES getTripType() {
+
+        return tripType;
+    }
+
+    public void setTripType(TRIP_TYPES triptype) {
+
+        this.tripType = triptype;
     }
 }
