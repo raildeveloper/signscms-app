@@ -2,6 +2,7 @@
 package au.gov.nsw.railcorp.converter;
 
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
+import au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter;
 
 import com.google.transit.realtime.GtfsRealtime.FeedHeader;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
@@ -31,7 +32,7 @@ public class GeneralProtocolBufferConverterTest extends TestCase {
     protected void setUp() throws Exception {
 
         super.setUp();
-        converter = new GeneralProtocolBufferConverter();
+        converter = new TripUpdateConverter();
     }
 
     /**
