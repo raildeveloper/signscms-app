@@ -17,6 +17,7 @@
 	
 	<bean id="TripUpdateConverter" class="au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter">
 		<property name="activeTrips" ref="TripUpdates"/>
+		<property name="protoStorage" ref="VehiclePositionCSVConverter"/>
 	</bean>
 	
 	<bean id="TripUpdates" class="au.gov.nsw.railcorp.gtfs.helper.ActiveTrips"/>
@@ -31,9 +32,9 @@
 		<property name="converter" ref="VehiclePositionCSVConverter"/>
 	</bean>
 
-<!-- 	<bean id="TripUpdateListener" class="au.gov.nsw.railcorp.gtfs.servlet.ProtoListenerServlet"> -->
-<!-- 		<property name="converter" ref="TripUpdateConverter"/> -->
-<!-- 	</bean> -->
+	<bean id="TripUpdateListener" class="au.gov.nsw.railcorp.gtfs.servlet.ProtoListenerServlet">
+		<property name="converter" ref="TripUpdateConverter"/>
+	</bean>
 
 	<bean id="VehiclePositionGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
 		<property name="protoStorage" ref="VehiclePositionCSVConverter"/>
