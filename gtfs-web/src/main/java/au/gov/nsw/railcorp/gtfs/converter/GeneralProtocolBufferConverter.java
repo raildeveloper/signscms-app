@@ -1,27 +1,30 @@
 // RailCorp 2012
+
 package au.gov.nsw.railcorp.gtfs.converter;
+
+import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 /**
  * Implements a general protocol buffer converter that can receive a protocol buffer via
  * a reader object, verifies it and makes it available for retrieval.
  */
-public class GeneralProtocolBufferConverter extends GeneralStoredProtocolBufferRetriever {
+public abstract class GeneralProtocolBufferConverter extends GeneralStoredProtocolBufferRetriever {
 
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-
     /**
      * Reads the Protocol Buffer data, validates it and stores data.
-     * @param protoStream A stream containing the data contents in Protocol Buffer format
+     * @param protoStream
+     *            A stream containing the data contents in Protocol Buffer format
      * @return returns true if the CSV was successfully parsed and converted
      */
     public boolean storeProtocolBuffer(InputStream protoStream) {
@@ -38,4 +41,11 @@ public class GeneralProtocolBufferConverter extends GeneralStoredProtocolBufferR
         return false;
     }
 
+    /**
+     * Does processing required for generating tripUpdates.
+     * @param feedMessage
+     *            feed
+     * @return success
+     */
+    public abstract boolean processLoadTripUpdates(TripModelEntityMessage feedMessage);
 }
