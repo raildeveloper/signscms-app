@@ -178,4 +178,39 @@ public class TripDao {
         return null;
     }
 
+    /**
+     * Get StopName for StopId.
+     * @param stopId
+     *            StopId to search.
+     * @return stopName
+     * @throws SQLException
+     *             s
+     */
+    public String getStopNameForStopId(String stopId) throws SQLException {
+
+        String stopName = null;
+        PreparedStatement stopStmt = null;
+        if (stopId != null) {
+            // Query database for StopName
+            try {
+                final String stopQuery = "SELECT STOP_NAME FROM STOPS WHERE STOP_ID = ?";
+                stopStmt = dbConnection.prepareStatement(stopQuery);
+                stopStmt.setString(1, stopId);
+                final ResultSet rs = stopStmt.executeQuery();
+
+                while (rs.next()) {
+                    stopName = rs.getString("STOP_NAME");
+                }
+
+            } catch (SQLException s) {
+                log.debug(s.getMessage());
+            } finally {
+                if (stopStmt != null) {
+                    stopStmt.close();
+                }
+            }
+        }
+        return stopName;
+
+    }
 }
