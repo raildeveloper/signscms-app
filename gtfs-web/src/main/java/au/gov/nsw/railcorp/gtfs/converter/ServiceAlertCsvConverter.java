@@ -35,7 +35,7 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
     private static final String ENGLISH_LANGUAGE = "en";
 
     // Set true to scan service alert feed for cancellations and propagate to trip updates
-    private static final boolean ENABLE_TRIP_UPDATE_CANCELLATIONS = true;
+    private static final boolean ENABLE_TRIP_UPDATE_CANCELLATIONS = false;
 
     /* Spring Injected Transit Bundle Bean */
     private ActiveTrips generator;
@@ -383,10 +383,11 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
             }
         }
 
-        if (protoStorage == null) {
-            return false;
-        }
-        protoStorage.generateTripUpdates();
+        // Commented - Paritosh - Don't need to generate TripUpdates from Service Alerts anymore
+        // if (protoStorage == null) {
+        // return false;
+        // }
+        // protoStorage.generateTripUpdates();
         return true;
     }
 
