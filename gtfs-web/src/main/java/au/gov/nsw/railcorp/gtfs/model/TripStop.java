@@ -18,15 +18,15 @@ public class TripStop {
 
     private int stopSequence;
 
-    private String stopName;
+    private String stopName = "";
 
     private String arrivalTime;
 
     private String departureTime;
 
-    private String stopLatitude;
+    private String stopLatitude = "0";
 
-    private String stopLongt;
+    private String stopLongt = "0";
 
     private double distanceFromCurrent;
 
@@ -256,6 +256,7 @@ public class TripStop {
      */
     // Determine the dwell time at this stop (in seconds)
     public long getAnticipatedDwellTime() {
+
         final int timecal = 1000;
         final long plannedArrival = (scheduledArrivalTime != null) ? scheduledArrivalTime.getTime() / timecal : 0;
         final long plannedDeparture = (scheduledDepartureTime != null) ? scheduledDepartureTime.getTime() / timecal : 0;
@@ -268,6 +269,7 @@ public class TripStop {
      */
     // Return the seconds of delay that occurred or is predicted to occur at this stop
     public long getArrivalDelay() {
+
         final int timecal = 1000;
         if (actualArrivalTime != null && scheduledArrivalTime != null) {
             return (actualArrivalTime.getTime() - scheduledArrivalTime.getTime()) / timecal;
@@ -283,6 +285,7 @@ public class TripStop {
      * @return long
      */
     public long getDepartureDelay() {
+
         final int timecal = 1000;
         if (actualDepartureTime != null && scheduledDepartureTime != null) {
             return (actualDepartureTime.getTime() - scheduledDepartureTime.getTime()) / timecal;
