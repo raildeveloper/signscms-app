@@ -3,70 +3,76 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	
-	
-	<bean id="ServiceAlertCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.ServiceAlertCsvConverter"> 
-	  <property name="protoStorage" ref="TripUpdateConverter"/>
-        <property name="generator" ref="TripUpdates"/>    
+
+
+	<bean id="ServiceAlertCSVConverter"
+		class="au.gov.nsw.railcorp.gtfs.converter.ServiceAlertCsvConverter">
+		<property name="protoStorage" ref="TripUpdateConverter" />
+		<property name="generator" ref="TripUpdates" />
 	</bean>
-	
-	<bean id="VehiclePositionCSVConverter" class="au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter">
-        <property name="protoStorage" ref="TripUpdateConverter"/>
-        <property name="generator" ref="TripUpdates"/>
-    </bean>
-	
+
+	<bean id="VehiclePositionCSVConverter"
+		class="au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter">
+		<property name="protoStorage" ref="TripUpdateConverter" />
+		<property name="generator" ref="TripUpdates" />
+	</bean>
+
 	<bean id="TripUpdateConverter" class="au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter">
-		<property name="activeTrips" ref="TripUpdates"/>
-		<property name="protoStorage" ref="VehiclePositionCSVConverter"/>
+		<property name="changedTrips" ref="ChangedTrips" />
+		<property name="activeTrips" ref="TripUpdates" />
+		<property name="protoStorage" ref="VehiclePositionCSVConverter" />
 	</bean>
-	
-	<bean id="TripUpdates" class="au.gov.nsw.railcorp.gtfs.helper.ActiveTrips"/>
-	
+
+	<bean id="TripUpdates" class="au.gov.nsw.railcorp.gtfs.helper.ActiveTrips" />
+
+	<bean id="ChangedTrips" class="au.gov.nsw.railcorp.gtfs.helper.ChangedTrips" />
+
 	<bean id="TransitBundle" class="au.gov.nsw.railcorp.gtfs.transitbundle.TransitBundle" />
-		
+
 	<bean id="ServiceAlertCSVListener" class="au.gov.nsw.railcorp.gtfs.servlet.CsvListenerServlet">
 		<property name="converter" ref="ServiceAlertCSVConverter" />
 	</bean>
-	
+
 	<bean id="VehiclePositionCSVListener" class="au.gov.nsw.railcorp.gtfs.servlet.CsvListenerServlet">
-		<property name="converter" ref="VehiclePositionCSVConverter"/>
+		<property name="converter" ref="VehiclePositionCSVConverter" />
 	</bean>
 
 	<bean id="TripUpdateListener" class="au.gov.nsw.railcorp.gtfs.servlet.ProtoListenerServlet">
-		<property name="converter" ref="TripUpdateConverter"/>
+		<property name="converter" ref="TripUpdateConverter" />
 	</bean>
 
 	<bean id="VehiclePositionGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
-		<property name="protoStorage" ref="VehiclePositionCSVConverter"/>
+		<property name="protoStorage" ref="VehiclePositionCSVConverter" />
 	</bean>
-	
+
 	<bean id="ServiceAlertGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
-		<property name="protoStorage" ref="ServiceAlertCSVConverter"/>
+		<property name="protoStorage" ref="ServiceAlertCSVConverter" />
 	</bean>
-	
+
 	<bean id="TripUpdateGTFSR" class="au.gov.nsw.railcorp.gtfs.servlet.GtfsrServlet">
-		<property name="protoStorage" ref="TripUpdateConverter"/>
+		<property name="protoStorage" ref="TripUpdateConverter" />
 	</bean>
 
-	<bean id="GtfsWebFilter" class="au.gov.nsw.railcorp.gtfs.servlet.filter.GtfsWebFilter"/>
-	
-	<bean id="StaticFeedHandler" class="au.gov.nsw.railcorp.gtfs.servlet.StaticFeedHandlerServlet">
-	    <property name="transitBundle" ref="TransitBundle"/>
-    </bean>	    
-	    
+	<bean id="GtfsWebFilter" class="au.gov.nsw.railcorp.gtfs.servlet.filter.GtfsWebFilter" />
 
-	<bean id="TransitBundleListener" class="au.gov.nsw.railcorp.gtfs.servlet.TransitBundleListener" >
-	     <property name="transitBundle" ref="TransitBundle"/>
-    </bean>
-    <bean id="InitDb" class="au.gov.nsw.railcorp.gtfs.servlet.DbBundleGenerator" >
-	     <property name="transitBundle" ref="TransitBundle"/>
-    </bean>		
-    <bean id="TripUpdateGenerator" class="au.gov.nsw.railcorp.gtfs.servlet.TripUpdateGenerator" >
-    	<property name="protoStorage" ref="TripUpdateConverter"/>
-	    <property name="generator" ref="TripUpdates"/>
-    </bean>
-    <bean id="TripInfoServlet" class="au.gov.nsw.railcorp.gtfs.servlet.TripInfoServlet" >
-        <property name="generator" ref="TripUpdates"/>
-    </bean>	
+	<bean id="StaticFeedHandler"
+		class="au.gov.nsw.railcorp.gtfs.servlet.StaticFeedHandlerServlet">
+		<property name="transitBundle" ref="TransitBundle" />
+	</bean>
+
+
+	<bean id="TransitBundleListener" class="au.gov.nsw.railcorp.gtfs.servlet.TransitBundleListener">
+		<property name="transitBundle" ref="TransitBundle" />
+	</bean>
+	<bean id="InitDb" class="au.gov.nsw.railcorp.gtfs.servlet.DbBundleGenerator">
+		<property name="transitBundle" ref="TransitBundle" />
+	</bean>
+	<bean id="TripUpdateGenerator" class="au.gov.nsw.railcorp.gtfs.servlet.TripUpdateGenerator">
+		<property name="protoStorage" ref="TripUpdateConverter" />
+		<property name="generator" ref="TripUpdates" />
+	</bean>
+	<bean id="TripInfoServlet" class="au.gov.nsw.railcorp.gtfs.servlet.TripInfoServlet">
+		<property name="generator" ref="TripUpdates" />
+	</bean>
 </beans>
 
