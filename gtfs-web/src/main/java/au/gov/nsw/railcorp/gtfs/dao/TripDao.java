@@ -213,4 +213,40 @@ public class TripDao {
         return stopName;
 
     }
+
+    /**
+     * Get Lat and Long for given stop Id.
+     * @param tripStop
+     *            tripStop.
+     * @param stopId
+     *            stopId.
+     * @throws SQLException
+     *             s
+     */
+    public void getGtfsStopsDetails(TripStop tripStop, String stopId) throws SQLException {
+
+        PreparedStatement stopStmt = null;
+
+        final String stopQuery = "SELECT STOP_NAME, STOP_LAT, STOP_LONG FROM STOPS WHERE STOP_ID = ?";
+        try {
+            stopStmt = dbConnection.prepareStatement(stopQuery);
+            stopStmt.setString(1, stopId);
+            final ResultSet rs = stopStmt.executeQuery();
+
+            while (rs.next()) {
+                tripStop.setStopName((rs.getString("STOP_NAME") != null) ? rs.getString("STOP_NAME") : "");
+                tripStop.setStopLatitude((rs.getString("STOP_LAT") != null) ? rs.getString("STOP_LAT") : "");
+                tripStop.setStopLongt((rs.getString("STOP_LON") != null) ? rs.getString("STOP_LON") : "");
+
+            }
+
+        } catch (SQLException s) {
+            log.debug(s.getMessage());
+        } finally {
+            if (stopStmt != null) {
+                stopStmt.close();
+            }
+        }
+
+    }
 }
