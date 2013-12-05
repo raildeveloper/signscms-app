@@ -29,9 +29,12 @@ import com.google.transit.realtime.GtfsRealtime.TripUpdate.StopTimeUpdate;
 import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,8 +125,8 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
                     long arrivalTime = 0L;
                     long departureTime = 0L;
-                    arrivalTime = Long.parseLong(tripStop.getArrivalTime());
-                    departureTime = Long.parseLong(tripStop.getDepartureTime());
+                    arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
+                    departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
                     log.debug("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
                     + departureTime + " for stop id " + tripStop.getStopId());
                     if (changedTrip.hasValidDelayPrediction()) {
@@ -164,6 +167,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     departureStopTimeEvent.setTime(departureTime);
                     stopTimeUpdate.setArrival(arrivalStopTimeEvent);
                     stopTimeUpdate.setDeparture(departureStopTimeEvent);
+                    stopTimeUpdate.setStopId(tripStop.getStopId());
                     changedTripUpdate.addStopTimeUpdate(stopTimeUpdate);
                 }
             }
@@ -296,6 +300,16 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         this.activeTrips = activetrips;
     }
 
+    public ChangedTrips getChangedTrips() {
+
+        return changedTrips;
+    }
+
+    public void setChangedTrips(ChangedTrips changedtrips) {
+
+        this.changedTrips = changedtrips;
+    }
+
     public VehiclePositionCsvConverter getProtoStorage() {
 
         return protoStorage;
@@ -366,12 +380,19 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                                 if (stopStatus != PbStopStatus.SS_NONE) {
                                     final TripStop tripStop = new TripStop();
                                     tripStop.setStopId(tripNodeMessage.getStopId());
-                                    tripStop.setArrivalTime(String.valueOf(tripNodeMessage.getArrivalTime()));
-                                    tripStop.setDepartureTime(String.valueOf(tripNodeMessage.getDepartureTime()));
+
+                                    final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                                    dateFormat.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
+                                    final Date arrivalDate = new Date(tripNodeMessage.getArrivalTime() * MILLISECOND_IN_SECOND);
+                                    final Date departureDate = new Date(tripNodeMessage.getDepartureTime() * MILLISECOND_IN_SECOND);
+                                    tripStop.setArrivalTime(dateFormat.format(arrivalDate));
+                                    tripStop.setDepartureTime(dateFormat.format(departureDate));
+
                                     tripStop.setStopSequence(tripNodeMessage.getStopSequence());
 
-                                    // Fetching Stop Name from H2 database - this needs to be changed to be sent from Trip publisher
-                                    tripStop.setStopName(tripDAO.getStopNameForStopId(tripNodeMessage.getStopId()));
+                                    // Fetching GTFS Stop Details from H2 database - this needs to be changed to be sent from Trip publisher
+                                    // tripStop.setStopName(tripDAO.getStopNameForStopId(tripNodeMessage.getStopId()));
+                                    tripDAO.getGtfsStopsDetails(tripStop, tripNodeMessage.getStopId());
                                     log.debug("Trip " + tripId + " has been following stopping pattern" + tripStop.toString());
                                     tripStops.add(tripStop);
                                 }
@@ -384,6 +405,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     }
 
                 }
+                changedTrips.setChangedTrips(changedTripsList);
             } else {
                 log.debug("Proto Buff received from Trip Publisher is empty");
                 returnMessage = false;
