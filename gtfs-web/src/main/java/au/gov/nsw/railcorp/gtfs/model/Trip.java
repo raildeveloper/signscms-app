@@ -8,6 +8,7 @@ import com.google.transit.realtime.GtfsRealtime.TripDescriptor;
 import com.google.transit.realtime.GtfsRealtime.VehiclePosition;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -70,7 +71,7 @@ public class Trip {
     private VehiclePosition vehiclePosition;
 
     // set of stops that this service will operate through
-    private List<TripStop> tripStops;
+    private List<TripStop> tripStops = new ArrayList<TripStop>();
 
     // If the trip is within 250m radius of a stop, store it here
     private TripStop currentStop;
