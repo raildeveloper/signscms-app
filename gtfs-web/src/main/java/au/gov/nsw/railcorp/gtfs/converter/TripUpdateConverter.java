@@ -340,7 +340,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
                 final List<Trip> changedTripsList = new ArrayList<Trip>();
 
-                for (TripMessage tripMessage : tripListMessage.getTripMsgsList()) {
+                tripMessageLoop: for (TripMessage tripMessage : tripListMessage.getTripMsgsList()) {
                     final String tripId = tripMessage.getTripId();
                     final PbActivity activity = tripMessage.getCurrentActivity();
                     final Trip trip = new Trip();
@@ -374,6 +374,12 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
                         final List<TripStop> tripStops = new ArrayList<TripStop>();
                         if (addStops) {
+                            if (!(tripMessage.getTripNodeMsgsList().size() > 0)) {
+                                // Let trip publisher know of the error - but continue to process other trips in the message
+                                returnMessage = false;
+                                log.debug("Trip " + tripId + " doesn't have any nodes - omitting this from trip updates ");
+                                continue tripMessageLoop;
+                            }
                             for (TripNodeMessage tripNodeMessage : tripMessage.getTripNodeMsgsList()) {
                                 log.debug("Trip " + tripId + " has following nodes --> " + tripNodeMessage.toString());
                                 final PbStopStatus stopStatus = tripNodeMessage.getStopStatus();
