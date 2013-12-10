@@ -719,7 +719,6 @@ public class TripUpdateConverterTest extends TestCase {
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
-
         assertTrue(converter.processLoadTripUpdates(message));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
@@ -761,4 +760,642 @@ public class TripUpdateConverterTest extends TestCase {
 
     }
 
+    @Test
+    public void testInsertTripWithoutStops() {
+
+        TripMessage.Builder tripMessage = TripMessage.newBuilder();
+        tripMessage.setTripId("101A");
+        tripMessage.setRouteId("IWL_2c");
+        tripMessage.setServiceId("999");
+        tripMessage.setBlockId(119);
+        tripMessage.setBundleId(99);
+        tripMessage.setTripInstance(1);
+        tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        builder.addTripMsgs(tripMessage);
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testMultipleInsertTripsWithoutStops() {
+
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("101A");
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+            builder.addTripMsgs(tripMessage);
+        }
+
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testMultipleInsertTripsOneWithoutStops() {
+
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("101A");
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+
+            // Add Stops to Message
+            if (k != 1) {
+                for (int i = 1; i <= 5; i++) {
+                    TripNodeMessage.Builder tripNodeMessage = TripNodeMessage.newBuilder();
+                    tripNodeMessage.setArrivalTime(System.currentTimeMillis() / 1000L + i);
+                    tripNodeMessage.setDepartureTime(System.currentTimeMillis() / 1000L + 30 + i);
+                    tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
+                    tripNodeMessage.setStopSequence(i);
+                    tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
+                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
+                    tripMessage.addTripNodeMsgs(tripNodeMessage);
+                }
+            }
+            builder.addTripMsgs(tripMessage);
+        }
+
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(numberTripInserts - 1, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testTimeTableTripUpdateWithoutStops() {
+
+        TripMessage.Builder tripMessage = TripMessage.newBuilder();
+        tripMessage.setTripId("101A");
+        tripMessage.setRouteId("IWL_2c");
+        tripMessage.setServiceId("999");
+        tripMessage.setBlockId(119);
+        tripMessage.setBundleId(99);
+        tripMessage.setTripInstance(1);
+        tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        builder.addTripMsgs(tripMessage);
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+    }
+
+    @Test
+    public void testMultipleTimeTableTripUpdatesWithoutStops() {
+
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("101A");
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+            builder.addTripMsgs(tripMessage);
+        }
+
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testMultipleTimeTableTripUpdatesOneWithoutStops() {
+
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("101A");
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+
+            // Add Stops to Message
+            if (k != 1) {
+                for (int i = 1; i <= 5; i++) {
+                    TripNodeMessage.Builder tripNodeMessage = TripNodeMessage.newBuilder();
+                    tripNodeMessage.setArrivalTime(System.currentTimeMillis() / 1000L + i);
+                    tripNodeMessage.setDepartureTime(System.currentTimeMillis() / 1000L + 30 + i);
+                    tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
+                    tripNodeMessage.setStopSequence(i);
+                    tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
+                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
+                    tripMessage.addTripNodeMsgs(tripNodeMessage);
+                }
+            }
+            builder.addTripMsgs(tripMessage);
+        }
+
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(numberTripInserts - 1, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testTripInsertWithoutStopsWithVehiclePosition() {
+
+        TripMessage.Builder tripMessage = TripMessage.newBuilder();
+        tripMessage.setTripId("101A");
+        tripMessage.setRouteId("IWL_2c");
+        tripMessage.setServiceId("999");
+        tripMessage.setBlockId(119);
+        tripMessage.setBundleId(99);
+        tripMessage.setTripInstance(1);
+        tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        builder.addTripMsgs(tripMessage);
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "101A,IWL_2c,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+    }
+
+    @Test
+    public void testMultipleTripInsertWithoutStopsWithVehiclePostion() {
+
+        // Number of Trip Insert Messages
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        String csvData = "";
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("A--" + String.valueOf(k));
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+            csvData += "A--" + String.valueOf(k)
+            + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
+            + ",Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+
+            builder.addTripMsgs(tripMessage);
+        }
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testMultipleTripInsertOneWithoutStopsWithVehiclePostion() {
+
+        // Number of Trip Insert Messages
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        String csvData = "";
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("A--" + String.valueOf(k));
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_INSERTED);
+            csvData += "A--" + String.valueOf(k)
+            + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
+            + ",Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+
+            // Add Stops to Message
+            if (k != 1) {
+                for (int i = 1; i <= 5; i++) {
+                    TripNodeMessage.Builder tripNodeMessage = TripNodeMessage.newBuilder();
+                    tripNodeMessage.setArrivalTime(System.currentTimeMillis() / 1000L + i);
+                    tripNodeMessage.setDepartureTime(System.currentTimeMillis() / 1000L + 30 + i);
+                    tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
+                    tripNodeMessage.setStopSequence(i);
+                    tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
+                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
+                    tripMessage.addTripNodeMsgs(tripNodeMessage);
+                }
+            }
+
+            builder.addTripMsgs(tripMessage);
+        }
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(numberTripInserts - 1, mesg.getEntityCount());
+
+        for (int j = 0; j < numberTripInserts - 1; j++) {
+            FeedEntity e = mesg.getEntity(j);
+            assertTrue(e.hasId());
+            int x = j + 2; // Nothing for first Entity should be there - It all begins with A--2
+
+            String id = "A--" + String.valueOf(x);
+
+            assertEquals(id, e.getId());
+            assertFalse(e.hasIsDeleted());
+            assertTrue(e.hasTripUpdate());
+            assertFalse(e.hasAlert());
+            assertFalse(e.hasVehicle());
+
+            TripUpdate tripUpdate = e.getTripUpdate();
+            assertTrue(tripUpdate.hasTimestamp());
+            assertTrue(tripUpdate.hasTrip());
+
+            TripDescriptor tripDescriptor = tripUpdate.getTrip();
+            assertTrue(tripDescriptor.hasTripId());
+            assertTrue(tripDescriptor.hasRouteId());
+            assertTrue(tripDescriptor.hasScheduleRelationship());
+            assertEquals("A--" + String.valueOf(x), tripDescriptor.getTripId());
+            assertEquals("IWL_2c", tripDescriptor.getRouteId());
+            assertEquals(ScheduleRelationship.ADDED, tripDescriptor.getScheduleRelationship());
+
+        }
+
+    }
+
+    @Test
+    public void testTripUpdatesWithoutStopsWithVehiclePosition() {
+
+        TripMessage.Builder tripMessage = TripMessage.newBuilder();
+        tripMessage.setTripId("101A");
+        tripMessage.setRouteId("IWL_2c");
+        tripMessage.setServiceId("999");
+        tripMessage.setBlockId(119);
+        tripMessage.setBundleId(99);
+        tripMessage.setTripInstance(1);
+        tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        builder.addTripMsgs(tripMessage);
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        String csvData = "101A,IWL_2c,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+    }
+
+    @Test
+    public void testMultipleTripUpdatesWithoutStopsWithVehiclePostion() {
+
+        // Number of Trip Insert Messages
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        String csvData = "";
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("A--" + String.valueOf(k));
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+            csvData += "A--" + String.valueOf(k)
+            + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
+            + ",Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+
+            builder.addTripMsgs(tripMessage);
+        }
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(0, mesg.getEntityCount());
+
+    }
+
+    @Test
+    public void testMultipleTripUpdatesOneWithoutStopsWithVehiclePostion() {
+
+        // Number of Trip Insert Messages
+        int numberTripInserts = 10;
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        String csvData = "";
+        for (int k = 1; k <= numberTripInserts; k++) {
+            TripMessage.Builder tripMessage = TripMessage.newBuilder();
+            tripMessage.setTripId("A--" + String.valueOf(k));
+            tripMessage.setRouteId("IWL_2c");
+            tripMessage.setServiceId("999");
+            tripMessage.setBlockId(119);
+            tripMessage.setBundleId(99);
+            tripMessage.setTripInstance(1);
+            tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
+            csvData += "A--" + String.valueOf(k)
+            + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
+            + ",Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
+
+            // Add Stops to Message
+            if (k != 1) {
+                for (int i = 1; i <= 5; i++) {
+                    TripNodeMessage.Builder tripNodeMessage = TripNodeMessage.newBuilder();
+                    tripNodeMessage.setArrivalTime(System.currentTimeMillis() / 1000L + i);
+                    tripNodeMessage.setDepartureTime(System.currentTimeMillis() / 1000L + 30 + i);
+                    tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
+                    tripNodeMessage.setStopSequence(i);
+                    tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
+                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
+                    tripMessage.addTripNodeMsgs(tripNodeMessage);
+                }
+            }
+
+            builder.addTripMsgs(tripMessage);
+        }
+        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        tripModelEntityMessage.setActiveTrips(builder);
+        TripModelEntityMessage message = tripModelEntityMessage.build();
+
+        StringReader reader = new StringReader(csvData);
+        converter.getProtoStorage().convertAndStoreCsv(reader);
+
+        assertFalse(converter.processLoadTripUpdates(message));
+        assertTrue(converter.generateTripUpdates());
+        FeedMessage mesg = null;
+        try {
+            mesg = FeedMessage.parseFrom(converter.getCurrentProtoBuf());
+
+        } catch (InvalidProtocolBufferException e) {
+            fail("Invalid Protocol Buffer");
+        }
+        assertTrue(mesg.hasHeader());
+        assertEquals("1.0", mesg.getHeader().getGtfsRealtimeVersion());
+        assertTrue(mesg.getHeader().getIncrementality().equals(Incrementality.FULL_DATASET));
+        assertTrue(mesg.getHeader().hasTimestamp());
+        assertEquals(numberTripInserts - 1, mesg.getEntityCount());
+
+        for (int j = 0; j < numberTripInserts - 1; j++) {
+            FeedEntity e = mesg.getEntity(j);
+            assertTrue(e.hasId());
+            int x = j + 2; // Nothing for first Entity should be there - It all begins with A--2
+
+            String id = "A--" + String.valueOf(x);
+
+            assertEquals(id, e.getId());
+            assertFalse(e.hasIsDeleted());
+            assertTrue(e.hasTripUpdate());
+            assertFalse(e.hasAlert());
+            assertFalse(e.hasVehicle());
+
+            TripUpdate tripUpdate = e.getTripUpdate();
+            assertTrue(tripUpdate.hasTimestamp());
+            assertTrue(tripUpdate.hasTrip());
+
+            TripDescriptor tripDescriptor = tripUpdate.getTrip();
+            assertTrue(tripDescriptor.hasTripId());
+            assertTrue(tripDescriptor.hasRouteId());
+            assertTrue(tripDescriptor.hasScheduleRelationship());
+            assertEquals("A--" + String.valueOf(x), tripDescriptor.getTripId());
+            assertEquals("IWL_2c", tripDescriptor.getRouteId());
+            assertEquals(ScheduleRelationship.REPLACEMENT, tripDescriptor.getScheduleRelationship());
+
+        }
+
+    }
 }
