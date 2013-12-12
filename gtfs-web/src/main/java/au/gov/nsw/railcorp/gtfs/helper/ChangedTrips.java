@@ -4,6 +4,7 @@ package au.gov.nsw.railcorp.gtfs.helper;
 
 import au.gov.nsw.railcorp.gtfs.model.Trip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class ChangedTrips {
 
     private static ChangedTrips sINSTANCE;
 
-    private List<Trip> changedTrips;
+    private List<Trip> changedTrips = new ArrayList<Trip>();
 
     /**
      * Changed Trips.
