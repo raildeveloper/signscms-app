@@ -94,95 +94,96 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         // doll that is a GTFSR payload
 
         // First Construct Messages for Changed Trips.
-        for (Trip changedTrip : changedTrips.getChangedTrips()) {
-            final String changedTripId = changedTrip.getTripId();
-            log.debug("Building GTFS R Trip Update for Changed Trips " + changedTripId);
-            final TripUpdate.Builder changedTripUpdate = TripUpdate.newBuilder();
+        if (changedTrips != null && changedTrips.getChangedTrips().size() > 0) {
+            for (Trip changedTrip : changedTrips.getChangedTrips()) {
+                final String changedTripId = changedTrip.getTripId();
+                log.debug("Building GTFS R Trip Update for Changed Trips " + changedTripId);
+                final TripUpdate.Builder changedTripUpdate = TripUpdate.newBuilder();
 
-            final TripDescriptor.Builder changedTripBuilder = TripDescriptor.newBuilder();
-            changedTripBuilder.setTripId(changedTrip.getTripId());
-            changedTripBuilder.setRouteId(changedTrip.getRouteId());
+                final TripDescriptor.Builder changedTripBuilder = TripDescriptor.newBuilder();
+                changedTripBuilder.setTripId(changedTrip.getTripId());
+                changedTripBuilder.setRouteId(changedTrip.getRouteId());
 
-            if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CANCELLED) {
-                // Mark the trip as Cancelled
-                log.debug("Trip " + changedTripId + " has been cancelled.");
-                changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.CANCELED);
-            } else {
-                if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CHANGED) {
-                    // Mark the trip as Replacement
-                    log.debug("Trip " + changedTripId + " has been replaced.");
-                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.REPLACEMENT);
-                } else if (changedTrip.getTripType() == TRIP_TYPES.TRIP_INSERTED) {
-                    // Mark the trip as ADDED
-                    log.debug("Trip " + changedTripId + " has been inserted.");
-                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.ADDED);
-                }
-                // For changed and inserted trips go through all the stops
-                for (TripStop tripStop : changedTrip.getTripStops()) {
-                    log.debug("Iterate through " + changedTripId + " all trip stops " + tripStop.getStopId());
-                    final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
-                    final StopTimeEvent.Builder arrivalStopTimeEvent = StopTimeEvent.newBuilder();
-                    final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
-                    long arrivalTime = 0L;
-                    long departureTime = 0L;
-                    arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
-                    departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
-                    log.debug("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
-                    + departureTime + " for stop id " + tripStop.getStopId());
-                    if (changedTrip.hasValidDelayPrediction()) {
-                        log.debug("Trip " + changedTripId + " has prediction. ");
-                        // Find the stop from where we should start publishing any delay information if it exists
-                        TripStop nextStop = changedTrip.getCurrentStop() != null ? changedTrip.getCurrentStop() : changedTrip
-                        .getNextStop();
-                        if (nextStop == null && changedTrip.getTripStops() != null) {
-                            nextStop = changedTrip.getTripStops().get(0);
-                        }
-                        log.debug("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
-                        if (tripStop.getStopSequence() >= nextStop.getStopSequence()) {
-                            // Include delay for these stops
-                            // calculate delay deltas
-                            long arrivalDelay = tripStop.getArrivalDelay();
-                            long departureDelay = tripStop.getDepartureDelay();
-                            log.debug("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
-                            + departureDelay + " for stop id " + tripStop.getStopId());
-
-                            arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0
-                            : arrivalDelay;
-                            departureDelay = (departureDelay > negative30 && departureDelay < positive30) ? 0
-                            : departureDelay;
-                            // if service has arrived at stop early, publish a useful
-                            // delay value
-                            // rather than the arrival time
-                            if (arrivalDelay < 0) {
-                                arrivalDelay = Math.max(arrivalDelay, departureDelay);
-                            }
-                            arrivalTime += arrivalDelay;
-                            departureTime += departureDelay;
-                            log.debug("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
-                            + departureTime + " for stop id " + tripStop.getStopId());
-                        }
-
+                if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CANCELLED) {
+                    // Mark the trip as Cancelled
+                    log.debug("Trip " + changedTripId + " has been cancelled.");
+                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.CANCELED);
+                } else {
+                    if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CHANGED) {
+                        // Mark the trip as Replacement
+                        log.debug("Trip " + changedTripId + " has been replaced.");
+                        changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.REPLACEMENT);
+                    } else if (changedTrip.getTripType() == TRIP_TYPES.TRIP_INSERTED) {
+                        // Mark the trip as ADDED
+                        log.debug("Trip " + changedTripId + " has been inserted.");
+                        changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.ADDED);
                     }
-                    arrivalStopTimeEvent.setTime(arrivalTime);
-                    departureStopTimeEvent.setTime(departureTime);
-                    stopTimeUpdate.setArrival(arrivalStopTimeEvent);
-                    stopTimeUpdate.setDeparture(departureStopTimeEvent);
-                    stopTimeUpdate.setStopId(tripStop.getStopId());
-                    changedTripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                    // For changed and inserted trips go through all the stops
+                    for (TripStop tripStop : changedTrip.getTripStops()) {
+                        log.debug("Iterate through " + changedTripId + " all trip stops " + tripStop.getStopId());
+                        final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
+                        final StopTimeEvent.Builder arrivalStopTimeEvent = StopTimeEvent.newBuilder();
+                        final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
+                        long arrivalTime = 0L;
+                        long departureTime = 0L;
+                        arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
+                        departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
+                        log.debug("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
+                        + departureTime + " for stop id " + tripStop.getStopId());
+                        if (changedTrip.hasValidDelayPrediction()) {
+                            log.debug("Trip " + changedTripId + " has prediction. ");
+                            // Find the stop from where we should start publishing any delay information if it exists
+                            TripStop nextStop = changedTrip.getCurrentStop() != null ? changedTrip.getCurrentStop() : changedTrip
+                            .getNextStop();
+                            if (nextStop == null && changedTrip.getTripStops() != null) {
+                                nextStop = changedTrip.getTripStops().get(0);
+                            }
+                            log.debug("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
+                            if (tripStop.getStopSequence() >= nextStop.getStopSequence()) {
+                                // Include delay for these stops
+                                // calculate delay deltas
+                                long arrivalDelay = tripStop.getArrivalDelay();
+                                long departureDelay = tripStop.getDepartureDelay();
+                                log.debug("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
+                                + departureDelay + " for stop id " + tripStop.getStopId());
+
+                                arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0
+                                : arrivalDelay;
+                                departureDelay = (departureDelay > negative30 && departureDelay < positive30) ? 0
+                                : departureDelay;
+                                // if service has arrived at stop early, publish a useful
+                                // delay value
+                                // rather than the arrival time
+                                if (arrivalDelay < 0) {
+                                    arrivalDelay = Math.max(arrivalDelay, departureDelay);
+                                }
+                                arrivalTime += arrivalDelay;
+                                departureTime += departureDelay;
+                                log.debug("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
+                                + departureTime + " for stop id " + tripStop.getStopId());
+                            }
+
+                        }
+                        arrivalStopTimeEvent.setTime(arrivalTime);
+                        departureStopTimeEvent.setTime(departureTime);
+                        stopTimeUpdate.setArrival(arrivalStopTimeEvent);
+                        stopTimeUpdate.setDeparture(departureStopTimeEvent);
+                        stopTimeUpdate.setStopId(tripStop.getStopId());
+                        changedTripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                    }
                 }
+                changedTripUpdate.setTrip(changedTripBuilder);
+                changedTripUpdate.setTimestamp(changedTrip.getRecordedTimeStamp());
+                // construct FeedEntity wrapped around TripUpdate
+                final FeedEntity.Builder feedEntity = FeedEntity.newBuilder();
+                feedEntity.setId(changedTrip.getTripId());
+                feedEntity.setTripUpdate(changedTripUpdate);
+
+                // add FeedEntity to FeedMessage
+                gtfsMessage.addEntity(feedEntity);
+
             }
-            changedTripUpdate.setTrip(changedTripBuilder);
-            changedTripUpdate.setTimestamp(changedTrip.getRecordedTimeStamp());
-            // construct FeedEntity wrapped around TripUpdate
-            final FeedEntity.Builder feedEntity = FeedEntity.newBuilder();
-            feedEntity.setId(changedTrip.getTripId());
-            feedEntity.setTripUpdate(changedTripUpdate);
-
-            // add FeedEntity to FeedMessage
-            gtfsMessage.addEntity(feedEntity);
-
         }
-
         if (activeTrips.getActiveTrips() != null) {
             activeTripLoop: for (Trip trip : activeTrips.getActiveTrips()) {
 
