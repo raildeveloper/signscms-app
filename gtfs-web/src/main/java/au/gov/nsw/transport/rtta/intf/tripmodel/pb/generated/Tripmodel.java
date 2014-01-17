@@ -163,6 +163,109 @@ public final class Tripmodel {
   }
 
   /**
+   * Protobuf enum {@code PbTripStereotype}
+   *
+   * <pre>
+   *
+   * The TripStereotype of the trip details.
+   * </pre>
+   */
+  public enum PbTripStereotype
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>TY_STATIC = 0;</code>
+     *
+     * <pre>
+     * The original, unmodified details of the trip.
+     * </pre>
+     */
+    TY_STATIC(0, 0),
+    /**
+     * <code>TY_DYNAMIC = 1;</code>
+     *
+     * <pre>
+     * The trip details can be modified.
+     * </pre>
+     */
+    TY_DYNAMIC(1, 1),
+    ;
+
+    /**
+     * <code>TY_STATIC = 0;</code>
+     *
+     * <pre>
+     * The original, unmodified details of the trip.
+     * </pre>
+     */
+    public static final int TY_STATIC_VALUE = 0;
+    /**
+     * <code>TY_DYNAMIC = 1;</code>
+     *
+     * <pre>
+     * The trip details can be modified.
+     * </pre>
+     */
+    public static final int TY_DYNAMIC_VALUE = 1;
+
+
+    public final int getNumber() { return value; }
+
+    public static PbTripStereotype valueOf(int value) {
+      switch (value) {
+        case 0: return TY_STATIC;
+        case 1: return TY_DYNAMIC;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<PbTripStereotype>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<PbTripStereotype>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<PbTripStereotype>() {
+            public PbTripStereotype findValueByNumber(int number) {
+              return PbTripStereotype.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final PbTripStereotype[] VALUES = values();
+
+    public static PbTripStereotype valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private PbTripStereotype(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:PbTripStereotype)
+  }
+
+  /**
    * Protobuf enum {@code PbStopStatus}
    *
    * <pre>
@@ -291,7 +394,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(1);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final PbStopStatus[] VALUES = values();
@@ -424,7 +527,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(2);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(3);
     }
 
     private static final PbSpeedBand[] VALUES = values();
@@ -747,7 +850,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(3);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(4);
     }
 
     private static final PbNodeMode[] VALUES = values();
@@ -1003,7 +1106,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(4);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(5);
     }
 
     private static final PbTripType[] VALUES = values();
@@ -1531,7 +1634,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(5);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(6);
     }
 
     private static final PbConsistType[] VALUES = values();
@@ -2132,7 +2235,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(6);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(7);
     }
 
     private static final PbArrivalAndDepartureSymbol[] VALUES = values();
@@ -2169,62 +2272,47 @@ public final class Tripmodel {
   public enum PbDirection
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>DR_NONE = 0;</code>
-     *
-     * <pre>
-     * </pre>
-     */
-    DR_NONE(0, 0),
-    /**
-     * <code>DR_DOWN = 1;</code>
+     * <code>DR_DOWN = 0;</code>
      *
      * <pre>
      * Down direction, moving away from Central Station.
      * </pre>
      */
-    DR_DOWN(1, 1),
+    DR_DOWN(0, 0),
     /**
-     * <code>DR_UP = 2;</code>
+     * <code>DR_UP = 1;</code>
      *
      * <pre>
      * Up direction, moving towards Central Station.
      * </pre>
      */
-    DR_UP(2, 2),
+    DR_UP(1, 1),
     ;
 
     /**
-     * <code>DR_NONE = 0;</code>
-     *
-     * <pre>
-     * </pre>
-     */
-    public static final int DR_NONE_VALUE = 0;
-    /**
-     * <code>DR_DOWN = 1;</code>
+     * <code>DR_DOWN = 0;</code>
      *
      * <pre>
      * Down direction, moving away from Central Station.
      * </pre>
      */
-    public static final int DR_DOWN_VALUE = 1;
+    public static final int DR_DOWN_VALUE = 0;
     /**
-     * <code>DR_UP = 2;</code>
+     * <code>DR_UP = 1;</code>
      *
      * <pre>
      * Up direction, moving towards Central Station.
      * </pre>
      */
-    public static final int DR_UP_VALUE = 2;
+    public static final int DR_UP_VALUE = 1;
 
 
     public final int getNumber() { return value; }
 
     public static PbDirection valueOf(int value) {
       switch (value) {
-        case 0: return DR_NONE;
-        case 1: return DR_DOWN;
-        case 2: return DR_UP;
+        case 0: return DR_DOWN;
+        case 1: return DR_UP;
         default: return null;
       }
     }
@@ -2251,7 +2339,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(7);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(8);
     }
 
     private static final PbDirection[] VALUES = values();
@@ -2405,7 +2493,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(8);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(9);
     }
 
     private static final PbActivity[] VALUES = values();
@@ -2523,7 +2611,7 @@ public final class Tripmodel {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(9);
+      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(10);
     }
 
     private static final PbTripSource[] VALUES = values();
@@ -2546,104 +2634,6 @@ public final class Tripmodel {
     }
 
     // @@protoc_insertion_point(enum_scope:PbTripSource)
-  }
-
-  /**
-   * Protobuf enum {@code TripStereotype}
-   */
-  public enum TripStereotype
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>TY_STATIC = 0;</code>
-     *
-     * <pre>
-     * The original, unmodified details of the trip (Timetable)
-     * </pre>
-     */
-    TY_STATIC(0, 0),
-    /**
-     * <code>TY_DYNAMIC = 1;</code>
-     *
-     * <pre>
-     * The trip details can be modified.
-     * </pre>
-     */
-    TY_DYNAMIC(1, 1),
-    ;
-
-    /**
-     * <code>TY_STATIC = 0;</code>
-     *
-     * <pre>
-     * The original, unmodified details of the trip (Timetable)
-     * </pre>
-     */
-    public static final int TY_STATIC_VALUE = 0;
-    /**
-     * <code>TY_DYNAMIC = 1;</code>
-     *
-     * <pre>
-     * The trip details can be modified.
-     * </pre>
-     */
-    public static final int TY_DYNAMIC_VALUE = 1;
-
-
-    public final int getNumber() { return value; }
-
-    public static TripStereotype valueOf(int value) {
-      switch (value) {
-        case 0: return TY_STATIC;
-        case 1: return TY_DYNAMIC;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<TripStereotype>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<TripStereotype>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<TripStereotype>() {
-            public TripStereotype findValueByNumber(int number) {
-              return TripStereotype.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.getDescriptor().getEnumTypes().get(10);
-    }
-
-    private static final TripStereotype[] VALUES = values();
-
-    public static TripStereotype valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private TripStereotype(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:TripStereotype)
   }
 
   public interface TripModelEntityMessageOrBuilder
@@ -3548,6 +3538,36 @@ public final class Tripmodel {
      * <code>optional int32 stop_sequence = 7;</code>
      */
     int getStopSequence();
+
+    // optional int32 dwellTimeSeconds = 8;
+    /**
+     * <code>optional int32 dwellTimeSeconds = 8;</code>
+     */
+    boolean hasDwellTimeSeconds();
+    /**
+     * <code>optional int32 dwellTimeSeconds = 8;</code>
+     */
+    int getDwellTimeSeconds();
+
+    // optional int32 arrivalDelaySeconds = 9;
+    /**
+     * <code>optional int32 arrivalDelaySeconds = 9;</code>
+     */
+    boolean hasArrivalDelaySeconds();
+    /**
+     * <code>optional int32 arrivalDelaySeconds = 9;</code>
+     */
+    int getArrivalDelaySeconds();
+
+    // optional int32 departureDelaySeconds = 10;
+    /**
+     * <code>optional int32 departureDelaySeconds = 10;</code>
+     */
+    boolean hasDepartureDelaySeconds();
+    /**
+     * <code>optional int32 departureDelaySeconds = 10;</code>
+     */
+    int getDepartureDelaySeconds();
   }
   /**
    * Protobuf type {@code TripNodeMessage}
@@ -3650,6 +3670,21 @@ public final class Tripmodel {
             case 56: {
               bitField0_ |= 0x00000040;
               stopSequence_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              dwellTimeSeconds_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              arrivalDelaySeconds_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              departureDelaySeconds_ = input.readInt32();
               break;
             }
           }
@@ -3858,6 +3893,54 @@ public final class Tripmodel {
       return stopSequence_;
     }
 
+    // optional int32 dwellTimeSeconds = 8;
+    public static final int DWELLTIMESECONDS_FIELD_NUMBER = 8;
+    private int dwellTimeSeconds_;
+    /**
+     * <code>optional int32 dwellTimeSeconds = 8;</code>
+     */
+    public boolean hasDwellTimeSeconds() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>optional int32 dwellTimeSeconds = 8;</code>
+     */
+    public int getDwellTimeSeconds() {
+      return dwellTimeSeconds_;
+    }
+
+    // optional int32 arrivalDelaySeconds = 9;
+    public static final int ARRIVALDELAYSECONDS_FIELD_NUMBER = 9;
+    private int arrivalDelaySeconds_;
+    /**
+     * <code>optional int32 arrivalDelaySeconds = 9;</code>
+     */
+    public boolean hasArrivalDelaySeconds() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional int32 arrivalDelaySeconds = 9;</code>
+     */
+    public int getArrivalDelaySeconds() {
+      return arrivalDelaySeconds_;
+    }
+
+    // optional int32 departureDelaySeconds = 10;
+    public static final int DEPARTUREDELAYSECONDS_FIELD_NUMBER = 10;
+    private int departureDelaySeconds_;
+    /**
+     * <code>optional int32 departureDelaySeconds = 10;</code>
+     */
+    public boolean hasDepartureDelaySeconds() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 departureDelaySeconds = 10;</code>
+     */
+    public int getDepartureDelaySeconds() {
+      return departureDelaySeconds_;
+    }
+
     private void initFields() {
       nodeName_ = "";
       tripSource_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource.TC_UNKNOWN;
@@ -3866,6 +3949,9 @@ public final class Tripmodel {
       departureTime_ = 0L;
       stopStatus_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbStopStatus.SS_NONE;
       stopSequence_ = 0;
+      dwellTimeSeconds_ = 0;
+      arrivalDelaySeconds_ = 0;
+      departureDelaySeconds_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3904,6 +3990,15 @@ public final class Tripmodel {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, stopSequence_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, dwellTimeSeconds_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, arrivalDelaySeconds_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, departureDelaySeconds_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3940,6 +4035,18 @@ public final class Tripmodel {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, stopSequence_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, dwellTimeSeconds_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, arrivalDelaySeconds_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, departureDelaySeconds_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4076,6 +4183,12 @@ public final class Tripmodel {
         bitField0_ = (bitField0_ & ~0x00000020);
         stopSequence_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        dwellTimeSeconds_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        arrivalDelaySeconds_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        departureDelaySeconds_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -4132,6 +4245,18 @@ public final class Tripmodel {
           to_bitField0_ |= 0x00000040;
         }
         result.stopSequence_ = stopSequence_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.dwellTimeSeconds_ = dwellTimeSeconds_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.arrivalDelaySeconds_ = arrivalDelaySeconds_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.departureDelaySeconds_ = departureDelaySeconds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4172,6 +4297,15 @@ public final class Tripmodel {
         }
         if (other.hasStopSequence()) {
           setStopSequence(other.getStopSequence());
+        }
+        if (other.hasDwellTimeSeconds()) {
+          setDwellTimeSeconds(other.getDwellTimeSeconds());
+        }
+        if (other.hasArrivalDelaySeconds()) {
+          setArrivalDelaySeconds(other.getArrivalDelaySeconds());
+        }
+        if (other.hasDepartureDelaySeconds()) {
+          setDepartureDelaySeconds(other.getDepartureDelaySeconds());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4523,6 +4657,105 @@ public final class Tripmodel {
         return this;
       }
 
+      // optional int32 dwellTimeSeconds = 8;
+      private int dwellTimeSeconds_ ;
+      /**
+       * <code>optional int32 dwellTimeSeconds = 8;</code>
+       */
+      public boolean hasDwellTimeSeconds() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int32 dwellTimeSeconds = 8;</code>
+       */
+      public int getDwellTimeSeconds() {
+        return dwellTimeSeconds_;
+      }
+      /**
+       * <code>optional int32 dwellTimeSeconds = 8;</code>
+       */
+      public Builder setDwellTimeSeconds(int value) {
+        bitField0_ |= 0x00000080;
+        dwellTimeSeconds_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 dwellTimeSeconds = 8;</code>
+       */
+      public Builder clearDwellTimeSeconds() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        dwellTimeSeconds_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 arrivalDelaySeconds = 9;
+      private int arrivalDelaySeconds_ ;
+      /**
+       * <code>optional int32 arrivalDelaySeconds = 9;</code>
+       */
+      public boolean hasArrivalDelaySeconds() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int32 arrivalDelaySeconds = 9;</code>
+       */
+      public int getArrivalDelaySeconds() {
+        return arrivalDelaySeconds_;
+      }
+      /**
+       * <code>optional int32 arrivalDelaySeconds = 9;</code>
+       */
+      public Builder setArrivalDelaySeconds(int value) {
+        bitField0_ |= 0x00000100;
+        arrivalDelaySeconds_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 arrivalDelaySeconds = 9;</code>
+       */
+      public Builder clearArrivalDelaySeconds() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        arrivalDelaySeconds_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 departureDelaySeconds = 10;
+      private int departureDelaySeconds_ ;
+      /**
+       * <code>optional int32 departureDelaySeconds = 10;</code>
+       */
+      public boolean hasDepartureDelaySeconds() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 departureDelaySeconds = 10;</code>
+       */
+      public int getDepartureDelaySeconds() {
+        return departureDelaySeconds_;
+      }
+      /**
+       * <code>optional int32 departureDelaySeconds = 10;</code>
+       */
+      public Builder setDepartureDelaySeconds(int value) {
+        bitField0_ |= 0x00000200;
+        departureDelaySeconds_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 departureDelaySeconds = 10;</code>
+       */
+      public Builder clearDepartureDelaySeconds() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        departureDelaySeconds_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:TripNodeMessage)
     }
 
@@ -4607,50 +4840,50 @@ public final class Tripmodel {
      */
     au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource getTripSource();
 
-    // optional .PbActivity current_activity = 7;
+    // optional int32 dop_ref = 7;
     /**
-     * <code>optional .PbActivity current_activity = 7;</code>
-     */
-    boolean hasCurrentActivity();
-    /**
-     * <code>optional .PbActivity current_activity = 7;</code>
-     */
-    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity();
-
-    // optional .PbActivity previous_activity = 8;
-    /**
-     * <code>optional .PbActivity previous_activity = 8;</code>
-     */
-    boolean hasPreviousActivity();
-    /**
-     * <code>optional .PbActivity previous_activity = 8;</code>
-     */
-    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity();
-
-    // optional int32 dop_ref = 9;
-    /**
-     * <code>optional int32 dop_ref = 9;</code>
+     * <code>optional int32 dop_ref = 7;</code>
      */
     boolean hasDopRef();
     /**
-     * <code>optional int32 dop_ref = 9;</code>
+     * <code>optional int32 dop_ref = 7;</code>
      */
     int getDopRef();
 
-    // optional string service_id = 10;
+    // optional string service_id = 8;
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     boolean hasServiceId();
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     java.lang.String getServiceId();
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     com.google.protobuf.ByteString
         getServiceIdBytes();
+
+    // optional int32 number_of_cars = 9;
+    /**
+     * <code>optional int32 number_of_cars = 9;</code>
+     */
+    boolean hasNumberOfCars();
+    /**
+     * <code>optional int32 number_of_cars = 9;</code>
+     */
+    int getNumberOfCars();
+
+    // optional .PbConsistType consist_type = 10;
+    /**
+     * <code>optional .PbConsistType consist_type = 10;</code>
+     */
+    boolean hasConsistType();
+    /**
+     * <code>optional .PbConsistType consist_type = 10;</code>
+     */
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType();
 
     // optional int32 block_id = 11;
     /**
@@ -4662,102 +4895,167 @@ public final class Tripmodel {
      */
     int getBlockId();
 
-    // optional .PbTripType trip_type = 12;
+    // optional int32 roster_id = 12;
     /**
-     * <code>optional .PbTripType trip_type = 12;</code>
+     * <code>optional int32 roster_id = 12;</code>
      */
-    boolean hasTripType();
+    boolean hasRosterId();
     /**
-     * <code>optional .PbTripType trip_type = 12;</code>
+     * <code>optional int32 roster_id = 12;</code>
      */
-    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType();
+    int getRosterId();
 
-    // optional .PbSpeedBand speed_band = 13;
+    // optional int32 position_in_roster = 13;
     /**
-     * <code>optional .PbSpeedBand speed_band = 13;</code>
+     * <code>optional int32 position_in_roster = 13;</code>
      */
-    boolean hasSpeedBand();
+    boolean hasPositionInRoster();
     /**
-     * <code>optional .PbSpeedBand speed_band = 13;</code>
+     * <code>optional int32 position_in_roster = 13;</code>
      */
-    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand();
+    int getPositionInRoster();
 
-    // optional .PbConsistType consist_type = 14;
+    // optional .PbActivity current_activity = 14;
     /**
-     * <code>optional .PbConsistType consist_type = 14;</code>
+     * <code>optional .PbActivity current_activity = 14;</code>
      */
-    boolean hasConsistType();
+    boolean hasCurrentActivity();
     /**
-     * <code>optional .PbConsistType consist_type = 14;</code>
+     * <code>optional .PbActivity current_activity = 14;</code>
      */
-    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType();
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity();
 
-    // optional int32 number_of_cars = 15;
+    // optional .PbActivity previous_activity = 15;
     /**
-     * <code>optional int32 number_of_cars = 15;</code>
+     * <code>optional .PbActivity previous_activity = 15;</code>
      */
-    boolean hasNumberOfCars();
+    boolean hasPreviousActivity();
     /**
-     * <code>optional int32 number_of_cars = 15;</code>
+     * <code>optional .PbActivity previous_activity = 15;</code>
      */
-    int getNumberOfCars();
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity();
 
-    // optional uint64 trip_start_time = 16;
+    // optional .PbTripStereotype trip_stereotype = 16;
     /**
-     * <code>optional uint64 trip_start_time = 16;</code>
+     * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+     */
+    boolean hasTripStereotype();
+    /**
+     * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+     */
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype getTripStereotype();
+
+    // optional uint64 trip_start_time = 17;
+    /**
+     * <code>optional uint64 trip_start_time = 17;</code>
      */
     boolean hasTripStartTime();
     /**
-     * <code>optional uint64 trip_start_time = 16;</code>
+     * <code>optional uint64 trip_start_time = 17;</code>
      */
     long getTripStartTime();
 
-    // optional uint64 trip_finish_time = 17;
+    // optional uint64 trip_finish_time = 18;
     /**
-     * <code>optional uint64 trip_finish_time = 17;</code>
+     * <code>optional uint64 trip_finish_time = 18;</code>
      */
     boolean hasTripFinishTime();
     /**
-     * <code>optional uint64 trip_finish_time = 17;</code>
+     * <code>optional uint64 trip_finish_time = 18;</code>
      */
     long getTripFinishTime();
 
-    // optional string route_id = 18;
+    // optional .PbTripType trip_type = 19;
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional .PbTripType trip_type = 19;</code>
+     */
+    boolean hasTripType();
+    /**
+     * <code>optional .PbTripType trip_type = 19;</code>
+     */
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType();
+
+    // optional .PbSpeedBand speed_band = 20;
+    /**
+     * <code>optional .PbSpeedBand speed_band = 20;</code>
+     */
+    boolean hasSpeedBand();
+    /**
+     * <code>optional .PbSpeedBand speed_band = 20;</code>
+     */
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand();
+
+    // optional string route_id = 21;
+    /**
+     * <code>optional string route_id = 21;</code>
      */
     boolean hasRouteId();
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional string route_id = 21;</code>
      */
     java.lang.String getRouteId();
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional string route_id = 21;</code>
      */
     com.google.protobuf.ByteString
         getRouteIdBytes();
 
-    // repeated .TripNodeMessage trip_node_msgs = 19;
+    // optional .PbDirection tripDirection = 22;
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>optional .PbDirection tripDirection = 22;</code>
+     */
+    boolean hasTripDirection();
+    /**
+     * <code>optional .PbDirection tripDirection = 22;</code>
+     */
+    au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection getTripDirection();
+
+    // optional string atLocationNode = 23;
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    boolean hasAtLocationNode();
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    java.lang.String getAtLocationNode();
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    com.google.protobuf.ByteString
+        getAtLocationNodeBytes();
+
+    // optional uint64 atLocationTime = 24;
+    /**
+     * <code>optional uint64 atLocationTime = 24;</code>
+     */
+    boolean hasAtLocationTime();
+    /**
+     * <code>optional uint64 atLocationTime = 24;</code>
+     */
+    long getAtLocationTime();
+
+    // repeated .TripNodeMessage trip_node_msgs = 25;
+    /**
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> 
         getTripNodeMsgsList();
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage getTripNodeMsgs(int index);
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     int getTripNodeMsgsCount();
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder> 
         getTripNodeMsgsOrBuilderList();
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder getTripNodeMsgsOrBuilder(
         int index);
@@ -4850,35 +5148,29 @@ public final class Tripmodel {
               break;
             }
             case 56: {
-              int rawValue = input.readEnum();
-              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(7, rawValue);
-              } else {
-                bitField0_ |= 0x00000040;
-                currentActivity_ = value;
-              }
+              bitField0_ |= 0x00000040;
+              dopRef_ = input.readInt32();
               break;
             }
-            case 64: {
-              int rawValue = input.readEnum();
-              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(8, rawValue);
-              } else {
-                bitField0_ |= 0x00000080;
-                previousActivity_ = value;
-              }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              serviceId_ = input.readBytes();
               break;
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              dopRef_ = input.readInt32();
+              numberOfCars_ = input.readInt32();
               break;
             }
-            case 82: {
-              bitField0_ |= 0x00000200;
-              serviceId_ = input.readBytes();
+            case 80: {
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(10, rawValue);
+              } else {
+                bitField0_ |= 0x00000200;
+                consistType_ = value;
+              }
               break;
             }
             case 88: {
@@ -4887,62 +5179,110 @@ public final class Tripmodel {
               break;
             }
             case 96: {
-              int rawValue = input.readEnum();
-              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(12, rawValue);
-              } else {
-                bitField0_ |= 0x00000800;
-                tripType_ = value;
-              }
+              bitField0_ |= 0x00000800;
+              rosterId_ = input.readInt32();
               break;
             }
             case 104: {
-              int rawValue = input.readEnum();
-              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(13, rawValue);
-              } else {
-                bitField0_ |= 0x00001000;
-                speedBand_ = value;
-              }
+              bitField0_ |= 0x00001000;
+              positionInRoster_ = input.readInt32();
               break;
             }
             case 112: {
               int rawValue = input.readEnum();
-              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.valueOf(rawValue);
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(14, rawValue);
               } else {
                 bitField0_ |= 0x00002000;
-                consistType_ = value;
+                currentActivity_ = value;
               }
               break;
             }
             case 120: {
-              bitField0_ |= 0x00004000;
-              numberOfCars_ = input.readInt32();
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(15, rawValue);
+              } else {
+                bitField0_ |= 0x00004000;
+                previousActivity_ = value;
+              }
               break;
             }
             case 128: {
-              bitField0_ |= 0x00008000;
-              tripStartTime_ = input.readUInt64();
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(16, rawValue);
+              } else {
+                bitField0_ |= 0x00008000;
+                tripStereotype_ = value;
+              }
               break;
             }
             case 136: {
               bitField0_ |= 0x00010000;
+              tripStartTime_ = input.readUInt64();
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00020000;
               tripFinishTime_ = input.readUInt64();
               break;
             }
-            case 146: {
-              bitField0_ |= 0x00020000;
+            case 152: {
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(19, rawValue);
+              } else {
+                bitField0_ |= 0x00040000;
+                tripType_ = value;
+              }
+              break;
+            }
+            case 160: {
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(20, rawValue);
+              } else {
+                bitField0_ |= 0x00080000;
+                speedBand_ = value;
+              }
+              break;
+            }
+            case 170: {
+              bitField0_ |= 0x00100000;
               routeId_ = input.readBytes();
               break;
             }
-            case 154: {
-              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+            case 176: {
+              int rawValue = input.readEnum();
+              au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection value = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(22, rawValue);
+              } else {
+                bitField0_ |= 0x00200000;
+                tripDirection_ = value;
+              }
+              break;
+            }
+            case 186: {
+              bitField0_ |= 0x00400000;
+              atLocationNode_ = input.readBytes();
+              break;
+            }
+            case 192: {
+              bitField0_ |= 0x00800000;
+              atLocationTime_ = input.readUInt64();
+              break;
+            }
+            case 202: {
+              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
                 tripNodeMsgs_ = new java.util.ArrayList<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage>();
-                mutable_bitField0_ |= 0x00040000;
+                mutable_bitField0_ |= 0x01000000;
               }
               tripNodeMsgs_.add(input.readMessage(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.PARSER, extensionRegistry));
               break;
@@ -4955,7 +5295,7 @@ public final class Tripmodel {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
           tripNodeMsgs_ = java.util.Collections.unmodifiableList(tripNodeMsgs_);
         }
         this.unknownFields = unknownFields.build();
@@ -5140,65 +5480,33 @@ public final class Tripmodel {
       return tripSource_;
     }
 
-    // optional .PbActivity current_activity = 7;
-    public static final int CURRENT_ACTIVITY_FIELD_NUMBER = 7;
-    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity currentActivity_;
+    // optional int32 dop_ref = 7;
+    public static final int DOP_REF_FIELD_NUMBER = 7;
+    private int dopRef_;
     /**
-     * <code>optional .PbActivity current_activity = 7;</code>
+     * <code>optional int32 dop_ref = 7;</code>
      */
-    public boolean hasCurrentActivity() {
+    public boolean hasDopRef() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .PbActivity current_activity = 7;</code>
-     */
-    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity() {
-      return currentActivity_;
-    }
-
-    // optional .PbActivity previous_activity = 8;
-    public static final int PREVIOUS_ACTIVITY_FIELD_NUMBER = 8;
-    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity previousActivity_;
-    /**
-     * <code>optional .PbActivity previous_activity = 8;</code>
-     */
-    public boolean hasPreviousActivity() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    /**
-     * <code>optional .PbActivity previous_activity = 8;</code>
-     */
-    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity() {
-      return previousActivity_;
-    }
-
-    // optional int32 dop_ref = 9;
-    public static final int DOP_REF_FIELD_NUMBER = 9;
-    private int dopRef_;
-    /**
-     * <code>optional int32 dop_ref = 9;</code>
-     */
-    public boolean hasDopRef() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional int32 dop_ref = 9;</code>
+     * <code>optional int32 dop_ref = 7;</code>
      */
     public int getDopRef() {
       return dopRef_;
     }
 
-    // optional string service_id = 10;
-    public static final int SERVICE_ID_FIELD_NUMBER = 10;
+    // optional string service_id = 8;
+    public static final int SERVICE_ID_FIELD_NUMBER = 8;
     private java.lang.Object serviceId_;
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     public boolean hasServiceId() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     public java.lang.String getServiceId() {
       java.lang.Object ref = serviceId_;
@@ -5215,7 +5523,7 @@ public final class Tripmodel {
       }
     }
     /**
-     * <code>optional string service_id = 10;</code>
+     * <code>optional string service_id = 8;</code>
      */
     public com.google.protobuf.ByteString
         getServiceIdBytes() {
@@ -5229,6 +5537,38 @@ public final class Tripmodel {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    // optional int32 number_of_cars = 9;
+    public static final int NUMBER_OF_CARS_FIELD_NUMBER = 9;
+    private int numberOfCars_;
+    /**
+     * <code>optional int32 number_of_cars = 9;</code>
+     */
+    public boolean hasNumberOfCars() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional int32 number_of_cars = 9;</code>
+     */
+    public int getNumberOfCars() {
+      return numberOfCars_;
+    }
+
+    // optional .PbConsistType consist_type = 10;
+    public static final int CONSIST_TYPE_FIELD_NUMBER = 10;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType consistType_;
+    /**
+     * <code>optional .PbConsistType consist_type = 10;</code>
+     */
+    public boolean hasConsistType() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional .PbConsistType consist_type = 10;</code>
+     */
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType() {
+      return consistType_;
     }
 
     // optional int32 block_id = 11;
@@ -5247,113 +5587,161 @@ public final class Tripmodel {
       return blockId_;
     }
 
-    // optional .PbTripType trip_type = 12;
-    public static final int TRIP_TYPE_FIELD_NUMBER = 12;
-    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType tripType_;
+    // optional int32 roster_id = 12;
+    public static final int ROSTER_ID_FIELD_NUMBER = 12;
+    private int rosterId_;
     /**
-     * <code>optional .PbTripType trip_type = 12;</code>
+     * <code>optional int32 roster_id = 12;</code>
      */
-    public boolean hasTripType() {
+    public boolean hasRosterId() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional .PbTripType trip_type = 12;</code>
+     * <code>optional int32 roster_id = 12;</code>
      */
-    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType() {
-      return tripType_;
+    public int getRosterId() {
+      return rosterId_;
     }
 
-    // optional .PbSpeedBand speed_band = 13;
-    public static final int SPEED_BAND_FIELD_NUMBER = 13;
-    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand speedBand_;
+    // optional int32 position_in_roster = 13;
+    public static final int POSITION_IN_ROSTER_FIELD_NUMBER = 13;
+    private int positionInRoster_;
     /**
-     * <code>optional .PbSpeedBand speed_band = 13;</code>
+     * <code>optional int32 position_in_roster = 13;</code>
      */
-    public boolean hasSpeedBand() {
+    public boolean hasPositionInRoster() {
       return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
-     * <code>optional .PbSpeedBand speed_band = 13;</code>
+     * <code>optional int32 position_in_roster = 13;</code>
      */
-    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand() {
-      return speedBand_;
+    public int getPositionInRoster() {
+      return positionInRoster_;
     }
 
-    // optional .PbConsistType consist_type = 14;
-    public static final int CONSIST_TYPE_FIELD_NUMBER = 14;
-    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType consistType_;
+    // optional .PbActivity current_activity = 14;
+    public static final int CURRENT_ACTIVITY_FIELD_NUMBER = 14;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity currentActivity_;
     /**
-     * <code>optional .PbConsistType consist_type = 14;</code>
+     * <code>optional .PbActivity current_activity = 14;</code>
      */
-    public boolean hasConsistType() {
+    public boolean hasCurrentActivity() {
       return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     /**
-     * <code>optional .PbConsistType consist_type = 14;</code>
+     * <code>optional .PbActivity current_activity = 14;</code>
      */
-    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType() {
-      return consistType_;
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity() {
+      return currentActivity_;
     }
 
-    // optional int32 number_of_cars = 15;
-    public static final int NUMBER_OF_CARS_FIELD_NUMBER = 15;
-    private int numberOfCars_;
+    // optional .PbActivity previous_activity = 15;
+    public static final int PREVIOUS_ACTIVITY_FIELD_NUMBER = 15;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity previousActivity_;
     /**
-     * <code>optional int32 number_of_cars = 15;</code>
+     * <code>optional .PbActivity previous_activity = 15;</code>
      */
-    public boolean hasNumberOfCars() {
+    public boolean hasPreviousActivity() {
       return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     /**
-     * <code>optional int32 number_of_cars = 15;</code>
+     * <code>optional .PbActivity previous_activity = 15;</code>
      */
-    public int getNumberOfCars() {
-      return numberOfCars_;
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity() {
+      return previousActivity_;
     }
 
-    // optional uint64 trip_start_time = 16;
-    public static final int TRIP_START_TIME_FIELD_NUMBER = 16;
-    private long tripStartTime_;
+    // optional .PbTripStereotype trip_stereotype = 16;
+    public static final int TRIP_STEREOTYPE_FIELD_NUMBER = 16;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype tripStereotype_;
     /**
-     * <code>optional uint64 trip_start_time = 16;</code>
+     * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
      */
-    public boolean hasTripStartTime() {
+    public boolean hasTripStereotype() {
       return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     /**
-     * <code>optional uint64 trip_start_time = 16;</code>
+     * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+     */
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype getTripStereotype() {
+      return tripStereotype_;
+    }
+
+    // optional uint64 trip_start_time = 17;
+    public static final int TRIP_START_TIME_FIELD_NUMBER = 17;
+    private long tripStartTime_;
+    /**
+     * <code>optional uint64 trip_start_time = 17;</code>
+     */
+    public boolean hasTripStartTime() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    /**
+     * <code>optional uint64 trip_start_time = 17;</code>
      */
     public long getTripStartTime() {
       return tripStartTime_;
     }
 
-    // optional uint64 trip_finish_time = 17;
-    public static final int TRIP_FINISH_TIME_FIELD_NUMBER = 17;
+    // optional uint64 trip_finish_time = 18;
+    public static final int TRIP_FINISH_TIME_FIELD_NUMBER = 18;
     private long tripFinishTime_;
     /**
-     * <code>optional uint64 trip_finish_time = 17;</code>
+     * <code>optional uint64 trip_finish_time = 18;</code>
      */
     public boolean hasTripFinishTime() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     /**
-     * <code>optional uint64 trip_finish_time = 17;</code>
+     * <code>optional uint64 trip_finish_time = 18;</code>
      */
     public long getTripFinishTime() {
       return tripFinishTime_;
     }
 
-    // optional string route_id = 18;
-    public static final int ROUTE_ID_FIELD_NUMBER = 18;
-    private java.lang.Object routeId_;
+    // optional .PbTripType trip_type = 19;
+    public static final int TRIP_TYPE_FIELD_NUMBER = 19;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType tripType_;
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional .PbTripType trip_type = 19;</code>
      */
-    public boolean hasRouteId() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+    public boolean hasTripType() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional .PbTripType trip_type = 19;</code>
+     */
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType() {
+      return tripType_;
+    }
+
+    // optional .PbSpeedBand speed_band = 20;
+    public static final int SPEED_BAND_FIELD_NUMBER = 20;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand speedBand_;
+    /**
+     * <code>optional .PbSpeedBand speed_band = 20;</code>
+     */
+    public boolean hasSpeedBand() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional .PbSpeedBand speed_band = 20;</code>
+     */
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand() {
+      return speedBand_;
+    }
+
+    // optional string route_id = 21;
+    public static final int ROUTE_ID_FIELD_NUMBER = 21;
+    private java.lang.Object routeId_;
+    /**
+     * <code>optional string route_id = 21;</code>
+     */
+    public boolean hasRouteId() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    /**
+     * <code>optional string route_id = 21;</code>
      */
     public java.lang.String getRouteId() {
       java.lang.Object ref = routeId_;
@@ -5370,7 +5758,7 @@ public final class Tripmodel {
       }
     }
     /**
-     * <code>optional string route_id = 18;</code>
+     * <code>optional string route_id = 21;</code>
      */
     public com.google.protobuf.ByteString
         getRouteIdBytes() {
@@ -5386,36 +5774,111 @@ public final class Tripmodel {
       }
     }
 
-    // repeated .TripNodeMessage trip_node_msgs = 19;
-    public static final int TRIP_NODE_MSGS_FIELD_NUMBER = 19;
+    // optional .PbDirection tripDirection = 22;
+    public static final int TRIPDIRECTION_FIELD_NUMBER = 22;
+    private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection tripDirection_;
+    /**
+     * <code>optional .PbDirection tripDirection = 22;</code>
+     */
+    public boolean hasTripDirection() {
+      return ((bitField0_ & 0x00200000) == 0x00200000);
+    }
+    /**
+     * <code>optional .PbDirection tripDirection = 22;</code>
+     */
+    public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection getTripDirection() {
+      return tripDirection_;
+    }
+
+    // optional string atLocationNode = 23;
+    public static final int ATLOCATIONNODE_FIELD_NUMBER = 23;
+    private java.lang.Object atLocationNode_;
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    public boolean hasAtLocationNode() {
+      return ((bitField0_ & 0x00400000) == 0x00400000);
+    }
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    public java.lang.String getAtLocationNode() {
+      java.lang.Object ref = atLocationNode_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          atLocationNode_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string atLocationNode = 23;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAtLocationNodeBytes() {
+      java.lang.Object ref = atLocationNode_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        atLocationNode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional uint64 atLocationTime = 24;
+    public static final int ATLOCATIONTIME_FIELD_NUMBER = 24;
+    private long atLocationTime_;
+    /**
+     * <code>optional uint64 atLocationTime = 24;</code>
+     */
+    public boolean hasAtLocationTime() {
+      return ((bitField0_ & 0x00800000) == 0x00800000);
+    }
+    /**
+     * <code>optional uint64 atLocationTime = 24;</code>
+     */
+    public long getAtLocationTime() {
+      return atLocationTime_;
+    }
+
+    // repeated .TripNodeMessage trip_node_msgs = 25;
+    public static final int TRIP_NODE_MSGS_FIELD_NUMBER = 25;
     private java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> tripNodeMsgs_;
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> getTripNodeMsgsList() {
       return tripNodeMsgs_;
     }
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     public java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder> 
         getTripNodeMsgsOrBuilderList() {
       return tripNodeMsgs_;
     }
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     public int getTripNodeMsgsCount() {
       return tripNodeMsgs_.size();
     }
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage getTripNodeMsgs(int index) {
       return tripNodeMsgs_.get(index);
     }
     /**
-     * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+     * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
      */
     public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder getTripNodeMsgsOrBuilder(
         int index) {
@@ -5429,18 +5892,24 @@ public final class Tripmodel {
       tripName_ = "";
       tpsTripHeaderId_ = 0;
       tripSource_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource.TC_UNKNOWN;
-      currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-      previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
       dopRef_ = 0;
       serviceId_ = "";
-      blockId_ = 0;
-      tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
-      speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
-      consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
       numberOfCars_ = 0;
+      consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
+      blockId_ = 0;
+      rosterId_ = 0;
+      positionInRoster_ = 0;
+      currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
+      previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
+      tripStereotype_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype.TY_STATIC;
       tripStartTime_ = 0L;
       tripFinishTime_ = 0L;
+      tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+      speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
       routeId_ = "";
+      tripDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
+      atLocationNode_ = "";
+      atLocationTime_ = 0L;
       tripNodeMsgs_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -5492,43 +5961,61 @@ public final class Tripmodel {
         output.writeEnum(6, tripSource_.getNumber());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeEnum(7, currentActivity_.getNumber());
+        output.writeInt32(7, dopRef_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeEnum(8, previousActivity_.getNumber());
+        output.writeBytes(8, getServiceIdBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, dopRef_);
+        output.writeInt32(9, numberOfCars_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(10, getServiceIdBytes());
+        output.writeEnum(10, consistType_.getNumber());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(11, blockId_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeEnum(12, tripType_.getNumber());
+        output.writeInt32(12, rosterId_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeEnum(13, speedBand_.getNumber());
+        output.writeInt32(13, positionInRoster_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeEnum(14, consistType_.getNumber());
+        output.writeEnum(14, currentActivity_.getNumber());
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeInt32(15, numberOfCars_);
+        output.writeEnum(15, previousActivity_.getNumber());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeUInt64(16, tripStartTime_);
+        output.writeEnum(16, tripStereotype_.getNumber());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeUInt64(17, tripFinishTime_);
+        output.writeUInt64(17, tripStartTime_);
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeBytes(18, getRouteIdBytes());
+        output.writeUInt64(18, tripFinishTime_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeEnum(19, tripType_.getNumber());
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeEnum(20, speedBand_.getNumber());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeBytes(21, getRouteIdBytes());
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        output.writeEnum(22, tripDirection_.getNumber());
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        output.writeBytes(23, getAtLocationNodeBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        output.writeUInt64(24, atLocationTime_);
       }
       for (int i = 0; i < tripNodeMsgs_.size(); i++) {
-        output.writeMessage(19, tripNodeMsgs_.get(i));
+        output.writeMessage(25, tripNodeMsgs_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -5565,19 +6052,19 @@ public final class Tripmodel {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, currentActivity_.getNumber());
+          .computeInt32Size(7, dopRef_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, previousActivity_.getNumber());
+          .computeBytesSize(8, getServiceIdBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, dopRef_);
+          .computeInt32Size(9, numberOfCars_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, getServiceIdBytes());
+          .computeEnumSize(10, consistType_.getNumber());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
@@ -5585,35 +6072,59 @@ public final class Tripmodel {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(12, tripType_.getNumber());
+          .computeInt32Size(12, rosterId_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(13, speedBand_.getNumber());
+          .computeInt32Size(13, positionInRoster_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(14, consistType_.getNumber());
+          .computeEnumSize(14, currentActivity_.getNumber());
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(15, numberOfCars_);
+          .computeEnumSize(15, previousActivity_.getNumber());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(16, tripStartTime_);
+          .computeEnumSize(16, tripStereotype_.getNumber());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(17, tripFinishTime_);
+          .computeUInt64Size(17, tripStartTime_);
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(18, getRouteIdBytes());
+          .computeUInt64Size(18, tripFinishTime_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(19, tripType_.getNumber());
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(20, speedBand_.getNumber());
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(21, getRouteIdBytes());
+      }
+      if (((bitField0_ & 0x00200000) == 0x00200000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(22, tripDirection_.getNumber());
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(23, getAtLocationNodeBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(24, atLocationTime_);
       }
       for (int i = 0; i < tripNodeMsgs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(19, tripNodeMsgs_.get(i));
+          .computeMessageSize(25, tripNodeMsgs_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5744,33 +6255,45 @@ public final class Tripmodel {
         bitField0_ = (bitField0_ & ~0x00000010);
         tripSource_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource.TC_UNKNOWN;
         bitField0_ = (bitField0_ & ~0x00000020);
-        currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-        bitField0_ = (bitField0_ & ~0x00000080);
         dopRef_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         serviceId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        numberOfCars_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
         bitField0_ = (bitField0_ & ~0x00000200);
         blockId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+        rosterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+        positionInRoster_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
-        consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
+        currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
         bitField0_ = (bitField0_ & ~0x00002000);
-        numberOfCars_ = 0;
+        previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
         bitField0_ = (bitField0_ & ~0x00004000);
-        tripStartTime_ = 0L;
+        tripStereotype_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype.TY_STATIC;
         bitField0_ = (bitField0_ & ~0x00008000);
-        tripFinishTime_ = 0L;
+        tripStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00010000);
-        routeId_ = "";
+        tripFinishTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00020000);
+        tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+        bitField0_ = (bitField0_ & ~0x00080000);
+        routeId_ = "";
+        bitField0_ = (bitField0_ & ~0x00100000);
+        tripDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
+        bitField0_ = (bitField0_ & ~0x00200000);
+        atLocationNode_ = "";
+        bitField0_ = (bitField0_ & ~0x00400000);
+        atLocationTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00800000);
         if (tripNodeMsgsBuilder_ == null) {
           tripNodeMsgs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x01000000);
         } else {
           tripNodeMsgsBuilder_.clear();
         }
@@ -5829,19 +6352,19 @@ public final class Tripmodel {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.currentActivity_ = currentActivity_;
+        result.dopRef_ = dopRef_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.previousActivity_ = previousActivity_;
+        result.serviceId_ = serviceId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.dopRef_ = dopRef_;
+        result.numberOfCars_ = numberOfCars_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.serviceId_ = serviceId_;
+        result.consistType_ = consistType_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
@@ -5849,35 +6372,59 @@ public final class Tripmodel {
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.tripType_ = tripType_;
+        result.rosterId_ = rosterId_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.speedBand_ = speedBand_;
+        result.positionInRoster_ = positionInRoster_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.consistType_ = consistType_;
+        result.currentActivity_ = currentActivity_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.numberOfCars_ = numberOfCars_;
+        result.previousActivity_ = previousActivity_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.tripStartTime_ = tripStartTime_;
+        result.tripStereotype_ = tripStereotype_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.tripFinishTime_ = tripFinishTime_;
+        result.tripStartTime_ = tripStartTime_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00020000;
         }
+        result.tripFinishTime_ = tripFinishTime_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.tripType_ = tripType_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.speedBand_ = speedBand_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00100000;
+        }
         result.routeId_ = routeId_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00200000;
+        }
+        result.tripDirection_ = tripDirection_;
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00400000;
+        }
+        result.atLocationNode_ = atLocationNode_;
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00800000;
+        }
+        result.atLocationTime_ = atLocationTime_;
         if (tripNodeMsgsBuilder_ == null) {
-          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+          if (((bitField0_ & 0x01000000) == 0x01000000)) {
             tripNodeMsgs_ = java.util.Collections.unmodifiableList(tripNodeMsgs_);
-            bitField0_ = (bitField0_ & ~0x00040000);
+            bitField0_ = (bitField0_ & ~0x01000000);
           }
           result.tripNodeMsgs_ = tripNodeMsgs_;
         } else {
@@ -5921,34 +6468,37 @@ public final class Tripmodel {
         if (other.hasTripSource()) {
           setTripSource(other.getTripSource());
         }
+        if (other.hasDopRef()) {
+          setDopRef(other.getDopRef());
+        }
+        if (other.hasServiceId()) {
+          bitField0_ |= 0x00000080;
+          serviceId_ = other.serviceId_;
+          onChanged();
+        }
+        if (other.hasNumberOfCars()) {
+          setNumberOfCars(other.getNumberOfCars());
+        }
+        if (other.hasConsistType()) {
+          setConsistType(other.getConsistType());
+        }
+        if (other.hasBlockId()) {
+          setBlockId(other.getBlockId());
+        }
+        if (other.hasRosterId()) {
+          setRosterId(other.getRosterId());
+        }
+        if (other.hasPositionInRoster()) {
+          setPositionInRoster(other.getPositionInRoster());
+        }
         if (other.hasCurrentActivity()) {
           setCurrentActivity(other.getCurrentActivity());
         }
         if (other.hasPreviousActivity()) {
           setPreviousActivity(other.getPreviousActivity());
         }
-        if (other.hasDopRef()) {
-          setDopRef(other.getDopRef());
-        }
-        if (other.hasServiceId()) {
-          bitField0_ |= 0x00000200;
-          serviceId_ = other.serviceId_;
-          onChanged();
-        }
-        if (other.hasBlockId()) {
-          setBlockId(other.getBlockId());
-        }
-        if (other.hasTripType()) {
-          setTripType(other.getTripType());
-        }
-        if (other.hasSpeedBand()) {
-          setSpeedBand(other.getSpeedBand());
-        }
-        if (other.hasConsistType()) {
-          setConsistType(other.getConsistType());
-        }
-        if (other.hasNumberOfCars()) {
-          setNumberOfCars(other.getNumberOfCars());
+        if (other.hasTripStereotype()) {
+          setTripStereotype(other.getTripStereotype());
         }
         if (other.hasTripStartTime()) {
           setTripStartTime(other.getTripStartTime());
@@ -5956,16 +6506,33 @@ public final class Tripmodel {
         if (other.hasTripFinishTime()) {
           setTripFinishTime(other.getTripFinishTime());
         }
+        if (other.hasTripType()) {
+          setTripType(other.getTripType());
+        }
+        if (other.hasSpeedBand()) {
+          setSpeedBand(other.getSpeedBand());
+        }
         if (other.hasRouteId()) {
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00100000;
           routeId_ = other.routeId_;
           onChanged();
+        }
+        if (other.hasTripDirection()) {
+          setTripDirection(other.getTripDirection());
+        }
+        if (other.hasAtLocationNode()) {
+          bitField0_ |= 0x00400000;
+          atLocationNode_ = other.atLocationNode_;
+          onChanged();
+        }
+        if (other.hasAtLocationTime()) {
+          setAtLocationTime(other.getAtLocationTime());
         }
         if (tripNodeMsgsBuilder_ == null) {
           if (!other.tripNodeMsgs_.isEmpty()) {
             if (tripNodeMsgs_.isEmpty()) {
               tripNodeMsgs_ = other.tripNodeMsgs_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x01000000);
             } else {
               ensureTripNodeMsgsIsMutable();
               tripNodeMsgs_.addAll(other.tripNodeMsgs_);
@@ -5978,7 +6545,7 @@ public final class Tripmodel {
               tripNodeMsgsBuilder_.dispose();
               tripNodeMsgsBuilder_ = null;
               tripNodeMsgs_ = other.tripNodeMsgs_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x01000000);
               tripNodeMsgsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTripNodeMsgsFieldBuilder() : null;
@@ -6315,121 +6882,49 @@ public final class Tripmodel {
         return this;
       }
 
-      // optional .PbActivity current_activity = 7;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
+      // optional int32 dop_ref = 7;
+      private int dopRef_ ;
       /**
-       * <code>optional .PbActivity current_activity = 7;</code>
+       * <code>optional int32 dop_ref = 7;</code>
        */
-      public boolean hasCurrentActivity() {
+      public boolean hasDopRef() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .PbActivity current_activity = 7;</code>
-       */
-      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity() {
-        return currentActivity_;
-      }
-      /**
-       * <code>optional .PbActivity current_activity = 7;</code>
-       */
-      public Builder setCurrentActivity(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000040;
-        currentActivity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .PbActivity current_activity = 7;</code>
-       */
-      public Builder clearCurrentActivity() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-        onChanged();
-        return this;
-      }
-
-      // optional .PbActivity previous_activity = 8;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-      /**
-       * <code>optional .PbActivity previous_activity = 8;</code>
-       */
-      public boolean hasPreviousActivity() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <code>optional .PbActivity previous_activity = 8;</code>
-       */
-      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity() {
-        return previousActivity_;
-      }
-      /**
-       * <code>optional .PbActivity previous_activity = 8;</code>
-       */
-      public Builder setPreviousActivity(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000080;
-        previousActivity_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .PbActivity previous_activity = 8;</code>
-       */
-      public Builder clearPreviousActivity() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 dop_ref = 9;
-      private int dopRef_ ;
-      /**
-       * <code>optional int32 dop_ref = 9;</code>
-       */
-      public boolean hasDopRef() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional int32 dop_ref = 9;</code>
+       * <code>optional int32 dop_ref = 7;</code>
        */
       public int getDopRef() {
         return dopRef_;
       }
       /**
-       * <code>optional int32 dop_ref = 9;</code>
+       * <code>optional int32 dop_ref = 7;</code>
        */
       public Builder setDopRef(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         dopRef_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 dop_ref = 9;</code>
+       * <code>optional int32 dop_ref = 7;</code>
        */
       public Builder clearDopRef() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         dopRef_ = 0;
         onChanged();
         return this;
       }
 
-      // optional string service_id = 10;
+      // optional string service_id = 8;
       private java.lang.Object serviceId_ = "";
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public boolean hasServiceId() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public java.lang.String getServiceId() {
         java.lang.Object ref = serviceId_;
@@ -6443,7 +6938,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public com.google.protobuf.ByteString
           getServiceIdBytes() {
@@ -6459,37 +6954,106 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public Builder setServiceId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000080;
         serviceId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public Builder clearServiceId() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         serviceId_ = getDefaultInstance().getServiceId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string service_id = 10;</code>
+       * <code>optional string service_id = 8;</code>
        */
       public Builder setServiceIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000080;
         serviceId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 number_of_cars = 9;
+      private int numberOfCars_ ;
+      /**
+       * <code>optional int32 number_of_cars = 9;</code>
+       */
+      public boolean hasNumberOfCars() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional int32 number_of_cars = 9;</code>
+       */
+      public int getNumberOfCars() {
+        return numberOfCars_;
+      }
+      /**
+       * <code>optional int32 number_of_cars = 9;</code>
+       */
+      public Builder setNumberOfCars(int value) {
+        bitField0_ |= 0x00000100;
+        numberOfCars_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 number_of_cars = 9;</code>
+       */
+      public Builder clearNumberOfCars() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        numberOfCars_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional .PbConsistType consist_type = 10;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
+      /**
+       * <code>optional .PbConsistType consist_type = 10;</code>
+       */
+      public boolean hasConsistType() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional .PbConsistType consist_type = 10;</code>
+       */
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType() {
+        return consistType_;
+      }
+      /**
+       * <code>optional .PbConsistType consist_type = 10;</code>
+       */
+      public Builder setConsistType(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000200;
+        consistType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .PbConsistType consist_type = 10;</code>
+       */
+      public Builder clearConsistType() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
         onChanged();
         return this;
       }
@@ -6527,223 +7091,328 @@ public final class Tripmodel {
         return this;
       }
 
-      // optional .PbTripType trip_type = 12;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+      // optional int32 roster_id = 12;
+      private int rosterId_ ;
       /**
-       * <code>optional .PbTripType trip_type = 12;</code>
+       * <code>optional int32 roster_id = 12;</code>
        */
-      public boolean hasTripType() {
+      public boolean hasRosterId() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional .PbTripType trip_type = 12;</code>
+       * <code>optional int32 roster_id = 12;</code>
        */
-      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType() {
-        return tripType_;
+      public int getRosterId() {
+        return rosterId_;
       }
       /**
-       * <code>optional .PbTripType trip_type = 12;</code>
+       * <code>optional int32 roster_id = 12;</code>
        */
-      public Builder setTripType(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+      public Builder setRosterId(int value) {
         bitField0_ |= 0x00000800;
-        tripType_ = value;
+        rosterId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .PbTripType trip_type = 12;</code>
+       * <code>optional int32 roster_id = 12;</code>
        */
-      public Builder clearTripType() {
+      public Builder clearRosterId() {
         bitField0_ = (bitField0_ & ~0x00000800);
-        tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+        rosterId_ = 0;
         onChanged();
         return this;
       }
 
-      // optional .PbSpeedBand speed_band = 13;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+      // optional int32 position_in_roster = 13;
+      private int positionInRoster_ ;
       /**
-       * <code>optional .PbSpeedBand speed_band = 13;</code>
+       * <code>optional int32 position_in_roster = 13;</code>
        */
-      public boolean hasSpeedBand() {
+      public boolean hasPositionInRoster() {
         return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional .PbSpeedBand speed_band = 13;</code>
+       * <code>optional int32 position_in_roster = 13;</code>
        */
-      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand() {
-        return speedBand_;
+      public int getPositionInRoster() {
+        return positionInRoster_;
       }
       /**
-       * <code>optional .PbSpeedBand speed_band = 13;</code>
+       * <code>optional int32 position_in_roster = 13;</code>
        */
-      public Builder setSpeedBand(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
+      public Builder setPositionInRoster(int value) {
         bitField0_ |= 0x00001000;
-        speedBand_ = value;
+        positionInRoster_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .PbSpeedBand speed_band = 13;</code>
+       * <code>optional int32 position_in_roster = 13;</code>
        */
-      public Builder clearSpeedBand() {
+      public Builder clearPositionInRoster() {
         bitField0_ = (bitField0_ & ~0x00001000);
-        speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+        positionInRoster_ = 0;
         onChanged();
         return this;
       }
 
-      // optional .PbConsistType consist_type = 14;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
+      // optional .PbActivity current_activity = 14;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
       /**
-       * <code>optional .PbConsistType consist_type = 14;</code>
+       * <code>optional .PbActivity current_activity = 14;</code>
        */
-      public boolean hasConsistType() {
+      public boolean hasCurrentActivity() {
         return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       /**
-       * <code>optional .PbConsistType consist_type = 14;</code>
+       * <code>optional .PbActivity current_activity = 14;</code>
        */
-      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType getConsistType() {
-        return consistType_;
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getCurrentActivity() {
+        return currentActivity_;
       }
       /**
-       * <code>optional .PbConsistType consist_type = 14;</code>
+       * <code>optional .PbActivity current_activity = 14;</code>
        */
-      public Builder setConsistType(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType value) {
+      public Builder setCurrentActivity(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00002000;
-        consistType_ = value;
+        currentActivity_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .PbConsistType consist_type = 14;</code>
+       * <code>optional .PbActivity current_activity = 14;</code>
        */
-      public Builder clearConsistType() {
+      public Builder clearCurrentActivity() {
         bitField0_ = (bitField0_ & ~0x00002000);
-        consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
+        currentActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
         onChanged();
         return this;
       }
 
-      // optional int32 number_of_cars = 15;
-      private int numberOfCars_ ;
+      // optional .PbActivity previous_activity = 15;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
       /**
-       * <code>optional int32 number_of_cars = 15;</code>
+       * <code>optional .PbActivity previous_activity = 15;</code>
        */
-      public boolean hasNumberOfCars() {
+      public boolean hasPreviousActivity() {
         return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       /**
-       * <code>optional int32 number_of_cars = 15;</code>
+       * <code>optional .PbActivity previous_activity = 15;</code>
        */
-      public int getNumberOfCars() {
-        return numberOfCars_;
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity getPreviousActivity() {
+        return previousActivity_;
       }
       /**
-       * <code>optional int32 number_of_cars = 15;</code>
+       * <code>optional .PbActivity previous_activity = 15;</code>
        */
-      public Builder setNumberOfCars(int value) {
+      public Builder setPreviousActivity(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         bitField0_ |= 0x00004000;
-        numberOfCars_ = value;
+        previousActivity_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 number_of_cars = 15;</code>
+       * <code>optional .PbActivity previous_activity = 15;</code>
        */
-      public Builder clearNumberOfCars() {
+      public Builder clearPreviousActivity() {
         bitField0_ = (bitField0_ & ~0x00004000);
-        numberOfCars_ = 0;
+        previousActivity_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity.AC_NONE;
         onChanged();
         return this;
       }
 
-      // optional uint64 trip_start_time = 16;
-      private long tripStartTime_ ;
+      // optional .PbTripStereotype trip_stereotype = 16;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype tripStereotype_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype.TY_STATIC;
       /**
-       * <code>optional uint64 trip_start_time = 16;</code>
+       * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
        */
-      public boolean hasTripStartTime() {
+      public boolean hasTripStereotype() {
         return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       /**
-       * <code>optional uint64 trip_start_time = 16;</code>
+       * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+       */
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype getTripStereotype() {
+        return tripStereotype_;
+      }
+      /**
+       * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+       */
+      public Builder setTripStereotype(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00008000;
+        tripStereotype_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .PbTripStereotype trip_stereotype = 16;</code>
+       */
+      public Builder clearTripStereotype() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        tripStereotype_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripStereotype.TY_STATIC;
+        onChanged();
+        return this;
+      }
+
+      // optional uint64 trip_start_time = 17;
+      private long tripStartTime_ ;
+      /**
+       * <code>optional uint64 trip_start_time = 17;</code>
+       */
+      public boolean hasTripStartTime() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      /**
+       * <code>optional uint64 trip_start_time = 17;</code>
        */
       public long getTripStartTime() {
         return tripStartTime_;
       }
       /**
-       * <code>optional uint64 trip_start_time = 16;</code>
+       * <code>optional uint64 trip_start_time = 17;</code>
        */
       public Builder setTripStartTime(long value) {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00010000;
         tripStartTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint64 trip_start_time = 16;</code>
+       * <code>optional uint64 trip_start_time = 17;</code>
        */
       public Builder clearTripStartTime() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         tripStartTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional uint64 trip_finish_time = 17;
+      // optional uint64 trip_finish_time = 18;
       private long tripFinishTime_ ;
       /**
-       * <code>optional uint64 trip_finish_time = 17;</code>
+       * <code>optional uint64 trip_finish_time = 18;</code>
        */
       public boolean hasTripFinishTime() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       /**
-       * <code>optional uint64 trip_finish_time = 17;</code>
+       * <code>optional uint64 trip_finish_time = 18;</code>
        */
       public long getTripFinishTime() {
         return tripFinishTime_;
       }
       /**
-       * <code>optional uint64 trip_finish_time = 17;</code>
+       * <code>optional uint64 trip_finish_time = 18;</code>
        */
       public Builder setTripFinishTime(long value) {
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00020000;
         tripFinishTime_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint64 trip_finish_time = 17;</code>
+       * <code>optional uint64 trip_finish_time = 18;</code>
        */
       public Builder clearTripFinishTime() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         tripFinishTime_ = 0L;
         onChanged();
         return this;
       }
 
-      // optional string route_id = 18;
-      private java.lang.Object routeId_ = "";
+      // optional .PbTripType trip_type = 19;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional .PbTripType trip_type = 19;</code>
        */
-      public boolean hasRouteId() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+      public boolean hasTripType() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional .PbTripType trip_type = 19;</code>
+       */
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType getTripType() {
+        return tripType_;
+      }
+      /**
+       * <code>optional .PbTripType trip_type = 19;</code>
+       */
+      public Builder setTripType(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00040000;
+        tripType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .PbTripType trip_type = 19;</code>
+       */
+      public Builder clearTripType() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        tripType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripType.TT_EXPRESSPASSENGERTRAIN;
+        onChanged();
+        return this;
+      }
+
+      // optional .PbSpeedBand speed_band = 20;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+      /**
+       * <code>optional .PbSpeedBand speed_band = 20;</code>
+       */
+      public boolean hasSpeedBand() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional .PbSpeedBand speed_band = 20;</code>
+       */
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand getSpeedBand() {
+        return speedBand_;
+      }
+      /**
+       * <code>optional .PbSpeedBand speed_band = 20;</code>
+       */
+      public Builder setSpeedBand(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00080000;
+        speedBand_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .PbSpeedBand speed_band = 20;</code>
+       */
+      public Builder clearSpeedBand() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
+        onChanged();
+        return this;
+      }
+
+      // optional string route_id = 21;
+      private java.lang.Object routeId_ = "";
+      /**
+       * <code>optional string route_id = 21;</code>
+       */
+      public boolean hasRouteId() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional string route_id = 21;</code>
        */
       public java.lang.String getRouteId() {
         java.lang.Object ref = routeId_;
@@ -6757,7 +7426,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional string route_id = 21;</code>
        */
       public com.google.protobuf.ByteString
           getRouteIdBytes() {
@@ -6773,48 +7442,191 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional string route_id = 21;</code>
        */
       public Builder setRouteId(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00020000;
+  bitField0_ |= 0x00100000;
         routeId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional string route_id = 21;</code>
        */
       public Builder clearRouteId() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         routeId_ = getDefaultInstance().getRouteId();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string route_id = 18;</code>
+       * <code>optional string route_id = 21;</code>
        */
       public Builder setRouteIdBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00020000;
+  bitField0_ |= 0x00100000;
         routeId_ = value;
         onChanged();
         return this;
       }
 
-      // repeated .TripNodeMessage trip_node_msgs = 19;
+      // optional .PbDirection tripDirection = 22;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection tripDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
+      /**
+       * <code>optional .PbDirection tripDirection = 22;</code>
+       */
+      public boolean hasTripDirection() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional .PbDirection tripDirection = 22;</code>
+       */
+      public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection getTripDirection() {
+        return tripDirection_;
+      }
+      /**
+       * <code>optional .PbDirection tripDirection = 22;</code>
+       */
+      public Builder setTripDirection(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00200000;
+        tripDirection_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .PbDirection tripDirection = 22;</code>
+       */
+      public Builder clearTripDirection() {
+        bitField0_ = (bitField0_ & ~0x00200000);
+        tripDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
+        onChanged();
+        return this;
+      }
+
+      // optional string atLocationNode = 23;
+      private java.lang.Object atLocationNode_ = "";
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public boolean hasAtLocationNode() {
+        return ((bitField0_ & 0x00400000) == 0x00400000);
+      }
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public java.lang.String getAtLocationNode() {
+        java.lang.Object ref = atLocationNode_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          atLocationNode_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAtLocationNodeBytes() {
+        java.lang.Object ref = atLocationNode_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          atLocationNode_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public Builder setAtLocationNode(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00400000;
+        atLocationNode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public Builder clearAtLocationNode() {
+        bitField0_ = (bitField0_ & ~0x00400000);
+        atLocationNode_ = getDefaultInstance().getAtLocationNode();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string atLocationNode = 23;</code>
+       */
+      public Builder setAtLocationNodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00400000;
+        atLocationNode_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional uint64 atLocationTime = 24;
+      private long atLocationTime_ ;
+      /**
+       * <code>optional uint64 atLocationTime = 24;</code>
+       */
+      public boolean hasAtLocationTime() {
+        return ((bitField0_ & 0x00800000) == 0x00800000);
+      }
+      /**
+       * <code>optional uint64 atLocationTime = 24;</code>
+       */
+      public long getAtLocationTime() {
+        return atLocationTime_;
+      }
+      /**
+       * <code>optional uint64 atLocationTime = 24;</code>
+       */
+      public Builder setAtLocationTime(long value) {
+        bitField0_ |= 0x00800000;
+        atLocationTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint64 atLocationTime = 24;</code>
+       */
+      public Builder clearAtLocationTime() {
+        bitField0_ = (bitField0_ & ~0x00800000);
+        atLocationTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      // repeated .TripNodeMessage trip_node_msgs = 25;
       private java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> tripNodeMsgs_ =
         java.util.Collections.emptyList();
       private void ensureTripNodeMsgsIsMutable() {
-        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
           tripNodeMsgs_ = new java.util.ArrayList<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage>(tripNodeMsgs_);
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x01000000;
          }
       }
 
@@ -6822,7 +7634,7 @@ public final class Tripmodel {
           au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder> tripNodeMsgsBuilder_;
 
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> getTripNodeMsgsList() {
         if (tripNodeMsgsBuilder_ == null) {
@@ -6832,7 +7644,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public int getTripNodeMsgsCount() {
         if (tripNodeMsgsBuilder_ == null) {
@@ -6842,7 +7654,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage getTripNodeMsgs(int index) {
         if (tripNodeMsgsBuilder_ == null) {
@@ -6852,7 +7664,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder setTripNodeMsgs(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage value) {
@@ -6869,7 +7681,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder setTripNodeMsgs(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder builderForValue) {
@@ -6883,7 +7695,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder addTripNodeMsgs(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage value) {
         if (tripNodeMsgsBuilder_ == null) {
@@ -6899,7 +7711,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder addTripNodeMsgs(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage value) {
@@ -6916,7 +7728,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder addTripNodeMsgs(
           au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder builderForValue) {
@@ -6930,7 +7742,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder addTripNodeMsgs(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder builderForValue) {
@@ -6944,7 +7756,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder addAllTripNodeMsgs(
           java.lang.Iterable<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage> values) {
@@ -6958,12 +7770,12 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder clearTripNodeMsgs() {
         if (tripNodeMsgsBuilder_ == null) {
           tripNodeMsgs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x01000000);
           onChanged();
         } else {
           tripNodeMsgsBuilder_.clear();
@@ -6971,7 +7783,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public Builder removeTripNodeMsgs(int index) {
         if (tripNodeMsgsBuilder_ == null) {
@@ -6984,14 +7796,14 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder getTripNodeMsgsBuilder(
           int index) {
         return getTripNodeMsgsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder getTripNodeMsgsOrBuilder(
           int index) {
@@ -7001,7 +7813,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder> 
            getTripNodeMsgsOrBuilderList() {
@@ -7012,14 +7824,14 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder addTripNodeMsgsBuilder() {
         return getTripNodeMsgsFieldBuilder().addBuilder(
             au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.getDefaultInstance());
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder addTripNodeMsgsBuilder(
           int index) {
@@ -7027,7 +7839,7 @@ public final class Tripmodel {
             index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.getDefaultInstance());
       }
       /**
-       * <code>repeated .TripNodeMessage trip_node_msgs = 19;</code>
+       * <code>repeated .TripNodeMessage trip_node_msgs = 25;</code>
        */
       public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder> 
            getTripNodeMsgsBuilderList() {
@@ -7040,7 +7852,7 @@ public final class Tripmodel {
           tripNodeMsgsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage.Builder, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessageOrBuilder>(
                   tripNodeMsgs_,
-                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  ((bitField0_ & 0x01000000) == 0x01000000),
                   getParentForChildren(),
                   isClean());
           tripNodeMsgs_ = null;
@@ -9372,27 +10184,47 @@ public final class Tripmodel {
      */
     int getBlockId();
 
-    // repeated .TimetableTripNodeMessage trip_nodes = 19;
+    // optional int32 rosterId = 19;
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>optional int32 rosterId = 19;</code>
+     */
+    boolean hasRosterId();
+    /**
+     * <code>optional int32 rosterId = 19;</code>
+     */
+    int getRosterId();
+
+    // optional int32 positionInRoster = 20;
+    /**
+     * <code>optional int32 positionInRoster = 20;</code>
+     */
+    boolean hasPositionInRoster();
+    /**
+     * <code>optional int32 positionInRoster = 20;</code>
+     */
+    int getPositionInRoster();
+
+    // repeated .TimetableTripNodeMessage trip_nodes = 21;
+    /**
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> 
         getTripNodesList();
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage getTripNodes(int index);
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     int getTripNodesCount();
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder> 
         getTripNodesOrBuilderList();
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder getTripNodesOrBuilder(
         int index);
@@ -9562,10 +10394,20 @@ public final class Tripmodel {
               blockId_ = input.readInt32();
               break;
             }
-            case 154: {
-              if (!((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+            case 152: {
+              bitField0_ |= 0x00040000;
+              rosterId_ = input.readInt32();
+              break;
+            }
+            case 160: {
+              bitField0_ |= 0x00080000;
+              positionInRoster_ = input.readInt32();
+              break;
+            }
+            case 170: {
+              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
                 tripNodes_ = new java.util.ArrayList<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage>();
-                mutable_bitField0_ |= 0x00040000;
+                mutable_bitField0_ |= 0x00100000;
               }
               tripNodes_.add(input.readMessage(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.PARSER, extensionRegistry));
               break;
@@ -9578,7 +10420,7 @@ public final class Tripmodel {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00040000) == 0x00040000)) {
+        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
           tripNodes_ = java.util.Collections.unmodifiableList(tripNodes_);
         }
         this.unknownFields = unknownFields.build();
@@ -10063,36 +10905,68 @@ public final class Tripmodel {
       return blockId_;
     }
 
-    // repeated .TimetableTripNodeMessage trip_nodes = 19;
-    public static final int TRIP_NODES_FIELD_NUMBER = 19;
+    // optional int32 rosterId = 19;
+    public static final int ROSTERID_FIELD_NUMBER = 19;
+    private int rosterId_;
+    /**
+     * <code>optional int32 rosterId = 19;</code>
+     */
+    public boolean hasRosterId() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional int32 rosterId = 19;</code>
+     */
+    public int getRosterId() {
+      return rosterId_;
+    }
+
+    // optional int32 positionInRoster = 20;
+    public static final int POSITIONINROSTER_FIELD_NUMBER = 20;
+    private int positionInRoster_;
+    /**
+     * <code>optional int32 positionInRoster = 20;</code>
+     */
+    public boolean hasPositionInRoster() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional int32 positionInRoster = 20;</code>
+     */
+    public int getPositionInRoster() {
+      return positionInRoster_;
+    }
+
+    // repeated .TimetableTripNodeMessage trip_nodes = 21;
+    public static final int TRIP_NODES_FIELD_NUMBER = 21;
     private java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> tripNodes_;
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> getTripNodesList() {
       return tripNodes_;
     }
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     public java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder> 
         getTripNodesOrBuilderList() {
       return tripNodes_;
     }
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     public int getTripNodesCount() {
       return tripNodes_.size();
     }
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage getTripNodes(int index) {
       return tripNodes_.get(index);
     }
     /**
-     * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+     * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
      */
     public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder getTripNodesOrBuilder(
         int index) {
@@ -10114,10 +10988,12 @@ public final class Tripmodel {
       originNodeName_ = "";
       destinationNodeName_ = "";
       numberOfCars_ = 0;
-      routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_NONE;
+      routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
       speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
       consistType_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbConsistType.CT_NONE;
       blockId_ = 0;
+      rosterId_ = 0;
+      positionInRoster_ = 0;
       tripNodes_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -10196,8 +11072,14 @@ public final class Tripmodel {
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         output.writeInt32(18, blockId_);
       }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeInt32(19, rosterId_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeInt32(20, positionInRoster_);
+      }
       for (int i = 0; i < tripNodes_.size(); i++) {
-        output.writeMessage(19, tripNodes_.get(i));
+        output.writeMessage(21, tripNodes_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -10280,9 +11162,17 @@ public final class Tripmodel {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(18, blockId_);
       }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, rosterId_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(20, positionInRoster_);
+      }
       for (int i = 0; i < tripNodes_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(19, tripNodes_.get(i));
+          .computeMessageSize(21, tripNodes_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10429,7 +11319,7 @@ public final class Tripmodel {
         bitField0_ = (bitField0_ & ~0x00001000);
         numberOfCars_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
-        routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_NONE;
+        routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
         bitField0_ = (bitField0_ & ~0x00004000);
         speedBand_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbSpeedBand.SB_NONE;
         bitField0_ = (bitField0_ & ~0x00008000);
@@ -10437,9 +11327,13 @@ public final class Tripmodel {
         bitField0_ = (bitField0_ & ~0x00010000);
         blockId_ = 0;
         bitField0_ = (bitField0_ & ~0x00020000);
+        rosterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        positionInRoster_ = 0;
+        bitField0_ = (bitField0_ & ~0x00080000);
         if (tripNodesBuilder_ == null) {
           tripNodes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00100000);
         } else {
           tripNodesBuilder_.clear();
         }
@@ -10543,10 +11437,18 @@ public final class Tripmodel {
           to_bitField0_ |= 0x00020000;
         }
         result.blockId_ = blockId_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.rosterId_ = rosterId_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.positionInRoster_ = positionInRoster_;
         if (tripNodesBuilder_ == null) {
-          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+          if (((bitField0_ & 0x00100000) == 0x00100000)) {
             tripNodes_ = java.util.Collections.unmodifiableList(tripNodes_);
-            bitField0_ = (bitField0_ & ~0x00040000);
+            bitField0_ = (bitField0_ & ~0x00100000);
           }
           result.tripNodes_ = tripNodes_;
         } else {
@@ -10634,11 +11536,17 @@ public final class Tripmodel {
         if (other.hasBlockId()) {
           setBlockId(other.getBlockId());
         }
+        if (other.hasRosterId()) {
+          setRosterId(other.getRosterId());
+        }
+        if (other.hasPositionInRoster()) {
+          setPositionInRoster(other.getPositionInRoster());
+        }
         if (tripNodesBuilder_ == null) {
           if (!other.tripNodes_.isEmpty()) {
             if (tripNodes_.isEmpty()) {
               tripNodes_ = other.tripNodes_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00100000);
             } else {
               ensureTripNodesIsMutable();
               tripNodes_.addAll(other.tripNodes_);
@@ -10651,7 +11559,7 @@ public final class Tripmodel {
               tripNodesBuilder_.dispose();
               tripNodesBuilder_ = null;
               tripNodes_ = other.tripNodes_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00100000);
               tripNodesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTripNodesFieldBuilder() : null;
@@ -11409,7 +12317,7 @@ public final class Tripmodel {
       }
 
       // optional .PbDirection route_direction = 15;
-      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_NONE;
+      private au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
       /**
        * <code>optional .PbDirection route_direction = 15;</code>
        */
@@ -11439,7 +12347,7 @@ public final class Tripmodel {
        */
       public Builder clearRouteDirection() {
         bitField0_ = (bitField0_ & ~0x00004000);
-        routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_NONE;
+        routeDirection_ = au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbDirection.DR_DOWN;
         onChanged();
         return this;
       }
@@ -11549,13 +12457,79 @@ public final class Tripmodel {
         return this;
       }
 
-      // repeated .TimetableTripNodeMessage trip_nodes = 19;
+      // optional int32 rosterId = 19;
+      private int rosterId_ ;
+      /**
+       * <code>optional int32 rosterId = 19;</code>
+       */
+      public boolean hasRosterId() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional int32 rosterId = 19;</code>
+       */
+      public int getRosterId() {
+        return rosterId_;
+      }
+      /**
+       * <code>optional int32 rosterId = 19;</code>
+       */
+      public Builder setRosterId(int value) {
+        bitField0_ |= 0x00040000;
+        rosterId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rosterId = 19;</code>
+       */
+      public Builder clearRosterId() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        rosterId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 positionInRoster = 20;
+      private int positionInRoster_ ;
+      /**
+       * <code>optional int32 positionInRoster = 20;</code>
+       */
+      public boolean hasPositionInRoster() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional int32 positionInRoster = 20;</code>
+       */
+      public int getPositionInRoster() {
+        return positionInRoster_;
+      }
+      /**
+       * <code>optional int32 positionInRoster = 20;</code>
+       */
+      public Builder setPositionInRoster(int value) {
+        bitField0_ |= 0x00080000;
+        positionInRoster_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 positionInRoster = 20;</code>
+       */
+      public Builder clearPositionInRoster() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        positionInRoster_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // repeated .TimetableTripNodeMessage trip_nodes = 21;
       private java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> tripNodes_ =
         java.util.Collections.emptyList();
       private void ensureTripNodesIsMutable() {
-        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
           tripNodes_ = new java.util.ArrayList<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage>(tripNodes_);
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00100000;
          }
       }
 
@@ -11563,7 +12537,7 @@ public final class Tripmodel {
           au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder> tripNodesBuilder_;
 
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> getTripNodesList() {
         if (tripNodesBuilder_ == null) {
@@ -11573,7 +12547,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public int getTripNodesCount() {
         if (tripNodesBuilder_ == null) {
@@ -11583,7 +12557,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage getTripNodes(int index) {
         if (tripNodesBuilder_ == null) {
@@ -11593,7 +12567,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder setTripNodes(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage value) {
@@ -11610,7 +12584,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder setTripNodes(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder builderForValue) {
@@ -11624,7 +12598,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder addTripNodes(au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage value) {
         if (tripNodesBuilder_ == null) {
@@ -11640,7 +12614,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder addTripNodes(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage value) {
@@ -11657,7 +12631,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder addTripNodes(
           au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder builderForValue) {
@@ -11671,7 +12645,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder addTripNodes(
           int index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder builderForValue) {
@@ -11685,7 +12659,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder addAllTripNodes(
           java.lang.Iterable<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage> values) {
@@ -11699,12 +12673,12 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder clearTripNodes() {
         if (tripNodesBuilder_ == null) {
           tripNodes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00100000);
           onChanged();
         } else {
           tripNodesBuilder_.clear();
@@ -11712,7 +12686,7 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public Builder removeTripNodes(int index) {
         if (tripNodesBuilder_ == null) {
@@ -11725,14 +12699,14 @@ public final class Tripmodel {
         return this;
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder getTripNodesBuilder(
           int index) {
         return getTripNodesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder getTripNodesOrBuilder(
           int index) {
@@ -11742,7 +12716,7 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public java.util.List<? extends au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder> 
            getTripNodesOrBuilderList() {
@@ -11753,14 +12727,14 @@ public final class Tripmodel {
         }
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder addTripNodesBuilder() {
         return getTripNodesFieldBuilder().addBuilder(
             au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.getDefaultInstance());
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder addTripNodesBuilder(
           int index) {
@@ -11768,7 +12742,7 @@ public final class Tripmodel {
             index, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.getDefaultInstance());
       }
       /**
-       * <code>repeated .TimetableTripNodeMessage trip_nodes = 19;</code>
+       * <code>repeated .TimetableTripNodeMessage trip_nodes = 21;</code>
        */
       public java.util.List<au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder> 
            getTripNodesBuilderList() {
@@ -11781,7 +12755,7 @@ public final class Tripmodel {
           tripNodesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessage.Builder, au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TimetableTripNodeMessageOrBuilder>(
                   tripNodes_,
-                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  ((bitField0_ & 0x00100000) == 0x00100000),
                   getParentForChildren(),
                   isClean());
           tripNodes_ = null;
@@ -13554,104 +14528,111 @@ public final class Tripmodel {
       "\n\017tripmodel.proto\"z\n\026TripModelEntityMess" +
       "age\022\022\n\ntime_stamp\030\001 \001(\004\022&\n\014active_trips\030" +
       "\002 \001(\0132\020.TripListMessage\022$\n\ttimetable\030\003 \001" +
-      "(\0132\021.TimetableMessage\"\302\001\n\017TripNodeMessag" +
+      "(\0132\021.TimetableMessage\"\230\002\n\017TripNodeMessag" +
       "e\022\021\n\tnode_name\030\001 \002(\t\022\"\n\013trip_source\030\002 \001(" +
       "\0162\r.PbTripSource\022\017\n\007stop_id\030\003 \001(\t\022\024\n\014arr" +
       "ival_time\030\004 \001(\004\022\026\n\016departure_time\030\005 \001(\004\022" +
       "\"\n\013stop_status\030\006 \001(\0162\r.PbStopStatus\022\025\n\rs" +
-      "top_sequence\030\007 \001(\005\"\220\004\n\013TripMessage\022\021\n\tbu" +
-      "ndle_id\030\001 \002(\005\022\017\n\007trip_id\030\002 \002(\t\022\025\n\rtrip_i",
-      "nstance\030\003 \002(\005\022\021\n\ttrip_name\030\004 \001(\t\022\032\n\022tps_" +
-      "trip_header_id\030\005 \001(\005\022\"\n\013trip_source\030\006 \001(" +
-      "\0162\r.PbTripSource\022%\n\020current_activity\030\007 \001" +
-      "(\0162\013.PbActivity\022&\n\021previous_activity\030\010 \001" +
-      "(\0162\013.PbActivity\022\017\n\007dop_ref\030\t \001(\005\022\022\n\nserv" +
-      "ice_id\030\n \001(\t\022\020\n\010block_id\030\013 \001(\005\022\036\n\ttrip_t" +
-      "ype\030\014 \001(\0162\013.PbTripType\022 \n\nspeed_band\030\r \001" +
-      "(\0162\014.PbSpeedBand\022$\n\014consist_type\030\016 \001(\0162\016" +
-      ".PbConsistType\022\026\n\016number_of_cars\030\017 \001(\005\022\027" +
-      "\n\017trip_start_time\030\020 \001(\004\022\030\n\020trip_finish_t",
-      "ime\030\021 \001(\004\022\020\n\010route_id\030\022 \001(\t\022(\n\016trip_node" +
-      "_msgs\030\023 \003(\0132\020.TripNodeMessage\"I\n\017TripLis" +
-      "tMessage\022\025\n\rmsg_timestamp\030\001 \002(\004\022\037\n\ttrip_" +
-      "msgs\030\002 \003(\0132\014.TripMessage\"\242\002\n\030TimetableTr" +
-      "ipNodeMessage\022\017\n\007trip_id\030\001 \002(\t\022\021\n\tnode_n" +
-      "ame\030\002 \002(\t\022\024\n\014arrival_time\030\003 \001(\004\022\026\n\016depar" +
-      "ture_time\030\004 \001(\004\022\036\n\tnode_mode\030\005 \001(\0162\013.PbN" +
-      "odeMode\022\025\n\rstop_sequence\030\006 \001(\005\022\017\n\007stop_i" +
-      "d\030\007 \001(\t\0224\n\016arrival_symbol\030\010 \001(\0162\034.PbArri" +
-      "valAndDepartureSymbol\0226\n\020departure_symbo",
-      "l\030\t \001(\0162\034.PbArrivalAndDepartureSymbol\"\217\004" +
-      "\n\024TimetableTripMessage\022\017\n\007trip_id\030\001 \002(\t\022" +
-      "\020\n\010route_id\030\002 \001(\t\022\022\n\nservice_id\030\003 \001(\t\022\024\n" +
-      "\014timetable_id\030\004 \001(\005\022\033\n\023timetableVersion_" +
-      "id\030\005 \001(\005\022\025\n\rtripHeader_id\030\006 \001(\005\022\021\n\ttrip_" +
-      "name\030\007 \001(\t\022\017\n\007dop_ref\030\010 \001(\005\022\036\n\ttrip_type" +
-      "\030\t \001(\0162\013.PbTripType\022\027\n\017trip_start_time\030\n" +
-      " \001(\004\022\030\n\020trip_finish_time\030\013 \001(\004\022\030\n\020origin" +
-      "_node_name\030\014 \001(\t\022\035\n\025destination_node_nam" +
-      "e\030\r \001(\t\022\026\n\016number_of_cars\030\016 \001(\005\022%\n\017route",
-      "_direction\030\017 \001(\0162\014.PbDirection\022 \n\nspeed_" +
-      "band\030\020 \001(\0162\014.PbSpeedBand\022$\n\014consist_type" +
-      "\030\021 \001(\0162\016.PbConsistType\022\020\n\010block_id\030\022 \001(\005" +
-      "\022-\n\ntrip_nodes\030\023 \003(\0132\031.TimetableTripNode" +
-      "Message\"\234\001\n\024TimetableInfoMessage\022\021\n\tbund" +
-      "le_id\030\001 \002(\005\022\023\n\013bundle_date\030\002 \001(\004\022\024\n\014time" +
-      "table_id\030\003 \001(\005\022\034\n\024timetable_version_id\030\004" +
-      " \001(\005\022\025\n\ractivate_date\030\005 \001(\004\022\021\n\tis_active" +
-      "\030\006 \001(\010\"n\n\020TimetableMessage\022-\n\016timetable_" +
-      "info\030\001 \001(\0132\025.TimetableInfoMessage\022+\n\014tt_",
-      "trip_msgs\030\002 \003(\0132\025.TimetableTripMessage*o" +
-      "\n\013PbTripState\022\016\n\nTS_INITIAL\020\000\022\025\n\021TS_ACTI" +
-      "VE_RUNNING\020\001\022\027\n\023TS_ACTIVE_CANCELLED\020\002\022\017\n" +
-      "\013TS_COMPLETE\020\003\022\017\n\013TS_INACTIVE\020\004*b\n\014PbSto" +
-      "pStatus\022\013\n\007SS_NONE\020\000\022\r\n\tSS_PICKUP\020\001\022\016\n\nS" +
-      "S_SETDOWN\020\002\022\024\n\020SS_PICKUPSETDOWN\020\003\022\020\n\014SS_" +
-      "TERMINATE\020\004*\215\001\n\013PbSpeedBand\022\013\n\007SB_NONE\020\000" +
-      "\022\020\n\014SB_HIGHSPEED\020\001\022\020\n\014SB_INTERCITY\020\002\022\017\n\013" +
-      "SB_SUBURBAN\020\003\022\024\n\020SB_OUTERSUBURBAN\020\004\022\022\n\016S" +
-      "B_FASTFREIGHT\020\005\022\022\n\016SB_SLOWFREIGHT\020\006*\337\002\n\n",
-      "PbNodeMode\022\013\n\007NM_NONE\020\000\022\016\n\nNM_STOP_RM\020\001\022" +
-      "\016\n\nNM_PASS_RM\020\003\022\025\n\021NM_SPECIALPASS_RM\020#\022\023" +
-      "\n\017NM_TERMINATE_RM\020\005\022\025\n\021NM_EXITNETWORK_RM" +
-      "\020\025\022\034\n\030NM_PASSINGEXITNETWORK_RM\020\027\022\016\n\nNM_S" +
-      "TOP_NR\020\t\022\016\n\nNM_PASS_NR\020\013\022\025\n\021NM_SPECIALPA" +
-      "SS_NR\020+\022\023\n\017NM_TERMINATE_NR\020\r\022\025\n\021NM_EXITN" +
-      "ETWORK_NR\020\035\022\034\n\030NM_PASSINGEXITNETWORK_NR\020" +
-      "\037\022 \n\034NM_SPECIALPASSEXITNETWORK_RM\0207\022 \n\034N" +
-      "M_SPECIALPASSEXITNETWORK_NR\020?*\377\001\n\nPbTrip" +
-      "Type\022\034\n\030TT_EXPRESSPASSENGERTRAIN\020\000\022\020\n\014TT",
-      "_EMPTYCARS\020\001\022\023\n\017TT_EXCHANGECARS\020\002\022\023\n\017TT_" +
-      "FREIGHTTRAIN\020\003\022\023\n\017TT_LIGHTENGINES\020\004\022\025\n\021T" +
-      "T_PASSENGERTRAIN\020\005\022\020\n\014TT_ROADCOACH\020\006\022\023\n\017" +
-      "TT_SPECIALTRAIN\020\007\022\023\n\017TT_TRACKMACHINE\020\010\022\021" +
-      "\n\rTT_TRIALTRAIN\020\t\022\034\n\030TT_TRACKMAINTENANCE" +
-      "TRAIN\020\n*\240\002\n\rPbConsistType\022\013\n\007CT_NONE\020\000\022\010" +
-      "\n\004CT_I\020\001\022\010\n\004CT_Q\020\002\022\010\n\004CT_Y\020\003\022\010\n\004CT_U\020\004\022\010" +
-      "\n\004CT_A\020\005\022\010\n\004CT_B\020\006\022\010\n\004CT_C\020\007\022\010\n\004CT_D\020\010\022\010" +
-      "\n\004CT_E\020\t\022\010\n\004CT_F\020\n\022\010\n\004CT_G\020\013\022\010\n\004CT_H\020\014\022\010" +
-      "\n\004CT_J\020\r\022\010\n\004CT_K\020\016\022\010\n\004CT_L\020\017\022\010\n\004CT_M\020\020\022\010",
-      "\n\004CT_N\020\021\022\010\n\004CT_O\020\022\022\010\n\004CT_P\020\023\022\010\n\004CT_R\020\024\022\010" +
-      "\n\004CT_S\020\025\022\010\n\004CT_T\020\026\022\010\n\004CT_V\020\027\022\010\n\004CT_W\020\030\022\010" +
-      "\n\004CT_X\020\031\022\010\n\004CT_Z\020\032*\223\003\n\033PbArrivalAndDepar" +
-      "tureSymbol\022\014\n\010ADS_NONE\020\000\022\n\n\006ADS_SD\020\001\022\n\n\006" +
-      "ADS_SP\020\002\022\n\n\006ADS_SA\020\003\022\n\n\006ADS_SF\020\004\022\n\n\006ADS_" +
-      "SL\020\005\022\n\n\006ADS_SE\020\006\022\n\n\006ADS_SG\020\007\022\n\n\006ADS_UA\020\010" +
-      "\022\n\n\006ADS_UD\020\t\022\n\n\006ADS_UF\020\n\022\n\n\006ADS_UH\020\013\022\n\n\006" +
-      "ADS_UL\020\014\022\n\n\006ADS_UP\020\r\022\n\n\006ADS_UQ\020\016\022\n\n\006ADS_" +
-      "UR\020\017\022\n\n\006ADS_US\020\020\022\n\n\006ADS_UT\020\021\022\n\n\006ADS_UW\020\022" +
-      "\022\n\n\006ADS_SB\020\023\022\n\n\006ADS_ST\020\024\022\n\n\006ADS_LA\020\025\022\n\n\006",
-      "ADS_LB\020\026\022\n\n\006ADS_LC\020\027\022\n\n\006ADS_LD\020\030\022\n\n\006ADS_" +
-      "LE\020\031\022\n\n\006ADS_LG\020\032\022\n\n\006ADS_LR\020\033\022\n\n\006ADS_LU\020\034" +
-      "\022\n\n\006ADS_LX\020\035\022\n\n\006ADS_LY\020\036*2\n\013PbDirection\022" +
-      "\013\n\007DR_NONE\020\000\022\013\n\007DR_DOWN\020\001\022\t\n\005DR_UP\020\002*X\n\n" +
-      "PbActivity\022\013\n\007AC_NONE\020\000\022\r\n\tAC_ACTIVE\020\001\022\017" +
-      "\n\013AC_COMPLETE\020\002\022\r\n\tAC_CANCEL\020\003\022\016\n\nAC_REM" +
-      "OVED\020\004*A\n\014PbTripSource\022\016\n\nTC_UNKNOWN\020\000\022\020" +
-      "\n\014TC_TIMETABLE\020\001\022\017\n\013TC_INSERTED\020\002*/\n\016Tri" +
-      "pStereotype\022\r\n\tTY_STATIC\020\000\022\016\n\nTY_DYNAMIC" +
-      "\020\001B7\n5au.gov.nsw.transport.rtta.intf.tri",
-      "pmodel.pb.generated"
+      "top_sequence\030\007 \001(\005\022\030\n\020dwellTimeSeconds\030\010" +
+      " \001(\005\022\033\n\023arrivalDelaySeconds\030\t \001(\005\022\035\n\025dep",
+      "artureDelaySeconds\030\n \001(\005\"\300\005\n\013TripMessage" +
+      "\022\021\n\tbundle_id\030\001 \002(\005\022\017\n\007trip_id\030\002 \002(\t\022\025\n\r" +
+      "trip_instance\030\003 \002(\005\022\021\n\ttrip_name\030\004 \001(\t\022\032" +
+      "\n\022tps_trip_header_id\030\005 \001(\005\022\"\n\013trip_sourc" +
+      "e\030\006 \001(\0162\r.PbTripSource\022\017\n\007dop_ref\030\007 \001(\005\022" +
+      "\022\n\nservice_id\030\010 \001(\t\022\026\n\016number_of_cars\030\t " +
+      "\001(\005\022$\n\014consist_type\030\n \001(\0162\016.PbConsistTyp" +
+      "e\022\020\n\010block_id\030\013 \001(\005\022\021\n\troster_id\030\014 \001(\005\022\032" +
+      "\n\022position_in_roster\030\r \001(\005\022%\n\020current_ac" +
+      "tivity\030\016 \001(\0162\013.PbActivity\022&\n\021previous_ac",
+      "tivity\030\017 \001(\0162\013.PbActivity\022*\n\017trip_stereo" +
+      "type\030\020 \001(\0162\021.PbTripStereotype\022\027\n\017trip_st" +
+      "art_time\030\021 \001(\004\022\030\n\020trip_finish_time\030\022 \001(\004" +
+      "\022\036\n\ttrip_type\030\023 \001(\0162\013.PbTripType\022 \n\nspee" +
+      "d_band\030\024 \001(\0162\014.PbSpeedBand\022\020\n\010route_id\030\025" +
+      " \001(\t\022#\n\rtripDirection\030\026 \001(\0162\014.PbDirectio" +
+      "n\022\026\n\016atLocationNode\030\027 \001(\t\022\026\n\016atLocationT" +
+      "ime\030\030 \001(\004\022(\n\016trip_node_msgs\030\031 \003(\0132\020.Trip" +
+      "NodeMessage\"I\n\017TripListMessage\022\025\n\rmsg_ti" +
+      "mestamp\030\001 \002(\004\022\037\n\ttrip_msgs\030\002 \003(\0132\014.TripM",
+      "essage\"\242\002\n\030TimetableTripNodeMessage\022\017\n\007t" +
+      "rip_id\030\001 \002(\t\022\021\n\tnode_name\030\002 \002(\t\022\024\n\014arriv" +
+      "al_time\030\003 \001(\004\022\026\n\016departure_time\030\004 \001(\004\022\036\n" +
+      "\tnode_mode\030\005 \001(\0162\013.PbNodeMode\022\025\n\rstop_se" +
+      "quence\030\006 \001(\005\022\017\n\007stop_id\030\007 \001(\t\0224\n\016arrival" +
+      "_symbol\030\010 \001(\0162\034.PbArrivalAndDepartureSym" +
+      "bol\0226\n\020departure_symbol\030\t \001(\0162\034.PbArriva" +
+      "lAndDepartureSymbol\"\273\004\n\024TimetableTripMes" +
+      "sage\022\017\n\007trip_id\030\001 \002(\t\022\020\n\010route_id\030\002 \001(\t\022" +
+      "\022\n\nservice_id\030\003 \001(\t\022\024\n\014timetable_id\030\004 \001(",
+      "\005\022\033\n\023timetableVersion_id\030\005 \001(\005\022\025\n\rtripHe" +
+      "ader_id\030\006 \001(\005\022\021\n\ttrip_name\030\007 \001(\t\022\017\n\007dop_" +
+      "ref\030\010 \001(\005\022\036\n\ttrip_type\030\t \001(\0162\013.PbTripTyp" +
+      "e\022\027\n\017trip_start_time\030\n \001(\004\022\030\n\020trip_finis" +
+      "h_time\030\013 \001(\004\022\030\n\020origin_node_name\030\014 \001(\t\022\035" +
+      "\n\025destination_node_name\030\r \001(\t\022\026\n\016number_" +
+      "of_cars\030\016 \001(\005\022%\n\017route_direction\030\017 \001(\0162\014" +
+      ".PbDirection\022 \n\nspeed_band\030\020 \001(\0162\014.PbSpe" +
+      "edBand\022$\n\014consist_type\030\021 \001(\0162\016.PbConsist" +
+      "Type\022\020\n\010block_id\030\022 \001(\005\022\020\n\010rosterId\030\023 \001(\005",
+      "\022\030\n\020positionInRoster\030\024 \001(\005\022-\n\ntrip_nodes" +
+      "\030\025 \003(\0132\031.TimetableTripNodeMessage\"\234\001\n\024Ti" +
+      "metableInfoMessage\022\021\n\tbundle_id\030\001 \002(\005\022\023\n" +
+      "\013bundle_date\030\002 \001(\004\022\024\n\014timetable_id\030\003 \001(\005" +
+      "\022\034\n\024timetable_version_id\030\004 \001(\005\022\025\n\ractiva" +
+      "te_date\030\005 \001(\004\022\021\n\tis_active\030\006 \001(\010\"n\n\020Time" +
+      "tableMessage\022-\n\016timetable_info\030\001 \001(\0132\025.T" +
+      "imetableInfoMessage\022+\n\014tt_trip_msgs\030\002 \003(" +
+      "\0132\025.TimetableTripMessage*o\n\013PbTripState\022" +
+      "\016\n\nTS_INITIAL\020\000\022\025\n\021TS_ACTIVE_RUNNING\020\001\022\027",
+      "\n\023TS_ACTIVE_CANCELLED\020\002\022\017\n\013TS_COMPLETE\020\003" +
+      "\022\017\n\013TS_INACTIVE\020\004*1\n\020PbTripStereotype\022\r\n" +
+      "\tTY_STATIC\020\000\022\016\n\nTY_DYNAMIC\020\001*b\n\014PbStopSt" +
+      "atus\022\013\n\007SS_NONE\020\000\022\r\n\tSS_PICKUP\020\001\022\016\n\nSS_S" +
+      "ETDOWN\020\002\022\024\n\020SS_PICKUPSETDOWN\020\003\022\020\n\014SS_TER" +
+      "MINATE\020\004*\215\001\n\013PbSpeedBand\022\013\n\007SB_NONE\020\000\022\020\n" +
+      "\014SB_HIGHSPEED\020\001\022\020\n\014SB_INTERCITY\020\002\022\017\n\013SB_" +
+      "SUBURBAN\020\003\022\024\n\020SB_OUTERSUBURBAN\020\004\022\022\n\016SB_F" +
+      "ASTFREIGHT\020\005\022\022\n\016SB_SLOWFREIGHT\020\006*\337\002\n\nPbN" +
+      "odeMode\022\013\n\007NM_NONE\020\000\022\016\n\nNM_STOP_RM\020\001\022\016\n\n",
+      "NM_PASS_RM\020\003\022\025\n\021NM_SPECIALPASS_RM\020#\022\023\n\017N" +
+      "M_TERMINATE_RM\020\005\022\025\n\021NM_EXITNETWORK_RM\020\025\022" +
+      "\034\n\030NM_PASSINGEXITNETWORK_RM\020\027\022\016\n\nNM_STOP" +
+      "_NR\020\t\022\016\n\nNM_PASS_NR\020\013\022\025\n\021NM_SPECIALPASS_" +
+      "NR\020+\022\023\n\017NM_TERMINATE_NR\020\r\022\025\n\021NM_EXITNETW" +
+      "ORK_NR\020\035\022\034\n\030NM_PASSINGEXITNETWORK_NR\020\037\022 " +
+      "\n\034NM_SPECIALPASSEXITNETWORK_RM\0207\022 \n\034NM_S" +
+      "PECIALPASSEXITNETWORK_NR\020?*\377\001\n\nPbTripTyp" +
+      "e\022\034\n\030TT_EXPRESSPASSENGERTRAIN\020\000\022\020\n\014TT_EM" +
+      "PTYCARS\020\001\022\023\n\017TT_EXCHANGECARS\020\002\022\023\n\017TT_FRE",
+      "IGHTTRAIN\020\003\022\023\n\017TT_LIGHTENGINES\020\004\022\025\n\021TT_P" +
+      "ASSENGERTRAIN\020\005\022\020\n\014TT_ROADCOACH\020\006\022\023\n\017TT_" +
+      "SPECIALTRAIN\020\007\022\023\n\017TT_TRACKMACHINE\020\010\022\021\n\rT" +
+      "T_TRIALTRAIN\020\t\022\034\n\030TT_TRACKMAINTENANCETRA" +
+      "IN\020\n*\240\002\n\rPbConsistType\022\013\n\007CT_NONE\020\000\022\010\n\004C" +
+      "T_I\020\001\022\010\n\004CT_Q\020\002\022\010\n\004CT_Y\020\003\022\010\n\004CT_U\020\004\022\010\n\004C" +
+      "T_A\020\005\022\010\n\004CT_B\020\006\022\010\n\004CT_C\020\007\022\010\n\004CT_D\020\010\022\010\n\004C" +
+      "T_E\020\t\022\010\n\004CT_F\020\n\022\010\n\004CT_G\020\013\022\010\n\004CT_H\020\014\022\010\n\004C" +
+      "T_J\020\r\022\010\n\004CT_K\020\016\022\010\n\004CT_L\020\017\022\010\n\004CT_M\020\020\022\010\n\004C" +
+      "T_N\020\021\022\010\n\004CT_O\020\022\022\010\n\004CT_P\020\023\022\010\n\004CT_R\020\024\022\010\n\004C",
+      "T_S\020\025\022\010\n\004CT_T\020\026\022\010\n\004CT_V\020\027\022\010\n\004CT_W\020\030\022\010\n\004C" +
+      "T_X\020\031\022\010\n\004CT_Z\020\032*\223\003\n\033PbArrivalAndDepartur" +
+      "eSymbol\022\014\n\010ADS_NONE\020\000\022\n\n\006ADS_SD\020\001\022\n\n\006ADS" +
+      "_SP\020\002\022\n\n\006ADS_SA\020\003\022\n\n\006ADS_SF\020\004\022\n\n\006ADS_SL\020" +
+      "\005\022\n\n\006ADS_SE\020\006\022\n\n\006ADS_SG\020\007\022\n\n\006ADS_UA\020\010\022\n\n" +
+      "\006ADS_UD\020\t\022\n\n\006ADS_UF\020\n\022\n\n\006ADS_UH\020\013\022\n\n\006ADS" +
+      "_UL\020\014\022\n\n\006ADS_UP\020\r\022\n\n\006ADS_UQ\020\016\022\n\n\006ADS_UR\020" +
+      "\017\022\n\n\006ADS_US\020\020\022\n\n\006ADS_UT\020\021\022\n\n\006ADS_UW\020\022\022\n\n" +
+      "\006ADS_SB\020\023\022\n\n\006ADS_ST\020\024\022\n\n\006ADS_LA\020\025\022\n\n\006ADS" +
+      "_LB\020\026\022\n\n\006ADS_LC\020\027\022\n\n\006ADS_LD\020\030\022\n\n\006ADS_LE\020",
+      "\031\022\n\n\006ADS_LG\020\032\022\n\n\006ADS_LR\020\033\022\n\n\006ADS_LU\020\034\022\n\n" +
+      "\006ADS_LX\020\035\022\n\n\006ADS_LY\020\036*%\n\013PbDirection\022\013\n\007" +
+      "DR_DOWN\020\000\022\t\n\005DR_UP\020\001*X\n\nPbActivity\022\013\n\007AC" +
+      "_NONE\020\000\022\r\n\tAC_ACTIVE\020\001\022\017\n\013AC_COMPLETE\020\002\022" +
+      "\r\n\tAC_CANCEL\020\003\022\016\n\nAC_REMOVED\020\004*A\n\014PbTrip" +
+      "Source\022\016\n\nTC_UNKNOWN\020\000\022\020\n\014TC_TIMETABLE\020\001" +
+      "\022\017\n\013TC_INSERTED\020\002B7\n5au.gov.nsw.transpor" +
+      "t.rtta.intf.tripmodel.pb.generated"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13669,13 +14650,13 @@ public final class Tripmodel {
           internal_static_TripNodeMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TripNodeMessage_descriptor,
-              new java.lang.String[] { "NodeName", "TripSource", "StopId", "ArrivalTime", "DepartureTime", "StopStatus", "StopSequence", });
+              new java.lang.String[] { "NodeName", "TripSource", "StopId", "ArrivalTime", "DepartureTime", "StopStatus", "StopSequence", "DwellTimeSeconds", "ArrivalDelaySeconds", "DepartureDelaySeconds", });
           internal_static_TripMessage_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_TripMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TripMessage_descriptor,
-              new java.lang.String[] { "BundleId", "TripId", "TripInstance", "TripName", "TpsTripHeaderId", "TripSource", "CurrentActivity", "PreviousActivity", "DopRef", "ServiceId", "BlockId", "TripType", "SpeedBand", "ConsistType", "NumberOfCars", "TripStartTime", "TripFinishTime", "RouteId", "TripNodeMsgs", });
+              new java.lang.String[] { "BundleId", "TripId", "TripInstance", "TripName", "TpsTripHeaderId", "TripSource", "DopRef", "ServiceId", "NumberOfCars", "ConsistType", "BlockId", "RosterId", "PositionInRoster", "CurrentActivity", "PreviousActivity", "TripStereotype", "TripStartTime", "TripFinishTime", "TripType", "SpeedBand", "RouteId", "TripDirection", "AtLocationNode", "AtLocationTime", "TripNodeMsgs", });
           internal_static_TripListMessage_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_TripListMessage_fieldAccessorTable = new
@@ -13693,7 +14674,7 @@ public final class Tripmodel {
           internal_static_TimetableTripMessage_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_TimetableTripMessage_descriptor,
-              new java.lang.String[] { "TripId", "RouteId", "ServiceId", "TimetableId", "TimetableVersionId", "TripHeaderId", "TripName", "DopRef", "TripType", "TripStartTime", "TripFinishTime", "OriginNodeName", "DestinationNodeName", "NumberOfCars", "RouteDirection", "SpeedBand", "ConsistType", "BlockId", "TripNodes", });
+              new java.lang.String[] { "TripId", "RouteId", "ServiceId", "TimetableId", "TimetableVersionId", "TripHeaderId", "TripName", "DopRef", "TripType", "TripStartTime", "TripFinishTime", "OriginNodeName", "DestinationNodeName", "NumberOfCars", "RouteDirection", "SpeedBand", "ConsistType", "BlockId", "RosterId", "PositionInRoster", "TripNodes", });
           internal_static_TimetableInfoMessage_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_TimetableInfoMessage_fieldAccessorTable = new

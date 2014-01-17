@@ -36,6 +36,15 @@ enum PbTripState {
 }
 
 //
+// The TripStereotype of the trip details.
+//
+enum PbTripStereotype {
+
+    TY_STATIC = 0;                          // The original, unmodified details of the trip.
+    TY_DYNAMIC = 1;                         // The trip details can be modified.
+}
+
+//
 // Stop status at this node
 //
 enum PbStopStatus {
@@ -193,9 +202,8 @@ enum PbArrivalAndDepartureSymbol {
 //
 enum PbDirection {
 
-    DR_NONE = 0;                            //
-    DR_DOWN = 1;                            // Down direction, moving away from Central Station.
-    DR_UP = 2;                              // Up direction, moving towards Central Station.
+    DR_DOWN = 0;                            // Down direction, moving away from Central Station.
+    DR_UP = 1;                              // Up direction, moving towards Central Station.
 }
 
 //
@@ -220,12 +228,6 @@ enum PbTripSource {
     TC_INSERTED = 2;                        // The trip has been inserted.
 }
 
-enum TripStereotype {
-
-    TY_STATIC = 0;                          // The original, unmodified details of the trip (Timetable)
-    TY_DYNAMIC = 1;                         // The trip details can be modified.
-}
-
 //
 // Message containing the active trip header information
 //
@@ -238,6 +240,9 @@ message TripNodeMessage {
     optional uint64 departure_time = 5;
     optional PbStopStatus stop_status = 6;
     optional int32 stop_sequence = 7;
+    optional int32 dwellTimeSeconds = 8;
+    optional int32 arrivalDelaySeconds = 9;
+    optional int32 departureDelaySeconds = 10;
 }
 
 message TripMessage {
@@ -248,19 +253,25 @@ message TripMessage {
     optional string trip_name = 4;
     optional int32 tps_trip_header_id = 5;
     optional PbTripSource trip_source = 6;
-    optional PbActivity current_activity = 7;
-    optional PbActivity previous_activity = 8;
-    optional int32 dop_ref = 9;
-    optional string service_id = 10;
+    optional int32 dop_ref = 7;
+    optional string service_id = 8;
+    optional int32 number_of_cars = 9;
+    optional PbConsistType consist_type = 10;
     optional int32 block_id = 11;
-    optional PbTripType trip_type = 12;
-    optional PbSpeedBand speed_band = 13;
-    optional PbConsistType consist_type = 14;
-    optional int32 number_of_cars = 15;
-    optional uint64 trip_start_time = 16;
-    optional uint64 trip_finish_time = 17;
-    optional string route_id = 18;
-    repeated TripNodeMessage trip_node_msgs = 19;
+    optional int32 roster_id = 12;
+    optional int32 position_in_roster = 13;
+    optional PbActivity current_activity = 14;
+    optional PbActivity previous_activity = 15;
+    optional PbTripStereotype trip_stereotype = 16;
+    optional uint64 trip_start_time = 17;
+    optional uint64 trip_finish_time = 18;
+    optional PbTripType trip_type = 19;
+    optional PbSpeedBand speed_band = 20;
+    optional string route_id = 21;
+    optional PbDirection tripDirection = 22;
+    optional string atLocationNode = 23;
+    optional uint64 atLocationTime = 24;
+    repeated TripNodeMessage trip_node_msgs = 25;
 }
 
 message TripListMessage {
@@ -305,7 +316,9 @@ message TimetableTripMessage {
     optional PbSpeedBand speed_band = 16;
     optional PbConsistType consist_type = 17;
     optional int32 block_id = 18;
-    repeated TimetableTripNodeMessage trip_nodes = 19;
+    optional int32 rosterId = 19;
+    optional int32 positionInRoster = 20;
+    repeated TimetableTripNodeMessage trip_nodes = 21;
 }
 
 message TimetableInfoMessage {
