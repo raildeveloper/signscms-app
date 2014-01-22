@@ -400,9 +400,9 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
                             if (trip.hasValidDelayPrediction() && nextTrip != null) {
                                 nextTrip.cascadeDelayFromPreviousTrip(trip);
                                 trips.add(nextTrip);
-                                getLog().info(
-                                "TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => " + nextTrip.getCurrentDelay()
-                                + " to next trip " + nextTrip.getTripId());
+//                                getLog().info(
+//                                "TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => " + nextTrip.getCurrentDelay()
+//                                + " to next trip " + nextTrip.getTripId());
                                 tripMap.put(nextTrip.getTripId(), nextTrip);
                             }
                         }
