@@ -329,12 +329,13 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
      *         message was successful or not.
      */
     @Override
-    public boolean processLoadTripUpdates(TripModelEntityMessage feedMessage) {
+    public String processLoadTripUpdates(TripModelEntityMessage feedMessage) {
 
-        boolean returnMessage = true;
+        String returnMessage = "true";
         boolean addStops = false;
         final TripDao tripDAO = H2DatabaseAccess.getTripDao();
         try {
+            log.debug(feedMessage.toString());
             if (feedMessage.hasActiveTrips()) {
                 final TripListMessage tripListMessage = feedMessage.getActiveTrips();
 
@@ -376,8 +377,10 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                         if (addStops) {
                             if (!(tripMessage.getTripNodeMsgsList().size() > 0)) {
                                 // Let trip publisher know of the error - but continue to process other trips in the message
-                                returnMessage = false;
+                                returnMessage = "false";
                                 log.debug("Trip " + tripId + " doesn't have any nodes - omitting this from trip updates ");
+                                returnMessage += "Trip " + tripId + " doesn't have any nodes - omitting this from trip updates ";
+
                                 continue tripMessageLoop;
                             }
                             for (TripNodeMessage tripNodeMessage : tripMessage.getTripNodeMsgsList()) {
@@ -414,14 +417,17 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                 changedTrips.setChangedTrips(changedTripsList);
             } else {
                 log.debug("Proto Buff received from Trip Publisher is empty");
-                returnMessage = false;
+                returnMessage = "false";
+                returnMessage += "Proto Buff received from Trip Publisher is empty";
             }
         } catch (NullPointerException e) {
             log.debug(e.getMessage());
-            returnMessage = false;
+            returnMessage = "false";
+            returnMessage += e.getMessage();
         } catch (SQLException s) {
             log.debug(s.getMessage());
-            returnMessage = false;
+            returnMessage = "false";
+            returnMessage += s.getMessage();
         }
         return returnMessage;
 

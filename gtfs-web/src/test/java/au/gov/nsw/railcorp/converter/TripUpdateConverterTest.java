@@ -97,7 +97,7 @@ public class TripUpdateConverterTest extends TestCase {
         tripModelEntityMessage.setActiveTrips(builder);
         TripModelEntityMessage message = tripModelEntityMessage.build();
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -167,7 +167,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -245,7 +245,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -323,7 +323,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
 
         FeedMessage mesg = null;
@@ -405,7 +405,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -483,7 +483,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -561,7 +561,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -638,7 +638,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
 
         FeedMessage mesg = null;
@@ -719,7 +719,7 @@ public class TripUpdateConverterTest extends TestCase {
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
-        assertTrue(converter.processLoadTripUpdates(message));
+        assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -784,7 +784,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -828,7 +828,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -886,7 +886,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -927,7 +927,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -970,7 +970,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1028,7 +1028,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1069,7 +1069,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1116,7 +1116,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1178,7 +1178,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1246,7 +1246,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1293,7 +1293,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {
@@ -1355,7 +1355,7 @@ public class TripUpdateConverterTest extends TestCase {
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
 
-        assertFalse(converter.processLoadTripUpdates(message));
+        assertFalse(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
         FeedMessage mesg = null;
         try {

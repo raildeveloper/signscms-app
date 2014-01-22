@@ -83,17 +83,22 @@ public class ProtoListenerServlet implements HttpRequestHandler {
 
         final PrintWriter writer = response.getWriter();
         final InputStream in = request.getInputStream();
-        log.info("Protocol Buffer Process {} request received of {} bytes",
-        request.getServletContext().getServletContextName(),
-        request.getContentLength());
-        final TripModelEntityMessage entityMessage = TripModelEntityMessage.parseFrom(in);
-
-        if (converter.processLoadTripUpdates(entityMessage)) {
-            response.setStatus(SUCCESS_STATUS_CODE);
-            writer.append("Successful Update");
-        } else {
-            response.setStatus(ERROR_STATUS_CODE);
-            writer.append("Failed Protocol Buffer validation processing");
+        try {
+            log.info("Protocol Buffer Process {} request received of {} bytes",
+            request.getServletContext().getServletContextName(),
+            request.getContentLength());
+            final TripModelEntityMessage entityMessage = TripModelEntityMessage.parseFrom(in);
+            final String returnMessage = converter.processLoadTripUpdates(entityMessage);
+            if ("true".equalsIgnoreCase(returnMessage)) {
+                response.setStatus(SUCCESS_STATUS_CODE);
+                writer.append("Successful Update");
+            } else {
+                response.setStatus(ERROR_STATUS_CODE);
+                writer.append("Failed Protocol Buffer validation processing");
+                writer.append(returnMessage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(writer);
         }
 
     }

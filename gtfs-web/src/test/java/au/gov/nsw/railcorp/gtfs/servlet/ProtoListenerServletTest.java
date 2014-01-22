@@ -109,7 +109,7 @@ public class ProtoListenerServletTest extends TestCase {
         when(sContext.getServletContextName()).thenReturn("testHandleRequestTripUpdateMessage");
 
         // when(TripModelEntityMessage.parseFrom(inputStream)).thenReturn(message);
-        when(protoServlet.getConverter().processLoadTripUpdates(message)).thenReturn(true);
+        when(protoServlet.getConverter().processLoadTripUpdates(message)).thenReturn("true");
 
         protoServlet.handleRequest(request, response);
         verify(protoServlet.getConverter()).processLoadTripUpdates(message);
@@ -151,7 +151,7 @@ public class ProtoListenerServletTest extends TestCase {
         when(response.getWriter()).thenReturn(writer);
         when(sContext.getServletContextName()).thenReturn("testHandleEmptyMessage");
 
-        when(protoServlet.getConverter().processLoadTripUpdates(message)).thenReturn(false);
+        when(protoServlet.getConverter().processLoadTripUpdates(message)).thenReturn("false");
         protoServlet.handleRequest(request, response);
         verify(protoServlet.getConverter()).processLoadTripUpdates(message);
         verify(writer).append("Failed Protocol Buffer validation processing");

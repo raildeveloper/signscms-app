@@ -47,5 +47,5 @@ public abstract class GeneralProtocolBufferConverter extends GeneralStoredProtoc
      *            feed
      * @return success
      */
-    public abstract boolean processLoadTripUpdates(TripModelEntityMessage feedMessage);
+    public abstract String processLoadTripUpdates(TripModelEntityMessage feedMessage);
 }

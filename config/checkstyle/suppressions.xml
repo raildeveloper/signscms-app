@@ -58,6 +58,7 @@
   <suppress id="warningCyclomaticComplexity" files="[/\\]TripUpdateConverter.java"/> 
   <suppress id="neverExceedCyclomaticComplexity" files="[/\\]TripUpdateConverter.java"/>
   <suppress checks="MethodLength" files="[/\\]TripUpdateConverter.java"/> 
+  <suppress checks="." files="[/\\]ProtoListenerServlet.java"/> 
   <suppress checks="." files="[/\\]TripStop.java"/> 
   <suppress checks="." files="[/\\]Trip.java"/> 
   <suppress checks="." files="[/\\]TripInfoServlet.java"/>
