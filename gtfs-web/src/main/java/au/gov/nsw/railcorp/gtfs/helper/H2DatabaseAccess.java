@@ -41,7 +41,7 @@ public class H2DatabaseAccess {
         Connection cnx = null;
         try {
             Class.forName("org.h2.Driver");
-            final String jdbcUrl = "jdbc:h2:~/transitBundle";
+            final String jdbcUrl = "jdbc:h2:~/transitBundle;AUTO_SERVER=TRUE";
             final Properties prop = new Properties();
             prop.setProperty("user", "sa");
             prop.setProperty("password", "sa");
