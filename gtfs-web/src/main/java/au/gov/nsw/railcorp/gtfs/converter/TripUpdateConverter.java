@@ -335,7 +335,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         boolean addStops = false;
         final TripDao tripDAO = H2DatabaseAccess.getTripDao();
         try {
-            log.info(feedMessage.toString());
+            //log.info(feedMessage.toString());
             if (feedMessage.hasActiveTrips()) {
                 final TripListMessage tripListMessage = feedMessage.getActiveTrips();
 

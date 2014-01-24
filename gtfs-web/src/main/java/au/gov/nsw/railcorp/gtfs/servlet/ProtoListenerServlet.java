@@ -87,7 +87,7 @@ public class ProtoListenerServlet implements HttpRequestHandler {
             log.info("Protocol Buffer Process {} request received of {} bytes",
             request.getServletContext().getServletContextName(),
             request.getContentLength());
-            log.info("Proto Buff Message Received : ---> \n" + in.toString());
+            //log.info("Proto Buff Message Received : ---> \n" + in.toString());
             final TripModelEntityMessage entityMessage = TripModelEntityMessage.parseFrom(in);
             final String returnMessage = converter.processLoadTripUpdates(entityMessage);
             if ("true".equalsIgnoreCase(returnMessage)) {
