@@ -392,8 +392,8 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
                                     final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
                                     dateFormat.setTimeZone(TimeZone.getTimeZone("Australia/Sydney"));
-                                    final Date arrivalDate = new Date(tripNodeMessage.getArrivalTime() * MILLISECOND_IN_SECOND);
-                                    final Date departureDate = new Date(tripNodeMessage.getDepartureTime() * MILLISECOND_IN_SECOND);
+                                    final Date arrivalDate = new Date(tripNodeMessage.getArrivalTime());
+                                    final Date departureDate = new Date(tripNodeMessage.getDepartureTime());
                                     tripStop.setArrivalTime(dateFormat.format(arrivalDate));
                                     tripStop.setDepartureTime(dateFormat.format(departureDate));
 

@@ -227,7 +227,7 @@ public class TripDao {
 
         PreparedStatement stopStmt = null;
 
-        final String stopQuery = "SELECT STOP_NAME, STOP_LAT, STOP_LONG FROM STOPS WHERE STOP_ID = ?";
+        final String stopQuery = "SELECT STOP_NAME, STOP_LAT, STOP_LON FROM STOPS WHERE STOP_ID = ?";
         try {
             stopStmt = dbConnection.prepareStatement(stopQuery);
             stopStmt.setString(1, stopId);
