@@ -63,4 +63,5 @@
   <suppress checks="." files="[/\\]Trip.java"/> 
   <suppress checks="." files="[/\\]TripInfoServlet.java"/>
   <suppress checks="." files="[/\\]Tripmodel.java"/>
+  <suppress checks="." files="[/\\]Trippublish.java"/>
 </suppressions>

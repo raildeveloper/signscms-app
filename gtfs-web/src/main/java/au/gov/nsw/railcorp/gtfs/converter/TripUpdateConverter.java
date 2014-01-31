@@ -9,13 +9,13 @@ import au.gov.nsw.railcorp.gtfs.helper.H2DatabaseAccess;
 import au.gov.nsw.railcorp.gtfs.model.Trip;
 import au.gov.nsw.railcorp.gtfs.model.Trip.TRIP_TYPES;
 import au.gov.nsw.railcorp.gtfs.model.TripStop;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbStopStatus;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripListMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbActivity;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbStopStatus;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbTripSource;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripNodeMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
@@ -119,7 +119,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                 }
                 // For changed and inserted trips go through all the stops
                 for (TripStop tripStop : changedTrip.getTripStops()) {
-                    log.info("Iterate through " + changedTripId + " all trip stops " + tripStop.getStopId());
+
                     final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
                     final StopTimeEvent.Builder arrivalStopTimeEvent = StopTimeEvent.newBuilder();
                     final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
@@ -335,7 +335,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         boolean addStops = false;
         final TripDao tripDAO = H2DatabaseAccess.getTripDao();
         try {
-            //log.info(feedMessage.toString());
+            // log.info(feedMessage.toString());
             if (feedMessage.hasActiveTrips()) {
                 final TripListMessage tripListMessage = feedMessage.getActiveTrips();
 
@@ -350,7 +350,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     trip.setServiceId(tripMessage.getServiceId());
                     trip.setBlockId(String.valueOf(tripMessage.getBlockId()));
                     trip.setRecordedTimeStamp(tripListMessage.getMsgTimestamp());
-                    log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
+                    // log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
                     if (activity == PbActivity.AC_CANCEL) {
                         log.info("Received Message that Trip " + tripId
                         + " has been CANCELLED");

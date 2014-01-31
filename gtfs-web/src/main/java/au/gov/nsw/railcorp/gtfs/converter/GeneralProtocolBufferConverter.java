@@ -2,7 +2,9 @@
 
 package au.gov.nsw.railcorp.gtfs.converter;
 
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
+
+
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;

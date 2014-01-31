@@ -8,8 +8,8 @@ import static org.mockito.Mockito.when;
 
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
 import au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripListMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -129,11 +129,12 @@ public class ProtoListenerServletTest extends TestCase {
 
         final ServletContext sContext = mock(ServletContext.class);
         final PrintWriter writer = mock(PrintWriter.class);
-
+        TripListMessage.Builder builder = TripListMessage.newBuilder();
+        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         final TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
 
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
-
+        tripModelEntityMessage.setActiveTrips(builder);
         TripModelEntityMessage message = tripModelEntityMessage.build();
         final byte[] messageByte = message.toByteArray();
         System.out.println("message " + message.toString());

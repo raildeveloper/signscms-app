@@ -8,13 +8,13 @@ import au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter;
 import au.gov.nsw.railcorp.gtfs.converter.VehiclePositionCsvConverter;
 import au.gov.nsw.railcorp.gtfs.helper.ActiveTrips;
 import au.gov.nsw.railcorp.gtfs.helper.ChangedTrips;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbActivity;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbStopStatus;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.PbTripSource;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripListMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripNodeMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbActivity;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbStopStatus;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbTripSource;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripNodeMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
@@ -86,8 +86,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setCurrentActivity(PbActivity.AC_CANCEL);
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
@@ -139,8 +137,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
         // Add Stops to Message
@@ -152,7 +148,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
             tripNodeMessage.setStopSequence(i);
             tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-            tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
             tripMessage.addTripNodeMsgs(tripNodeMessage);
         }
 
@@ -217,8 +212,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
             // Add Stops to Message
@@ -230,7 +223,6 @@ public class TripUpdateConverterTest extends TestCase {
                 tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                 tripNodeMessage.setStopSequence(i);
                 tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                 tripMessage.addTripNodeMsgs(tripNodeMessage);
             }
 
@@ -294,8 +286,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
         // Add Stops to Message
@@ -307,7 +297,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
             tripNodeMessage.setStopSequence(i);
             tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-            tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
             tripMessage.addTripNodeMsgs(tripNodeMessage);
         }
 
@@ -375,8 +364,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -391,7 +378,6 @@ public class TripUpdateConverterTest extends TestCase {
                 tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                 tripNodeMessage.setStopSequence(i);
                 tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                 tripMessage.addTripNodeMsgs(tripNodeMessage);
             }
 
@@ -454,8 +440,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
         // Add Stops to Message
@@ -467,7 +451,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
             tripNodeMessage.setStopSequence(i);
             tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-            tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
             tripMessage.addTripNodeMsgs(tripNodeMessage);
         }
 
@@ -533,8 +516,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
             // Add Stops to Message
@@ -546,7 +527,6 @@ public class TripUpdateConverterTest extends TestCase {
                 tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                 tripNodeMessage.setStopSequence(i);
                 tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                 tripMessage.addTripNodeMsgs(tripNodeMessage);
             }
 
@@ -609,8 +589,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
         // Add Stops to Message
@@ -622,7 +600,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
             tripNodeMessage.setStopSequence(i);
             tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-            tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
             tripMessage.addTripNodeMsgs(tripNodeMessage);
         }
 
@@ -690,8 +667,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -706,7 +681,6 @@ public class TripUpdateConverterTest extends TestCase {
                 tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                 tripNodeMessage.setStopSequence(i);
                 tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                 tripMessage.addTripNodeMsgs(tripNodeMessage);
             }
 
@@ -768,8 +742,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
         TripListMessage.Builder builder = TripListMessage.newBuilder();
@@ -813,8 +785,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
             builder.addTripMsgs(tripMessage);
         }
@@ -857,8 +827,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
             // Add Stops to Message
@@ -870,7 +838,6 @@ public class TripUpdateConverterTest extends TestCase {
                     tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                     tripNodeMessage.setStopSequence(i);
                     tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                     tripMessage.addTripNodeMsgs(tripNodeMessage);
                 }
             }
@@ -911,8 +878,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
         TripListMessage.Builder builder = TripListMessage.newBuilder();
@@ -955,8 +920,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
             builder.addTripMsgs(tripMessage);
         }
@@ -999,8 +962,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
             // Add Stops to Message
@@ -1012,7 +973,6 @@ public class TripUpdateConverterTest extends TestCase {
                     tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                     tripNodeMessage.setStopSequence(i);
                     tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                     tripMessage.addTripNodeMsgs(tripNodeMessage);
                 }
             }
@@ -1053,8 +1013,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_INSERTED);
 
         TripListMessage.Builder builder = TripListMessage.newBuilder();
@@ -1099,8 +1057,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -1147,8 +1103,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_INSERTED);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -1163,7 +1117,6 @@ public class TripUpdateConverterTest extends TestCase {
                     tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                     tripNodeMessage.setStopSequence(i);
                     tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                     tripMessage.addTripNodeMsgs(tripNodeMessage);
                 }
             }
@@ -1230,8 +1183,6 @@ public class TripUpdateConverterTest extends TestCase {
         tripMessage.setRouteId("IWL_2c");
         tripMessage.setServiceId("999");
         tripMessage.setBlockId(119);
-        tripMessage.setBundleId(99);
-        tripMessage.setTripInstance(1);
         tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
 
         TripListMessage.Builder builder = TripListMessage.newBuilder();
@@ -1276,8 +1227,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -1324,8 +1273,6 @@ public class TripUpdateConverterTest extends TestCase {
             tripMessage.setRouteId("IWL_2c");
             tripMessage.setServiceId("999");
             tripMessage.setBlockId(119);
-            tripMessage.setBundleId(99);
-            tripMessage.setTripInstance(1);
             tripMessage.setTripSource(PbTripSource.TC_TIMETABLE);
             csvData += "A--" + String.valueOf(k)
             + ",IWL_2c,11:30:00," + RandomStringUtils.randomNumeric(5) + ",1," + RandomStringUtils.randomNumeric(3)
@@ -1340,7 +1287,6 @@ public class TripUpdateConverterTest extends TestCase {
                     tripNodeMessage.setStopId(RandomStringUtils.randomNumeric(5));
                     tripNodeMessage.setStopSequence(i);
                     tripNodeMessage.setStopStatus(PbStopStatus.SS_PICKUP);
-                    tripNodeMessage.setNodeName(RandomStringUtils.randomAlphanumeric(3).toUpperCase());
                     tripMessage.addTripNodeMsgs(tripNodeMessage);
                 }
             }

@@ -1,0 +1,315 @@
+//
+// active-trips.proto
+//
+// Definition of the protocol buffer message relating to the rtta trip model
+//
+// Copyright (c) 2013 Sydney Trains
+//
+
+syntax = "proto2";
+
+option java_package = "au.gov.nsw.transport.rtta.intf.trippublish.pb.generated";
+
+//
+// A message containing RTTA TripModel trips
+//
+// All messages need to be sent in a TripModelEntity message so that clients
+// can decode them without having to know what the content type is.
+//
+message TripModelEntityMessage {
+
+    required uint64 time_stamp = 1;
+    required TripListMessage active_trips = 2;
+}
+
+//
+// The current status of the trip
+//
+enum PbTripState {
+
+    TS_INITIAL = 0;                         // Initial status
+    TS_ACTIVE_RUNNING = 1;                  // Trip is active and running
+    TS_ACTIVE_CANCELLED = 2;                // Trip is active but has been cancelled
+    TS_COMPLETE = 3;                        // Trip has completed
+    TS_INACTIVE = 4;                        // Trip is inactive
+}
+
+//
+// The TripStereotype of the trip details.
+//
+enum PbTripStereotype {
+
+    TY_STATIC = 0;                          // The original, unmodified details of the trip.
+    TY_DYNAMIC = 1;                         // The trip details can be modified.
+}
+
+//
+// Stop status at this node
+//
+enum PbStopStatus {
+
+    SS_NONE = 0;                            // None
+    SS_PICKUP = 1;                          // Pickup only
+    SS_SETDOWN = 2;                         // Set down only
+    SS_PICKUPSETDOWN = 3;                   // Pick up and set down
+    SS_TERMINATE = 4;                       // Terminating
+}
+
+//
+// SpeedBand - Speed band for this trip.
+// Values from TPS database.
+//
+enum PbSpeedBand {
+
+    SB_NONE = 0;
+    SB_HIGHSPEED = 1;
+    SB_INTERCITY = 2;
+    SB_SUBURBAN = 3;
+    SB_OUTERSUBURBAN = 4;
+    SB_FASTFREIGHT = 5;
+    SB_SLOWFREIGHT = 6;
+}
+
+//
+// NodeMode - Codes for mode of action at the current node.
+// Values from TPS database.
+//
+enum PbNodeMode {
+
+    NM_NONE = 0;                            //
+    NM_STOP_RM = 1;                         // Stop (revenue mode)
+    NM_PASS_RM = 3;                         // Pass (revenue mode)
+    NM_SPECIALPASS_RM = 35;                 // Special pass (revenue mode)
+    NM_TERMINATE_RM = 5;                    // Terminate (revenue mode)
+    NM_EXITNETWORK_RM = 21;                 // Exit Network (revenue mode)
+    NM_PASSINGEXITNETWORK_RM = 23;          // Passing Exit Network (revenue mode)
+    NM_STOP_NR = 9;                         // Stop (Non-Revenue)
+    NM_PASS_NR = 11;                        // Pass (Non-Revenue)
+    NM_SPECIALPASS_NR = 43;                 // Special pass (Non-revenue)
+    NM_TERMINATE_NR = 13;                   // Terminate (Non-Revenue)
+    NM_EXITNETWORK_NR = 29;                 // Exit Network (Non-revenue)
+    NM_PASSINGEXITNETWORK_NR = 31;          // Passing Exit Network (Non-Revenue)
+    NM_SPECIALPASSEXITNETWORK_RM = 55;      // Special Pass Exit network (Revenue mode)
+    NM_SPECIALPASSEXITNETWORK_NR = 63;      // Special Pass Exit network (Non-Revenue)
+}
+
+//
+// Trip type as defined in TPS database
+//
+enum PbTripType {
+
+    TT_EXPRESSPASSENGERTRAIN = 0;           // Express Passenger Train.
+    TT_EMPTYCARS = 1;                       // Empty Train.
+    TT_EXCHANGECARS = 2;                    // Exchange Cars.
+    TT_FREIGHTTRAIN = 3;                    // Freight Train.
+    TT_LIGHTENGINES = 4;                    // Light Engines.
+    TT_PASSENGERTRAIN = 5;                  // Passenger Train.
+    TT_ROADCOACH = 6;                       // Road Coach.
+    TT_SPECIALTRAIN = 7;                    // Special Train.
+    TT_TRACKMACHINE = 8;                    // Track Machine.
+    TT_TRIALTRAIN = 9;                      // Trial Train.
+    TT_TRACKMAINTENANCETRAIN = 10;          // Track Maintenance Train.
+}
+
+//
+// Type of train as defined in TPS database
+//
+enum PbConsistType {
+
+    CT_NONE = 0;                            // Unknown consist_type.
+    CT_I = 1;                               // I: MTP.NodeMode
+    CT_Q = 2;                               // Q: Maintenance A
+    CT_Y = 3;                               // Y: Y
+    CT_U = 4;                               // U: Maintenance B
+    CT_A = 5;                               // A: A
+    CT_B = 6;                               // B: Bus
+    CT_C = 7;                               // C: C
+    CT_D = 8;                               // D: De Loco
+    CT_E = 9;                               // E: El Loco
+    CT_F = 10;                              // f: Slow Freight
+    CT_G = 11;                              // G: G
+    CT_H = 12;                              // H: H
+    CT_J = 13;                              // J: Hunter
+    CT_K = 14;                              // K: K
+    CT_L = 15;                              // L: Ll Loco
+    CT_M = 16;                              // M: M
+    CT_N = 17;                              // N: Endeavour
+    CT_O = 18;                              // O: Other
+    CT_P = 19;                              // P: Xplorer
+    CT_R = 20;                              // R: R
+    CT_S = 21;                              // S: S
+    CT_T = 22;                              // T: T
+    CT_V = 23;                              // V: V
+    CT_W = 24;                              // W: Fast Freight
+    CT_X = 25;                              // X: XPT
+    CT_Z = 26;                              // Z: L&C
+}
+
+enum PbArrivalAndDepartureSymbol {
+
+    ADS_NONE = 0;                           // "" : Unknown.
+    ADS_SD  = 1;                            // "$": Train stands by fully crewed at location for specified time.
+    ADS_SP  = 2;                            // "%": Train decants, or shunts and decants, as required at this location.
+    //      Tanking may also occur at this location.
+    ADS_SA  = 3;                            // "&": Refer to annotation for Special instructions.
+    ADS_SF  = 4;                            // "/": Travelsafe Car Unlock procedure.
+    ADS_SL  = 5;                            // "<": Toilet Unlock procedure.
+    ADS_SE  = 6;                            // "=": Train tabled to perform Rail Clean/Point Clean or traverses infrequently used rails/points.
+    ADS_SG  = 7;                            // ">": Guard to carry out Toilet Lock procedure.
+    ADS_UA  = 8;                            // "A": Train attaches at this point.
+    ADS_UD  = 9;                            // "D": Train divides at this point.
+    ADS_UF  = 10;                           // "F": Shunt and refuel as required.
+    ADS_UH  = 11;                           // "H": Shunt, decant and refuel as required. Tanking may also occur at this location.
+    ADS_UL  = 12;                           // "L": Time allowed for locomotive purposes.
+    //      Trains stopping for crew purposes only e.g. relief, will be indicated by
+    //      'L' shown on the departure time e.g. Central arr 1020
+    //      dep 1024L
+    ADS_UP  = 13;                           // "P": Pilot staff working commences at / finishes at this location.
+    //      (for use in Special Train Notices)
+    ADS_UQ  = 14;                           // "Q": Relay driver to be provided and shunt as required.
+    ADS_UR  = 15;                           // "R": Relay driver to be provided at this point.
+    ADS_US  = 16;                           // "S": Train shunts at this point.
+    ADS_UT  = 17;                           // "T": Train ahead - wait line clear.
+    ADS_UW  = 18;                           // "W": Wash Train.
+    ADS_SB  = 19;                           // "\": Travelsafe Car Lock procedure.
+    ADS_ST  = 20;                           // "^": Guard to carry out Toilet Unlock procedure.
+    ADS_LA  = 21;                           // "a": Conditional stop to set down or pick up passengers.
+    //      Stops to pick up or set down customers when required.
+    ADS_LB  = 22;                           // "b": Conditional stop to only set down passengers.
+    //      Stops to set down customers when required.
+    ADS_LC  = 23;                           // "c": Conditional stop to only pick up passengers.
+    //      Stops to pick up customers when required.
+    ADS_LD  = 24;                           // "d": Regular stop to only set down passengers.
+    //      Stops to set down customers, but does not pick up.
+    ADS_LE  = 25;                           // "e": May depart before the published time after setting down passengers.
+    ADS_LG  = 26;                           // "g": Train Crew to perform specified duties at this location e.g. Safeworking
+    //      of trains through an unattended location, or change of Guard's
+    //      workstation.
+    ADS_LR  = 27;                           // "r": Recovery time (time in addition to running time).
+    ADS_LU  = 28;                           // "u": Regular stop to only pick up passengers.
+    //      Stops to pick up customers, but does not set down.
+    ADS_LX  = 29;                           // "x": Train to wait at crossing loop for approaching train.
+    //      Crossing of trains on single line sections will be indicated by 'x' shown.
+    //      on the departure time e.g. Mulgrave arr 1020
+    //      dep 1024x
+    ADS_LY  = 30;                           // "y": Change to/from connecting bus / Road Coach service.
+}
+
+//
+// Direction of the trip
+// Values from TPS database.
+//
+enum PbDirection {
+
+    DR_DOWN = 0;                            // Down direction, moving away from Central Station.
+    DR_UP = 1;                              // Up direction, moving towards Central Station.
+}
+
+//
+// Activty status of a trip
+//
+enum PbActivity {
+
+    AC_NONE = 0;                            // No activity.
+    AC_ACTIVE = 1;                          // Trip is active.
+    AC_COMPLETE = 2;                        // Trip has completed.
+    AC_CANCEL = 3;                          // Trip is cancelled.
+    AC_REMOVED = 4;                         // Trip is removed.
+}
+
+//
+// Source of the trip
+//
+enum PbTripSource {
+
+    TC_UNKNOWN = 0;                         //
+    TC_TIMETABLE = 1;                       // Source of the trip is the timetable.
+    TC_INSERTED = 2;                        // The trip has been inserted.
+}
+
+//
+// Message containing the active trip header information
+//
+message TripNodeMessage {
+    optional PbTripSource trip_source = 1;
+    optional string stop_id = 2;
+    optional uint64 arrival_time = 3;
+    optional uint64 departure_time = 4;
+    optional int32 stop_sequence = 5;
+    optional PbStopStatus stop_status = 6;
+}
+
+message TripMessage {
+
+    required string trip_id = 1;
+    optional PbTripSource trip_source = 2;
+    required string service_id = 3;
+    required int32 block_id = 4;
+    optional PbActivity current_activity = 5;
+    optional PbActivity previous_activity = 6;
+    required string route_id = 7;
+    repeated TripNodeMessage trip_node_msgs = 8;
+}
+
+message TripListMessage {
+
+    required uint64 msg_timestamp = 1;
+    repeated TripMessage trip_msgs = 2;
+}
+
+//
+// Timetable Messages
+//
+message TimetableTripNodeMessage {
+
+    required string trip_id = 1;
+    required string node_name = 2;
+    optional uint64 arrival_time = 3;
+    optional uint64 departure_time = 4;
+    optional PbNodeMode node_mode = 5;
+    optional int32 stop_sequence = 6;
+    optional string stop_id = 7;
+    optional PbArrivalAndDepartureSymbol arrival_symbol = 8;
+    optional PbArrivalAndDepartureSymbol departure_symbol = 9;
+}
+
+message TimetableTripMessage {
+
+    required string trip_id = 1;
+    optional string route_id = 2;
+    optional string service_id = 3;
+    optional int32 timetable_id = 4;
+    optional int32 timetableVersion_id = 5;
+    optional int32 tripHeader_id = 6;
+    optional string trip_name = 7;
+    optional int32 dop_ref = 8;
+    optional PbTripType trip_type = 9;
+    optional uint64 trip_start_time = 10;
+    optional uint64 trip_finish_time = 11;
+    optional string origin_node_name = 12;
+    optional string destination_node_name = 13;
+    optional int32 number_of_cars = 14;
+    optional PbDirection route_direction = 15;
+    optional PbSpeedBand speed_band = 16;
+    optional PbConsistType consist_type = 17;
+    optional int32 block_id = 18;
+    optional int32 rosterId = 19;
+    optional int32 positionInRoster = 20;
+    repeated TimetableTripNodeMessage trip_nodes = 21;
+}
+
+message TimetableInfoMessage {
+
+    required int32 bundle_id = 1;
+    optional uint64 bundle_date = 2;
+    optional int32 timetable_id = 3;
+    optional int32 timetable_version_id = 4;
+    optional uint64 activate_date = 5;
+    optional bool is_active = 6;
+}
+
+message TimetableMessage {
+
+    optional TimetableInfoMessage timetable_info = 1;
+    repeated TimetableTripMessage tt_trip_msgs = 2;
+}

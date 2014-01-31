@@ -3,7 +3,7 @@
 package au.gov.nsw.railcorp.gtfs.servlet;
 
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
-import au.gov.nsw.transport.rtta.intf.tripmodel.pb.generated.Tripmodel.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
