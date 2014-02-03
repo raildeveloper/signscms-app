@@ -127,8 +127,8 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     long departureTime = 0L;
                     arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
                     departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
-                    log.info("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
-                    + departureTime + " for stop id " + tripStop.getStopId());
+//                    log.info("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
+//                    + departureTime + " for stop id " + tripStop.getStopId());
                     if (changedTrip.hasValidDelayPrediction()) {
                         log.info("Trip " + changedTripId + " has prediction. ");
                         // Find the stop from where we should start publishing any delay information if it exists
@@ -384,7 +384,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                                 continue tripMessageLoop;
                             }
                             for (TripNodeMessage tripNodeMessage : tripMessage.getTripNodeMsgsList()) {
-                                log.info("Trip " + tripId + " has following nodes --> " + tripNodeMessage.toString());
+                                //log.info("Trip " + tripId + " has following nodes --> " + tripNodeMessage.toString());
                                 final PbStopStatus stopStatus = tripNodeMessage.getStopStatus();
                                 if (stopStatus != PbStopStatus.SS_NONE) {
                                     final TripStop tripStop = new TripStop();
@@ -456,9 +456,9 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                         log.info("Now calculating delays for " + trip.getTripId());
                         trip.calculateDelay();
                         trip.setMissedVehicleUpdates(0);
-                        log
-                        .info("Trip has vehicle position so should be some prediction - setting timestamp to reflect trip update --> "
-                        + vehiclePosition.getTimestamp());
+//                        log
+//                        .info("Trip has vehicle position so should be some prediction - setting timestamp to reflect trip update --> "
+//                        + vehiclePosition.getTimestamp());
                         trip.setRecordedTimeStamp(vehiclePosition.getTimestamp());
                         break;
                     }
