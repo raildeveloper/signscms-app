@@ -1,9 +1,9 @@
 //
-// active-trips.proto
+// trippublish.proto
 //
-// Definition of the protocol buffer message relating to the rtta trip model
+// Definition of the protocol buffer message relating to publishing the rtta trip model
 //
-// Copyright (c) 2013 Sydney Trains
+// Copyright (c) 2014 Sydney Trains
 //
 
 syntax = "proto2";
@@ -13,13 +13,13 @@ option java_package = "au.gov.nsw.transport.rtta.intf.trippublish.pb.generated";
 //
 // A message containing RTTA TripModel trips
 //
-// All messages need to be sent in a TripModelEntity message so that clients
+// All messages need to be sent in a TripPublishEntity message so that clients
 // can decode them without having to know what the content type is.
 //
-message TripModelEntityMessage {
+message TripPublishEntityMessage {
 
     required uint64 time_stamp = 1;
-    required TripListMessage active_trips = 2;
+    optional TripListMessage active_trips = 2;
 }
 
 //
@@ -150,7 +150,7 @@ enum PbArrivalAndDepartureSymbol {
     ADS_NONE = 0;                           // "" : Unknown.
     ADS_SD  = 1;                            // "$": Train stands by fully crewed at location for specified time.
     ADS_SP  = 2;                            // "%": Train decants, or shunts and decants, as required at this location.
-    //      Tanking may also occur at this location.
+                                            //      Tanking may also occur at this location.
     ADS_SA  = 3;                            // "&": Refer to annotation for Special instructions.
     ADS_SF  = 4;                            // "/": Travelsafe Car Unlock procedure.
     ADS_SL  = 5;                            // "<": Toilet Unlock procedure.
@@ -161,11 +161,11 @@ enum PbArrivalAndDepartureSymbol {
     ADS_UF  = 10;                           // "F": Shunt and refuel as required.
     ADS_UH  = 11;                           // "H": Shunt, decant and refuel as required. Tanking may also occur at this location.
     ADS_UL  = 12;                           // "L": Time allowed for locomotive purposes.
-    //      Trains stopping for crew purposes only e.g. relief, will be indicated by
-    //      'L' shown on the departure time e.g. Central arr 1020
-    //      dep 1024L
+                                            //      Trains stopping for crew purposes only e.g. relief, will be indicated by
+                                            //      'L' shown on the departure time e.g. Central arr 1020
+                                            //      dep 1024L
     ADS_UP  = 13;                           // "P": Pilot staff working commences at / finishes at this location.
-    //      (for use in Special Train Notices)
+                                            //      (for use in Special Train Notices)
     ADS_UQ  = 14;                           // "Q": Relay driver to be provided and shunt as required.
     ADS_UR  = 15;                           // "R": Relay driver to be provided at this point.
     ADS_US  = 16;                           // "S": Train shunts at this point.
@@ -174,24 +174,24 @@ enum PbArrivalAndDepartureSymbol {
     ADS_SB  = 19;                           // "\": Travelsafe Car Lock procedure.
     ADS_ST  = 20;                           // "^": Guard to carry out Toilet Unlock procedure.
     ADS_LA  = 21;                           // "a": Conditional stop to set down or pick up passengers.
-    //      Stops to pick up or set down customers when required.
+                                            //      Stops to pick up or set down customers when required.
     ADS_LB  = 22;                           // "b": Conditional stop to only set down passengers.
-    //      Stops to set down customers when required.
+                                            //      Stops to set down customers when required.
     ADS_LC  = 23;                           // "c": Conditional stop to only pick up passengers.
-    //      Stops to pick up customers when required.
+                                            //      Stops to pick up customers when required.
     ADS_LD  = 24;                           // "d": Regular stop to only set down passengers.
-    //      Stops to set down customers, but does not pick up.
+                                            //      Stops to set down customers, but does not pick up.
     ADS_LE  = 25;                           // "e": May depart before the published time after setting down passengers.
     ADS_LG  = 26;                           // "g": Train Crew to perform specified duties at this location e.g. Safeworking
-    //      of trains through an unattended location, or change of Guard's
-    //      workstation.
+                                            //      of trains through an unattended location, or change of Guard's
+                                            //      workstation.
     ADS_LR  = 27;                           // "r": Recovery time (time in addition to running time).
     ADS_LU  = 28;                           // "u": Regular stop to only pick up passengers.
-    //      Stops to pick up customers, but does not set down.
+                                            //      Stops to pick up customers, but does not set down.
     ADS_LX  = 29;                           // "x": Train to wait at crossing loop for approaching train.
-    //      Crossing of trains on single line sections will be indicated by 'x' shown.
-    //      on the departure time e.g. Mulgrave arr 1020
-    //      dep 1024x
+                                            //      Crossing of trains on single line sections will be indicated by 'x' shown.
+                                            //      on the departure time e.g. Mulgrave arr 1020
+                                            //      dep 1024x
     ADS_LY  = 30;                           // "y": Change to/from connecting bus / Road Coach service.
 }
 
@@ -233,83 +233,29 @@ enum PbTripSource {
 message TripNodeMessage {
     optional PbTripSource trip_source = 1;
     optional string stop_id = 2;
-    optional uint64 arrival_time = 3;
-    optional uint64 departure_time = 4;
-    optional int32 stop_sequence = 5;
-    optional PbStopStatus stop_status = 6;
+    optional string stop_name =3;
+    optional double stop_lat = 4;
+    optional double stop_long = 5;
+    optional uint64 arrival_time = 6;
+    optional uint64 departure_time = 7;
+    optional int32 stop_sequence = 8;
+    optional PbStopStatus stop_status = 9;
 }
 
 message TripMessage {
 
     required string trip_id = 1;
     optional PbTripSource trip_source = 2;
-    required string service_id = 3;
-    required int32 block_id = 4;
+    optional string service_id = 3;
+    optional int32 block_id = 4;
     optional PbActivity current_activity = 5;
     optional PbActivity previous_activity = 6;
-    required string route_id = 7;
+    optional string route_id = 7;
     repeated TripNodeMessage trip_node_msgs = 8;
 }
 
 message TripListMessage {
 
-    required uint64 msg_timestamp = 1;
+    optional uint64 msg_timestamp = 1;
     repeated TripMessage trip_msgs = 2;
-}
-
-//
-// Timetable Messages
-//
-message TimetableTripNodeMessage {
-
-    required string trip_id = 1;
-    required string node_name = 2;
-    optional uint64 arrival_time = 3;
-    optional uint64 departure_time = 4;
-    optional PbNodeMode node_mode = 5;
-    optional int32 stop_sequence = 6;
-    optional string stop_id = 7;
-    optional PbArrivalAndDepartureSymbol arrival_symbol = 8;
-    optional PbArrivalAndDepartureSymbol departure_symbol = 9;
-}
-
-message TimetableTripMessage {
-
-    required string trip_id = 1;
-    optional string route_id = 2;
-    optional string service_id = 3;
-    optional int32 timetable_id = 4;
-    optional int32 timetableVersion_id = 5;
-    optional int32 tripHeader_id = 6;
-    optional string trip_name = 7;
-    optional int32 dop_ref = 8;
-    optional PbTripType trip_type = 9;
-    optional uint64 trip_start_time = 10;
-    optional uint64 trip_finish_time = 11;
-    optional string origin_node_name = 12;
-    optional string destination_node_name = 13;
-    optional int32 number_of_cars = 14;
-    optional PbDirection route_direction = 15;
-    optional PbSpeedBand speed_band = 16;
-    optional PbConsistType consist_type = 17;
-    optional int32 block_id = 18;
-    optional int32 rosterId = 19;
-    optional int32 positionInRoster = 20;
-    repeated TimetableTripNodeMessage trip_nodes = 21;
-}
-
-message TimetableInfoMessage {
-
-    required int32 bundle_id = 1;
-    optional uint64 bundle_date = 2;
-    optional int32 timetable_id = 3;
-    optional int32 timetable_version_id = 4;
-    optional uint64 activate_date = 5;
-    optional bool is_active = 6;
-}
-
-message TimetableMessage {
-
-    optional TimetableInfoMessage timetable_info = 1;
-    repeated TimetableTripMessage tt_trip_msgs = 2;
 }
