@@ -13,7 +13,7 @@ import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbSto
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbTripSource;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripMessage;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripNodeMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
@@ -90,10 +90,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         assertTrue(Boolean.valueOf(converter.processLoadTripUpdates(message)));
         assertTrue(converter.generateTripUpdates());
@@ -154,10 +154,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -228,10 +228,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -303,10 +303,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "101A,IWL_2c,11:30:00,20131205,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -383,10 +383,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -457,10 +457,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -532,10 +532,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -606,10 +606,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "101A,IWL_2c,11:30:00,20131205,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -686,10 +686,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -747,10 +747,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -789,10 +789,10 @@ public class TripUpdateConverterTest extends TestCase {
             builder.addTripMsgs(tripMessage);
         }
 
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -844,10 +844,10 @@ public class TripUpdateConverterTest extends TestCase {
             builder.addTripMsgs(tripMessage);
         }
 
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -883,10 +883,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -924,10 +924,10 @@ public class TripUpdateConverterTest extends TestCase {
             builder.addTripMsgs(tripMessage);
         }
 
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -979,10 +979,10 @@ public class TripUpdateConverterTest extends TestCase {
             builder.addTripMsgs(tripMessage);
         }
 
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "123.23.trip,testRoute,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -1018,10 +1018,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "101A,IWL_2c,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -1064,10 +1064,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -1123,10 +1123,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -1188,10 +1188,10 @@ public class TripUpdateConverterTest extends TestCase {
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         builder.addTripMsgs(tripMessage);
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         String csvData = "101A,IWL_2c,11:30:00,20121210,1,A27,Some trip,None,30.76864309,-150.3478953,35.4312,12334.321,20.23,4,stop1,1,167293089032,1\n";
         StringReader reader = new StringReader(csvData);
@@ -1234,10 +1234,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);
@@ -1293,10 +1293,10 @@ public class TripUpdateConverterTest extends TestCase {
 
             builder.addTripMsgs(tripMessage);
         }
-        TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
 
         StringReader reader = new StringReader(csvData);
         converter.getProtoStorage().convertAndStoreCsv(reader);

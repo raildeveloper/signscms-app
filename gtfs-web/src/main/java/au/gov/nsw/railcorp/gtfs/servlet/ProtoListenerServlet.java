@@ -3,7 +3,7 @@
 package au.gov.nsw.railcorp.gtfs.servlet;
 
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,7 +88,7 @@ public class ProtoListenerServlet implements HttpRequestHandler {
             request.getServletContext().getServletContextName(),
             request.getContentLength());
             //log.info("Proto Buff Message Received : ---> \n" + in.toString());
-            final TripModelEntityMessage entityMessage = TripModelEntityMessage.parseFrom(in);
+            final TripPublishEntityMessage entityMessage = TripPublishEntityMessage.parseFrom(in);
             final String returnMessage = converter.processLoadTripUpdates(entityMessage);
             if ("true".equalsIgnoreCase(returnMessage)) {
                 response.setStatus(SUCCESS_STATUS_CODE);

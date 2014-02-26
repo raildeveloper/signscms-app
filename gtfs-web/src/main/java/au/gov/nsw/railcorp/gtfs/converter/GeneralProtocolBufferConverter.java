@@ -4,7 +4,9 @@ package au.gov.nsw.railcorp.gtfs.converter;
 
 
 
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+
+
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
@@ -49,5 +51,5 @@ public abstract class GeneralProtocolBufferConverter extends GeneralStoredProtoc
      *            feed
      * @return success
      */
-    public abstract String processLoadTripUpdates(TripModelEntityMessage feedMessage);
+    public abstract String processLoadTripUpdates(TripPublishEntityMessage feedMessage);
 }

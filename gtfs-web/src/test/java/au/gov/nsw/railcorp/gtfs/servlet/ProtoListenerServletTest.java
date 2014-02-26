@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
 import au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -79,11 +79,11 @@ public class ProtoListenerServletTest extends TestCase {
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
         // TripListMessage tripListMessage = builder.build();
 
-        final TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
 
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
         final byte[] messageByte = message.toByteArray();
         System.out.println("message " + message.toString());
         final InputStream byteIn = new ByteArrayInputStream(messageByte);
@@ -131,11 +131,11 @@ public class ProtoListenerServletTest extends TestCase {
         final PrintWriter writer = mock(PrintWriter.class);
         TripListMessage.Builder builder = TripListMessage.newBuilder();
         builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
-        final TripModelEntityMessage.Builder tripModelEntityMessage = TripModelEntityMessage.newBuilder();
+        final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
 
         tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
         tripModelEntityMessage.setActiveTrips(builder);
-        TripModelEntityMessage message = tripModelEntityMessage.build();
+        TripPublishEntityMessage message = tripModelEntityMessage.build();
         final byte[] messageByte = message.toByteArray();
         System.out.println("message " + message.toString());
         final InputStream byteIn = new ByteArrayInputStream(messageByte);

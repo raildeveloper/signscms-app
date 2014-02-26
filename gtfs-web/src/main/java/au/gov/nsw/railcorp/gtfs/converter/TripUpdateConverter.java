@@ -14,8 +14,8 @@ import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbSto
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.PbTripSource;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripMessage;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripModelEntityMessage;
 import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripNodeMessage;
+import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
@@ -329,7 +329,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
      *         message was successful or not.
      */
     @Override
-    public String processLoadTripUpdates(TripModelEntityMessage feedMessage) {
+    public String processLoadTripUpdates(TripPublishEntityMessage feedMessage) {
 
         String returnMessage = "true";
         boolean addStops = false;
