@@ -350,7 +350,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     trip.setServiceId(tripMessage.getServiceId());
                     trip.setBlockId(String.valueOf(tripMessage.getBlockId()));
                     trip.setRecordedTimeStamp(tripListMessage.getMsgTimestamp());
-                    log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
+                    //log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
                     if (activity == PbActivity.AC_CANCEL) {
                         log.info("Received Message that Trip " + tripId
                         + " has been CANCELLED");
