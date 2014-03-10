@@ -137,13 +137,13 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                         if (nextStop == null && changedTrip.getTripStops() != null) {
                             nextStop = changedTrip.getTripStops().get(0);
                         }
-                        log.info("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
+                        log.debug("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
                         if (tripStop.getStopSequence() >= nextStop.getStopSequence()) {
                             // Include delay for these stops
                             // calculate delay deltas
                             long arrivalDelay = tripStop.getArrivalDelay();
                             long departureDelay = tripStop.getDepartureDelay();
-                            log.info("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
+                            log.debug("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
                             + departureDelay + " for stop id " + tripStop.getStopId());
 
                             arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0
@@ -158,7 +158,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                             }
                             arrivalTime += arrivalDelay;
                             departureTime += departureDelay;
-                            log.info("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
+                            log.debug("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
                             + departureTime + " for stop id " + tripStop.getStopId());
                         }
 
@@ -402,7 +402,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                                     // Fetching GTFS Stop Details from H2 database - this needs to be changed to be sent from Trip publisher
                                     // tripStop.setStopName(tripDAO.getStopNameForStopId(tripNodeMessage.getStopId()));
                                     tripDAO.getGtfsStopsDetails(tripStop, tripNodeMessage.getStopId());
-                                    log.info("Trip " + tripId + " has been following stopping pattern" + tripStop.toString());
+                                    log.debug("Trip " + tripId + " has been following stopping pattern" + tripStop.toString());
                                     tripStops.add(tripStop);
                                 }
                             }
@@ -451,7 +451,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     final TripDescriptor tripDescriptor = vehiclePosition.getTrip();
                     final String vpTripId = tripDescriptor.getTripId();
                     if (trip.getTripId().equalsIgnoreCase(vpTripId)) {
-                        log.info("Found Vehicle Position for " + trip.getTripId() + " currently at " + vehiclePosition.toString());
+                        log.debug("Found Vehicle Position for " + trip.getTripId() + " currently at " + vehiclePosition.toString());
                         trip.setVehiclePosition(vehiclePosition);
                         log.info("Now calculating delays for " + trip.getTripId());
                         trip.calculateDelay();
