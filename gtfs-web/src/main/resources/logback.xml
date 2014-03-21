@@ -10,8 +10,8 @@
       <maxHistory>7</maxHistory>
       <timeBasedFileNamingAndTriggeringPolicy
             class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <!-- or whenever the file size reaches 100MB -->
-        <maxFileSize>100MB</maxFileSize>
+        <!-- or whenever the file size reaches 150MB -->
+        <maxFileSize>150MB</maxFileSize>
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
     <encoder>

@@ -90,6 +90,8 @@ public class Trip {
 
     // Type of Trip
     private TRIP_TYPES tripType;
+    
+    private boolean tripPosition;
 
     public String getTripId() {
 
@@ -621,5 +623,17 @@ public class Trip {
     public void setTripType(TRIP_TYPES triptype) {
 
         this.tripType = triptype;
+    }
+
+    
+    public boolean isTripPosition() {
+    
+        return tripPosition;
+    }
+
+    
+    public void setTripPosition(boolean tripPosition) {
+    
+        this.tripPosition = tripPosition;
     }
 }

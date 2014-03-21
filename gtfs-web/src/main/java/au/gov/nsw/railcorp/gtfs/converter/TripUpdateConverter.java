@@ -75,6 +75,10 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         final int positive30 = 30;
         final int negative30 = -30;
 
+        // How many updates should a vehicle be absent from the vehicle position feed
+        // for before it's invalidated?
+        final int invalidateCacheItemSampleThreshold = 180;
+
         // setup FeedMessage & Feed Header GTFS objects?
         final FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
         gtfsHeader.setGtfsRealtimeVersion(GTFS_VERSION);
@@ -96,91 +100,94 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
         // First Construct Messages for Changed Trips.
         for (Trip changedTrip : changedTrips.getChangedTrips()) {
             final String changedTripId = changedTrip.getTripId();
-            log.info("Building GTFS R Trip Update for Changed Trips " + changedTripId);
-            final TripUpdate.Builder changedTripUpdate = TripUpdate.newBuilder();
+            if (changedTrip.getMissedVehicleUpdates() < invalidateCacheItemSampleThreshold) {
+                log.info("Building GTFS R Trip Update for Changed Trips " + changedTripId);
+                final TripUpdate.Builder changedTripUpdate = TripUpdate.newBuilder();
 
-            final TripDescriptor.Builder changedTripBuilder = TripDescriptor.newBuilder();
-            changedTripBuilder.setTripId(changedTrip.getTripId());
-            changedTripBuilder.setRouteId(changedTrip.getRouteId());
+                final TripDescriptor.Builder changedTripBuilder = TripDescriptor.newBuilder();
+                changedTripBuilder.setTripId(changedTrip.getTripId());
+                changedTripBuilder.setRouteId(changedTrip.getRouteId());
 
-            if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CANCELLED) {
-                // Mark the trip as Cancelled
-                log.info("Trip " + changedTripId + " has been cancelled.");
-                changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.CANCELED);
-            } else {
-                if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CHANGED) {
-                    // Mark the trip as Replacement
-                    log.info("Trip " + changedTripId + " has been replaced.");
-                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.REPLACEMENT);
-                } else if (changedTrip.getTripType() == TRIP_TYPES.TRIP_INSERTED) {
-                    // Mark the trip as ADDED
-                    log.info("Trip " + changedTripId + " has been inserted.");
-                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.ADDED);
-                }
-                // For changed and inserted trips go through all the stops
-                for (TripStop tripStop : changedTrip.getTripStops()) {
-
-                    final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
-                    final StopTimeEvent.Builder arrivalStopTimeEvent = StopTimeEvent.newBuilder();
-                    final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
-                    long arrivalTime = 0L;
-                    long departureTime = 0L;
-                    arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
-                    departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
-//                    log.info("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
-//                    + departureTime + " for stop id " + tripStop.getStopId());
-                    if (changedTrip.hasValidDelayPrediction()) {
-                        log.info("Trip " + changedTripId + " has prediction. ");
-                        // Find the stop from where we should start publishing any delay information if it exists
-                        TripStop nextStop = changedTrip.getCurrentStop() != null ? changedTrip.getCurrentStop() : changedTrip
-                        .getNextStop();
-                        if (nextStop == null && changedTrip.getTripStops() != null) {
-                            nextStop = changedTrip.getTripStops().get(0);
-                        }
-                        log.debug("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
-                        if (tripStop.getStopSequence() >= nextStop.getStopSequence()) {
-                            // Include delay for these stops
-                            // calculate delay deltas
-                            long arrivalDelay = tripStop.getArrivalDelay();
-                            long departureDelay = tripStop.getDepartureDelay();
-                            log.debug("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
-                            + departureDelay + " for stop id " + tripStop.getStopId());
-
-                            arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0
-                            : arrivalDelay;
-                            departureDelay = (departureDelay > negative30 && departureDelay < positive30) ? 0
-                            : departureDelay;
-                            // if service has arrived at stop early, publish a useful
-                            // delay value
-                            // rather than the arrival time
-                            if (arrivalDelay < 0) {
-                                arrivalDelay = Math.max(arrivalDelay, departureDelay);
-                            }
-                            arrivalTime += arrivalDelay;
-                            departureTime += departureDelay;
-                            log.debug("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
-                            + departureTime + " for stop id " + tripStop.getStopId());
-                        }
-
+                if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CANCELLED) {
+                    // Mark the trip as Cancelled
+                    log.info("Trip " + changedTripId + " has been cancelled.");
+                    changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.CANCELED);
+                } else {
+                    if (changedTrip.getTripType() == TRIP_TYPES.TRIP_CHANGED) {
+                        // Mark the trip as Replacement
+                        log.info("Trip " + changedTripId + " has been replaced.");
+                        changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.REPLACEMENT);
+                    } else if (changedTrip.getTripType() == TRIP_TYPES.TRIP_INSERTED) {
+                        // Mark the trip as ADDED
+                        log.info("Trip " + changedTripId + " has been inserted.");
+                        changedTripBuilder.setScheduleRelationship(TripDescriptor.ScheduleRelationship.ADDED);
                     }
-                    arrivalStopTimeEvent.setTime(arrivalTime);
-                    departureStopTimeEvent.setTime(departureTime);
-                    stopTimeUpdate.setArrival(arrivalStopTimeEvent);
-                    stopTimeUpdate.setDeparture(departureStopTimeEvent);
-                    stopTimeUpdate.setStopId(tripStop.getStopId());
-                    changedTripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                    // For changed and inserted trips go through all the stops
+                    for (TripStop tripStop : changedTrip.getTripStops()) {
+
+                        final StopTimeUpdate.Builder stopTimeUpdate = StopTimeUpdate.newBuilder();
+                        final StopTimeEvent.Builder arrivalStopTimeEvent = StopTimeEvent.newBuilder();
+                        final StopTimeEvent.Builder departureStopTimeEvent = StopTimeEvent.newBuilder();
+                        long arrivalTime = 0L;
+                        long departureTime = 0L;
+                        arrivalTime = tripStop.getScheduledArrivalTime().getTime() / MILLISECOND_IN_SECOND;
+                        departureTime = tripStop.getScheduledDepartureTime().getTime() / MILLISECOND_IN_SECOND;
+                        // log.info("Trip " + changedTripId + " scheduled arrival time  " + arrivalTime + " scheduled departure time "
+                        // + departureTime + " for stop id " + tripStop.getStopId());
+                        if (changedTrip.hasValidDelayPrediction()) {
+                            log.info("Trip " + changedTripId + " has prediction. ");
+                            // Find the stop from where we should start publishing any delay information if it exists
+                            TripStop nextStop = changedTrip.getCurrentStop() != null ? changedTrip.getCurrentStop() : changedTrip
+                            .getNextStop();
+                            if (nextStop == null && changedTrip.getTripStops() != null) {
+                                nextStop = changedTrip.getTripStops().get(0);
+                            }
+                            log.debug("Trip " + changedTripId + " prediction to start from stop " + nextStop.getStopId());
+                            if (tripStop.getStopSequence() >= nextStop.getStopSequence()) {
+                                // Include delay for these stops
+                                // calculate delay deltas
+                                long arrivalDelay = tripStop.getArrivalDelay();
+                                long departureDelay = tripStop.getDepartureDelay();
+                                log.debug("Trip has " + changedTripId + " arrival delay " + arrivalDelay + " departure delay "
+                                + departureDelay + " for stop id " + tripStop.getStopId());
+
+                                arrivalDelay = (arrivalDelay > negative30 && arrivalDelay < positive30) ? 0
+                                : arrivalDelay;
+                                departureDelay = (departureDelay > negative30 && departureDelay < positive30) ? 0
+                                : departureDelay;
+                                // if service has arrived at stop early, publish a useful
+                                // delay value
+                                // rather than the arrival time
+                                if (arrivalDelay < 0) {
+                                    arrivalDelay = Math.max(arrivalDelay, departureDelay);
+                                }
+                                arrivalTime += arrivalDelay;
+                                departureTime += departureDelay;
+                                log.debug("Trip " + changedTripId + " now has arrival time " + arrivalTime + " & departure time "
+                                + departureTime + " for stop id " + tripStop.getStopId());
+                            }
+
+                        }
+                        arrivalStopTimeEvent.setTime(arrivalTime);
+                        departureStopTimeEvent.setTime(departureTime);
+                        stopTimeUpdate.setArrival(arrivalStopTimeEvent);
+                        stopTimeUpdate.setDeparture(departureStopTimeEvent);
+                        stopTimeUpdate.setStopId(tripStop.getStopId());
+                        changedTripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                    }
                 }
+                changedTripUpdate.setTrip(changedTripBuilder);
+                changedTripUpdate.setTimestamp(changedTrip.getRecordedTimeStamp());
+                // construct FeedEntity wrapped around TripUpdate
+                final FeedEntity.Builder feedEntity = FeedEntity.newBuilder();
+                feedEntity.setId(changedTrip.getTripId());
+                feedEntity.setTripUpdate(changedTripUpdate);
+
+                // add FeedEntity to FeedMessage
+                gtfsMessage.addEntity(feedEntity);
+            } else {
+                log.info("Trip " + changedTripId + " has been invalidated; as no vehicle location update received after trip was active.");
             }
-            changedTripUpdate.setTrip(changedTripBuilder);
-            changedTripUpdate.setTimestamp(changedTrip.getRecordedTimeStamp());
-            // construct FeedEntity wrapped around TripUpdate
-            final FeedEntity.Builder feedEntity = FeedEntity.newBuilder();
-            feedEntity.setId(changedTrip.getTripId());
-            feedEntity.setTripUpdate(changedTripUpdate);
-
-            // add FeedEntity to FeedMessage
-            gtfsMessage.addEntity(feedEntity);
-
         }
 
         if (activeTrips.getActiveTrips() != null) {
@@ -350,7 +357,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     trip.setServiceId(tripMessage.getServiceId());
                     trip.setBlockId(String.valueOf(tripMessage.getBlockId()));
                     trip.setRecordedTimeStamp(tripListMessage.getMsgTimestamp());
-                    //log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
+                    // log.info("Recived Trip Update for " + tripId + " complete message " + tripMessage.toString());
                     if (activity == PbActivity.AC_CANCEL) {
                         log.info("Received Message that Trip " + tripId
                         + " has been CANCELLED");
@@ -384,7 +391,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                                 continue tripMessageLoop;
                             }
                             for (TripNodeMessage tripNodeMessage : tripMessage.getTripNodeMsgsList()) {
-                                //log.info("Trip " + tripId + " has following nodes --> " + tripNodeMessage.toString());
+                                // log.info("Trip " + tripId + " has following nodes --> " + tripNodeMessage.toString());
                                 final PbStopStatus stopStatus = tripNodeMessage.getStopStatus();
                                 if (stopStatus != PbStopStatus.SS_NONE) {
                                     final TripStop tripStop = new TripStop();
@@ -453,14 +460,40 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                     if (trip.getTripId().equalsIgnoreCase(vpTripId)) {
                         log.debug("Found Vehicle Position for " + trip.getTripId() + " currently at " + vehiclePosition.toString());
                         trip.setVehiclePosition(vehiclePosition);
+                        // TripPosition reported - caching it
+                        trip.setTripPosition(true);
                         log.info("Now calculating delays for " + trip.getTripId());
                         trip.calculateDelay();
                         trip.setMissedVehicleUpdates(0);
-//                        log
-//                        .info("Trip has vehicle position so should be some prediction - setting timestamp to reflect trip update --> "
-//                        + vehiclePosition.getTimestamp());
+                        // log
+                        // .info("Trip has vehicle position so should be some prediction - setting timestamp to reflect trip update --> "
+                        // + vehiclePosition.getTimestamp());
                         trip.setRecordedTimeStamp(vehiclePosition.getTimestamp());
                         break;
+                    } else {
+                        // Check if TripPosition was previously reported for this Trip - If Yes - replace it with cached value.
+                        for (Trip changedTrip : changedTrips.getChangedTrips()) {
+                            if (trip.getTripId().equalsIgnoreCase(changedTrip.getTripId())) {
+                                if (trip.isTripPosition()) {
+                                    trip.setVehiclePosition(changedTrip.getVehiclePosition());
+                                    log
+                                    .info("Trip "
+                                    + trip.getTripId()
+                                    + " didn't had vehicle position reported in current feed - Hence previous known position "
+                                    + trip.getVehiclePosition().toString() + " of feed is being used for time predictions.");
+                                    trip.calculateDelay();
+                                    trip.setTripPosition(true);
+                                    trip.setMissedVehicleUpdates(trip.getMissedVehicleUpdates() + 1);
+                                } else {
+                                    // This trip Isn't active Yet
+                                    trip.setMissedVehicleUpdates(0);
+                                    trip.setTripPosition(false);
+                                }
+
+                            }
+
+                        }
+
                     }
                 }
             }
