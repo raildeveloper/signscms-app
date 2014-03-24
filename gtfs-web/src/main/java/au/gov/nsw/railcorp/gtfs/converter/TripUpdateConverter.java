@@ -364,7 +364,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
 
                         trip.setTripType(TRIP_TYPES.TRIP_CANCELLED);
                         changedTripsList.add(trip);
-                    } else {
+                    } else if (activity != PbActivity.AC_COMPLETE) {
                         final PbTripSource tripSource = tripMessage.getTripSource();
                         if (tripSource == PbTripSource.TC_INSERTED) {
                             // This is inserted trip
@@ -418,6 +418,8 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
                             checkVehiclePosition(trip);
                             changedTripsList.add(trip);
                         }
+                    } else {
+                        log.info("Trip " + tripId + " has been reported as COMPLETE from RTTA");
                     }
 
                 }
