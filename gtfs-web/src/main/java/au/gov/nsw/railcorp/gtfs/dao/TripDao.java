@@ -129,6 +129,7 @@ public class TripDao {
             if (nextTripId != null) {
                 final Trip nextTrip = this.findTrip(nextTripId);
                 trip.setNextTrip(nextTrip);
+                nextTrip.setIsFormedTrip(true);
             }
         }
         return trip;

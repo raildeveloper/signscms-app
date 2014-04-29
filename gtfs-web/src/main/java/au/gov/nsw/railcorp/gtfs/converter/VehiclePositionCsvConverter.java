@@ -377,6 +377,11 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
                         Trip trip = tripMap.get(tripDescriptor.getTripId());
                         if (trip == null) {
                             trip = tripDAO.findTripWithFollowingTrip(tripDescriptor.getTripId());
+                        } else if (trip.isFormedTrip()) {
+                            final long cascadedDelay = trip.getCurrentDelay();
+                            trip = tripDAO.findTripWithFollowingTrip(tripDescriptor.getTripId());
+                            trip.setCurrentDelay(cascadedDelay);
+                            trip.cascadeCurrentDelayToStops();
                         }
 
                         // store timestamp and descriptor for use in GTFSRTripUpdate feed
@@ -400,9 +405,9 @@ public class VehiclePositionCsvConverter extends GeneralCsvConverter {
                             if (trip.hasValidDelayPrediction() && nextTrip != null) {
                                 nextTrip.cascadeDelayFromPreviousTrip(trip);
                                 trips.add(nextTrip);
-//                                getLog().info(
-//                                "TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => " + nextTrip.getCurrentDelay()
-//                                + " to next trip " + nextTrip.getTripId());
+                                // getLog().info(
+                                // "TripUpdateGenerator: cascaded delay " + trip.getCurrentDelay() + " => " + nextTrip.getCurrentDelay()
+                                // + " to next trip " + nextTrip.getTripId());
                                 tripMap.put(nextTrip.getTripId(), nextTrip);
                             }
                         }

@@ -84,6 +84,9 @@ public class Trip {
 
     // The next trip in the block
     private Trip nextTrip;
+    
+    // Is the trip Formed trip
+    private boolean isFormedTrip = false;
 
     // The current delay time in seconds
     private long currentDelay = Long.MAX_VALUE;
@@ -635,5 +638,17 @@ public class Trip {
     public void setTripPosition(boolean tripPosition) {
     
         this.tripPosition = tripPosition;
+    }
+
+    
+    public boolean isFormedTrip() {
+    
+        return isFormedTrip;
+    }
+
+    
+    public void setIsFormedTrip(boolean isFormedTrip) {
+    
+        this.isFormedTrip = isFormedTrip;
     }
 }
