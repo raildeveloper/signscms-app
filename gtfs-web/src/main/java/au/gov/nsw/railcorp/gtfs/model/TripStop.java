@@ -116,10 +116,8 @@ public class TripStop {
      */
     public Date gtfsTimeToDate(String time) {
 
-        final int split = 3;
-        final int hour23 = 23;
-        final int hour24 = 24;
         // split time of format HH:mm:ss into array
+        final int split = 3;
         final String[] timeParts = time.split(":");
         if (timeParts.length != split) {
             return null;
@@ -132,8 +130,8 @@ public class TripStop {
 
         // deal with GTFS supporting times beyond 23:59:59 (offset to yesterday)
         final Calendar calendar = new GregorianCalendar();
-        if (hour > hour23) {
-            hour -= hour24;
+        final int currentHours = calendar.get(Calendar.HOUR_OF_DAY);
+        if (currentHours < 10 && hour > 18) {
             calendar.add(Calendar.DAY_OF_MONTH, -1);
         }
 
