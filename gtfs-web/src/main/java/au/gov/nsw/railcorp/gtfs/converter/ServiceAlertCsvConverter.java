@@ -361,7 +361,13 @@ public class ServiceAlertCsvConverter extends GeneralCsvConverter {
      * (non-Javadoc)
      * @see au.gov.nsw.railcorp.gtfs.converter.GeneralCsvConverter#processTripUpdates(com.google.transit.realtime.GtfsRealtime.FeedMessage)
      */
-    @Override
+    // @Override
+    // Trip Updates generation has been moved inside RTTA.
+    /**
+     * Process Trip Updates.
+     * @param feedMessage FeedMessage
+     * @return boolean
+     */
     protected boolean processTripUpdates(FeedMessage feedMessage) {
 
         // Loop over service alerts looking for cancelled message

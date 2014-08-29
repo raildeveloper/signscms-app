@@ -8,8 +8,9 @@ import static org.mockito.Mockito.when;
 
 import au.gov.nsw.railcorp.gtfs.converter.GeneralProtocolBufferConverter;
 import au.gov.nsw.railcorp.gtfs.converter.TripUpdateConverter;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripListMessage;
-import au.gov.nsw.transport.rtta.intf.trippublish.pb.generated.Trippublish.TripPublishEntityMessage;
+
+import com.google.transit.realtime.GtfsRealtime.FeedHeader;
+import com.google.transit.realtime.GtfsRealtime.FeedMessage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -75,15 +76,28 @@ public class ProtoListenerServletTest extends TestCase {
 
         // Set up the ProtoBuff Input Stream
 
-        TripListMessage.Builder builder = TripListMessage.newBuilder();
-        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
-        // TripListMessage tripListMessage = builder.build();
+        // TripListMessage.Builder builder = TripListMessage.newBuilder();
+        // builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        // // TripListMessage tripListMessage = builder.build();
+        //
+        // final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
+        //
+        // tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        // tripModelEntityMessage.setActiveTrips(builder);
+        // TripPublishEntityMessage message = tripModelEntityMessage.build();
 
-        final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
+        // TripList Message is no longer receieved - RTTA 2B - App Shall now receive GTFSR TripUpdate Proto Buff
 
-        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
-        tripModelEntityMessage.setActiveTrips(builder);
-        TripPublishEntityMessage message = tripModelEntityMessage.build();
+        FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
+        gtfsHeader.setGtfsRealtimeVersion("1.0");
+        gtfsHeader.setIncrementality(FeedHeader.Incrementality.FULL_DATASET);
+        gtfsHeader.setTimestamp(System.currentTimeMillis() / 1000);
+
+        FeedMessage.Builder gtfsMessage = FeedMessage.newBuilder();
+        gtfsMessage.setHeader(gtfsHeader);
+
+        final FeedMessage message = gtfsMessage.build();
+
         final byte[] messageByte = message.toByteArray();
         System.out.println("message " + message.toString());
         final InputStream byteIn = new ByteArrayInputStream(messageByte);
@@ -104,6 +118,7 @@ public class ProtoListenerServletTest extends TestCase {
 
                 return byteIn.read();
             }
+
         });
         when(response.getWriter()).thenReturn(writer);
         when(sContext.getServletContextName()).thenReturn("testHandleRequestTripUpdateMessage");
@@ -129,13 +144,25 @@ public class ProtoListenerServletTest extends TestCase {
 
         final ServletContext sContext = mock(ServletContext.class);
         final PrintWriter writer = mock(PrintWriter.class);
-        TripListMessage.Builder builder = TripListMessage.newBuilder();
-        builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
-        final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
+        // TripListMessage.Builder builder = TripListMessage.newBuilder();
+        // builder.setMsgTimestamp(System.currentTimeMillis() / 1000L);
+        // final TripPublishEntityMessage.Builder tripModelEntityMessage = TripPublishEntityMessage.newBuilder();
+        //
+        // tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
+        // tripModelEntityMessage.setActiveTrips(builder);
+        // TripPublishEntityMessage message = tripModelEntityMessage.build();
+        // Phase2B - GTFSR Trip Update ProtoBuff is being published
 
-        tripModelEntityMessage.setTimeStamp(System.currentTimeMillis() / 1000L);
-        tripModelEntityMessage.setActiveTrips(builder);
-        TripPublishEntityMessage message = tripModelEntityMessage.build();
+        FeedHeader.Builder gtfsHeader = FeedHeader.newBuilder();
+        gtfsHeader.setGtfsRealtimeVersion("1.0");
+        gtfsHeader.setIncrementality(FeedHeader.Incrementality.FULL_DATASET);
+        gtfsHeader.setTimestamp(System.currentTimeMillis() / 1000);
+
+        FeedMessage.Builder gtfsMessage = FeedMessage.newBuilder();
+        gtfsMessage.setHeader(gtfsHeader);
+
+        final FeedMessage message = gtfsMessage.build();
+
         final byte[] messageByte = message.toByteArray();
         System.out.println("message " + message.toString());
         final InputStream byteIn = new ByteArrayInputStream(messageByte);
@@ -148,6 +175,7 @@ public class ProtoListenerServletTest extends TestCase {
 
                 return byteIn.read();
             }
+
         });
         when(response.getWriter()).thenReturn(writer);
         when(sContext.getServletContextName()).thenReturn("testHandleEmptyMessage");

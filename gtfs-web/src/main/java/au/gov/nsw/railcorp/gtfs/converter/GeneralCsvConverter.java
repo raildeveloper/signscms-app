@@ -86,8 +86,8 @@ public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRet
 
             final byte[] newProtoBuf = newFeed.toByteArray();
             setCurrentProtoBuf(newProtoBuf);
-
-            processTripUpdates(newFeed);
+            // Trip Update Generation has been moved inside RTTA
+            //processTripUpdates(newFeed);
 
         } catch (IOException e) {
             log.error("Failed to Process CSV - " + e.getMessage());
@@ -161,12 +161,13 @@ public abstract class GeneralCsvConverter extends GeneralStoredProtocolBufferRet
      */
     protected abstract boolean processCsvRowAndBuildGtfsrEntity(Object row, FeedEntity.Builder gtfsEntity, Builder gtfsMessage);
 
-    /**
-     * Does processing required for generating tripUpdates.
-     * @param feedMessage
-     *            feed
-     * @return success
-     */
-    protected abstract boolean processTripUpdates(FeedMessage feedMessage);
+    // Trip Update Generation has been moved inside RTTA
+//    /**
+//     * Does processing required for generating tripUpdates.
+//     * @param feedMessage
+//     *            feed
+//     * @return success
+//     */
+//    protected abstract boolean processTripUpdates(FeedMessage feedMessage);
 
 }

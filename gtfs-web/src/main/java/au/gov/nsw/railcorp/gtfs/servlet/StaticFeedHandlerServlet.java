@@ -2,7 +2,6 @@
 
 package au.gov.nsw.railcorp.gtfs.servlet;
 
-import au.gov.nsw.railcorp.gtfs.helper.PublishBundle;
 import au.gov.nsw.railcorp.gtfs.transitbundle.TransitBundle;
 
 import java.io.BufferedInputStream;
@@ -118,12 +117,15 @@ public class StaticFeedHandlerServlet implements HttpRequestHandler {
             // Files Uploaded - Create the Zip bundle
             if (uploadedFiles != null && uploadedFiles.size() > 0) {
                 createGtfsBundle(publishPath, uploadedFiles);
-                // push these files into H2 database
-                log.info("Finished creating zip for transit bundle - publishing them to h2 db now");
-                final PublishBundle publishBundle = new PublishBundle();
-                final File publishedTransitBundle = new File(transitBundle.getLatestBundleLocation());
-                publishBundle.publishBundleH2db(publishedTransitBundle);
-                log.info("Finished publishing to h2 db");
+
+                log.info("Finished creating zip for transit bundle {} ",
+                new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+
+                // Push to H2 Database is no longer required - This is removed as part of Phase2B
+                // final PublishBundle publishBundle = new PublishBundle();
+                // final File publishedTransitBundle = new File(transitBundle.getLatestBundleLocation());
+                // publishBundle.publishBundleH2db(publishedTransitBundle);
+                // log.info("Finished publishing to h2 db");
             } else {
                 // Error Condition
                 response.setStatus(BAD_REQUEST_CODE);

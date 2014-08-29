@@ -100,7 +100,8 @@
 		<servlet-name>TripUpdateGTFSR</servlet-name>
 		<url-pattern>/GTFSRTripUpdates</url-pattern>
 	</servlet-mapping>
-	<servlet>
+	<!-- H2 Servlet isn't required as part of Phase2B - Commenting out for now - This would beed to be removed -->
+	<!-- <servlet>
 		<servlet-name>H2Console</servlet-name>
 		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
 		<init-param>
@@ -112,7 +113,7 @@
 	<servlet-mapping>
 		<servlet-name>H2Console</servlet-name>
 		<url-pattern>/console/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	<servlet>
 		<description>Servlet to receive GTFS Bundle and get that in H2Database</description>
 		<display-name>InitDb</display-name>
@@ -157,7 +158,7 @@
 	<url-pattern>/GTFS_LoadTripUpdate/*</url-pattern>
 	<url-pattern>/InitDb/*</url-pattern>
 	<url-pattern>/TripUpdate/*</url-pattern>	
-	<url-pattern>/console/*</url-pattern>
+	<!-- <url-pattern>/console/*</url-pattern> -->
 	<http-method>GET</http-method>
 	<http-method>POST</http-method>
 	</web-resource-collection>

@@ -328,6 +328,21 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
     }
 
     /**
+     * Processes Protocol Buffer message received from RTTA 2B GTFS Trip Publisher.
+     * @param feedMessage
+     *            - GtfsRealTime feedMessage
+     * @return - boolean - true or false - status if processing protocol buffer message was successful or not.
+     */
+    @Override
+    public String processLoadTripUpdates(FeedMessage feedMessage) {
+
+        final byte[] newProtoBuf = feedMessage.toByteArray();
+        setCurrentProtoBuf(newProtoBuf);
+
+        return "true";
+    }
+
+    /**
      * Processes Protocol Buffer message received from TripPublisher - Builds
      * objects for Change Trips.
      * @param feedMessage
@@ -335,7 +350,7 @@ public class TripUpdateConverter extends GeneralProtocolBufferConverter {
      * @return - boolean - true or false - status if processing Protocol Buffer
      *         message was successful or not.
      */
-    @Override
+
     public String processLoadTripUpdates(TripPublishEntityMessage feedMessage) {
 
         String returnMessage = "true";
