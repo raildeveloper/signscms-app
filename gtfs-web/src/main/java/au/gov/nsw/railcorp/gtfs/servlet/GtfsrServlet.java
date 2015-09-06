@@ -3,18 +3,19 @@
 package au.gov.nsw.railcorp.gtfs.servlet;
 
 import au.gov.nsw.railcorp.gtfs.converter.StoredProtocolBufferRetriever;
-
-import java.io.IOException;
-import java.io.PrintWriter;
+import com.google.transit.realtime.GtfsRealtime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.HttpRequestHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.HttpRequestHandler;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * This class implements the GTFSR that serves protocol buffers
@@ -26,6 +27,9 @@ public class GtfsrServlet implements HttpRequestHandler {
 
     private StoredProtocolBufferRetriever protoStorage;
     private Logger log = LoggerFactory.getLogger(this.getClass());
+
+    private static final String HEADER_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
+    private static final long MILLISECOND_IN_SECOND = 1000L;
 
     /**
      * Constructor.
@@ -81,6 +85,14 @@ public class GtfsrServlet implements HttpRequestHandler {
             log.info("GTFS-R {} debug request received", request.getServletContext().getServletContextName());
             final PrintWriter writer = response.getWriter();
             writer.append(protoStorage.getCurrentProtoBufDebug());
+
+            GtfsRealtime.FeedMessage feed = GtfsRealtime.FeedMessage.parseFrom(protoStorage.getCurrentProtoBuf());
+            long feedGenerationTimeStamp = feed.getHeader().getTimestamp();
+            Date feedGenerationDate = new Date(feedGenerationTimeStamp * MILLISECOND_IN_SECOND);
+            final SimpleDateFormat headerDateFormat = new SimpleDateFormat(HEADER_DATE_FORMAT);
+            headerDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            final String lastModifiedHeader = headerDateFormat.format(feedGenerationDate);
+            response.setHeader("Last-Modified", lastModifiedHeader);
         } else {
             log.info("GTFS-R {} binary request received", request.getServletContext().getServletContextName());
             final ServletOutputStream output = response.getOutputStream();
