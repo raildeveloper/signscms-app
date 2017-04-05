@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/signscms-app.iml" filepath="$PROJECT_DIR$/signscms-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/signscms-ear/signscms-ear.iml" filepath="$PROJECT_DIR$/signscms-ear/signscms-ear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/signscms-web/signscms-web.iml" filepath="$PROJECT_DIR$/signscms-web/signscms-web.iml" />
+    </modules>
+  </component>
+</project>
