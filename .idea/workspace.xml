@@ -1,67 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78079640-6f4a-4c59-9a03-7957df69ae58" name="Default" comment="Initial Commit">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-ear/README.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/Converter.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/CsvConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/GeneralCsvConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/GeneralProtocolBufferConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/GeneralStoredProtocolBufferRetriever.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/ServiceAlertCsvConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/StoredProtocolBufferRetriever.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/TripUpdate.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/TripUpdateConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/VehiclePositionCsvConverter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/types/ServiceAlertCsvRow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/types/TripBasedCsvRow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/converter/types/VehiclePositionCsvRow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/dao/TripDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/exception/BusinessException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/exception/SystemException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/helper/ActiveTrips.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/helper/ChangedTrips.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/helper/H2DatabaseAccess.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/helper/PublishBundle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/model/Trip.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/model/TripStop.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/CsvListenerServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/DbBundleGenerator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/GtfsrServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/ProtoListenerServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/StaticFeedHandlerServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/TransitBundleListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/TripInfoServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/TripUpdateGenerator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/servlet/filter/GtfsWebFilter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/railcorp/gtfs/transitbundle/TransitBundle.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/transport/rtta/intf/tripmodel/pb/generated/Tripmodel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/au/gov/nsw/transport/rtta/intf/trippublish/pb/generated/Trippublish.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/com/google/transit/realtime/GtfsRealtime.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/com/google/transit/realtime/gtfs-realtime.proto" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/tripmodel.proto" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/java/trippublish.proto" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/resources/logback.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/webapp/WEB-INF/GTFS-Spring.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/webapp/WEB-INF/trip-info.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/main/webapp/WEB-INF/web.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/converter/GeneralProtocolBufferConverterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/converter/ServiceAlertCsvConverterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/converter/VehiclePositionCsvConverterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/exception/SystemExceptionTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/CSVListenerServletTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/GtfsrServletTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/ProtoListenerServletTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/StaticFeedHandlerServletTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/TransitBundleListenerTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/filter/GtfsWebFilterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/java/au/gov/nsw/railcorp/gtfs/servlet/filter/MockFilterChain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/resources/service_alert_aggregation_complex.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/resources/servicealerts-largetestdata.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gtfs-web/src/test/resources/servicealertstest-fails-production.csv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signscms-ear/signscms-ear.iml" afterPath="$PROJECT_DIR$/signscms-ear/signscms-ear.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signscms-web/signscms-web.iml" afterPath="$PROJECT_DIR$/signscms-web/signscms-web.iml" />
+    <list default="true" id="78079640-6f4a-4c59-9a03-7957df69ae58" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="signscms-app.iws" />
@@ -110,8 +50,8 @@
       <file leaf-file-name="logback.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/signscms-web/build/resources/main/logback.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42857143">
-              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.5714286">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1208,7 +1148,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="gtfs&#9;FILE&#9;file:///Users/administrator/CodeRepo/signscms-app/signscms-ear/gtfs-ear.iml" />
+    <property name="SearchEverywhereHistoryKey" value="git&#9;FILE&#9;file:///Users/administrator/CodeRepo/signscms-app/.gitignore&#10;gtfs&#9;FILE&#9;file:///Users/administrator/CodeRepo/signscms-app/signscms-ear/gtfs-ear.iml" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1370,6 +1310,13 @@
       <option name="number" value="Default" />
       <updated>1491401053868</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1491428136953</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1491428136953</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1450,10 +1397,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/signscms-web/build/resources/main/logback.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42857143">
-          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.5714286">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding />
         </state>
       </provider>
