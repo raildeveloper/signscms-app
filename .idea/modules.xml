@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/signscms-app.iml" filepath="$PROJECT_DIR$/signscms-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/signscms-ear/signscms-ear.iml" filepath="$PROJECT_DIR$/signscms-ear/signscms-ear.iml" />
-      <module fileurl="file://$PROJECT_DIR$/signscms-web/signscms-web.iml" filepath="$PROJECT_DIR$/signscms-web/signscms-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-app.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear.iml" group="signscms-ear" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear_main.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear_main.iml" group="signscms-ear" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear_test.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-ear/signscms-ear_test.iml" group="signscms-ear" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web.iml" group="signscms-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web_main.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web_main.iml" group="signscms-web" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web_test.iml" filepath="$PROJECT_DIR$/.idea/modules/signscms-web/signscms-web_test.iml" group="signscms-web" />
     </modules>
   </component>
 </project>
