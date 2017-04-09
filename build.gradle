@@ -28,10 +28,12 @@ subprojects {
     checkstyleTest.classpath += configurations.provided
 
     repositories {
-        mavenCentral()
+
+        mavenLocal()
         maven {
 
             url "http://maven.springframework.org/release"
+            //url "https://repo.spring.io/release"
         }
 
         // Use the Maven Central repository; requires internet access.
@@ -43,10 +45,12 @@ subprojects {
         compile group: 'commons-codec', name: 'commons-codec', version: '1.3'
         compile group: 'com.google.guava', name: 'guava', version: '21.0'
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        compile group: 'org.springframework', name: 'spring-web', version: '2.5.6.SEC03'
-        compile group: 'org.springframework', name: 'spring-beans', version: '2.5.6.SEC03'
-        compile group: 'org.springframework', name: 'spring-context', version: '2.5.6.SEC03'
-        compile group: 'org.springframework', name: 'spring-core', version: '2.5.6.SEC03'
+        compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.7.RELEASE'
+        //compile group: 'org.springframework', name: 'spring-web', version: '4.3.7.RELEASE'
+        compile group: 'org.springframework', name: 'spring-beans', version: '4.3.7.RELEASE'
+        compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+        compile group: 'org.springframework', name: 'spring-core', version: '4.3.7.RELEASE'
+        compile group: 'javax.servlet', name: 'jstl', version: '1.2'
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.2'
         compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.2'

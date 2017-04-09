@@ -22,7 +22,7 @@
   <module name="NewlineAtEndOfFile"/>
 
   <module name="RegexpHeader">
-    <property name="header" value="^// RailCorp 201\d$"/>
+    <property name="header" value="^// SydneyTrains 201\d$"/>
   </module>
 
   <module name="FileLength">
@@ -155,7 +155,7 @@
     <module name="PackageName">
       <!-- no uppercase letters, 2 or more characters -->
       <property name="format"
-                value="^au.gov.nsw.railcorp.gtfs(\.[a-z][a-z0-9]+)*$"
+                value="^au.gov.nsw.sydneytrains(\.[a-z][a-z0-9]+)*$"
                 />
     </module>
     <module name="ParameterName"/>
