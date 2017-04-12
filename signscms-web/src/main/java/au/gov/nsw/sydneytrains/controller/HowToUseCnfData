@@ -1,0 +1,33 @@
+How to use CnfData class
+
+At start up
+- Create instance of class
+- Call readFromSource
+    TODO: should it be optional to read from a file or a database?
+    TODO: should file directories be configurable?
+
+When a player connects (IN hostname)
+- Call getDevice with the hostname
+    A configured device will return a CnfDevice, otherwise null
+- Call getLink with CnfDevice.getDeviceId
+    A CnfLink will be returned, otherwise null
+    Get CnfLink.getViewId which can return 0 (blank)
+- Call getView with the viewId
+    A CnfView should be returned, but otherwise null (error condition)
+- Call CnfView.getAsJSON
+    The JSON string contains the configured view (a series of image filenames)
+
+When a user connects
+- Call getAllDevicesAsJSON
+- Call getAllViewsAsJSON
+- Call getAllLinksAsJSON
+    The JSON strings contain all the configured information
+
+When a user presses the submit button (IN deviceId, viewId)
+- viewId can be 0 (blank view)
+- update the links
+- Call writeToSource
+
+
+
+

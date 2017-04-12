@@ -6,13 +6,13 @@ package au.gov.nsw.sydneytrains.controller;
  * Configured device: a pc that is configured to display a signage view
  */
 public class CnfDevice {
-    private final int deviceId;
+    private final Integer deviceId;
     private final String deviceName;
     private final String description;
     private final int pixelsHorizontal;
     private final int pixelsVertical;
 
-    public CnfDevice(final int deviceId, final String deviceName, final String description,
+    public CnfDevice(final Integer deviceId, final String deviceName, final String description,
                      final int pixelsHorizontal, final int pixelsVertical)
     {
         this.deviceId = deviceId;
@@ -22,7 +22,7 @@ public class CnfDevice {
         this.pixelsVertical = pixelsVertical;
     }
 
-    public int getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
@@ -40,5 +40,13 @@ public class CnfDevice {
 
     public int getPixelsVertical() {
         return pixelsVertical;
+    }
+
+    // Debugging
+    public void print() {
+        System.out.println("deviceId: " + this.deviceId
+                            + " deviceName: " + this.deviceName
+                            + " description: " + this.description
+                            + " pixels (HxV): " + this.pixelsHorizontal + "x" + this.pixelsVertical);
     }
 }

@@ -8,23 +8,29 @@ package au.gov.nsw.sydneytrains.controller;
  */
 public class CnfLink {
 
-    private final int deviceId;
-    private int viewId;
+    private final Integer deviceId;
+    private Integer viewId;
 
-    public CnfLink(int deviceId, int viewId) {
+    public CnfLink(Integer deviceId, Integer viewId) {
         this.deviceId = deviceId;
         this.viewId = viewId;
     }
 
-    public int getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public int getViewId() {
+    public Integer getViewId() {
         return viewId;
     }
 
-    public void setViewId(int viewId) {
+    public void setViewId(Integer viewId) {
         this.viewId = viewId;
+    }
+
+    // Debugging
+    public void print() {
+        System.out.println("deviceId: " + this.deviceId
+                + " viewId: " + this.viewId);
     }
 }

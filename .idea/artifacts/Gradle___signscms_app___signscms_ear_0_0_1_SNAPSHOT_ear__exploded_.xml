@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="Gradle : signscms-app : signscms-ear-0.0.1-SNAPSHOT.ear (exploded)">
+    <output-path>$PROJECT_DIR$/signscms-ear/build/libs/exploded/signscms-ear-0.0.1-SNAPSHOT.ear</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$">
+        <files>
+          <file path="$PROJECT_DIR$/signscms-ear/build/libs/exploded/signscms-ear-0.0.1-SNAPSHOT.ear/META-INF/application.xml" value="PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8YXBwbGljYXRpb24geG1sbnM9Imh0dHA6Ly9qYXZhLnN1bi5jb20veG1sL25zL2phdmFlZSINCiAgICAgICAgICAgICB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHA6Ly9qYXZhLnN1bi5jb20veG1sL25zL2phdmFlZSBodHRwOi8vamF2YS5zdW4uY29tL3htbC9ucy9qYXZhZWUvYXBwbGljYXRpb25fNi54c2QiDQogICAgICAgICAgICAgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgdmVyc2lvbj0iNiI+DQogICAgPGRlc2NyaXB0aW9uPkRpZ2l0YWwgU2lnbmFnZSBDb250ZW50IE1hbmFnZW1lbnQgU3lzdGVtPC9kZXNjcmlwdGlvbj4NCiAgICA8aW5pdGlhbGl6ZS1pbi1vcmRlcj50cnVlPC9pbml0aWFsaXplLWluLW9yZGVyPg0KICAgIDxtb2R1bGU+DQogICAgICAgIDx3ZWI+DQogICAgICAgICAgICA8d2ViLXVyaT5TaWduYWdlQ01TLndhcjwvd2ViLXVyaT4NCiAgICAgICAgICAgIDxjb250ZXh0LXJvb3Q+U2lnbmFnZUNNUzwvY29udGV4dC1yb290Pg0KICAgICAgICA8L3dlYj4NCiAgICA8L21vZHVsZT4NCiAgICA8bGlicmFyeS1kaXJlY3Rvcnk+bGliPC9saWJyYXJ5LWRpcmVjdG9yeT4NCjwvYXBwbGljYXRpb24+DQo=" />
+        </files>
+        <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/signscms-ear/build/libs/exploded/signscms-ear-0.0.1-SNAPSHOT.ear/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="signscms-ear_main/javaeeApplication/JavaEE Application Gradle : signscms-ear-0.0.1-SNAPSHOT.ear" />
+      <element id="dir-copy" path="$PROJECT_DIR$/signscms-ear/src/main" />
+      <element id="directory" name="SignageCMS.war">
+        <element id="artifact" artifact-name="Gradle : signscms-app : SignageCMS.war (exploded)" />
+      </element>
+    </root>
+  </artifact>
+</component>

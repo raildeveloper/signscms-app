@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="ear" name="Gradle : signscms-app : signscms-ear-0.0.1-SNAPSHOT.ear">
+    <output-path>$PROJECT_DIR$/signscms-ear/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="signscms-ear-0.0.1-SNAPSHOT.ear">
+      <element id="artifact" artifact-name="Gradle : signscms-app : signscms-ear-0.0.1-SNAPSHOT.ear (exploded)" />
+    </root>
+  </artifact>
+</component>

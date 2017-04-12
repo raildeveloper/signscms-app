@@ -7,13 +7,13 @@ package au.gov.nsw.sydneytrains.controller;
  */
 public class CnfView {
 
-    private final int viewId;
+    private final Integer viewId;
     private final String viewName;
     private final String description;
     private final int pixelsHorizontal;
     private final int pixelsVertical;
 
-    public CnfView(final int viewId, final String viewName, final String description,
+    public CnfView(final Integer viewId, final String viewName, final String description,
                    final int pixelsHorizontal, final int pixelsVertical)
     {
         this.viewId = viewId;
@@ -23,7 +23,7 @@ public class CnfView {
         this.pixelsVertical = pixelsVertical;
     }
 
-    public int getViewId() {
+    public Integer getViewId() {
         return viewId;
     }
 
@@ -41,5 +41,13 @@ public class CnfView {
 
     public int getPixelsVertical() {
         return pixelsVertical;
+    }
+
+    // Debugging
+    public void print() {
+        System.out.println("viewId: " + this.viewId
+                + " viewName: " + this.viewName
+                + " description: " + this.description
+                + " pixels (HxV): " + this.pixelsHorizontal + "x" + this.pixelsVertical);
     }
 }
