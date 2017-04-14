@@ -32,10 +32,11 @@ public class CnfData {
         m_devices.put(key, new CnfDevice(key, "TestPC2", "Test PC 2", 8*240, 240));
         printDevices();
 
+        String[] images = new String[]{"P5 blue.png", "P6 blue.png", "Stairs Down blue.png", "Arrow Down blue.png"};
         key = 3;
-        m_views.put(key, new CnfView(key, "TestView1", "Test View 1", 4*240, 240));
+        m_views.put(key, new CnfView(key, "TestView1", "Test View 1", 4*240, 240, images));
         key = 4;
-        m_views.put(key, new CnfView(key, "TestView2", "Test View 2", 8*240, 240));
+        m_views.put(key, new CnfView(key, "TestView2", "Test View 2", 8*240, 240, images));
         printViews();
 
         Integer deviceId = 1, viewId = 3;

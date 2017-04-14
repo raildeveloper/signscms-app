@@ -12,15 +12,18 @@ public class CnfView {
     private final String description;
     private final int pixelsHorizontal;
     private final int pixelsVertical;
+    private final String[] images;
 
     public CnfView(final Integer viewId, final String viewName, final String description,
-                   final int pixelsHorizontal, final int pixelsVertical)
+                   final int pixelsHorizontal, final int pixelsVertical, final String[] images)
     {
         this.viewId = viewId;
         this.viewName = viewName;
         this.description = description;
         this.pixelsHorizontal = pixelsHorizontal;
         this.pixelsVertical = pixelsVertical;
+        // is allocation required ? this.images = new String[images.length];
+        this.images = images;
     }
 
     public Integer getViewId() {
@@ -42,6 +45,8 @@ public class CnfView {
     public int getPixelsVertical() {
         return pixelsVertical;
     }
+
+    public String[] getImages() { return images; }
 
     // Debugging
     public void print() {
