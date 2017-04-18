@@ -1,4 +1,4 @@
-package au.gov.nsw.sydneytrains.controller;
+package au.gov.nsw.sydneytrains.model;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -92,7 +92,7 @@ public class CnfData {
      */
     public String getAllDevicesAsJSON() {
         Gson gson = new Gson();
-        return gson.toJSON(m_devices);
+        return gson.toJson(m_devices);
     }
 
     /*
@@ -130,7 +130,7 @@ public class CnfData {
      */
     public String getAllViewsAsJSON() {
         Gson gson = new Gson();
-        return gson.toJSON(m_views);
+        return gson.toJson(m_views);
     }
 
     /*
@@ -153,7 +153,7 @@ public class CnfData {
      */
     public String getAllLinksAsJSON() {
         Gson gson = new Gson();
-        return gson.toJSON(m_links);
+        return gson.toJson(m_links);
     }
 
     /*

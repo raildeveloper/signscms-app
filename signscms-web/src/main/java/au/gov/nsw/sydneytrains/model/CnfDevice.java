@@ -1,4 +1,4 @@
-package au.gov.nsw.sydneytrains.controller;
+package au.gov.nsw.sydneytrains.model;
 
 /**
  * Created by Oscar on 10/04/2017.
