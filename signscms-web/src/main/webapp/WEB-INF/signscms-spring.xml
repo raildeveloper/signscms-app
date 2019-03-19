@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd ">
+<!--
+    <context:component-scan base-package="au.gov.nsw.sydneytrains.controller"/>
+    <mvc:annotation-driven/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <mvc:view-controller path="/" view-name="upload"/>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="268435456"/>
+    </bean> -->
+
+    <bean id="SignScmsWebFilter" class="au.gov.nsw.sydneytrains.filter.SignScmsWebFilter"/>
+
+    <bean id="GetSignForDeviceServlet" class="au.gov.nsw.sydneytrains.servlet.GetSignForDeviceServlet">
+    </bean>
+    <bean id="DeviceServlet" class="au.gov.nsw.sydneytrains.servlet.DeviceServlet">
+    </bean>
+    <bean id="SignControllerServlet" class="au.gov.nsw.sydneytrains.servlet.SignControllerServlet">
+    </bean>
+    <bean id="InitialiseDeviceView" class="au.gov.nsw.sydneytrains.servlet.InitialiseDeviceView">
+    </bean>
+    <bean id="ChangeSignServlet" class="au.gov.nsw.sydneytrains.servlet.ChangeSignServlet">
+    </bean>
+    <bean id="ScheduleServlet" class="au.gov.nsw.sydneytrains.servlet.ScheduleServlet">
+    </bean>
+    <bean id="ScheduleOperationsServlet" class="au.gov.nsw.sydneytrains.servlet.ScheduleOperationsServlet">
+    </bean>
+    <bean id="ContactUsServlet" class="au.gov.nsw.sydneytrains.servlet.ContactUsServlet">
+    </bean>
+
+
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+</beans>

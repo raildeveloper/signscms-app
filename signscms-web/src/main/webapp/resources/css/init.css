@@ -1,0 +1,33 @@
+
+#initpage{
+    border:1px solid #B0B0B0;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-clip:content-box;
+    background-color: #bfff00;
+}
+
+#clear {
+    border: 1px solid #B0B0B0;
+}
+
+#load {
+    border: 1px solid #B0B0B0;
+}
+
+.xmltext {
+    border: 5px solid #B0B0B0;
+    background-color: #FFFFC0;
+}
+
+.success {
+    background-color: #00FF00;
+}
+
+.error {
+    background-color: #FF0000;
+}
+
+.warning {
+    background-color: #FF7700;
+}

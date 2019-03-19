@@ -1,0 +1,76 @@
+How to use CnfData class
+
+NOTE NOTE: default behaviour is always that the device will be showing blank
+
+At start up
+- Create instance of class
+- Call readFromSource
+    TODO: should it be optional to read from a file or a database?
+    TODO: should file directories be configurable?
+
+When a player connects (IN hostname)
+- Call getDevice with the hostname
+    A configured device will return a CnfDevice, otherwise null
+- Call getLink with CnfDevice.getDeviceId
+    A CnfLink will be returned, otherwise null
+- Call getView with the viewId
+    A CnfView should be returned, but otherwise null (error condition)
+- Return a DataForSign with the CnfDevice and CnfView
+
+When a user connects
+- Call getAllDevicesAsJSON
+- Call getAllViewsAsJSON
+- Call getAllLinksAsJSON
+    The JSON strings contain all the configured information
+
+When a user presses the submit button (IN deviceId, viewId)
+- viewId can be 0 (blank view)
+- update the links
+- Call writeToSource
+
+
+
+NOTE NOTE: XML data is based upon
+<?xml version="1.0"?>
+<SCMS_DATA version="0.1">
+    <DEVICES>
+        <DEVICE id="dTH1" name="SIGN-THL-1" description="Northen stairs near George St exit" pixHor="960" pixVer="240" />
+        <DEVICE id="dTH2" name="SIGN-THL-2" description="Northen stairs P5 and 6" pixHor="960" pixVer="240" />
+    </DEVICES>
+    <VIEWS>
+        <!-- id="0" is reserved for blank />
+        <VIEW id="vTH1" name="P5-6Down" description="P5 and P6 down stairs" pixHor="960" pixVer="240">
+            <IMAGES>
+                <IMAGE name="P5 blue.png" />
+                <IMAGE name="P6 blue.png" />
+                <IMAGE name="Stairs Down blue.png" />
+                <IMAGE name="Arrow Down blue.png" />
+            </IMAGES>
+        </VIEW>
+        <VIEW id="vTH2" name="P5-6Up" description="P5 and P6 up stairs" pixHor="960" pixVer="240">
+            <IMAGES>
+                <IMAGE name="Exit blue.png" />
+                <IMAGE name="Stairs Up blue.png" />
+                <IMAGE name="Arrow Up blue.png" />
+            </IMAGES>
+        </VIEW>
+    </VIEWS>
+    <LINKS>
+        <LINK deviceId="dTH1" viewId="vTH1" />
+        <LINK deviceId="dTH2" viewId="vTH2" />
+    </LINKS>
+    <LINK_ASSOCIATIONS>
+        <LINK_ASSOCIATION deviceId="dTH1" viewId="vTH1">
+            <ASSOCIATION deviceId="dTH2" viewId="vTH2" />
+            ... can be multiple
+        </LINK_ASSOCIATION>
+    </LINK_ASSOCIATIONS>
+</SCMS_DATA>
+
+Just a thought:
+Put application configuration settings in the config file as well.
+<CONFIGSETTINGS>
+    <DATAVERSION version="1.0" />
+    <IMAGES dirPathName="D:\SCMS\Images" />
+</CONFIGSETTINGS>
+

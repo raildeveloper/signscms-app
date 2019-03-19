@@ -1,0 +1,20 @@
+PURPOSE : Explain how to use this application
+
+APPLICATION DESCRIPTION : Provides a configured view for a configured device.
+
+CONFIGURATION: At start up the application reads the data from the database.
+
+RUNNING: Once the application has initialised, the following web pages are available:
+    <server>:8080/Init
+        Executes a force read from the XML configuration file. The database is filled with the read information.
+    <server>:8080/Sign?hostname=<machine>
+        <TODO description>
+    <server>:8080/console
+        <TODO description>
+    <server>:8080/Test
+        <TODO whishfull thinking?>
+etc
+
+
+<TODO> images need to be outside the WAR file, ie D:\SCMS\Images
+

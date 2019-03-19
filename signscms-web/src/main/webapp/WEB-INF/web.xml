@@ -1,0 +1,141 @@
+<!--suppress WebProperties -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>SignageCMS</display-name>
+    <description>SydneyTrains Signage CMS application.</description>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/signscms-spring.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>au.gov.nsw.sydneytrains.servlet.CnfDataObjectsListener</listener-class>
+    </listener>
+    <!-- <filter>
+         <filter-name>SignScmsWebFilter</filter-name>
+         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+     </filter>
+     <filter-mapping>
+         <filter-name>SignScmsWebFilter</filter-name>
+         <url-pattern>/*</url-pattern>
+     </filter-mapping>-->
+
+    <servlet>
+        <description>Initialise all CnfView Objects - Read from XML configuration file</description>
+        <display-name>InitialiseDeviceView</display-name>
+        <servlet-name>InitialiseDeviceView</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+        <init-param>
+            <param-name>handleRequest</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InitialiseDeviceView</servlet-name>
+        <url-pattern>/Init</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>Get Devices</description>
+        <display-name>DeviceServlet</display-name>
+        <servlet-name>DeviceServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeviceServlet</servlet-name>
+        <url-pattern>/Devices</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>Schedule</description>
+        <display-name>ScheduleServlet</display-name>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleServlet</servlet-name>
+        <url-pattern>/Schedule</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>ScheduleOperationsServlet</description>
+        <display-name>ScheduleOperationsServlet</display-name>
+        <servlet-name>ScheduleOperationsServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ScheduleOperationsServlet</servlet-name>
+        <url-pattern>/addSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>Contact</description>
+        <display-name>ContactUsServlet</display-name>
+        <servlet-name>ContactUsServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactUsServlet</servlet-name>
+        <url-pattern>/Contact</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description>Get Sign for Device Servlet</description>
+        <display-name>GetSignForDeviceServlet</display-name>
+        <servlet-name>GetSignForDeviceServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetSignForDeviceServlet</servlet-name>
+        <url-pattern>/Sign</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>Get Controller</description>
+        <display-name>SignControllerServlet</display-name>
+        <servlet-name>SignControllerServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignControllerServlet</servlet-name>
+        <url-pattern>/Controller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <description>Change Sign</description>
+        <display-name>ChangeSignServlet</display-name>
+        <servlet-name>ChangeSignServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeSignServlet</servlet-name>
+        <url-pattern>/ChangeSign</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>H2Console</servlet-name>
+        <servlet-class>org.h2.server.web.WebServlet</servlet-class>
+        <init-param>
+            <param-name>webAllowOthers</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>H2Console</servlet-name>
+        <url-pattern>/console/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+</web-app>

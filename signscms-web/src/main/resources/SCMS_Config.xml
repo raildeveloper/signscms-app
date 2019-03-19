@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<SCMS_DATA version="0.1">
+    <DEVICES>
+        <DEVICE id="d1" order="1" name="ESC 01" description="Platform 5/6" PI_Name="SPI-THL-DS-1" pixHor="768" pixVer="96"/>
+        <DEVICE id="d2" order="2" name="ESC 02" description="Platform 5/6" PI_Name="SPI-THL-DS-3" pixHor="768" pixVer="96"/>
+        <DEVICE id="d3" order="3" name="ESC 03" description="Platform 5/6" PI_Name="SPI-THL-DS-7" pixHor="768" pixVer="96"/>
+        <DEVICE id="d4" order="4" name="ESC 04" description="Platform 5/6" PI_Name="SPI-THL-DS-5" pixHor="768" pixVer="96"/>
+        <DEVICE id="d5" order="5" name="ESC 05" description="Platform 4" PI_Name="SPI-THL-DS-4" pixHor="768" pixVer="96"/>
+        <DEVICE id="d6" order="6" name="ESC 06" description="Platform 4" PI_Name="SPI-THL-DS-2" pixHor="768" pixVer="96"/>
+        <DEVICE id="d7" order="7" name="ESC 07" description="Platform 4" PI_Name="SPI-THL-DS-6" pixHor="768" pixVer="96"/>
+        <DEVICE id="d8" order="8" name="ESC 08" description="Platform 4" PI_Name="SPI-THL-DS-8" pixHor="768" pixVer="96"/>
+        <DEVICE id="d9" order="9" name="QVB_ENT" description="QVB Entrance" PI_Name="SPI-THL-DS-9" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d10" order="10" name="QVB_EXIT" description="QVB Exit" PI_Name="SPI-THL-DS-10" pixHor="1920" pixVer="96"/>
+    </DEVICES>
+    <VIEWS>
+
+        <VIEW id="v1_d1" name="UP" description="Escalator 1 Up" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d1" name="DOWN" description="Escalator 1 Down" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d1" name="NO ENTRY" description="Escalator 1 No Entry" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d1" name="OUT OF ORDER" description="Escalator 1 Out of Order" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d1" name="EVACUATE" description="Escalator 1 Evacuate" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d1" name="TEST" description="Escalator 1 Test" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d1" name="CLOCK" description="Escalator 1 Clock" pixHor="786" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+
+        <VIEW id="v1_d2" name="UP" description="Escalator 2 Up" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC02_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d2" name="DOWN" description="Escalator 2 Down" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC02_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d2" name="NO ENTRY" description="Escalator 2 No Entry" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d2" name="OUT OF ORDER" description="Escalator 2 Out of Order" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d2" name="EVACUATE" description="Escalator 2 Evacuate" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d2" name="TEST" description="Escalator 2 Test" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d2" name="CLOCK" description="Escalator 2 Clock" pixHor="786" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d3" name="UP" description="Escalator 3 Up" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC03_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d3" name="DOWN" description="Escalator 3 Down" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC03_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d3" name="NO ENTRY" description="Escalator 3 No Entry" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d3" name="OUT OF ORDER" description="Escalator 3 Out of Order" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d3" name="EVACUATE" description="Escalator 3 Evacuate" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d3" name="TEST" description="Escalator 3 Test" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d3" name="CLOCK" description="Escalator 3 Clock" pixHor="786" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d4" name="UP" description="Escalator 4 Up" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC04_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d4" name="DOWN" description="Escalator 4 Down" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC04_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d4" name="NO ENTRY" description="Escalator 4 No Entry" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d4" name="OUT OF ORDER" description="Escalator 4 Out of Order" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d4" name="EVACUATE" description="Escalator 4 Evacuate" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d4" name="TEST" description="Escalator 4 Test" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d4" name="CLOCK" description="Escalator 4 Clock" pixHor="786" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d5" name="UP" description="Escalator 5 Up" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC05_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d5" name="DOWN" description="Escalator 5 Down" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC05_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d5" name="NO ENTRY" description="Escalator 5 No Entry" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC05_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d5" name="OUT OF ORDER" description="Escalator 5 Out of Order" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC05_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d5" name="EVACUATE" description="Escalator 5 Evacuate" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d5" name="TEST" description="Escalator 5 Test" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d5" name="CLOCK" description="Escalator 5 Clock" pixHor="786" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+
+        <VIEW id="v1_d6" name="UP" description="Escalator 6 Up" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC06_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d6" name="DOWN" description="Escalator 6 Down" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC06_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d6" name="NO ENTRY" description="Escalator 6 No Entry" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC06_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d6" name="OUT OF ORDER" description="Escalator 6 Out of Order" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC06_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d6" name="EVACUATE" description="Escalator 6 Evacuate" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d6" name="TEST" description="Escalator 6 Test" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d6" name="CLOCK" description="Escalator 6 Clock" pixHor="786" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+
+        <VIEW id="v1_d7" name="UP" description="Escalator 7 Up" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC07_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d7" name="DOWN" description="Escalator 7 Down" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC07_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d7" name="NO ENTRY" description="Escalator 7 No Entry" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC07_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d7" name="OUT OF ORDER" description="Escalator 7 Out of Order" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC07_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d7" name="EVACUATE" description="Escalator 7 Evacuate" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d7" name="TEST" description="Escalator 7 Test" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d7" name="CLOCK" description="Escalator 7 Clock" pixHor="786" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+
+        <VIEW id="v1_d8" name="UP" description="Escalator 8 Up" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d8" name="DOWN" description="Escalator 8 Down" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d8" name="NO ENTRY" description="Escalator 8 No Entry" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d8" name="OUT OF ORDER" description="Escalator 8 Out of Order" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d8" name="EVACUATE" description="Escalator 8 Evacuate" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d8" name="TEST" description="Escalator 8 Test" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v7_d8" name="CLOCK" description="Escalator 8 Clock" pixHor="786" pixVer="96" associatedDevice="d8">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d9" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1_Resize.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d9" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2_Resize.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d9" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d9" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d9" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d9" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d9">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+
+        <VIEW id="v1_d10" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d10" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d10" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d10" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v5_d10" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v6_d10" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d10">
+            <IMAGES>
+                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+            </IMAGES>
+        </VIEW>
+
+    </VIEWS>
+    <SECTIONS>
+        <SECTION sectionId="s1" deviceId="d1" positionId="1" vOffset="10px"/>
+        <SECTION sectionId="s1" deviceId="d6" positionId="2" vOffset="10px"/>
+        <SECTION sectionId="s1" deviceId="d2" positionId="3" vOffset="10px"/>
+        <SECTION sectionId="s1" deviceId="d5" positionId="4" vOffset="10px"/>
+        <SECTION sectionId="s2" deviceId="d4" positionId="1" vOffset="10px"/>
+        <SECTION sectionId="s2" deviceId="d7" positionId="2" vOffset="10px"/>
+        <SECTION sectionId="s2" deviceId="d3" positionId="3" vOffset="10px"/>
+        <SECTION sectionId="s2" deviceId="d8" positionId="4" vOffset="10px"/>
+        <SECTION sectionId="s3" deviceId="d9" positionId="1" vOffset="10px"/>
+        <SECTION sectionId="s3" deviceId="d10" positionId="2" vOffset="10px"/>
+    </SECTIONS>
+</SCMS_DATA>

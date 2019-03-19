@@ -1,0 +1,2 @@
+include 'signscms-web'
+include 'signscms-ear'
