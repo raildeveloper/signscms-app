@@ -225,6 +225,13 @@ function redirectToContactUs() {
         window.location.href = "/Contact";
     }, 1000);
 }
+
+function redirectToAdmin() {
+    setTimeout(function () {
+        window.location.href = "/Admin";
+    }, 1000);
+}
+
 function changeSignForDevice(deviceId) {
     //console.log("Chaneg Sign for Device " + deviceId);
 

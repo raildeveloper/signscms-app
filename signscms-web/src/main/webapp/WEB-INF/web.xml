@@ -73,6 +73,16 @@
         <url-pattern>/addSchedule</url-pattern>
     </servlet-mapping>
     <servlet>
+        <description>Admin</description>
+        <display-name>AdminServlet</display-name>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <description>Contact</description>
         <display-name>ContactUsServlet</display-name>
         <servlet-name>ContactUsServlet</servlet-name>

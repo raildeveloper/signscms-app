@@ -197,6 +197,12 @@ function redirectToContactUs() {
     }, 1000);
 }
 
+function redirectToAdmin() {
+    setTimeout(function () {
+        window.location.href = "/Admin";
+    }, 1000);
+}
+
 function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),

@@ -37,7 +37,7 @@ public class SchedulerService {
                     //System.out.println("running");
                     changeSignsonSchedule();
                 }
-            }, delay, 10, TimeUnit.SECONDS);
+            }, delay, 1, TimeUnit.MINUTES);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

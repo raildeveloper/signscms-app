@@ -234,6 +234,13 @@ function redirectToContactUs() {
     }, 1000);
 }
 
+function redirectToAdmin() {
+    setTimeout(function () {
+        window.location.href = "/Admin";
+    }, 1000);
+}
+
+
 function changeSignForDevice(deviceId) {
     setTimeout(function () {
         window.location.href = "/ChangeSign?action=view&deviceId=" + deviceId;

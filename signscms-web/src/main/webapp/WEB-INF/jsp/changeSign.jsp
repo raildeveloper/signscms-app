@@ -50,7 +50,7 @@
                     About
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a onclick="redirectToSchedule();">
                     <span class="menu-icon fa fa-clock-o"></span>
                     <span class="hidden-xs">Schedule</span>
@@ -63,7 +63,17 @@
                     <span class="hidden-xs">Contact Us</span>
                     <span class="visible-xs">Contact</span>
                 </a>
+            </li> -->
+            <%
+                if (session.getAttribute("role").equals("admin") || session.getAttribute("role").equals("superuser")) {
+            %>
+            <li class="hidden-xs">
+                <a onclick="redirectToAdmin();">
+                    <span class="menu-icon fa fa-tools"></span>
+                    Admin
+                </a>
             </li>
+            <% } %>
             <li class="hidden-xs">
                 <a href="#">
                     <span class="menu-icon fa fa-user-circle-o"></span>

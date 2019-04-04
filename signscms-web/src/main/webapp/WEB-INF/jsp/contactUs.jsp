@@ -52,7 +52,7 @@
                     About
                 </a>
             </li>
-            <li>
+         <!--    <li>
                 <a onclick="redirectToSchedule();">
                     <span class="menu-icon fa fa-clock-o"></span>
                     <span class="hidden-xs">Schedule</span>
@@ -65,7 +65,17 @@
                     <span class="hidden-xs">Contact Us</span>
                     <span class="visible-xs">Contact</span>
                 </a>
+            </li> -->
+            <%
+                if (session.getAttribute("role").equals("admin") || session.getAttribute("role").equals("superuser")) {
+            %>
+            <li class="hidden-xs">
+                <a onclick="redirectToAdmin();">
+                    <span class="menu-icon fa fa-tools"></span>
+                    Admin
+                </a>
             </li>
+            <% } %>
             <li class="hidden-xs">
 
                 <a href="#">
@@ -95,6 +105,7 @@
                   action="/upload" enctype="multipart/form-data">
                 <br style="clear:both">
                 <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
+                <h5 style="margin-bottom: 25px; text-align: center;"> or alternatively contact PI ServiceDesk on (02) 9379 4000</h5>
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" name="name" placeholder="Name" required="">
                 </div>
