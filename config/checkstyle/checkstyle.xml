@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE module PUBLIC
+"-//Puppy Crawl//DTD Check Configuration 1.1//EN"
+"http://www.puppycrawl.com/dtds/configuration_1_1.dtd">
+
+<module name="Checker">
+
+  <!-- SuppressionFilter: The file is managed by the team leaders -->
+  <!--    suppressions are reviewed periodically        -->
+  <module name="SuppressionFilter">
+    <property
+        name="file"
+        value="${project_loc}/../config/checkstyle/suppressions.xml"
+        />
+  </module>
+
+  <module name="StrictDuplicateCode">
+    <property name="min" value="20"/>
+  </module>
+
+  <module name="NewlineAtEndOfFile"/>
+
+  <module name="RegexpHeader">
+    <property name="header" value="^// SydneyTrains 201\d$"/>
+  </module>
+
+  <module name="FileLength">
+    <property name="max" value="2000"/>
+  </module>
+
+  <module name="FileTabCharacter"/>
+
+  <module name="RegexpSingleline">
+    <property name="id" value="utf8"/>
+    <property name="format" value="[^\x00-\x7F]"/>
+    <property name="message" value="Only use ASCII characters."/>
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="id" value="consoleOutput"/>
+    <property name="format" value="System\.((out|err))\."/>
+    <property name="message"
+              value="System.out. should be replaced with logger debugging."
+              />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format" value="\.printStackTrace\(\s*\)"/>
+    <property name="message"
+              value="printStackTrace directs output to the console and should be replaced with logger debugging."
+              />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format"
+              value="^\s+.\s+@param\s+Description of the Parameter"
+              />
+    <property name="message"
+              value="Default parameter description text present in the code.  Replace with meaningful description."
+              />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format"
+              value="^\s+.\s+@return\s+Description of the Return Value"
+              />
+    <property name="message"
+              value="Default return value description text present in the code.  Replace with meaningful description."
+              />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format" value="\s$"/>
+    <property name="message"
+              value="Trailing whitespace not allowed. Causes merge HELL!"
+              />
+  </module>
+
+  <module name="RegexpSingleline">
+    <property name="format" value="(Boolean)\s+(is)[\p{L}\s]*\(\)"/>
+    <property name="message"
+              value="Boolean getter method has to match java bean naming convention (eg Boolean getDefault() )."
+              />
+  </module>
+
+  <!-- Disallow using standard constants -->
+  <module name="RegexpSingleline">
+    <property name="format"
+              value="(Double|Float|Integer|Long)\s*\.\s*valueOf\s*\(\s*[01]\s*\)"
+              />
+    <property name="message"
+              value="Use NumberUtils.xxx_ZERO or NumberUtils.xxx_ONE"
+              />
+  </module>
+  <module name="RegexpSingleline">
+    <property name="format"
+              value="(Double|Float|Integer|Long)\s*\.\s*valueOf\s*\(\s*&quot;"
+              />
+    <property name="message"
+              value="Do not supply a string to be parsed, you know the number."
+              />
+  </module>
+  <module name="RegexpSingleline">
+    <property name="format"
+              value="\.\s*parse(Double|Float|Int|Long)\s*\(\s*&quot;"
+              />
+    <property name="message" value="Do not avoid magic numbers this way!"/>
+  </module>
+
+
+  <module name="TreeWalker">
+
+    <!-- Checks for Javadoc comments.                     -->
+    <!-- See http://checkstyle.sf.net/config_javadoc.html -->
+    <!-- Javadoc is not required on non-interface methods and variables -->
+    <module name="JavadocMethod">
+      <property name="scope" value="package"/>
+      <property name="allowMissingPropertyJavadoc" value="true"/>
+    </module>
+    <module name="JavadocType">
+      <property name="scope" value="package"/>
+      <?ignore
+    
+      <property name="versionFormat" value="\d\d/\d\d/201\d"/>
+      ?>
+    </module>
+    <module name="JavadocVariable">
+      <property name="scope" value="package"/>
+    </module>
+    <!-- all JavaDoc must have the right style          -->
+    <module name="JavadocStyle">
+      <property name="checkEmptyJavadoc" value="true"/>
+    </module>
+
+
+    <!-- Checks for Naming Conventions.                  -->
+    <!-- See http://checkstyle.sf.net/config_naming.html -->
+
+    <!-- Many abstract classes do not correspond to this naming scheme -->
+    <!-- They use too many different naming schemes                    -->
+    <!-- <module name="AbstractClassName"/> -->
+
+    <module name="ConstantName">
+      <property name="format" value="^(log|[A-Z][A-Z0-9]*(_[A-Z0-9]+)*)$"/>
+    </module>
+    <module name="LocalFinalVariableName"/>
+    <module name="LocalVariableName"/>
+    <module name="MemberName">
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+    </module>
+    <module name="MethodName">
+      <property name="format" value="^[a-z][A-Z]?([a-z0-9][A-Z]?)*$"/>
+    </module>
+    <module name="PackageName">
+      <!-- no uppercase letters, 2 or more characters -->
+      <property name="format"
+                value="^au.gov.nsw.sydneytrains(\.[a-z][a-z0-9]+)*$"
+                />
+    </module>
+    <module name="ParameterName"/>
+    <module name="StaticVariableName">
+      <property name="format" value="^s[a-zA-Z0-9]*$"/>
+    </module>
+    <module name="TypeName">
+      <property name="format" value="^[A-Z]([a-z0-9][A-Z]?)*$"/>
+    </module>
+    <module name="ClassTypeParameterName"/>
+    <module name="MethodTypeParameterName"/>
+
+    <!-- Checks for imports                              -->
+    <!-- See http://checkstyle.sf.net/config_import.html -->
+    <module name="AvoidStarImport">
+      <property name="allowStaticMemberImports" value="true"/>
+    </module>
+    <module name="RedundantImport"/>
+    <module name="UnusedImports"/>
+    <module name="ImportOrder">
+      <property name="option" value="top"/>
+    </module>
+
+    <!-- Checks for Size Violations.                    -->
+    <!-- See http://checkstyle.sf.net/config_sizes.html -->
+    <module name="LineLength">
+      <property name="max" value="140"/>
+      <property name="ignorePattern" value="^import (static )?[^ ]+;$"/>
+    </module>
+    <module name="MethodLength"/>
+    <module name="ParameterNumber"/>
+    <module name="OuterTypeNumber"/>
+
+    <!-- Checks for whitespace                               -->
+    <!-- See http://checkstyle.sf.net/config_whitespace.html -->
+    <module name="EmptyForIteratorPad"/>
+    <module name="NoWhitespaceAfter"/>
+    <module name="NoWhitespaceBefore"/>
+    <module name="OperatorWrap"/>
+    <module name="ParenPad"/>
+    <module name="TypecastParenPad"/>
+    <module name="WhitespaceAfter"/>
+    <module name="WhitespaceAround"/>
+    <module name="GenericWhitespace"/>
+
+    <!-- Modifier Checks                                    -->
+    <!-- See http://checkstyle.sf.net/config_modifiers.html -->
+    <module name="ModifierOrder"/>
+    <module name="RedundantModifier"/>
+
+
+    <!-- Checks for blocks. You know, those {}'s         -->
+    <!-- See http://checkstyle.sf.net/config_blocks.html -->
+    <module name="EmptyBlock"/>
+    <module name="LeftCurly">
+      <property name="option" value="nlow"/>
+    </module>
+    <module name="NeedBraces"/>
+    <module name="RightCurly"/>
+    <!-- allow blocks in switch statements, they help readability... comments? -->
+    <module name="AvoidNestedBlocks">
+      <property name="allowInSwitchCase" value="true"/>
+    </module>
+
+    <!-- ================================================================== -->
+    <!-- ================================================================== -->
+    <!-- Checks for common coding problems               -->
+    <!-- See http://checkstyle.sf.net/config_coding.html -->
+
+    <!-- this one seems unnatural                        -->
+    <!-- <module name="ArrayTrailingComma"/>             -->
+
+    <module name="CovariantEquals"/>
+    <module name="DeclarationOrder"/>
+    <module name="DefaultComesLast"/>    
+    <module name="EqualsHashCode"/>
+    <module name="ExplicitInitialization"/>
+    <module name="FallThrough"/>
+    <module name="FinalLocalVariable"/>
+    <module name="EqualsAvoidNull"/>
+    <module name="NoClone"/>
+    <module name="NoFinalizer"/>
+    <module name="HiddenField"/>
+    <module name="IllegalCatch"/>
+    <module name="IllegalThrows"/>
+    <module name="IllegalInstantiation">
+      <property name="classes"
+                value="java.lang.Boolean,java.lang.Character,java.lang.Double,java.lang.Float,java.lang.Integer,java.lang.Long,java.lang.String"
+                />
+    </module>
+
+    <module name="InnerAssignment"/>
+    <module name="MagicNumber">
+      <property name="ignoreAnnotation" value="true"/>
+    </module>
+    <module name="MissingSwitchDefault"/>
+    <module name="ModifiedControlVariable"/>
+    <module name="MultipleVariableDeclarations"/>
+    <module name="NestedIfDepth">
+      <property name="max" value="3"/>
+    </module>
+    <module name="NestedTryDepth">
+      <property name="max" value="3"/>
+    </module>
+    <module name="PackageDeclaration"/>
+    <module name="ParameterAssignment"/>
+    <module name="RedundantThrows">
+      <property name="allowUnchecked" value="true"/>
+    </module>
+    <module name="ReturnCount"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+    <module name="StringLiteralEquality"/>
+    <module name="SuperClone"/>
+    <module name="SuperFinalize"/>
+    <module name="UnnecessaryParentheses"/>
+
+
+    <!-- ================================================================== -->
+    <!-- ================================================================== -->
+    <!-- Checks for class design                         -->
+    <!-- See http://checkstyle.sf.net/config_design.html -->
+
+    <module name="FinalClass"/>
+    <module name="InterfaceIsType"/>
+    <module name="MutableException"/>
+    <module name="ThrowsCount">
+      <property name="max" value="7"/>
+    </module>
+    <module name="VisibilityModifier"/>
+
+
+    <!-- ================================================================== -->
+    <!-- ================================================================== -->
+    <!-- Checks for metrics                               -->
+    <!-- See http://checkstyle.sf.net/config_metrics.html -->
+
+    <module name="CyclomaticComplexity">
+      <property name="id" value="warningCyclomaticComplexity"/>
+      <property name="max" value="10"/>
+    </module>
+    <module name="CyclomaticComplexity">
+      <property name="id" value="neverExceedCyclomaticComplexity"/>
+      <property name="max" value="20"/>
+    </module>
+
+
+    <!-- ================================================================== -->
+    <!-- ================================================================== -->
+    <!-- Miscellaneous other checks.                   -->
+    <!-- See http://checkstyle.sf.net/config_misc.html -->
+    <module name="ArrayTypeStyle"/>
+    <!--  <module name="Indentation"/> -->
+    <module name="TrailingComment"/>
+    <module name="UpperEll"/>
+
+
+    <!--
+        I cannot believe I need this one. Using "Regexp" as it supports
+        MULTILINE mode.
+    -->
+    <module name="Regexp">
+      <property name="id" value="throwRuntimeRegexp"/>
+      <property name="illegalPattern" value="true"/>
+      <property name="format" value="\snew\s+RuntimeException"/>
+    </module>
+
+    <!-- Do not allow types to be fully qualified. -->
+    <module name="DescendantToken">
+      <property name="id" value="fullQualifiedType"/>
+      <property name="tokens"
+                value="TYPE, EXTENDS_CLAUSE, IMPLEMENTS_CLAUSE"
+                />
+      <property name="limitedTokens" value="DOT"/>
+      <property name="maximumNumber" value="1"/>
+      <property name="maximumMessage" value="Do not use fully qualified types."/>
+    </module>
+
+    <!-- Annotations checks -->
+    <module name="AnnotationUseStyle"/>
+    <module name="MissingDeprecated"/>
+    <module name="MissingOverride"/>
+    <module name="PackageAnnotation"/>
+  </module>
+</module>
