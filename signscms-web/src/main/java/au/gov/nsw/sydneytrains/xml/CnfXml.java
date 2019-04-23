@@ -51,8 +51,12 @@ public class CnfXml {
 
 		boolean result = false;
 
-		if (!cnfFile.exists() || !cnfFile.isFile()) {
-			System.out.println("ERROR: config file doesn't exist or is not a file");
+		System.out.println("Checking configuration file: "+ cnfFile.getAbsolutePath());
+
+		if (!cnfFile.exists()) {
+			System.out.println("ERROR: config file doesn't exist");
+		} else if (!cnfFile.isFile()) {
+			System.out.println("ERROR: config file is not a file");
 		} else {
 			System.out.println("SUCCESS: config file exists");
 

@@ -1,0 +1,9 @@
+.gradle/*
+signscms-ear/*
+signscms-web/bin/*
+signscms-web/build/*
+/.vscode/launch.json
+/signscms-web/.project
+/signscms-web/.settings/org.eclipse.buildship.core.prefs
+/.project
+/.settings/org.eclipse.buildship.core.prefs
