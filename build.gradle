@@ -8,7 +8,7 @@ subprojects {
     apply plugin: 'idea'
 
     version = '0.0.1-SNAPSHOT'
-    sourceCompatibility = 1.10 // Target JDK 8 only
+    sourceCompatibility = 1.8 // Target JDK 8 only
     //sourceSets.test.output.resourcesDir = sourceSets.test.output.classesDir
     configurations {
         // This configuration is used for JAR dependencies that are going to be
