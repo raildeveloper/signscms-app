@@ -44,6 +44,13 @@
     display: flex;
 }
 
+.outerbasecontainernoborder {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-color: #2D3B46;
+    display: flex;
+}
 .wrapper {
     margin-top: 80px;
     margin-bottom: 20px;

@@ -6,6 +6,7 @@ var signDisplayed;
 var sectionDisplayed;
 var hostname;
 var section;
+var border;
 
 function getSignForDevice() {
 
@@ -18,6 +19,7 @@ function getSignForDevice() {
 function getSignImages() {
     hostname = getUrlParameter('hostname');
     section = getUrlParameter('section');
+    border = getUrlParameter('border');
     var url;
     if (section != null) {
         url = "/Sign?format=json&section=" + section;
@@ -72,7 +74,93 @@ function getSectionDetails(url) {
 
 function displaySection(data) {
 
+    if (border != null) {
+        displaySectionNoBorder(data);
+    } else {
 
+        var refreshDom = false;
+
+        if (sectionDisplayed != null) {
+            var jsonSectionDisplayed = JSON.stringify(sectionDisplayed);
+            var jsonSectionData = JSON.stringify(data);
+
+            if (jsonSectionDisplayed == jsonSectionData) {
+            } else {
+                sectionDisplayed = data;
+                refreshDom = true;
+            }
+        } else {
+            // First time - sign Displayed null
+            sectionDisplayed = data;
+            refreshDom = true;
+        }
+
+
+        if (data != null && refreshDom == true) {
+            $("#outer").empty();
+
+            console.log(JSON.stringify(data));
+            var len = data.length;
+            for (var i = 0; i < len; i++) {
+
+
+                jQuery('<div/>', {
+                    id: 'div_base_' + i,
+                    class: 'outerbasecontainer',
+                    width: data[i].pixelsHorizontal + 96,
+                    height: data[i].pixelsVertical
+                }).appendTo('#outer');
+
+                jQuery('<div/>', {
+                    id: 'div_label_' + i,
+                    class: 'labelContainerSign',
+                    width: "96px",
+                    height: "96px",
+                    text: data[i].cnfDevice.pi_name
+                }).appendTo('#div_base_' + i);
+
+                var images_size = data[i].images.length;
+                for (var j = 0; j < images_size; j++) {
+                    jQuery('<div/>', {
+                        id: 'div_image_' + i + '_' + j,
+                        class: 'imageContainer'
+                    }).appendTo('#div_base_' + i);
+                    if (data[i].viewName == 'CLOCK') {
+                        jQuery('#div_image_' + i + '_' + j).load('resources/html/section_clock/clock1_' + i + '.html');
+                        jQuery('<div/>', {
+                            id: 'div_image_1' + i + '_' + j,
+                            class: 'imageContainer'
+                        }).appendTo('#div_base_' + i);
+                        jQuery('#div_image_1' + i + '_' + j).load('resources/html/section_clock/clock10_' + i + '.html');
+                    } else {
+                        jQuery('<img/>', {
+                            id: 'image_' + i + '_' + j,
+                            src: data[i].images[j]
+                        }).appendTo('#div_image_' + i + '_' + j);
+
+                    }// End of IF Clock
+                }
+                if (data[i].viewName == 'TEST') {
+                    var topPosition = (i * 96) + 58;
+                    jQuery('<div/>', {
+                        id: 'div_h3_' + i,
+                        class: 'indicator_test'
+                    }).appendTo('#div_base_' + i);
+
+                    $('#div_h3_' + i).css('top', topPosition + 'px');
+                    jQuery('<h3/>', {
+                        id: 'h3_' + i,
+                        text: "Sign under Test"
+                    }).appendTo('#div_h3_' + i);
+                }
+            }
+        }
+    }
+}
+
+function displaySectionNoBorder(data) {
+
+    console.log("display without border");
     var refreshDom = false;
 
     if (sectionDisplayed != null) {
@@ -101,18 +189,12 @@ function displaySection(data) {
 
             jQuery('<div/>', {
                 id: 'div_base_' + i,
-                class: 'outerbasecontainer',
-                width: data[i].pixelsHorizontal + 96,
+                class: 'outerbasecontainernoborder',
+                width: data[i].pixelsHorizontal,
                 height: data[i].pixelsVertical
             }).appendTo('#outer');
 
-            jQuery('<div/>', {
-                id: 'div_label_' + i,
-                class: 'labelContainerSign',
-                width: "96px",
-                height: "96px",
-                text: data[i].cnfDevice.pi_name
-            }).appendTo('#div_base_' + i);
+
 
             var images_size = data[i].images.length;
             for (var j = 0; j < images_size; j++) {
@@ -120,13 +202,13 @@ function displaySection(data) {
                     id: 'div_image_' + i + '_' + j,
                     class: 'imageContainer'
                 }).appendTo('#div_base_' + i);
-                if(data[i].viewName == 'CLOCK'){
-                    jQuery('#div_image_' + i + '_' + j).load('resources/html/section_clock/clock1_'+ i+'.html');
+                if (data[i].viewName == 'CLOCK') {
+                    jQuery('#div_image_' + i + '_' + j).load('resources/html/section_clock/clock1_' + i + '.html');
                     jQuery('<div/>', {
                         id: 'div_image_1' + i + '_' + j,
                         class: 'imageContainer'
                     }).appendTo('#div_base_' + i);
-                    jQuery('#div_image_1' + i + '_' + j).load('resources/html/section_clock/clock10_'+ i+'.html');
+                    jQuery('#div_image_1' + i + '_' + j).load('resources/html/section_clock/clock10_' + i + '.html');
                 } else {
                     jQuery('<img/>', {
                         id: 'image_' + i + '_' + j,
@@ -135,7 +217,7 @@ function displaySection(data) {
 
                 }// End of IF Clock
             }
-            if(data[i].viewName == 'TEST') {
+            if (data[i].viewName == 'TEST') {
                 var topPosition = (i * 96) + 58;
                 jQuery('<div/>', {
                     id: 'div_h3_' + i,
@@ -151,7 +233,6 @@ function displaySection(data) {
         }
     }
 }
-
 
 function display(data) {
 
@@ -190,39 +271,38 @@ function display(data) {
                     id: 'div_image_' + i,
                     class: 'imageContainer'
                 }).appendTo('#baseContainer');
-                if(data.viewName == 'CLOCK'){
+                if (data.viewName == 'CLOCK') {
 
-                    jQuery('<div>',{
-                        id:'div_clock_'+i,
-                        class:'clock'
-                    }).appendTo('#div_image_',i);
+                    jQuery('<div>', {
+                        id: 'div_clock_' + i,
+                        class: 'clock'
+                    }).appendTo('#div_image_', i);
 
 
-
-                   /* jQuery('#div_image_' + i).load('resources/html/clock.html');
-                    jQuery('<div/>', {
-                        id: 'div_image_1' + i,
-                        class: 'imageContainer'
-                    }).appendTo('#baseContainer');
-                    jQuery('#div_image_1' + i).load('resources/html/clock2.html');*/
+                    /* jQuery('#div_image_' + i).load('resources/html/clock.html');
+                     jQuery('<div/>', {
+                         id: 'div_image_1' + i,
+                         class: 'imageContainer'
+                     }).appendTo('#baseContainer');
+                     jQuery('#div_image_1' + i).load('resources/html/clock2.html');*/
                 } else {
-                jQuery('<img/>', {
-                    id: 'image_' + i,
-                    src: data.images[i]
-                }).appendTo('#div_image_' + i);
-                if (data.viewName == 'TEST') {
-                    jQuery('<div/>', {
-                        id: 'div_h3_' + i,
-                        class: 'indicator_test'
-                    }).appendTo('#baseContainer');
+                    jQuery('<img/>', {
+                        id: 'image_' + i,
+                        src: data.images[i]
+                    }).appendTo('#div_image_' + i);
+                    if (data.viewName == 'TEST') {
+                        jQuery('<div/>', {
+                            id: 'div_h3_' + i,
+                            class: 'indicator_test'
+                        }).appendTo('#baseContainer');
 
-                    jQuery('<h3/>', {
-                        id: 'h3_' + i,
-                        text: "Sign under Test"
-                    }).appendTo('#div_h3_' + i);
-                }
+                        jQuery('<h3/>', {
+                            id: 'h3_' + i,
+                            text: "Sign under Test"
+                        }).appendTo('#div_h3_' + i);
+                    }
 
-            }// End of Clock
+                }// End of Clock
             }
         }
     }
