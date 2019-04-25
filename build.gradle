@@ -41,7 +41,8 @@ subprojects {
     }
 
     dependencies {
-        // Any changes here will require updates to the jars specified in        
+        // Any changes here will require updates to the jars specified in  
+        
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.7.RELEASE'
         compile group: 'org.springframework', name: 'spring-beans', version: '4.3.7.RELEASE'
