@@ -2,7 +2,7 @@
  * Created by administrator on 27/4/17.
  */
 function authenticate() {
-    console.log("In authenticate");
+    //console.log("In authenticate");
     $.ajax({
         type: "POST",
         url: "/Controller?action=authenticate",
@@ -23,15 +23,15 @@ function authenticate() {
 
 function displayOrForward(data) {
 
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     var authenticated = data.authenticated;
-    console.log("authenticated" + authenticated);
+    //.log("authenticated" + authenticated);
 
     //alert("HERE !!");
     if (authenticated === false) {
-        console.log("HERE !!");
+        //console.log("HERE !!");
         $('#errorMessage').text("Incorrect Username or Password.");
-        console.log($(errorMessage));
+        //console.log($(errorMessage));
     } else {
         setTimeout(function () {
             window.location.href = "/Devices";

@@ -71,8 +71,18 @@ function displayAllDevices(data) {
 
         jQuery('<h3/>', {
             id: 'my_list_h3_' + i,
-            text: "Sign : " + val.deviceName
+            text: "Sign : " + val.deviceName + "  ",
+            display:'inline-block'
         }).appendTo('#div_my_list' + i);
+
+        jQuery('<a/>', {
+            id: 'my_list_detail_a_href_' + i,
+            class: 'fa fa-info-circle',
+            display:'inline-block',
+            //float:'right',
+            onclick: 'getSignInfo("' + val.deviceId + '","my_list_detail_a_href_' + i + '")'
+        }).appendTo('#my_list_h3_' + i);
+
 
         var modeName = getModeForDevice(val.deviceId, allViews, allLinks);
         jQuery('<h3/>', {
@@ -92,7 +102,6 @@ function displayAllDevices(data) {
         }).appendTo('#div_img' + i);
 
 
-
         jQuery('<div/>', {
             id: 'my_list_description_' + i,
             text: val.description,
@@ -107,57 +116,6 @@ function displayAllDevices(data) {
             onclick: 'changeSignForDevice("' + val.deviceId + '")'
         }).appendTo('#div_my_list' + i);
 
-
-        /*
-         jQuery('<span/>', {
-         id: 'my_span_horizontal_' + i,
-         text: "Width: " + val.pixelsHorizontal + "px"
-         }).appendTo('#div_my_list' + i);
-         jQuery('<span/>', {
-         id: 'my_span_vertical_' + i,
-         text: "Height: " + val.pixelsVertical + "px",
-         class: 'pull-right'
-         }).appendTo('#div_my_list' + i);
-
-         jQuery('<div/>', {
-         id: 'my_list_detail_' + i,
-         class: 'detail'
-         }).appendTo('#div_my_list' + i);
-
-         jQuery('<p/>', {
-         id: 'my_list_detail_p' + i,
-         text: "Current Sign"
-         }).appendTo('#my_list_detail_' + i);
-
-         jQuery('<img/>', {
-         id: 'my_list_detail_img' + i,
-         src: imgSrc
-         }).appendTo('#my_list_detail_' + i);
-
-         jQuery('<span/>', {
-         id: 'my_span_horizontal_' + i,
-         text: "Width: " + val.pixelsHorizontal + "px"
-         }).appendTo('#my_list_detail_' + i);
-         jQuery('<span/>', {
-         id: 'my_span_vertical_' + i,
-         text: "Height: " + val.pixelsVertical + "px",
-         class: 'pull-right'
-         }).appendTo('#my_list_detail_' + i);
-
-
-         jQuery('<div/>', {
-         id: 'my_list_detail_img' + i,
-         text: val.description,
-         class: 'offer'
-         }).appendTo('#my_list_detail_' + i);
-
-         jQuery('<a/>', {
-         id: 'my_list_detail_a_href' + i,
-         class: 'btn btn-info',
-         text: 'Change Sign',
-         //href: "#",
-         onclick: 'changeSignForDevice("' + val.deviceId + '")'
-         }).appendTo('#my_list_detail_' + i);*/
     });
 
 }
@@ -238,6 +196,50 @@ function changeSignForDevice(deviceId) {
     setTimeout(function () {
         window.location.href = "/ChangeSign?action=view&deviceId=" + deviceId;
     }, 1000);
+
+}
+
+function getSignInfo(deviceId, deviceDomId) {
+
+    jQuery('#modalBody').empty();
+    console.log("device id " + deviceId);
+    console.log("device Dom Id " + deviceDomId);
+    var deviceName = "";
+    var description = "";
+    var pi_name = "";
+    var pixelsHorizontal = "";
+    var pixelsVertical = "";
+    var location = "";
+
+    jQuery.each(allDevices, function (i, device) {
+
+        if (device.deviceId == deviceId) {
+            deviceName = device.deviceName;
+            description = device.description;
+            pi_name = device.pi_name;
+            pixelsHorizontal = device.pixelsHorizontal;
+            pixelsVertical = device.pixelsVertical;
+            location = device.location;
+
+        }
+    });
+    console.log(deviceName + "-" + description + "-" + pi_name + "-" + pixelsHorizontal + "-" + pixelsVertical + "-" + location);
+
+    var modalBody = "<b> Sign Name: </b>" + deviceName + "<br>" +
+        "<b> Description: </b>" + description + "<br>" +
+        "<b> PI Name: </b>" + pi_name + "<br>" +
+        "<b> Location: </b>" + location + "<br>";
+
+    jQuery('<p/>', {
+        id: 'modalBody',
+        html: modalBody,
+        class: 'modal-body'
+    }).appendTo('#modalBody');
+
+
+    $('#myModal').modal('show');
+
+
 }
 
 

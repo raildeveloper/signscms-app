@@ -52,10 +52,10 @@ public class H2DatabaseAccess {
         Connection cnx = null;
         try {
             Class.forName("org.h2.Driver");
-            final String jdbcUrl = "jdbc:h2:~/signscms;AUTO_SERVER=TRUE";
+            //final String jdbcUrl = "jdbc:h2:~/signscms;AUTO_SERVER=TRUE";
 
             // For Amazon Ec2 comment above and uncomment below
-           // final String jdbcUrl = "jdbc:h2:/var/lib/tomcat8/webapps/ROOT/signscms;AUTO_SERVER=TRUE";
+            final String jdbcUrl = "jdbc:h2:/var/lib/tomcat8/webapps/ROOT/signscms;AUTO_SERVER=TRUE";
 
             final Properties prop = new Properties();
             prop.setProperty("user", "sa");

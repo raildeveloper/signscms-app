@@ -53,11 +53,11 @@ public class AdminServlet implements HttpRequestHandler {
                 printWriter.write(responseJson);
             }
             else if (action.equals("upload")){
-                System.out.println("HERE ");
+                //System.out.println("HERE ");
                 String selectedDevice = request.getParameter("device");
                 String selectedView = request.getParameter("view");
                 String image = request.getParameter("image");
-                System.out.println(selectedDevice + " - " + selectedView + " - " + image);
+                //System.out.println(selectedDevice + " - " + selectedView + " - " + image);
 
             }
         } else {

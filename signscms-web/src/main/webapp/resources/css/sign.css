@@ -10,6 +10,7 @@
 .imageContainer {
     float: left;
     overflow: hidden;
+    cursor:none;
 
 }
 

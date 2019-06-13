@@ -99,7 +99,7 @@ function displaySection(data) {
         if (data != null && refreshDom == true) {
             $("#outer").empty();
 
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             var len = data.length;
             for (var i = 0; i < len; i++) {
 
@@ -160,7 +160,7 @@ function displaySection(data) {
 
 function displaySectionNoBorder(data) {
 
-    console.log("display without border");
+    //console.log("display without border");
     var refreshDom = false;
 
     if (sectionDisplayed != null) {
@@ -182,7 +182,7 @@ function displaySectionNoBorder(data) {
     if (data != null && refreshDom == true) {
         $("#outer").empty();
 
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         var len = data.length;
         for (var i = 0; i < len; i++) {
 
@@ -241,7 +241,7 @@ function display(data) {
     if (signDisplayed != null) {
         var jsonSignDisplayed = JSON.stringify(signDisplayed);
         var jsonData = JSON.stringify(data);
-        console.log(jsonData);
+        //console.log(jsonData);
         if (jsonSignDisplayed == jsonData) {
         } else {
             signDisplayed = data;

@@ -118,12 +118,12 @@ public class CnfDao {
     private void initialiseCnfDevice () throws SQLException {
         if (!doesTableExist("CNFDEVICE")) {
             addTable( "CNFDEVICE",
-                    "(DeviceId VARCHAR(15), DeviceName VARCHAR(50), DeviceDescription VARCHAR(150), PI_Name VARCHAR(50), PixelsHorizontal VARCHAR(10), PixelsVertical VARCHAR(10))");
+                    "(DeviceId VARCHAR(15), DeviceName VARCHAR(50), DeviceDescription VARCHAR(150), PI_Name VARCHAR(50), PixelsHorizontal VARCHAR(10), PixelsVertical VARCHAR(10), Location VARCHAR(999))");
         } else {
             //DROP TABLE - CREATE NEW - This is added for any Schema changes
             dropTable("CNFDEVICE");
             addTable( "CNFDEVICE",
-                    "(DeviceId VARCHAR(15), DeviceName VARCHAR(50), DeviceDescription VARCHAR(150), PI_Name VARCHAR(50), PixelsHorizontal VARCHAR(10), PixelsVertical VARCHAR(10))");
+                    "(DeviceId VARCHAR(15), DeviceName VARCHAR(50), DeviceDescription VARCHAR(150), PI_Name VARCHAR(50), PixelsHorizontal VARCHAR(10), PixelsVertical VARCHAR(10), Location VARCHAR(999))");
 
         }
     }
@@ -180,8 +180,9 @@ public class CnfDao {
                 String pi_name = rs.getString("PI_Name");
                 String pixelsHorizontal = rs.getString("PixelsHorizontal");
                 String pixelsVertical = rs.getString("PixelsVertical");
+                String location = rs.getString("Location");
 
-                cnfDevice.put(deviceId, new CnfDevice(deviceId, deviceName, deviceDescription,pi_name, Integer.valueOf(pixelsHorizontal), Integer.valueOf(pixelsVertical)));
+                cnfDevice.put(deviceId, new CnfDevice(deviceId, deviceName, deviceDescription,pi_name, Integer.valueOf(pixelsHorizontal), Integer.valueOf(pixelsVertical),location));
             }
 
         } catch (SQLException s) {
@@ -219,7 +220,8 @@ public class CnfDao {
                         + "'" + device.getDescription() + "',"
                         + "'" + device.getPi_name() + "',"
                         + "'" + device.getPixelsHorizontal() + "',"
-                        + "'" + device.getPixelsVertical() + "')";
+                        + "'" + device.getPixelsVertical() + "',"
+                        + "'" + device.getLocation() + "')";
                 cnfDeviceStmt = dbConnection.prepareStatement(sqlUpdate);
                 cnfDeviceStmt.executeUpdate();
             }
@@ -528,7 +530,7 @@ public class CnfDao {
     public boolean addDeviceView(String deviceId, String viewId)  throws SQLException {
         boolean result = false;
         PreparedStatement statement = null;
-        System.out.println("Adding link device " + deviceId + " with view " + viewId);
+        //System.out.println("Adding link device " + deviceId + " with view " + viewId);
         try {
             final String updt = "INSERT INTO CNFVIEWDEVICELINK VALUES(?,?)";
             statement = dbConnection.prepareStatement(updt);

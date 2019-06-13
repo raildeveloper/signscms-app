@@ -28,7 +28,7 @@ public class ChangeSignServlet implements HttpRequestHandler {
 
         String action = (request.getParameter("action") != null) ? request.getParameter("action") : "view";
         String deviceId = (request.getParameter("deviceId") != null) ? request.getParameter("deviceId") : "null";
-        System.out.println("HERE !! format-> " + format + "device Id " + deviceId + "action -> " + action);
+        //System.out.println("HERE !! format-> " + format + "device Id " + deviceId + "action -> " + action);
 
         // Prevent browser caching of response
         response.setHeader("Expires", "Tue, 03 Jul 2001 06:00:00 GMT");
@@ -69,7 +69,7 @@ public class ChangeSignServlet implements HttpRequestHandler {
                     // TODO is this necessary? There is a bug in reading from the DB: the images are not read with the view
                     // CnfData.getInstance().readFromDatabase();
                     CnfData.getInstance().updateLink(deviceId, viewId);
-                    System.out.println("Success update");
+                    //System.out.println("Success update");
                     printWriter.write(new Gson().toJson("Success"));
                 } else {
                     printWriter.write(new Gson().toJson("Error"));

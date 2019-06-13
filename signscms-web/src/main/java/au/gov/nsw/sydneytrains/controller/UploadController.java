@@ -38,11 +38,11 @@ public class UploadController {
                     byte[] bytes = file.getBytes();
                     String fileN = file.getOriginalFilename();
 
-                    System.out.println(fileN + ":--> " + file.getContentType());
+                    //System.out.println(fileN + ":--> " + file.getContentType());
                     // Creating the directory to store file
                     String rootPath = System.getProperty("catalina.home");
                     File dir = new File(rootPath + File.separator + "tmpFiles");
-                    System.out.println("File path" + dir.getAbsolutePath());
+                    //System.out.println("File path" + dir.getAbsolutePath());
                     if (!dir.exists())
                         dir.mkdirs();
 

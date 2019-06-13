@@ -110,11 +110,11 @@ public class SchedulerService {
 
 
                     }
-                    System.out.println(" Start time" + sTime.toString());
-                    System.out.println(" End time" + eTime.toString());
-                    System.out.println(" Time Now" + currentTime.toString());
+                    //System.out.println(" Start time" + sTime.toString());
+                    //System.out.println(" End time" + eTime.toString());
+                    //System.out.println(" Time Now" + currentTime.toString());
                 } else {
-                    System.out.println("Schedule Id" + schedule.getCnfScheduleId() + " is not active.");
+                    //System.out.println("Schedule Id" + schedule.getCnfScheduleId() + " is not active.");
                 }
 
             }

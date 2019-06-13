@@ -28,10 +28,10 @@ public class ContactUsService {
         try {
             ScheduledFuture<?> files = executorService.scheduleAtFixedRate(new Runnable() {
                 public void run() {
-                    System.out.println("running contact us service");
+                    //System.out.println("running contact us service");
                     checkContactUsData();
                 }
-            }, 0, 15, TimeUnit.MINUTES);
+            }, 0, 60, TimeUnit.MINUTES);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

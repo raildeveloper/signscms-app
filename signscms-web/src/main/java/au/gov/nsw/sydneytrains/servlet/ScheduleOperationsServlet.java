@@ -81,7 +81,7 @@ public class ScheduleOperationsServlet implements HttpRequestHandler {
                         "  }\n" +
                         "}";
                 printWriter.write(responseJson);
-                System.out.println("request " + deviceId + ":" + viewId + ":" + startTime + ":" + endTime);
+                //System.out.println("request " + deviceId + ":" + viewId + ":" + startTime + ":" + endTime);
             }
 
 
@@ -118,13 +118,13 @@ public class ScheduleOperationsServlet implements HttpRequestHandler {
                         "  }\n" +
                         "}";
                 printWriter.write(responseJson);
-                System.out.println("request " + deviceId + ":" + viewId + ":" + startTime + ":" + endTime);
+                //System.out.println("request " + deviceId + ":" + viewId + ":" + startTime + ":" + endTime);
             }
 
 
             if (action.equals("edit")) {
                 String scheduleId = request.getParameter("scheduleId");
-                System.out.println("EDIT SCHEDULE " + scheduleId);
+                //System.out.println("EDIT SCHEDULE " + scheduleId);
                 try {
                     CnfSchedule schedule = schedulerDao.getSchedule(scheduleId);
                     CnfData cnfData = CnfData.getInstance();
@@ -144,7 +144,7 @@ public class ScheduleOperationsServlet implements HttpRequestHandler {
 
             }
             if(action.equals("status")){
-                System.out.println("DELETE SCHEDULE");
+                //System.out.println("DELETE SCHEDULE");
                 String scheduleId = request.getParameter("scheduleId");
                 String status = request.getParameter("status");
 

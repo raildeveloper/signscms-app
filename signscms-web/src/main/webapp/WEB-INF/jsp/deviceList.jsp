@@ -66,6 +66,8 @@
                 </a>
             </li> -->
             <%
+                if (session != null && session.getAttribute("role") != null) {
+
                 if (session.getAttribute("role").equals("admin") || session.getAttribute("role").equals("superuser")) {
             %>
             <li class="hidden-xs">
@@ -74,7 +76,7 @@
                     Admin
                 </a>
             </li>
-            <% } %>
+            <% } }%>
             <li class="hidden-xs">
                 <a href="#">
                     <span class="menu-icon fa fa-user-circle-o"></span>
@@ -98,6 +100,22 @@
     <div id="allDevices" class="container">
         <div id="deviceRows" class="row">
 
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-notify modal-info modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sign Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body">
+
+
+            </div>
         </div>
     </div>
 </div>

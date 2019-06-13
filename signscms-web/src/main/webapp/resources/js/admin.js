@@ -52,7 +52,7 @@ function getAllDeviceView() {
 
 function displayUploadImg(data) {
 
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     allDevices = data[0];
     allViews = data[1];
     allLinks = data[2];
@@ -95,7 +95,7 @@ function submitUploadImg(){
     formData.append('image', $('input[type=file]')[0].files[0]);
 
 
-    console.log("selected Device " + selectedDeviceId + "-selected view-" + selectedViewId + "selected file" + selectedFile);
+    //console.log("selected Device " + selectedDeviceId + "-selected view-" + selectedViewId + "selected file" + selectedFile);
     $.ajax({
         type: "POST",
         url: "/Admin?format=json&action=upload",
@@ -119,7 +119,7 @@ function submitUploadImg(){
 }
 
 function displayAllSchedules(data) {
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     $("#schTableBody").empty();
     allSchedules = data[0];
     allDevices = data[1];
@@ -369,11 +369,11 @@ function changeStatus(scheduleId, checkboxId){
     var message = null;
     var checked;
     if($('#'+checkboxId).is(':checked')){
-        console.log("checkboxId - checked " + checkboxId);
+        //console.log("checkboxId - checked " + checkboxId);
         message = "Activate this schedule?";
         checked = true;
     } else {
-        console.log("checkboxId - unchecked " + checkboxId);
+        //console.log("checkboxId - unchecked " + checkboxId);
         message = "De-activate this schedule?";
         checked = false;
     }

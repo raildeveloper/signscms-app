@@ -55,10 +55,10 @@ function displayAllViews(data) {
     var allViews = data[1];
     var allLinks = data[2];
     var selectedDevice;
-    console.log("selected sign" + deviceId);
+    //console.log("selected sign" + deviceId);
     jQuery.each(allDevices, function (i, device) {
 
-        console.log("Device Id " + device.deviceId);
+        //console.log("Device Id " + device.deviceId);
         if(device.deviceId == deviceId){
             selectedDevice = device;
         }

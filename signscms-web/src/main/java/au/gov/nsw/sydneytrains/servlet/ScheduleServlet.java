@@ -41,7 +41,7 @@ public class ScheduleServlet implements HttpRequestHandler {
                 SchedulerDao schedulerDao = H2DatabaseAccess.getSchedulerDao();
                 //
 
-                System.out.println("GET ALL SCHEDULES");
+                //System.out.println("GET ALL SCHEDULES");
                 CnfSchedule schedule = new CnfSchedule();
                 schedule.setCnfDevice("d1");
                 schedule.setScheduleCnfView("v1");
@@ -61,9 +61,9 @@ public class ScheduleServlet implements HttpRequestHandler {
                     //schedulerDao.insertSchedule(schedule);
                     schedules = schedulerDao.getAllSchedules();
 
-                    for(CnfSchedule cnfSchedule: schedules){
-                        System.out.println(cnfSchedule.getCnfScheduleId());
-                    }
+                    //for(CnfSchedule cnfSchedule: schedules){
+                        //System.out.println(cnfSchedule.getCnfScheduleId());
+                    //}
 
                 }catch (Exception e){
                     e.printStackTrace();

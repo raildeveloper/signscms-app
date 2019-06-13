@@ -108,9 +108,10 @@ public class CnfXml {
 					String pi_name = node.getAttributes().getNamedItem("PI_Name").getNodeValue();
 					String pixHor = node.getAttributes().getNamedItem("pixHor").getNodeValue();
 					String pixVer = node.getAttributes().getNamedItem("pixVer").getNodeValue();
+					String location = node.getAttributes().getNamedItem("location").getNodeValue();
 
 					devices.put(id, new CnfDevice(id, name, description, pi_name,
-							Integer.valueOf(pixHor), Integer.valueOf(pixVer)));
+							Integer.valueOf(pixHor), Integer.valueOf(pixVer),location));
 				}
 			}
 			cnfData.setDevices(devices);

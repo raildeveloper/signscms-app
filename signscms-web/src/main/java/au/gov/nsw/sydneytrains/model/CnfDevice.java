@@ -13,15 +13,17 @@ public class CnfDevice implements Comparable<CnfDevice>{
     private final int pixelsHorizontal;
     private final int pixelsVertical;
     private int positionId;
+    private String location;
 
     public CnfDevice(final String deviceId, final String deviceName, final String description, final String pi_name,
-                     final int pixelsHorizontal, final int pixelsVertical) {
+                     final int pixelsHorizontal, final int pixelsVertical, final String location) {
         this.deviceId = deviceId;
         this.deviceName = deviceName;
         this.description = description;
         this.pi_name = pi_name;
         this.pixelsHorizontal = pixelsHorizontal;
         this.pixelsVertical = pixelsVertical;
+        this.location = location;
     }
 
     public String getDeviceId() {
@@ -48,13 +50,16 @@ public class CnfDevice implements Comparable<CnfDevice>{
         return pixelsVertical;
     }
 
+    public String getLocation() { return  location;}
+
     // Debugging
     public void print() {
         System.out.println("deviceId: " + this.deviceId
                 + " deviceName: " + this.deviceName
                 + " description: " + this.description
                 + " pi_name: " + this.pi_name
-                + " pixels (HxV): " + this.pixelsHorizontal + "x" + this.pixelsVertical);
+                + " pixels (HxV): " + this.pixelsHorizontal
+                        + "x" + this.pixelsVertical + "location" + this.location);
     }
 
     public int getPositionId(){return positionId;}

@@ -141,7 +141,7 @@ public class CnfData {
      * A default device is used to indicate that a specific device doesn't exist
      */
     public CnfDevice getDefaultDevice() {
-        return new CnfDevice(DEFAULT_DEVICEID, "ERROR", "ERROR", "ERROR",0, 0);
+        return new CnfDevice(DEFAULT_DEVICEID, "ERROR", "ERROR", "ERROR",0, 0, "ERROR");
     }
 
     /*
@@ -170,7 +170,7 @@ public class CnfData {
 
         while (keyIter.hasNext()) {
             String key = keyIter.next();
-            System.out.println("key-" + key + " :section id: " +  m_sections.get(key).getSectionId());
+            //System.out.println("key-" + key + " :section id: " +  m_sections.get(key).getSectionId());
 
             sectionList.add(m_sections.get(key).getSectionId());
 
@@ -180,10 +180,10 @@ public class CnfData {
 
         Set<String> uniqueSectionSet = new HashSet<>(sectionList);
         for(String section : uniqueSectionSet){
-            System.out.println("Size of Unique Section" + uniqueSectionSet.size() + " section:" + section);
+            //System.out.println("Size of Unique Section" + uniqueSectionSet.size() + " section:" + section);
             List<CnfDevice> devices = getDevicesBySectionId(section);
             for(CnfDevice device : devices){
-                System.out.println("device " + device.getDeviceId());
+                //System.out.println("device " + device.getDeviceId());
                 sorted_mDevice.put(device.getDeviceId(),device);
             }
 
@@ -199,7 +199,7 @@ public class CnfData {
         for(String key:keys){
             sorted_mDevices.put(key,m_devices.get(key));
         }*/
-      System.out.println("json" + gson.toJson(sorted_mDevice));
+      //System.out.println("json" + gson.toJson(sorted_mDevice));
         return gson.toJson(sorted_mDevice);
     }
 

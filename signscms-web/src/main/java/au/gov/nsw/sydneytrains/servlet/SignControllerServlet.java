@@ -58,7 +58,7 @@ public class SignControllerServlet implements HttpRequestHandler {
                     session.setAttribute("authenticated", String.valueOf(user.isAuthenticated()));
                 }
                 Gson gson = new Gson();
-                System.out.println(gson.toJson(user));
+                //System.out.println(gson.toJson(user));
                 printWriter.append(gson.toJson(user));
             } catch (SQLException e) {
                 e.printStackTrace();

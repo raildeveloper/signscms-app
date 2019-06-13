@@ -39,7 +39,7 @@ public class DeviceServlet implements HttpRequestHandler {
                 String allSectionsJson = cnfData.getAllSectionsAsJSON();
 
                 String responseJson = "[" + allDevicesJson + "," + allViewsJson + "," + allLinksJson + "," + allSectionsJson + "]";
-                System.out.println("responseJson " + allDevicesJson);
+                //System.out.println("responseJson " + allDevicesJson);
                 printWriter.write(responseJson);
             }
         } else {

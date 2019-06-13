@@ -43,7 +43,7 @@ public class GetSignForDeviceServlet implements HttpRequestHandler {
         // Device IP Address
         String deviceIPAddress = request.getRemoteAddr();
         String deviceHost = request.getRemoteHost();
-        System.out.println("Request from: sectionName " + sectionName + " device name " + deviceName + " IP address " + deviceIPAddress + " host " + deviceHost);
+        //System.out.println("Request from: sectionName " + sectionName + " device name " + deviceName + " IP address " + deviceIPAddress + " host " + deviceHost);
 
         if (format.equals("json")) {
             if(sectionName != null){
@@ -67,7 +67,7 @@ public class GetSignForDeviceServlet implements HttpRequestHandler {
         CnfDevice cnfDevice = configData.getDeviceByName(hostName);
         if (null == cnfDevice) {
             writer.append(gson.toJson(defaultView));
-            System.out.println("Reply: " + defaultView.getAsString());
+            //System.out.println("Reply: " + defaultView.getAsString());
             return;
         }
 
@@ -75,7 +75,7 @@ public class GetSignForDeviceServlet implements HttpRequestHandler {
         CnfLink cnfLink = configData.getLink(cnfDevice.getDeviceId());
         if (null == cnfLink) {
             writer.append(gson.toJson(defaultView));
-            System.out.println("Reply: " + defaultView.getAsString());
+            //System.out.println("Reply: " + defaultView.getAsString());
             return;
         }
 
@@ -84,39 +84,39 @@ public class GetSignForDeviceServlet implements HttpRequestHandler {
         cnfView.setCnfDevice(cnfDevice);
         if (null == cnfView) {
             writer.append(gson.toJson(defaultView));
-            System.out.println("Reply: " + defaultView.getAsString());
+            //System.out.println("Reply: " + defaultView.getAsString());
             return;
         }
 
         writer.append(gson.toJson(cnfView));
-        System.out.println("Reply: " + cnfView.getAsString());
+        //System.out.println("Reply: " + cnfView.getAsString());
     }
 
     private void sendResponseForSection(HttpServletResponse httpServletResponse, String section) throws IOException{
 
         final PrintWriter writer = httpServletResponse.getWriter();
         Gson gson = new Gson();
-        System.out.println("section  -->" + section);
+        //System.out.println("section  -->" + section);
         CnfData configData = CnfData.getInstance();
         List<CnfDevice> cnfDevices = configData.getDevicesBySectionId(section);
         List<CnfView> cnfViews = new ArrayList<>();
         for(CnfDevice cnfDevice: cnfDevices){
-            System.out.println("Inside For Device");
+            //System.out.println("Inside For Device");
             cnfDevice.print();
             CnfLink cnfLink = configData.getLink(cnfDevice.getDeviceId());
 
             CnfView cnfView = configData.getViewById(cnfLink.getViewId());
             CnfView cnfView1 = new CnfView(cnfView.getViewId(),cnfView.getViewName(),cnfView.getDescription(),cnfView.getPixelsHorizontal(),cnfView.getPixelsVertical(),cnfView.getAssociated_Device(),cnfView.getImages());
-            System.out.println("cnfView ------- " + cnfView.getAsString());
+            //System.out.println("cnfView ------- " + cnfView.getAsString());
             //cnfDevice.print();
             cnfView1.setCnfDevice(cnfDevice);
-            System.out.println("What has been set in CnfView");
+            //System.out.println("What has been set in CnfView");
             cnfView1.getCnfDevice().print();
             cnfViews.add(cnfView1);
         }
 
         writer.append(gson.toJson(cnfViews));
-        System.out.println("Reply: " + gson.toJson(cnfViews));
+        //System.out.println("Reply: " + gson.toJson(cnfViews));
     }
 }
 

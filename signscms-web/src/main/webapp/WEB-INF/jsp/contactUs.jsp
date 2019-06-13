@@ -67,6 +67,7 @@
                 </a>
             </li> -->
             <%
+                if (session != null && session.getAttribute("role") != null) {
                 if (session.getAttribute("role").equals("admin") || session.getAttribute("role").equals("superuser")) {
             %>
             <li class="hidden-xs">
@@ -75,7 +76,7 @@
                     Admin
                 </a>
             </li>
-            <% } %>
+            <% }} %>
             <li class="hidden-xs">
 
                 <a href="#">
