@@ -4,24 +4,27 @@
     background-position:center center;
     background-repeat:no-repeat;
     background-clip:content-box;
-    background-color: #bfff00;
+    background-color: #F3F3F3;
 }
 
 #clear {
     border: 1px solid #B0B0B0;
+    margin-left: 10px;
 }
 
 #load {
     border: 1px solid #B0B0B0;
+    margin-left: 10px;
 }
 
 .xmltext {
     border: 5px solid #B0B0B0;
+    margin-left: 10px;
     background-color: #FFFFC0;
 }
 
 .success {
-    background-color: #00FF00;
+    background-color: #F3F3F3;
 }
 
 .error {

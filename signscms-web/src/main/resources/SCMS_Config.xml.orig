@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 <SCMS_DATA version="0.1">
     <DEVICES>
-        <DEVICE id="d1" name="ESC 01" description="Platform 5/6" PI_Name="SPI-THL-DS-1" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d2" name="ESC 02" description="Platform 5/6" PI_Name="SPI-THL-DS-3" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d3" name="ESC 03" description="Platform 5/6" PI_Name="SPI-THL-DS-7" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d4" name="ESC 04" description="Platform 5/6" PI_Name="SPI-THL-DS-5" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d5" name="ESC 05" description="Platform 4" PI_Name="SPI-THL-DS-2" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d6" name="ESC 06" description="Platform 4" PI_Name="SPI-THL-DS-4" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d7" name="ESC 07" description="Platform 4" PI_Name="SPI-THL-DS-8" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d8" name="ESC 08" description="Platform 4" PI_Name="SPI-THL-DS-6" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d9" order="9" name="QVB_ENT" description="QVB Entrance" PI_Name="SPI-THL-DS-9" location="Concourse Near QVB Entrance" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d10" order="10" name="QVB_EXIT" description="QVB Exit" PI_Name="SPI-THL-DS-10" location="Concourse Near QVB Exit" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d11" order="11" name="NEW 1" description="New nr 1" PI_Name="SPI-THL-DS-11" location="Concourse Near Alpha barrier" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d12" order="12" name="NEW 2" description="New nr 2" PI_Name="SPI-THL-DS-12" location="Concourse Near Charlie barrier" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d13" name="TBD 01" description="1536x96 TBD 1" PI_Name="SPI-THL-DS-13" location="Concourse Near Bravo barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d14" name="TBD 02" description="1536x96 TBD 2" PI_Name="SPI-THL-DS-14" location="Concourse Near Alpha barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d15" name="TBD 03" description="1536x96 TBD 3" PI_Name="SPI-THL-DS-15" location="Concourse Near Charlie barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d16" name="TBD 04" description="1536x96 TBD 4" PI_Name="SPI-THL-DS-16" location="Concourse Near Bravo barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d17" name="TBD 05" description="768x96 TBD 5" PI_Name="SPI-THL-DS-17" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d18" name="TBD 06" description="768x96 TBD 6" PI_Name="SPI-THL-DS-18" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d19" name="TBD 07" description="768x96 TBD 7" PI_Name="SPI-THL-DS-19" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d20" name="TBD 08" description="768x96 TBD 8" PI_Name="SPI-THL-DS-20" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
+        <DEVICE id="d1" name="ESC 01" description="Platform 5/6" PI_Name="SPI-THL-DS-1" pixHor="768" pixVer="96"/>
+        <DEVICE id="d2" name="ESC 02" description="Platform 5/6" PI_Name="SPI-THL-DS-3" pixHor="768" pixVer="96"/>
+        <DEVICE id="d3" name="ESC 03" description="Platform 5/6" PI_Name="SPI-THL-DS-7" pixHor="768" pixVer="96"/>
+        <DEVICE id="d4" name="ESC 04" description="Platform 5/6" PI_Name="SPI-THL-DS-5" pixHor="768" pixVer="96"/>
+        <DEVICE id="d5" name="ESC 05" description="Platform 4" PI_Name="SPI-THL-DS-2" pixHor="768" pixVer="96"/>
+        <DEVICE id="d6" name="ESC 06" description="Platform 4" PI_Name="SPI-THL-DS-4" pixHor="768" pixVer="96"/>
+        <DEVICE id="d7" name="ESC 07" description="Platform 4" PI_Name="SPI-THL-DS-8" pixHor="768" pixVer="96"/>
+        <DEVICE id="d8" name="ESC 08" description="Platform 4" PI_Name="SPI-THL-DS-6" pixHor="768" pixVer="96"/>
+        <DEVICE id="d9" order="9" name="QVB_ENT" description="QVB Entrance" PI_Name="SPI-THL-DS-9" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d10" order="10" name="QVB_EXIT" description="QVB Exit" PI_Name="SPI-THL-DS-10" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d11" order="11" name="NEW 1" description="New nr 1" PI_Name="SPI-THL-DS-11" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d12" order="12" name="NEW 2" description="New nr 2" PI_Name="SPI-THL-DS-12" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d13" name="TBD 01" description="1536x96 TBD 1" PI_Name="SPI-THL-DS-13" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d14" name="TBD 02" description="1536x96 TBD 2" PI_Name="SPI-THL-DS-14" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d15" name="TBD 03" description="1536x96 TBD 3" PI_Name="SPI-THL-DS-15" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d16" name="TBD 04" description="1536x96 TBD 4" PI_Name="SPI-THL-DS-16" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d17" name="TBD 05" description="768x96 TBD 5" PI_Name="SPI-THL-DS-17" pixHor="768" pixVer="96"/>
+        <DEVICE id="d18" name="TBD 06" description="768x96 TBD 6" PI_Name="SPI-THL-DS-18" pixHor="768" pixVer="96"/>
+        <DEVICE id="d19" name="TBD 07" description="768x96 TBD 7" PI_Name="SPI-THL-DS-19" pixHor="768" pixVer="96"/>
+        <DEVICE id="d20" name="TBD 08" description="768x96 TBD 8" PI_Name="SPI-THL-DS-20" pixHor="768" pixVer="96"/>
     </DEVICES>
     <VIEWS>
 
@@ -381,12 +381,20 @@
 
        <VIEW id="v1_d11" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d11">
             <IMAGES>
+<<<<<<< HEAD
                 <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
+=======
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1_Resize.png"/>
+>>>>>>> origin/master
             </IMAGES>
         </VIEW>
         <VIEW id="v2_d11" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d11">
             <IMAGES>
+<<<<<<< HEAD
                 <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
+=======
+                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2_Resize.png"/>
+>>>>>>> origin/master
             </IMAGES>
         </VIEW>
         <VIEW id="v3_d11" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d11">
@@ -744,11 +752,20 @@
         <SECTION sectionId="s3" deviceId="d18" positionId="2" vOffset="10px"/>
         <SECTION sectionId="s3" deviceId="d19" positionId="3" vOffset="10px"/>
         <SECTION sectionId="s3" deviceId="d20" positionId="4" vOffset="10px"/>
+<<<<<<< HEAD
         <SECTION sectionId="s4" deviceId="d13" positionId="1" vOffset="10px"/>
         <SECTION sectionId="s4" deviceId="d14" positionId="2" vOffset="10px"/>
         <SECTION sectionId="s4" deviceId="d15" positionId="3" vOffset="10px"/>
         <SECTION sectionId="s4" deviceId="d16" positionId="4" vOffset="10px"/>
         <SECTION sectionId="s4" deviceId="d9" positionId="5" vOffset="10px"/>
         <SECTION sectionId="s4" deviceId="d10" positionId="6" vOffset="10px"/>
+=======
+        <SECTION sectionId="s4" deviceId="d9" positionId="1" vOffset="10px"/>
+        <SECTION sectionId="s4" deviceId="d10" positionId="2" vOffset="10px"/>
+        <SECTION sectionId="s5" deviceId="d13" positionId="1" vOffset="10px"/>
+        <SECTION sectionId="s5" deviceId="d14" positionId="2" vOffset="10px"/>
+        <SECTION sectionId="s5" deviceId="d15" positionId="3" vOffset="10px"/>
+        <SECTION sectionId="s5" deviceId="d16" positionId="4" vOffset="10px"/>
+>>>>>>> origin/master
     </SECTIONS>
 </SCMS_DATA>

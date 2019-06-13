@@ -4,20 +4,20 @@
 
 function init() {
 
-    executeInit();
+//    executeInit();
 }
 
 function executeInit() {
     console.log("executeInit");
 
     var elem = document.getElementById("clear");
-    elem.innerHTML="<button type=\"button\" onclick=executeClear()>Clear</button>";
+    elem.innerHTML="Clear";
 
 	elem = document.getElementById("load");
-	elem.innerHTML="<button type=\"button\" onclick=executeLoad()>Load</button>";
+	elem.innerHTML="Load";
 
 	elem = document.getElementById("showXML");
-	elem.innerHTML="<button type=\"button\" onclick=executeShowXML()>ShowXML</button>";
+	elem.innerHTML="ShowXML";
 }
 
 function executeClear() {
