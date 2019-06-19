@@ -1,732 +1,617 @@
 <?xml version="1.0"?>
-<SCMS_DATA version="0.1">
+<SCMS_DATA version="0.1" content="v10">
     <DEVICES>
-        <DEVICE id="d1" name="ESC 01" description="Platform 5/6" PI_Name="SPI-THL-DS-1" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d2" name="ESC 02" description="Platform 5/6" PI_Name="SPI-THL-DS-3" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d3" name="ESC 03" description="Platform 5/6" PI_Name="SPI-THL-DS-7" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d4" name="ESC 04" description="Platform 5/6" PI_Name="SPI-THL-DS-5" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d5" name="ESC 05" description="Platform 4" PI_Name="SPI-THL-DS-2" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d6" name="ESC 06" description="Platform 4" PI_Name="SPI-THL-DS-4" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d7" name="ESC 07" description="Platform 4" PI_Name="SPI-THL-DS-8" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d8" name="ESC 08" description="Platform 4" PI_Name="SPI-THL-DS-6" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d9" order="9" name="QVB_ENT" description="QVB Entrance" PI_Name="SPI-THL-DS-9" location="Concourse Near QVB Entrance" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d10" order="10" name="QVB_EXIT" description="QVB Exit" PI_Name="SPI-THL-DS-10" location="Concourse Near QVB Exit" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d11" order="11" name="NEW 1" description="New nr 1" PI_Name="SPI-THL-DS-11" location="Concourse Near Alpha barrier" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d12" order="12" name="NEW 2" description="New nr 2" PI_Name="SPI-THL-DS-12" location="Concourse Near Charlie barrier" pixHor="1920" pixVer="96"/>
-        <DEVICE id="d13" name="TBD 01" description="1536x96 TBD 1" PI_Name="SPI-THL-DS-13" location="Concourse Near Bravo barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d14" name="TBD 02" description="1536x96 TBD 2" PI_Name="SPI-THL-DS-14" location="Concourse Near Alpha barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d15" name="TBD 03" description="1536x96 TBD 3" PI_Name="SPI-THL-DS-15" location="Concourse Near Charlie barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d16" name="TBD 04" description="1536x96 TBD 4" PI_Name="SPI-THL-DS-16" location="Concourse Near Bravo barrier" pixHor="1536" pixVer="96"/>
-        <DEVICE id="d17" name="TBD 05" description="768x96 TBD 5" PI_Name="SPI-THL-DS-17" location="Concourse Near Alpha barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d18" name="TBD 06" description="768x96 TBD 6" PI_Name="SPI-THL-DS-18" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d19" name="TBD 07" description="768x96 TBD 7" PI_Name="SPI-THL-DS-19" location="Concourse Near Bravo barrier" pixHor="768" pixVer="96"/>
-        <DEVICE id="d20" name="TBD 08" description="768x96 TBD 8" PI_Name="SPI-THL-DS-20" location="Concourse Near Charlie barrier" pixHor="768" pixVer="96"/>
+        <DEVICE id="d1" order="1" name="DS_ESC_01_B" description="Platform 5/6" PI_Name="SPI-THL-DS-1" pixHor="768" pixVer="96"/>
+        <DEVICE id="d2" order="3" name="DS_ESC_02_B" description="Platform 5/6" PI_Name="SPI-THL-DS-3" pixHor="768" pixVer="96"/>
+        <DEVICE id="d3" order="7" name="DS_ESC_03_B" description="Platform 5/6" PI_Name="SPI-THL-DS-7" pixHor="768" pixVer="96"/>
+        <DEVICE id="d4" order="5" name="DS_ESC_04_B" description="Platform 5/6" PI_Name="SPI-THL-DS-5" pixHor="768" pixVer="96"/>
+        <DEVICE id="d5" order="2" name="DS_ESC_05_B" description="Platform 4" PI_Name="SPI-THL-DS-2" pixHor="768" pixVer="96"/>
+        <DEVICE id="d6" order="4" name="DS_ESC_06_B" description="Platform 4" PI_Name="SPI-THL-DS-4" pixHor="768" pixVer="96"/>
+        <DEVICE id="d7" order="8" name="DS_ESC_07_B" description="Platform 4" PI_Name="SPI-THL-DS-8" pixHor="768" pixVer="96"/>
+        <DEVICE id="d8" order="6" name="DS_ESC_08_B" description="Platform 4" PI_Name="SPI-THL-DS-6" pixHor="768" pixVer="96"/>
+        <DEVICE id="d9" order="21" name="DS_GL_ALPHA_En" description="QVB Entrance" PI_Name="SPI-THL-DS-9" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d10" order="22" name="DS_GL_ALPHA_Ex" description="QVB Exit" PI_Name="SPI-THL-DS-10" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d11" order="11" name="NEW 1" description="New nr 1 1920x96" PI_Name="SPI-THL-DS-11" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d12" order="12" name="NEW 2" description="New nr 2 1920x96" PI_Name="SPI-THL-DS-12" pixHor="1920" pixVer="96"/>
+        <DEVICE id="d13" order="17" name="DS_GL_Bravo_West_En" description="Bravo West Entrance" PI_Name="SPI-THL-DS-13" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d14" order="18" name="DS_GL_Bravo_West_Ex" description="Bravo West Exit" PI_Name="SPI-THL-DS-14" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d15" order="19" name="DS_GL_Bravo_East_En" description="Bravo East Entrance" PI_Name="SPI-THL-DS-15" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d16" order="20" name="DS_GL Bravo_East_Ex" description="Bravo East Exit" PI_Name="SPI-THL-DS-16" pixHor="1536" pixVer="96"/>
+        <DEVICE id="d17" order="13" name="DS_STR_09_B" description="Stairs 9 Beside" PI_Name="SPI-THL-DS-17" pixHor="768" pixVer="96"/>
+        <DEVICE id="d18" order="14" name="DS_STR_10_B" description="Stairs 10 Beside" PI_Name="SPI-THL-DS-18" pixHor="768" pixVer="96"/>
+        <DEVICE id="d19" order="15" name="DS_STR_13_B" description="Stairs 13 Beside" PI_Name="SPI-THL-DS-19" pixHor="768" pixVer="96"/>
+        <DEVICE id="d20" order="16" name="DS_STR_14_B" description="Stairs 14 Beside" PI_Name="SPI-THL-DS-20" pixHor="768" pixVer="96"/>
     </DEVICES>
     <VIEWS>
 
-        <VIEW id="v1_d1" name="UP" description="Escalator 1 Up" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v1_d1" name="UP" description="Escalator 1 Up" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d1" name="DOWN" description="Escalator 1 Down" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v2_d1" name="DOWN" description="Escalator 1 Down" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d1" name="NO ENTRY" description="Escalator 1 No Entry" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v3_d1" name="NO ENTRY" description="Escalator 1 No Entry" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d1" name="OUT OF ORDER" description="Escalator 1 Out of Order" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v4_d1" name="OUT OF ORDER" description="Escalator 1 Out of Order" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d1" name="EVACUATE" description="Escalator 1 Evacuate" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v5_d1" name="EVACUATE" description="Escalator 1 Evacuate" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d1" name="TEST" description="Escalator 1 Test" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v6_d1" name="TEST" description="Escalator 1 Test" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d1" name="CLOCK" description="Escalator 1 Clock" pixHor="786" pixVer="96" associatedDevice="d1">
+        <VIEW id="v7_d1" name="CLOCK" description="Escalator 1 Clock" pixHor="768" pixVer="96" associatedDevice="d1">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d1" name="CALIBRATE" description="Escalator 1 Calibrate" pixHor="768" pixVer="96" associatedDevice="d1">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
 
-        <VIEW id="v1_d2" name="UP" description="Escalator 2 Up" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v1_d2" name="UP" description="Escalator 2 Up" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC02_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d2" name="DOWN" description="Escalator 2 Down" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v2_d2" name="DOWN" description="Escalator 2 Down" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC02_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d2" name="NO ENTRY" description="Escalator 2 No Entry" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v3_d2" name="NO ENTRY" description="Escalator 2 No Entry" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d2" name="OUT OF ORDER" description="Escalator 2 Out of Order" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v4_d2" name="OUT OF ORDER" description="Escalator 2 Out of Order" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d2" name="EVACUATE" description="Escalator 2 Evacuate" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v5_d2" name="EVACUATE" description="Escalator 2 Evacuate" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d2" name="TEST" description="Escalator 2 Test" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v6_d2" name="TEST" description="Escalator 2 Test" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d2" name="CLOCK" description="Escalator 2 Clock" pixHor="786" pixVer="96" associatedDevice="d2">
+        <VIEW id="v7_d2" name="CLOCK" description="Escalator 2 Clock" pixHor="768" pixVer="96" associatedDevice="d2">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d2" name="CALIBRATE" description="Escalator 2 Calibrate" pixHor="768" pixVer="96" associatedDevice="d2">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-        <VIEW id="v1_d3" name="UP" description="Escalator 3 Up" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v1_d3" name="UP" description="Escalator 3 Up" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC03_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d3" name="DOWN" description="Escalator 3 Down" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v2_d3" name="DOWN" description="Escalator 3 Down" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC03_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d3" name="NO ENTRY" description="Escalator 3 No Entry" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v3_d3" name="NO ENTRY" description="Escalator 3 No Entry" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d3" name="OUT OF ORDER" description="Escalator 3 Out of Order" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v4_d3" name="OUT OF ORDER" description="Escalator 3 Out of Order" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d3" name="EVACUATE" description="Escalator 3 Evacuate" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v5_d3" name="EVACUATE" description="Escalator 3 Evacuate" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d3" name="TEST" description="Escalator 3 Test" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v6_d3" name="TEST" description="Escalator 3 Test" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d3" name="CLOCK" description="Escalator 3 Clock" pixHor="786" pixVer="96" associatedDevice="d3">
+        <VIEW id="v7_d3" name="CLOCK" description="Escalator 3 Clock" pixHor="768" pixVer="96" associatedDevice="d3">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d3" name="CALIBRATE" description="Escalator 3 Calibrate" pixHor="768" pixVer="96" associatedDevice="d3">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-        <VIEW id="v1_d4" name="UP" description="Escalator 4 Up" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v1_d4" name="UP" description="Escalator 4 Up" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC04_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d4" name="DOWN" description="Escalator 4 Down" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v2_d4" name="DOWN" description="Escalator 4 Down" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC04_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d4" name="NO ENTRY" description="Escalator 4 No Entry" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v3_d4" name="NO ENTRY" description="Escalator 4 No Entry" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d4" name="OUT OF ORDER" description="Escalator 4 Out of Order" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v4_d4" name="OUT OF ORDER" description="Escalator 4 Out of Order" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d4" name="EVACUATE" description="Escalator 4 Evacuate" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v5_d4" name="EVACUATE" description="Escalator 4 Evacuate" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d4" name="TEST" description="Escalator 4 Test" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v6_d4" name="TEST" description="Escalator 4 Test" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d4" name="CLOCK" description="Escalator 4 Clock" pixHor="786" pixVer="96" associatedDevice="d4">
+        <VIEW id="v7_d4" name="CLOCK" description="Escalator 4 Clock" pixHor="768" pixVer="96" associatedDevice="d4">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d4" name="CALIBRATE" description="Escalator 4 Calibrate" pixHor="768" pixVer="96" associatedDevice="d4">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-        <VIEW id="v1_d5" name="UP" description="Escalator 5 Up" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v1_d5" name="UP" description="Escalator 5 Up" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC05_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d5" name="DOWN" description="Escalator 5 Down" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v2_d5" name="DOWN" description="Escalator 5 Down" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC05_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d5" name="NO ENTRY" description="Escalator 5 No Entry" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v3_d5" name="NO ENTRY" description="Escalator 5 No Entry" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC05_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d5" name="OUT OF ORDER" description="Escalator 5 Out of Order" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v4_d5" name="OUT OF ORDER" description="Escalator 5 Out of Order" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC05_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d5" name="EVACUATE" description="Escalator 5 Evacuate" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v5_d5" name="EVACUATE" description="Escalator 5 Evacuate" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d5" name="TEST" description="Escalator 5 Test" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v6_d5" name="TEST" description="Escalator 5 Test" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d5" name="CLOCK" description="Escalator 5 Clock" pixHor="786" pixVer="96" associatedDevice="d5">
+        <VIEW id="v7_d5" name="CLOCK" description="Escalator 5 Clock" pixHor="768" pixVer="96" associatedDevice="d5">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d5" name="CALIBRATE" description="Escalator 5 Calibrate" pixHor="768" pixVer="96" associatedDevice="d5">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-
-        <VIEW id="v1_d6" name="UP" description="Escalator 6 Up" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v1_d6" name="UP" description="Escalator 6 Up" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC06_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d6" name="DOWN" description="Escalator 6 Down" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v2_d6" name="DOWN" description="Escalator 6 Down" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC06_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d6" name="NO ENTRY" description="Escalator 6 No Entry" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v3_d6" name="NO ENTRY" description="Escalator 6 No Entry" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC06_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d6" name="OUT OF ORDER" description="Escalator 6 Out of Order" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v4_d6" name="OUT OF ORDER" description="Escalator 6 Out of Order" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC06_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d6" name="EVACUATE" description="Escalator 6 Evacuate" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v5_d6" name="EVACUATE" description="Escalator 6 Evacuate" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d6" name="TEST" description="Escalator 6 Test" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v6_d6" name="TEST" description="Escalator 6 Test" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d6" name="CLOCK" description="Escalator 6 Clock" pixHor="786" pixVer="96" associatedDevice="d6">
+        <VIEW id="v7_d6" name="CLOCK" description="Escalator 6 Clock" pixHor="768" pixVer="96" associatedDevice="d6">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d6" name="CALIBRATE" description="Escalator 6 Calibrate" pixHor="768" pixVer="96" associatedDevice="d6">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-
-        <VIEW id="v1_d7" name="UP" description="Escalator 7 Up" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v1_d7" name="UP" description="Escalator 7 Up" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC07_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d7" name="DOWN" description="Escalator 7 Down" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v2_d7" name="DOWN" description="Escalator 7 Down" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC07_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d7" name="NO ENTRY" description="Escalator 7 No Entry" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v3_d7" name="NO ENTRY" description="Escalator 7 No Entry" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC07_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d7" name="OUT OF ORDER" description="Escalator 7 Out of Order" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v4_d7" name="OUT OF ORDER" description="Escalator 7 Out of Order" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC07_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d7" name="EVACUATE" description="Escalator 7 Evacuate" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v5_d7" name="EVACUATE" description="Escalator 7 Evacuate" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d7" name="TEST" description="Escalator 7 Test" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v6_d7" name="TEST" description="Escalator 7 Test" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d7" name="CLOCK" description="Escalator 7 Clock" pixHor="786" pixVer="96" associatedDevice="d7">
+        <VIEW id="v7_d7" name="CLOCK" description="Escalator 7 Clock" pixHor="768" pixVer="96" associatedDevice="d7">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
+        <VIEW id="v8_d7" name="CALIBRATE" description="Escalator 7 Calibrate" pixHor="768" pixVer="96" associatedDevice="d7">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
 
-
-        <VIEW id="v1_d8" name="UP" description="Escalator 8 Up" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v1_d8" name="UP" description="Escalator 8 Up" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC08_M1_v2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d8" name="DOWN" description="Escalator 8 Down" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v2_d8" name="DOWN" description="Escalator 8 Down" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC08_M2.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d8" name="NO ENTRY" description="Escalator 8 No Entry" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v3_d8" name="NO ENTRY" description="Escalator 8 No Entry" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d8" name="OUT OF ORDER" description="Escalator 8 Out of Order" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v4_d8" name="OUT OF ORDER" description="Escalator 8 Out of Order" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d8" name="EVACUATE" description="Escalator 8 Evacuate" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v5_d8" name="EVACUATE" description="Escalator 8 Evacuate" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-TEST.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d8" name="TEST" description="Escalator 8 Test" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v6_d8" name="TEST" description="Escalator 8 Test" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL_M6.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d8" name="CLOCK" description="Escalator 8 Clock" pixHor="786" pixVer="96" associatedDevice="d8">
+        <VIEW id="v7_d8" name="CLOCK" description="Escalator 8 Clock" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
                 <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
             </IMAGES>
         </VIEW>
-
-        <VIEW id="v1_d9" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d9">
+        <VIEW id="v8_d8" name="CALIBRATE" description="Escalator 8 Calibrate" pixHor="768" pixVer="96" associatedDevice="d8">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d9" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d9">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d9" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d9">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d9" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d9">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d9" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d9">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d9" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d9">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
             </IMAGES>
         </VIEW>
 
-
-        <VIEW id="v1_d10" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v1_d9" name="MODE 1" description="Exit only" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Entry_Mode1_ExitOnly.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d10" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v2_d9" name="MODE 2" description="To platforms" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Entry_Mode2_toPlatforms.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d10" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v3_d9" name="MODE 3" description="Place holder" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Entry_Mode3_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d10" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v4_d9" name="MODE 4" description="Place holder" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Entry_Mode4_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d10" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v5_d9" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Entry_Mode3_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d10" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d10">
+        <VIEW id="v6_d9" name="CALIBRATE" description="Calibrate" pixHor="1920" pixVer="96" associatedDevice="d9">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
-            </IMAGES>
-        </VIEW>
-
-       <VIEW id="v1_d11" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d11" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d11" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d11" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d11" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d11" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d11">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1920x96.png"/>
             </IMAGES>
         </VIEW>
 
-
-        <VIEW id="v1_d12" name="ENTRANCE" description="ENTRANCE" pixHor="1920" pixVer="96" associatedDevice="d12">
+        <VIEW id="v1_d10" name="MODE 1" description="QVB Buses" pixHor="1920" pixVer="96" associatedDevice="d10">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Exit_Mode1_QVB_Buses.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d12" name="EXIT" description="EXIT" pixHor="1920" pixVer="96" associatedDevice="d12">
+        <VIEW id="v2_d10" name="MODE 2" description="Place holder" pixHor="1920" pixVer="96" associatedDevice="d10">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_QVB_v1_S2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d12" name="NO ENTRY" description="No Entry" pixHor="1920" pixVer="96" associatedDevice="d12">
+        <VIEW id="v3_d10" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d10">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Alpha_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d12" name="STATION CLOSED" description="Station Closed" pixHor="1920" pixVer="96" associatedDevice="d12">
+        <VIEW id="v4_d10" name="CALIBRATE" description="Calibrate" pixHor="1920" pixVer="96" associatedDevice="d10">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC08_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d12" name="EVACUATE" description="Evacuate" pixHor="1920" pixVer="96" associatedDevice="d12">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d12" name="TEST" description="Test" pixHor="1920" pixVer="96" associatedDevice="d12">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1920x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d13" name="UP" description="TBD 1 Up" pixHor="1536" pixVer="96" associatedDevice="d13">
+        <VIEW id="v1_d11" name="CALIBRATE" description="Calibrate" pixHor="1920" pixVer="96" associatedDevice="d11">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d13" name="DOWN" description="TBD 1 Down" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d13" name="NO ENTRY" description="TBD 1 No Entry" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d13" name="OUT OF ORDER" description="TBD 1 Out of Order" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d13" name="EVACUATE" description="TBD 1 Evacuate" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d13" name="TEST" description="TBD 1 Test" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v7_d13" name="CLOCK" description="TBD 1 Clock" pixHor="1536" pixVer="96" associatedDevice="d13">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/Calibrate-1920x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d14" name="UP" description="TBD 2 Up" pixHor="1536" pixVer="96" associatedDevice="d14">
+        <VIEW id="v1_d12" name="CALIBRATE" description="Calibrate" pixHor="1920" pixVer="96" associatedDevice="d12">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d14" name="DOWN" description="TBD 2 Down" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d14" name="NO ENTRY" description="TBD 2 No Entry" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d14" name="OUT OF ORDER" description="TBD 2 Out of Order" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d14" name="EVACUATE" description="TBD 2 Evacuate" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d14" name="TEST" description="TBD 2 Test" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v7_d14" name="CLOCK" description="TBD 2 Clock" pixHor="1536" pixVer="96" associatedDevice="d14">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
+                <IMAGE name="/resources/images/Calibrate-1920x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d15" name="UP" description="TBD 3 Up" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v1_d13" name="MODE 1" description="Both" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode1_Both.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d15" name="DOWN" description="TBD 3 Down" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v2_d13" name="MODE 2" description="Split" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode2_Split.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d15" name="NO ENTRY" description="TBD 3 No Entry" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v3_d13" name="MODE 3" description="Exit only" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode3_Exitonly.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d15" name="OUT OF ORDER" description="TBD 3 Out of Order" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v4_d13" name="MODE 4" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode4_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d15" name="EVACUATE" description="TBD 3 Evacuate" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v5_d13" name="MODE 5" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode5_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d15" name="TEST" description="TBD 3 Test" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v6_d13" name="TEST" description="Test" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Entry_Mode5_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d15" name="CLOCK" description="TBD 3 Clock" pixHor="1536" pixVer="96" associatedDevice="d15">
+        <VIEW id="v7_d13" name="CALIBRATE" description="Calibrate" pixHor="1536" pixVer="96" associatedDevice="d13">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-
-        <VIEW id="v1_d16" name="UP" description="TBD 4 Up" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S1.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d16" name="DOWN" description="TBD 4 Down" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d16" name="NO ENTRY" description="TBD 4 No Entry" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d16" name="OUT OF ORDER" description="TBD 4 Out of Order" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d16" name="EVACUATE" description="TBD 4 Evacuate" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d16" name="TEST" description="TBD 4 Test" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v7_d16" name="CLOCK" description="TBD 4 Clock" pixHor="1536" pixVer="96" associatedDevice="d16">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_Bravo_S2.png"/>
-            </IMAGES>
-        </VIEW>
-		
-        <VIEW id="v1_d17" name="UP" description="TBD 5 Up" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M1_v2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v2_d17" name="DOWN" description="TBD 5 Down" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M2.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v3_d17" name="NO ENTRY" description="TBD 5 No Entry" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v4_d17" name="OUT OF ORDER" description="TBD 5 Out of Order" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d17" name="EVACUATE" description="TBD 5 Evacuate" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d17" name="TEST" description="TBD 5 Test" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_M6.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v7_d17" name="CLOCK" description="TBD 5 Clock" pixHor="786" pixVer="96" associatedDevice="d17">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1536x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d18" name="UP" description="TBD 6 Up" pixHor="786" pixVer="96" associatedDevice="d18">
+        <VIEW id="v1_d14" name="MODE 1" description="George St" pixHor="1536" pixVer="96" associatedDevice="d14">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC02_M1_v2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Exit_Mode1_GeorgeSt.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d18" name="DOWN" description="TBD 6 Down" pixHor="786" pixVer="96" associatedDevice="d18">
+        <VIEW id="v2_d14" name="MODE 2" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d14">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC02_M2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d18" name="NO ENTRY" description="TBD 6 No Entry" pixHor="786" pixVer="96" associatedDevice="d18">
+        <VIEW id="v3_d14" name="TEST" description="Test" pixHor="1536" pixVer="96" associatedDevice="d14">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_West_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d18" name="OUT OF ORDER" description="TBD 6 Out of Order" pixHor="786" pixVer="96" associatedDevice="d18">
+        <VIEW id="v4_d14" name="CALIBRATE" description="Calibrate" pixHor="1536" pixVer="96" associatedDevice="d14">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC02_M3.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v5_d18" name="EVACUATE" description="TBD 6 Evacuate" pixHor="786" pixVer="96" associatedDevice="d18">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v6_d18" name="TEST" description="TBD 6 Test" pixHor="786" pixVer="96" associatedDevice="d18">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_M6.png"/>
-            </IMAGES>
-        </VIEW>
-        <VIEW id="v7_d18" name="CLOCK" description="TBD 6 Clock" pixHor="786" pixVer="96" associatedDevice="d18">
-            <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1536x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d19" name="UP" description="TBD 7 Up" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v1_d15" name="MODE 1" description="Both" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC03_M1_v2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode1_Both.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d19" name="DOWN" description="TBD 7 Down" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v2_d15" name="MODE 2" description="Split" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC03_M2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode2_Split.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d19" name="NO ENTRY" description="TBD 7 No Entry" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v3_d15" name="MODE 3" description="Exit only" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode3_Exitonly.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d19" name="OUT OF ORDER" description="TBD 7 Out of Order" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v4_d15" name="MODE 4" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC03_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode4_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d19" name="EVACUATE" description="TBD 7 Evacuate" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v5_d15" name="MODE 5" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode5_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d19" name="TEST" description="TBD 7 Test" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v6_d15" name="TEST" description="Test" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_M6.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Entry_Mode5_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d19" name="CLOCK" description="TBD 7 Clock" pixHor="786" pixVer="96" associatedDevice="d19">
+        <VIEW id="v7_d15" name="CALIBRATE" description="Calibrate" pixHor="1536" pixVer="96" associatedDevice="d15">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1536x96.png"/>
             </IMAGES>
         </VIEW>
 
-        <VIEW id="v1_d20" name="UP" description="TBD 8 Up" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v1_d16" name="MODE 1" description="George St" pixHor="1536" pixVer="96" associatedDevice="d16">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC04_M1_v2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Exit_Mode1_GeorgeSt.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v2_d20" name="DOWN" description="TBD 8 Down" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v2_d16" name="MODE 2" description="Placeholder" pixHor="1536" pixVer="96" associatedDevice="d16">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC04_M2.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v3_d20" name="NO ENTRY" description="TBD 8 No Entry" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v3_d16" name="TEST" description="Test" pixHor="1536" pixVer="96" associatedDevice="d16">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
+                <IMAGE name="/resources/images/DS_GL_Bravo_East_Exit_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v4_d20" name="OUT OF ORDER" description="TBD 8 Out of Order" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v4_d16" name="CALIBRATE" description="Calibrate" pixHor="1536" pixVer="96" associatedDevice="d16">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC04_M3.png"/>
+                <IMAGE name="/resources/images/Calibrate-1536x96.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v5_d20" name="EVACUATE" description="TBD 8 Evacuate" pixHor="786" pixVer="96" associatedDevice="d20">
+
+        <VIEW id="v1_d17" name="MODE 1" description="Normal" pixHor="768" pixVer="96" associatedDevice="d17">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-TEST.png"/>
+                <IMAGE name="/resources/images/DS_ST09_B_Mode1_Normal.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v6_d20" name="TEST" description="TBD 8 Test" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v2_d17" name="MODE 2" description="Placeholder" pixHor="768" pixVer="96" associatedDevice="d17">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL_M6.png"/>
+                <IMAGE name="/resources/images/DS_ST09_B_Mode2_Placeholder.png"/>
             </IMAGES>
         </VIEW>
-        <VIEW id="v7_d20" name="CLOCK" description="TBD 8 Clock" pixHor="786" pixVer="96" associatedDevice="d20">
+        <VIEW id="v3_d17" name="TEST" description="Test" pixHor="768" pixVer="96" associatedDevice="d17">
             <IMAGES>
-                <IMAGE name="/resources/images/ZTHL-006_ESC01_M3.png"/>
+                <IMAGE name="/resources/images/DS_ST09_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d17" name="CALIBRATE" description="Calibrate" pixHor="768" pixVer="96" associatedDevice="d17">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d18" name="MODE 1" description="Normal" pixHor="768" pixVer="96" associatedDevice="d18">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST10_B_Mode1_Normal.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d18" name="MODE 2" description="Placeholder" pixHor="768" pixVer="96" associatedDevice="d18">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST10_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d18" name="TEST" description="Test" pixHor="768" pixVer="96" associatedDevice="d18">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST10_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d18" name="CALIBRATE" description="Calibrate" pixHor="768" pixVer="96" associatedDevice="d18">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d19" name="MODE 1" description="Normal" pixHor="768" pixVer="96" associatedDevice="d19">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST13_B_Mode1_Normal.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d19" name="MODE 2" description="Placeholder" pixHor="768" pixVer="96" associatedDevice="d19">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST13_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d19" name="TEST" description="Test" pixHor="768" pixVer="96" associatedDevice="d19">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST13_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d19" name="CALIBRATE" description="Calibrate" pixHor="768" pixVer="96" associatedDevice="d19">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
+            </IMAGES>
+        </VIEW>
+
+        <VIEW id="v1_d20" name="MODE 1" description="Normal" pixHor="768" pixVer="96" associatedDevice="d20">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST14_B_Mode1_Normal.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v2_d20" name="MODE 2" description="Placeholder" pixHor="768" pixVer="96" associatedDevice="d20">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST14_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v3_d20" name="TEST" description="Test" pixHor="768" pixVer="96" associatedDevice="d20">
+            <IMAGES>
+                <IMAGE name="/resources/images/DS_ST14_B_Mode2_Placeholder.png"/>
+            </IMAGES>
+        </VIEW>
+        <VIEW id="v4_d20" name="CALIBRATE" description="Calibrate" pixHor="768" pixVer="96" associatedDevice="d20">
+            <IMAGES>
+                <IMAGE name="/resources/images/Calibrate-768x96.png"/>
             </IMAGES>
         </VIEW>
 
